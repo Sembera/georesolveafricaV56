@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.georesolveafrica.com/sitemap.xml
+
+# Crawl delay for better server performance
+Crawl-delay: 1
+
+# Specific paths
+Allow: /methods.html
+Allow: /applications.html
+Allow: /projects.html
+Allow: /resources.html
+Allow: /news.html
+Allow: /contact.html
+
+# Block specific directories if needed
+Disallow: /node_modules/
+Disallow: /_drafts/

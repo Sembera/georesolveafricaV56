@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News & Insights | Georesolve Africa</title>
+    <meta name="description" content="Latest news and insights from Georesolve Africa. Industry updates, technical articles, and project announcements from East Africa's leading geoscience firm.">
+    <meta name="keywords" content="geoscience news, East Africa geology, industry insights, technical articles, project updates, geological research">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="News & Insights | Georesolve Africa">
+    <meta property="og:description" content="Latest news and insights from East Africa's leading geoscience consulting firm.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://georesolve.africa/news.html">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="resources/favicon/Icon-Flavicon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    
+    <style>
+        :root {
+            --primary-color: #345363;
+            --secondary-color: #9EDB9E;
+            --accent-color: #4DA34D;
+            --text-dark: #1a1a1a;
+            --text-light: #ffffff;
+            --background-light: #f8f9fa;
+            --border-color: #e9ecef;
+            --shadow-light: 0 2px 10px rgba(52, 83, 99, 0.1);
+            --shadow-medium: 0 8px 30px rgba(52, 83, 99, 0.15);
+            --shadow-heavy: 0 20px 60px rgba(52, 83, 99, 0.2);
+            --transition-fast: 0.2s ease;
+            --transition-medium: 0.3s ease;
+            --transition-slow: 0.5s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+            padding-top: 80px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            transition: var(--transition-medium);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-decoration: none;
+            gap: 0.25rem;
+        }
+
+        .logo img {
+            height: 55px;
+            width: auto;
+        }
+
+        .logo-tagline {
+            font-size: 0.65rem;
+            color: var(--primary-color);
+            font-weight: 500;
+            font-style: italic;
+            letter-spacing: 0.5px;
+            margin-left: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: var(--transition-fast);
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-color);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: var(--transition-fast);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: var(--text-light);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Featured Article */
+        .featured-article {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .featured-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .featured-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .featured-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .featured-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.8));
+            display: flex;
+            align-items: flex-end;
+            padding: 2rem;
+        }
+
+        .featured-category {
+            background: var(--accent-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .featured-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .featured-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .featured-excerpt {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition-medium);
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: var(--text-light);
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* News Filters */
+        .news-filters {
+            background: var(--background-light);
+            border-bottom: 1px solid var(--border-color);
+            padding: 2rem 0;
+            position: sticky;
+            top: 80px;
+            z-index: 100;
+        }
+
+        .filters-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .filter-label {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 0.9rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--border-color);
+            background: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            border-color: var(--accent-color);
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .search-container {
+            flex: 1;
+            max-width: 300px;
+        }
+
+        .news-search {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 25px;
+            font-size: 0.9rem;
+            transition: var(--transition-fast);
+        }
+
+        .news-search:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        /* Articles Grid */
+        .articles-section {
+            padding: 4rem 0;
+            background: var(--background-light);
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .article-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition-medium);
+            cursor: pointer;
+        }
+
+        .article-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .article-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+        }
+
+        .article-category {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--accent-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .article-content {
+            padding: 2rem;
+        }
+
+        .article-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 1rem;
+        }
+
+        .article-excerpt {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .article-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            background: var(--background-light);
+            color: #666;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        .read-more {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition-fast);
+        }
+
+        .read-more:hover {
+            gap: 1rem;
+        }
+
+        /* Newsletter Section */
+        .newsletter-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        .newsletter-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter-content p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .newsletter-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            background: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-light);
+            border-color: var(--text-light);
+        }
+
+        .btn-secondary:hover {
+            background: var(--text-light);
+            color: var(--primary-color);
+        }
+
+        /* Social Feed */
+        .social-section {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .social-card {
+            background: var(--background-light);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition-medium);
+        }
+
+        .social-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .social-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .social-handle {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .social-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .featured-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filters-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-container {
+                max-width: none;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .featured-text h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .filter-buttons {
+                justify-content: center;
+            }
+
+            .featured-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="footer-styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="resources/logo/Georesolve Logo.png" alt="GeoResolve Logo">
+                <span class="logo-tagline">Data Driven, Research Based</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="methods.html" class="nav-link">Methods</a></li>
+                <li><a href="applications.html" class="nav-link">Applications</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="resources.html" class="nav-link">Resources</a></li>
+                <li><a href="news.html" class="nav-link active">News</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">News & Insights</h1>
+            <p class="page-subtitle">Stay updated with the latest developments in geoscience, project announcements, and industry insights from across East Africa</p>
+        </div>
+    </section>
+
+    <!-- Featured Article -->
+    <section class="featured-article" id="featured-section">
+        <div class="container">
+            <div class="featured-content animate-on-scroll">
+                <div class="featured-text">
+                    <h2 id="featured-title">Kenya Leads Africa's Direct Air Capture Revolution</h2>
+                    <div class="featured-meta">
+                        <span id="featured-date">October 2025</span>
+                        <span id="featured-category">Climate Tech & Innovation</span>
+                        <span id="featured-read-time">8 min read</span>
+                    </div>
+                    <p class="featured-excerpt" id="featured-excerpt">Kenya has emerged as a global leader in direct air capture (DAC) technology, with Octavia Carbon commissioning Project Hummingbird - the first commercial DAC plant on the African continent. The East African Rift Valley's unique combination of abundant geothermal energy and basaltic rock formations provides ideal conditions for carbon removal and permanent storage, positioning the region to potentially contribute 20% of global carbon dioxide removal by 2035.</p>
+                    <a href="https://rmi.org/the-opportunity-for-direct-air-capture-in-africa/" target="_blank" class="btn btn-primary" id="featured-link">Read Full Article</a>
+                </div>
+                <div class="featured-image">
+                    <img src="resources/kenya-Dac.png" alt="Direct Air Capture in Kenya" id="featured-image">
+                    <div class="featured-overlay">
+                        <span class="featured-category">Featured Story</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Filters -->
+    <section class="news-filters">
+        <div class="container">
+            <div class="filters-container">
+                <div class="filter-group">
+                    <div class="filter-label">Category</div>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-category="all">All News</button>
+                        <button class="filter-btn" data-category="industry">Industry</button>
+                        <button class="filter-btn" data-category="technical">Technical</button>
+                        <button class="filter-btn" data-category="research">Research</button>
+                    </div>
+                </div>
+                
+                <div class="search-container">
+                    <input type="text" class="news-search" placeholder="Search articles...">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Articles Section -->
+    <section class="articles-section">
+        <div class="container">
+            <div class="articles-grid" id="articles-grid">
+                <!-- Articles will be dynamically generated -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-content animate-on-scroll">
+                <h2>Stay Informed</h2>
+                <p>Subscribe to our newsletter for the latest geoscience insights, project updates, and industry developments across East Africa.</p>
+                <form class="newsletter-form" name="newsletter" method="POST" data-netlify="true">
+                    <input type="hidden" name="form-name" value="newsletter">
+                    <input type="email" name="email" class="newsletter-input" placeholder="Enter your email address" required>
+                    <button type="submit" class="btn btn-secondary">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Media Section -->
+    <section class="social-section" style="display: none;">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">Follow Our Work</h2>
+                <p class="section-subtitle">Connect with us on social media for real-time updates and insights</p>
+            </div>
+            
+            <div class="social-grid">
+                <div class="social-card animate-on-scroll">
+                    <div class="social-icon">📘</div>
+                    <div class="social-handle">@GeoresolveAfrica</div>
+                    <p class="social-description">Follow us on LinkedIn for professional updates, project announcements, and industry insights.</p>
+                    <a href="#" class="social-link">Connect on LinkedIn</a>
+                </div>
+                
+                <div class="social-card animate-on-scroll">
+                    <div class="social-icon">📷</div>
+                    <div class="social-handle">@Georesolve_Africa</div>
+                    <p class="social-description">See our field work in action through photos and stories from projects across East Africa.</p>
+                    <a href="#" class="social-link">Follow on Instagram</a>
+                </div>
+                
+                <div class="social-card animate-on-scroll">
+                    <div class="social-icon">🐦</div>
+                    <div class="social-handle">@GeoresolveAfrica</div>
+                    <p class="social-description">Get real-time updates on project milestones, industry news, and technical insights.</p>
+                    <a href="#" class="social-link">Follow on Twitter</a>
+                </div>
+                
+                <div class="social-card animate-on-scroll">
+                    <div class="social-icon">📺</div>
+                    <div class="social-handle">Georesolve Africa</div>
+                    <p class="social-description">Watch project documentaries, technical tutorials, and educational content about geoscience.</p>
+                    <a href="#" class="social-link">Subscribe on YouTube</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const articlesData = [
+            {
+                id: 1,
+                title: "Kenya Leads Africa's Direct Air Capture Revolution",
+                category: "industry",
+                date: "October 2025",
+                readTime: "8 min read",
+                image: "resources/Kenya-DAC.png",
+                excerpt: "Kenya emerges as a global leader in carbon removal technology with the launch of Project Hummingbird, Africa's first commercial direct air capture facility.",
+                tags: ["carbon capture", "climate tech", "Kenya", "geothermal"],
+                content: "Kenya has emerged as a global leader in direct air capture (DAC) technology, with Octavia Carbon commissioning Project Hummingbird - the first commercial DAC plant on the African continent. The East African Rift Valley's unique combination of abundant geothermal energy and basaltic rock formations provides ideal conditions for carbon removal.",
+                link: "https://rmi.org/the-opportunity-for-direct-air-capture-in-africa/"
+            },
+            {
+                id: 2,
+                title: "Tanzania's Ngorongoro-Lengai Geopark Revitalized with International Support",
+                category: "industry",
+                date: "October 2025",
+                readTime: "6 min read",
+                image: "resources/Tanzania-Geopark.png",
+                excerpt: "Sub-Saharan Africa's only global geopark receives major reconstruction support, showcasing world-class geological features.",
+                tags: ["geopark", "Tanzania", "conservation", "geotourism"],
+                content: "The Ngorongoro-Lengai Global Geopark, spanning 12,000 square kilometers, has been successfully revalidated by UNESCO following comprehensive infrastructure improvements and capacity building initiatives. The geopark showcases the active Ol Doinyo Lengai volcano and paleontological sites.",
+                link: "https://www.morningstar.com/news/pr-newswire/20251024cn06096/global-geopark-in-tanzania-revived-with-chinese-aid"
+            },
+            {
+                id: 3,
+                title: "Rising Heatwaves Intensify Air Pollution Risks Across Sub-Saharan Africa",
+                category: "research",
+                date: "November 2025",
+                readTime: "5 min read",
+                image: "resources/Heatwaves-Air-Pollution.png",
+                excerpt: "New research reveals concerning interactions between increasing heatwaves and air pollution in Sub-Saharan Africa.",
+                tags: ["climate change", "air quality", "research", "public health"],
+                content: "Comprehensive geoscience research demonstrates how rising temperatures exacerbate air pollution challenges across the region, requiring integrated environmental monitoring and management strategies to protect public health.",
+                link: "https://geosciences.ed.ac.uk/news-and-events/news/rising-heatwaves-intensify-air-pollution-risks-across-sub-saharan-africa"
+            },
+            {
+                id: 4,
+                title: "USGS Expands International Programs Across African Continent",
+                category: "industry",
+                date: "November 2025",
+                readTime: "4 min read",
+                image: "resources/USGS-Africa.png",
+                excerpt: "The United States Geological Survey strengthens its presence in Africa, supporting critical mineral resource assessments.",
+                tags: ["USGS", "international cooperation", "resource assessment", "hazards"],
+                content: "USGS programs across Africa focus on sustainable mineral development, groundwater resource mapping, and natural hazard mitigation in partnership with local geological surveys across the continent.",
+                link: "https://www.usgs.gov/international-programs/africa"
+            },
+            {
+                id: 5,
+                title: "Uganda Reforestation Project Tackles Climate Hazards in Rwenzori Mountains",
+                category: "research",
+                date: "June 2025",
+                readTime: "6 min read",
+                image: "resources/Uganda-Reforestation.png",
+                excerpt: "Penn State researchers partner with Ugandan communities to implement tree-based adaptation strategies against floods and landslides.",
+                tags: ["climate adaptation", "reforestation", "Uganda", "community"],
+                content: "Community-led reforestation initiative in Kilembe village combines indigenous tree species with scientific monitoring to combat devastating rainstorms, landslides, and mudslides. The project planted 1,500 trees in June 2025.",
+                link: "https://www.psu.edu/news/earth-and-mineral-sciences/story/uganda-community-collaboration-targets-climate-hazards"
+            },
+            {
+                id: 6,
+                title: "Africa's Most Climate-Exposed Nations: 30-Year Analysis by Germanwatch",
+                category: "research",
+                date: "November 2025",
+                readTime: "7 min read",
+                image: "resources/Climate-Risk-Index.png",
+                excerpt: "Germanwatch Climate Risk Index 2026 identifies Libya, Mozambique, and Malawi as Africa's most affected countries.",
+                tags: ["climate risk", "extreme weather", "vulnerability", "data"],
+                content: "Libya ranks 4th globally after Cyclone Daniel killed 13,200 people and caused $6 billion in damages. East African nations including Kenya (39th), Ethiopia (47th), Tanzania (82nd), and Uganda (79th) feature prominently in climate vulnerability rankings.",
+                link: "https://www.ecofinagency.com/news/2111-50709-africa-s-most-climate-exposed-countries-between-1995-and-2024-germanwatch"
+            },
+            {
+                id: 7,
+                title: "African Nations Join Global Nuclear Energy Pledge for 2050",
+                category: "industry",
+                date: "November 2025",
+                readTime: "4 min read",
+                image: "resources/Nuclear-energy.png",
+                excerpt: "Additional African countries commit to IAEA-backed initiative to triple nuclear energy capacity by 2050.",
+                tags: ["nuclear energy", "clean energy", "IAEA", "2050"],
+                content: "International Atomic Energy Agency announces expanded African participation in global nuclear energy pledge, targeting carbon-free baseload power generation to complement renewable energy development across the continent.",
+                link: "https://www.iaea.org/newscenter/news/two-more-countries-join-global-pledge-to-triple-nuclear-energy-by-2050"
+            },
+            {
+                id: 8,
+                title: "Major Solar Energy Expansion in Rwanda and Uganda Backed by €2.5M",
+                category: "industry",
+                date: "November 2025",
+                readTime: "5 min read",
+                image: "resources/solar.jpg",
+                excerpt: "Significant solar energy projects advance in Rwanda and Uganda with substantial European financial backing.",
+                tags: ["solar energy", "Rwanda", "Uganda", "investment"],
+                content: "€2.5 million investment package accelerates solar energy deployment across Rwanda and Uganda, expanding clean electricity access to underserved communities and supporting industrial development in both countries.",
+                link: "https://www.pvknowhow.com/news/impressive-solar-energy-rwanda-uganda-expansion-backed-by-e2-5m/"
+            },
+            {
+                id: 9,
+                title: "Burundi Unveils $3.5B Energy Plan, Seeks Private Investment",
+                category: "industry",
+                date: "November 2025",
+                readTime: "6 min read",
+                image: "resources/Burundi-energy-mix.jfif",
+                excerpt: "Burundi launches comprehensive $3.5 billion energy development plan calling for significant private sector investment.",
+                tags: ["Burundi", "energy planning", "electrification", "investment"],
+                content: "Ambitious energy sector development plan targets dramatic expansion of electricity access through hydropower, solar, and grid infrastructure investments. Government prioritizes public-private partnerships to achieve 2030 electrification goals.",
+                link: "https://www.ecofinagency.com/news-industry/2909-49077-burundi-unveils-3-5b-energy-plan-calls-for-private-investment-to-boost-electrification"
+            },
+            {
+                id: 10,
+                title: "Ruvyironza Hydropower Project Now Operational in Burundi",
+                category: "industry",
+                date: "November 2025",
+                readTime: "4 min read",
+                image: "resources/Burundi-Hydropower.png",
+                excerpt: "Burundi successfully commissions Ruvyironza hydropower facility, adding critical clean energy capacity to national grid.",
+                tags: ["hydropower", "Burundi", "renewable energy", "commissioning"],
+                content: "Ruvyironza hydropower project reaches operational status, contributing clean electricity generation to Burundi's national grid. The facility represents successful implementation of hydroelectric development in East Africa.",
+                link: "https://energy-news-network.com/industry-news/ruvyironza-hydropower-project-now-operational-in-burundi/"
+            }
+        ];
+
+        function updateFeaturedArticle(articleId) {
+            const article = articlesData.find(a => a.id === articleId);
+            if (!article) return;
+            
+            document.getElementById('featured-title').textContent = article.title;
+            document.getElementById('featured-date').textContent = article.date;
+            document.getElementById('featured-category').textContent = article.category;
+            document.getElementById('featured-read-time').textContent = article.readTime;
+            document.getElementById('featured-excerpt').textContent = article.content;
+            document.getElementById('featured-link').href = article.link;
+            document.getElementById('featured-image').src = article.image;
+            document.getElementById('featured-image').alt = article.title;
+            
+            document.getElementById('featured-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            renderArticles(articlesData);
+            setupNewsFilters();
+            setupNewsletterForm();
+            setupSearch();
+        });
+
+        function renderArticles(articles) {
+            const grid = document.getElementById('articles-grid');
+            grid.innerHTML = '';
+
+            articles.forEach((article, index) => {
+                const card = createArticleCard(article);
+                grid.appendChild(card);
+            });
+
+            setTimeout(() => {
+                const cards = grid.querySelectorAll('.article-card');
+                cards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, index * 100);
+                });
+            }, 100);
+        }
+
+        function createArticleCard(article) {
+            const card = document.createElement('div');
+            card.className = 'article-card animate-on-scroll';
+            card.dataset.category = article.category;
+            card.dataset.articleId = article.id;
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+
+            card.innerHTML = `
+                <div class="article-image">
+                    <img src="${article.image}" alt="${article.title}">
+                    <div class="article-category">${article.category}</div>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">${article.title}</h3>
+                    <div class="article-meta">
+                        <span>${article.date}</span>
+                        <span>${article.readTime}</span>
+                    </div>
+                    <p class="article-excerpt">${article.excerpt}</p>
+                    <div class="article-tags">
+                        ${article.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                    <a href="#" class="read-more" onclick="updateFeaturedArticle(${article.id}); return false;">Read More →</a>
+                </div>
+            `;
+
+            return card;
+        }
+
+        function setupNewsFilters() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const category = this.dataset.category;
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    filterArticles(category);
+                });
+            });
+        }
+
+        function filterArticles(category) {
+            const filteredArticles = category === 'all' 
+                ? articlesData 
+                : articlesData.filter(article => article.category === category);
+            
+            renderArticles(filteredArticles);
+        }
+
+        function setupSearch() {
+            const searchInput = document.querySelector('.news-search');
+            
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const activeCategory = document.querySelector('.filter-btn.active').dataset.category;
+                
+                let filteredArticles = activeCategory === 'all' 
+                    ? articlesData 
+                    : articlesData.filter(article => article.category === activeCategory);
+                
+                if (searchTerm) {
+                    filteredArticles = filteredArticles.filter(article => 
+                        article.title.toLowerCase().includes(searchTerm) ||
+                        article.excerpt.toLowerCase().includes(searchTerm) ||
+                        article.tags.some(tag => tag.toLowerCase().includes(searchTerm))
+                    );
+                }
+                
+                renderArticles(filteredArticles);
+            });
+        }
+
+        function setupNewsletterForm() {
+            const form = document.querySelector('.newsletter-form');
+            
+            if (form) {
+                form.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    const email = this.querySelector('input[name="email"]').value;
+                    
+                    // Try Netlify Forms first (works in production)
+                    try {
+                        await fetch('/', {
+                            method: 'POST',
+                            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                            body: new URLSearchParams(new FormData(this)).toString()
+                        });
+                        alert(`Thank you for subscribing! We'll send updates to ${email}`);
+                        this.reset();
+                    } catch (error) {
+                        // Fallback to mailto for local testing
+                        window.location.href = `mailto:info@georesolveafrica.com?subject=Newsletter Subscription&body=Email: ${email}`;
+                    }
+                });
+            }
+        }
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+
+    <!-- Clients Section -->
+    <section class="clients-section">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">Trusted by Leading Organizations</h2>
+                <p class="section-subtitle">GeoResolve partners with government agencies, consulting firms, and private sector clients across East Africa</p>
+            </div>
+
+            <div class="clients-grid animate-on-scroll">
+                <div class="client-card">
+                    <img src="resources/Clients/zv-consulting.png" alt="ZV Consulting Ltd - Rwanda" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/atc-uganda.png" alt="ATC Uganda" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/ministry-energy-uganda.png" alt="Ministry of Energy - Uganda" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/fichtner.png.png" alt="Fichtner GmbH - Germany" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/Artelia.png" alt="Artelia - France" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/Aecom.png" alt="Aecom - International" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/Songa.png" alt="Songa Energy - Burundi" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/virunga-power.png" alt="Virunga Power - Burundi" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/anzana-electric.png" alt="Anzana Electric Group - Burundi" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/MBW.png" alt="MBW Consulting - Uganda" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/razel-bec.png" alt="Razel-Bec - International" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/Tectoni.png" alt="Tectoni Africa - Uganda" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/RSV.png" alt="RSV Engineering - Uganda" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/paraa.png" alt="Paraa Safari Lodge - Uganda" class="client-logo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>GeoResolve</h3>
+                    <p class="footer-tagline">Data-Driven, Research-Based</p>
+                    <p>Premier geoscience consulting firm providing expert geophysical, geotechnical, and hydrogeology services across Uganda, Rwanda, Burundi, and East Africa.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="LinkedIn">LinkedIn</a>
+                        <a href="#" aria-label="Twitter">Twitter</a>
+                        <a href="#" aria-label="Email">Email</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="methods.html#geophysics">Geophysical Surveys</a></li>
+                        <li><a href="methods.html#geotechnical">Geotechnical Investigation</a></li>
+                        <li><a href="methods.html#hydrogeology">Hydrogeology Studies</a></li>
+                        <li><a href="methods.html#drilling">Drilling Services</a></li>
+                        <li><a href="methods.html#geospatial">Geospatial Services</a></li>
+                        <li><a href="methods.html#surveys">Topographic Surveys</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="g-resolog.html">G-ResoLog</a></li>
+                        <li><a href="g-resconvt.html">G-ResConvt</a></li>
+                        <li><a href="g-geopylanner.html">G-GeoPyLanner</a></li>
+                        <li><a href="resources.html">All Tools</a></li>
+                        <li><a href="news.html">News & Updates</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul class="footer-contact">
+                        <li><strong>Head Office:</strong><br>Kasangati, Uganda<br>HMK Building, Gayaza Road</li>
+                        <li><strong>Phone:</strong><br>+256 771 999 614<br>+256 772 876 300</li>
+                        <li><strong>Email:</strong><br><a href="mailto:info@georesolveafrica.com">info@georesolveafrica.com</a></li>
+                        <li><strong>Hours:</strong><br>Mon-Fri: 8:00 AM - 6:00 PM<br>Sat: 9:00 AM - 2:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2025 GeoResolve. All rights reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="contact.html">Privacy Policy</a>
+                        <a href="contact.html">Terms of Service</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                    <p class="footer-location">Serving Uganda, Rwanda, Burundi, DRC, South Sudan & East Africa</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>

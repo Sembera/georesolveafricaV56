@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoResolve | Geophysical, Geotechnical & Hydrogeology Services Uganda, Rwanda, Burundi, East Africa</title>
+    <meta name="description" content="GeoResolve: Premier geoscience consulting in Uganda, Rwanda, Burundi & East Africa. Seismic refraction, ERT surveys, geotechnical investigation, drilling, GIS, drone surveys, topographic mapping. Data-driven, research-based solutions.">
+    <meta name="keywords" content="geophysical surveys Uganda, geotechnical investigation Rwanda, seismic refraction Burundi, ERT surveys East Africa, MASW Uganda, hydrogeology Rwanda, diamond drilling Burundi, GIS data acquisition Uganda, drone surveys East Africa, topographic surveys Rwanda, cadastral surveys Uganda, slope stability Burundi, dam foundation studies, geoscience consulting East Africa">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Georesolve Africa - Premier Geoscience Consulting">
+    <meta property="og:description" content="Expert geoscience consulting services across East Africa. Specializing in geophysics, geotechnical engineering, and hydrogeology.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://georesolve.africa">
+    <meta property="og:image" content="resources/hero-geoscience.png">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Georesolve Africa - Geoscience Consulting">
+    <meta name="twitter:description" content="Professional geoscience consulting services in East Africa.">
+    <meta name="twitter:image" content="resources/hero-geoscience.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="resources/favicon/Icon-Flavicon.png">
+
+    <!-- Structured Data / Schema.org -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "GeoResolve Africa",
+      "alternateName": "GeoResolve",
+      "url": "https://georesolve.africa",
+      "logo": "https://georesolve.africa/resources/logo/georesolve-logo.svg.svg",
+      "image": "https://georesolve.africa/resources/about.png",
+      "description": "Premier geoscience consulting firm providing expert geophysical, geotechnical, and hydrogeology services across Uganda, Rwanda, Burundi, and East Africa.",
+      "slogan": "Data Driven, Research Based",
+      "telephone": "+256771999614",
+      "email": "info@georesolveafrica.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "HMK Building, Gayaza Road, Kasangati",
+        "addressLocality": "Kasangati",
+        "addressRegion": "Central Region",
+        "addressCountry": "UG"
+      },
+      "areaServed": ["Uganda", "Rwanda", "Burundi", "DRC", "South Sudan"],
+      "serviceType": ["Geophysical Surveys", "Geotechnical Engineering", "Hydrogeology", "Drilling Services"],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "50"
+      }
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    
+    <!-- Contentful Integration -->
+    <script src="contentful.js"></script>
+
+    <!-- Footer & Clients Styles -->
+    <link rel="stylesheet" href="footer-styles.css">
+
+    <style>
+        :root {
+            --primary-color: #345363;
+            --secondary-color: #9EDB9E;
+            --accent-color: #4DA34D;
+            --text-dark: #1a1a1a;
+            --text-light: #ffffff;
+            --background-light: #f8f9fa;
+            --border-color: #e9ecef;
+            --shadow-light: 0 2px 10px rgba(52, 83, 99, 0.1);
+            --shadow-medium: 0 8px 30px rgba(52, 83, 99, 0.15);
+            --shadow-heavy: 0 20px 60px rgba(52, 83, 99, 0.2);
+            --transition-fast: 0.2s ease;
+            --transition-medium: 0.3s ease;
+            --transition-slow: 0.5s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            transition: var(--transition-medium);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-decoration: none;
+            gap: 0.25rem;
+        }
+
+        .logo img {
+            height: 55px;
+            width: auto;
+        }
+
+        .logo-tagline {
+            font-size: 0.65rem;
+            color: var(--primary-color);
+            font-weight: 500;
+            font-style: italic;
+            letter-spacing: 0.5px;
+            margin-left: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: var(--transition-fast);
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-color);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: var(--transition-fast);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-color);
+            margin: 3px 0;
+            transition: var(--transition-fast);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('resources/hero-geoscience.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.3;
+            filter: brightness(0.6) contrast(0.9);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: var(--text-light);
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition-medium);
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: var(--text-light);
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-light);
+            border-color: var(--text-light);
+        }
+
+        .btn-secondary:hover {
+            background: var(--text-light);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Services Section */
+        .services-section {
+            padding: 6rem 0;
+            background: var(--background-light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition-medium);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            transform: scaleX(0);
+            transition: var(--transition-medium);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .service-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .service-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        .service-features li::before {
+            content: '✓';
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .service-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition-fast);
+        }
+
+        .service-link:hover {
+            color: var(--accent-color);
+            gap: 1rem;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            display: block;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        /* Projects Showcase */
+        .projects-showcase {
+            padding: 6rem 0;
+            background: var(--background-light);
+        }
+
+        .project-carousel {
+            margin-top: 3rem;
+        }
+
+        .project-slide {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition-medium);
+        }
+
+        .project-slide:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .project-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.7));
+            display: flex;
+            align-items: flex-end;
+            padding: 1.5rem;
+        }
+
+        .project-location {
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-description {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* Tools Section */
+        .tools-section {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tool-card {
+            background: var(--background-light);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: var(--transition-medium);
+            border: 2px solid transparent;
+        }
+
+        .tool-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+            background: white;
+        }
+
+        .tool-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .tool-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .tool-name {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .tool-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .tool-features {
+            list-style: none;
+            margin-bottom: 1rem;
+        }
+
+        .tool-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        .tool-features li::before {
+            content: '✓';
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .tool-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition-fast);
+        }
+
+        .tool-link:hover {
+            color: var(--accent-color);
+            gap: 1rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        .cta-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-content p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: var(--text-light);
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 1.6;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .about-stats {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .cta-content h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .hero-content {
+                padding: 0 1rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .about-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Focus styles for keyboard navigation */
+        .btn:focus,
+        .nav-link:focus,
+        .service-link:focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="resources/logo/Georesolve Logo.png" alt="GeoResolve Logo">
+                <span class="logo-tagline">Data Driven, Research Based</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="methods.html" class="nav-link">Methods</a></li>
+                <li><a href="applications.html" class="nav-link">Applications</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="resources.html" class="nav-link">Resources</a></li>
+                <li><a href="news.html" class="nav-link">News</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Integrated Geoscience Solutions for East Africa</h1>
+            <p class="hero-subtitle">Expert consulting in geophysics, geotechnical engineering, hydrogeology, and drilling services. Delivering precise geological insights for infrastructure, mining, and water resource projects across the region.</p>
+            <div class="hero-cta">
+                <a href="contact.html" class="btn btn-primary">Start Your Project</a>
+                <a href="methods.html" class="btn btn-secondary">Our Methods</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">Comprehensive Geoscience Services</h2>
+                <p class="section-subtitle">Our integrated approach combines cutting-edge technology with deep geological expertise to deliver actionable insights for your projects.</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">🗲</div>
+                    <h3 class="service-title">Geophysical Surveys</h3>
+                    <p class="service-description">Advanced seismic, electrical, and magnetic surveys to map subsurface structures and identify geological features with precision.</p>
+                    <ul class="service-features">
+                        <li>Seismic refraction & MASW</li>
+                        <li>Electrical resistivity tomography (ERT)</li>
+                        <li>Ground-penetrating radar (GPR)</li>
+                        <li>Magnetic and gravity surveys</li>
+                    </ul>
+                    <a href="methods.html#geophysics" class="service-link">Learn More →</a>
+                </div>
+
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">🏗</div>
+                    <h3 class="service-title">Geotechnical Engineering</h3>
+                    <p class="service-description">Comprehensive soil and rock mechanics analysis for foundation design, slope stability, and infrastructure development.</p>
+                    <ul class="service-features">
+                        <li>Soil mechanics testing</li>
+                        <li>Foundation analysis and design</li>
+                        <li>Slope stability assessment</li>
+                        <li>Construction material evaluation</li>
+                    </ul>
+                    <a href="methods.html#geotechnical" class="service-link">Learn More →</a>
+                </div>
+
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">💧</div>
+                    <h3 class="service-title">Hydrogeology</h3>
+                    <p class="service-description">Groundwater resource assessment, well design, and water quality analysis for sustainable water management solutions.</p>
+                    <ul class="service-features">
+                        <li>Aquifer characterization</li>
+                        <li>Pump testing and analysis</li>
+                        <li>Groundwater monitoring</li>
+                        <li>Water resource management</li>
+                    </ul>
+                    <a href="methods.html#hydrogeology" class="service-link">Learn More →</a>
+                </div>
+
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">⚡</div>
+                    <h3 class="service-title">Drilling Services</h3>
+                    <p class="service-description">Professional drilling for exploration, geotechnical investigation, and groundwater development with advanced equipment.</p>
+                    <ul class="service-features">
+                        <li>Mineral exploration drilling</li>
+                        <li>Geotechnical core drilling</li>
+                        <li>Water well drilling</li>
+                        <li>Monitoring well installation</li>
+                    </ul>
+                    <a href="methods.html#drilling" class="service-link">Learn More →</a>
+                </div>
+
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">🗺</div>
+                    <h3 class="service-title">GIS & Geospatial Services</h3>
+                    <p class="service-description">Modern geospatial solutions combining drone surveys, GIS analysis, topographic and cadastral mapping for comprehensive spatial data.</p>
+                    <ul class="service-features">
+                        <li>Drone surveys & photogrammetry</li>
+                        <li>GIS data acquisition & analysis</li>
+                        <li>Topographic & cadastral surveys</li>
+                        <li>Digital terrain modeling</li>
+                    </ul>
+                    <a href="methods.html#geospatial" class="service-link">Learn More →</a>
+                </div>
+
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">🔬</div>
+                    <h3 class="service-title">Laboratory Testing</h3>
+                    <p class="service-description">Comprehensive soil, rock, and water testing services with accredited laboratory facilities for accurate material characterization.</p>
+                    <ul class="service-features">
+                        <li>Soil classification & testing</li>
+                        <li>Rock mechanics testing</li>
+                        <li>Water quality analysis</li>
+                        <li>Construction material testing</li>
+                    </ul>
+                    <a href="methods.html#geotechnical" class="service-link">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text animate-on-scroll">
+                    <h2>Leading Geoscience Innovation in East Africa</h2>
+                    <p>GeoResolve brings together decades of geological expertise with cutting-edge technology to deliver comprehensive geoscience solutions. Our team of experienced geologists, geophysicists, and engineers has successfully completed projects across Uganda, Rwanda, Burundi, and throughout East Africa.</p>
+                    <p>We specialize in providing actionable geological insights that drive informed decision-making for infrastructure development, mining exploration, and water resource management. Our commitment to scientific excellence and local expertise makes us the preferred partner for complex geological challenges.</p>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <span class="stat-number counter" data-target="50">0</span>
+                            <div class="stat-label">Projects Delivered</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number counter" data-target="7">0</span>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number counter" data-target="4">0</span>
+                            <div class="stat-label">Countries</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number counter" data-target="30">0</span>
+                            <div class="stat-label">Active Clients</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image animate-on-scroll">
+                    <img src="resources/about.png" alt="Geological field work in East Africa">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Showcase -->
+    <section class="projects-showcase">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">Featured Projects</h2>
+                <p class="section-subtitle">Explore our portfolio of successful geoscience projects across East Africa, showcasing our expertise in diverse geological environments.</p>
+            </div>
+            
+            <div class="project-carousel splide animate-on-scroll">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <li class="splide__slide">
+                            <div class="project-slide">
+                                <div class="project-image">
+                                    <img src="resources/projects/rwanda-dams.png" alt="Rwanda Dam Sites Investigation">
+                                    <div class="project-overlay">
+                                        <span class="project-location">Rwanda</span>
+                                    </div>
+                                </div>
+                                <div class="project-info">
+                                    <h3 class="project-title">Mwogo, Rukarara & Kavili Dam Sites</h3>
+                                    <p class="project-description">Comprehensive geophysical investigation using Seismic Refraction and MASW methods for three proposed dam sites.</p>
+                                    <div class="project-meta">
+                                        <span>2025</span>
+                                        <span>Infrastructure</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="splide__slide">
+                            <div class="project-slide">
+                                <div class="project-image">
+                                    <img src="resources/projects/arua-dam.png" alt="Arua Water Dam Investigation">
+                                    <div class="project-overlay">
+                                        <span class="project-location">Uganda</span>
+                                    </div>
+                                </div>
+                                <div class="project-info">
+                                    <h3 class="project-title">Arua Water Dam</h3>
+                                    <p class="project-description">Comprehensive geological mapping of 5.5 km² and 1.5km Seismic Refraction for major water infrastructure project.</p>
+                                    <div class="project-meta">
+                                        <span>2025</span>
+                                        <span>Water</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="splide__slide">
+                            <div class="project-slide">
+                                <div class="project-image">
+                                    <img src="resources/projects/mutambu-hybrid.png" alt="Mutambu Hydro-Solar Hybrid">
+                                    <div class="project-overlay">
+                                        <span class="project-location">Burundi</span>
+                                    </div>
+                                </div>
+                                <div class="project-info">
+                                    <h3 class="project-title">1MW Mutambu Hydro-Solar Hybrid</h3>
+                                    <p class="project-description">Integrated ground and aerial survey for innovative renewable energy project combining hydro and solar power.</p>
+                                    <div class="project-meta">
+                                        <span>2025</span>
+                                        <span>Energy</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="splide__slide">
+                            <div class="project-slide">
+                                <div class="project-image">
+                                    <img src="resources/projects/isingiro-water.png" alt="Isingiro Water Supply">
+                                    <div class="project-overlay">
+                                        <span class="project-location">Uganda</span>
+                                    </div>
+                                </div>
+                                <div class="project-info">
+                                    <h3 class="project-title">Isingiro Water Supply Project</h3>
+                                    <p class="project-description">Extensive 10.3km of 2D Resistivity Surveys along water pipeline routes for major infrastructure development.</p>
+                                    <div class="project-meta">
+                                        <span>2023</span>
+                                        <span>Water</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="splide__slide">
+                            <div class="project-slide">
+                                <div class="project-image">
+                                    <img src="resources/projects/mpanga-hydro.png" alt="Mpanga II Hydro Power">
+                                    <div class="project-overlay">
+                                        <span class="project-location">Uganda</span>
+                                    </div>
+                                </div>
+                                <div class="project-info">
+                                    <h3 class="project-title">Mpanga II Hydro Power Project</h3>
+                                    <p class="project-description">Comprehensive investigation with geotechnical drilling, geological mapping, and slope stability analysis.</p>
+                                    <div class="project-meta">
+                                        <span>2023</span>
+                                        <span>Energy</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Glimpse Section -->
+    <section class="tools-section">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">Professional Geoscience Tools</h2>
+                <p class="section-subtitle">Specialized software tools developed for geological data management, analysis, and project planning</p>
+            </div>
+
+            <div class="tools-grid">
+                <div class="tool-card animate-on-scroll">
+                    <div class="tool-header">
+                        <div class="tool-icon">📊</div>
+                        <h3 class="tool-name">G-ResoLog</h3>
+                    </div>
+                    <p class="tool-description">Comprehensive borehole logging and geological data management system for efficient exploration and investigation projects.</p>
+                    <ul class="tool-features">
+                        <li>Digital borehole logging</li>
+                        <li>Lithology classification</li>
+                        <li>Data visualization & export</li>
+                        <li>Report generation</li>
+                    </ul>
+                    <a href="g-resolog.html" class="tool-link">Explore Tool →</a>
+                </div>
+
+                <div class="tool-card animate-on-scroll">
+                    <div class="tool-header">
+                        <div class="tool-icon">🔄</div>
+                        <h3 class="tool-name">G-ResConvt</h3>
+                    </div>
+                    <p class="tool-description">Advanced unit conversion tool for geotechnical and geophysical parameters with extensive formula library.</p>
+                    <ul class="tool-features">
+                        <li>Multi-unit conversions</li>
+                        <li>Geotechnical calculators</li>
+                        <li>Standard formulas</li>
+                        <li>Custom parameter sets</li>
+                    </ul>
+                    <a href="g-resconvt.html" class="tool-link">Explore Tool →</a>
+                </div>
+
+                <div class="tool-card animate-on-scroll">
+                    <div class="tool-header">
+                        <div class="tool-icon">📋</div>
+                        <h3 class="tool-name">G-GeoPyLanner</h3>
+                    </div>
+                    <p class="tool-description">Intelligent geophysical survey planning tool for optimizing survey design, equipment selection, and cost estimation.</p>
+                    <ul class="tool-features">
+                        <li>Survey design optimization</li>
+                        <li>Equipment recommendations</li>
+                        <li>Cost estimation</li>
+                        <li>Timeline planning</li>
+                    </ul>
+                    <a href="g-geopylanner.html" class="tool-link">Explore Tool →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content animate-on-scroll">
+                <h2>Ready to Start Your Geoscience Project?</h2>
+                <p>Contact our expert team today for a consultation and discover how we can provide the geological insights you need for successful project implementation.</p>
+                <div class="hero-cta">
+                    <a href="contact.html" class="btn btn-primary">Get Started Today</a>
+                    <a href="resources.html" class="btn btn-secondary">Explore Resources</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clients Section -->
+    <section class="clients-section">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">Trusted by Leading Organizations</h2>
+                <p class="section-subtitle">GeoResolve partners with government agencies, consulting firms, and private sector clients across East Africa</p>
+            </div>
+
+            <div class="clients-grid animate-on-scroll">
+                <div class="client-card">
+                    <img src="resources/Clients/zv-consulting.png" alt="ZV Consulting Ltd - Rwanda" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/atc-uganda.png" alt="ATC Uganda" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/ministry-energy-uganda.png" alt="Ministry of Energy - Uganda" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/fichtner.png.png" alt="Fichtner GmbH - Germany" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/Artelia.png" alt="Artelia - France" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/Aecom.png" alt="Aecom - International" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/Songa.png" alt="Songa Energy - Burundi" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/virunga-power.png" alt="Virunga Power - Burundi" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/anzana-electric.png" alt="Anzana Electric Group - Burundi" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/MBW.png" alt="MBW Consulting - Uganda" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/razel-bec.png" alt="Razel-Bec - International" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/Tectoni.png" alt="Tectoni Africa - Uganda" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/RSV.png" alt="RSV Engineering - Uganda" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/paraa.png" alt="Paraa Safari Lodge - Uganda" class="client-logo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>GeoResolve</h3>
+                    <p class="footer-tagline">Data-Driven, Research-Based</p>
+                    <p>Premier geoscience consulting firm providing expert geophysical, geotechnical, and hydrogeology services across Uganda, Rwanda, Burundi, and East Africa.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="LinkedIn">LinkedIn</a>
+                        <a href="#" aria-label="Twitter">Twitter</a>
+                        <a href="#" aria-label="Email">Email</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="methods.html#geophysics">Geophysical Surveys</a></li>
+                        <li><a href="methods.html#geotechnical">Geotechnical Investigation</a></li>
+                        <li><a href="methods.html#hydrogeology">Hydrogeology Studies</a></li>
+                        <li><a href="methods.html#drilling">Drilling Services</a></li>
+                        <li><a href="methods.html#geospatial">Geospatial Services</a></li>
+                        <li><a href="methods.html#surveys">Topographic Surveys</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="g-resolog.html">G-ResoLog</a></li>
+                        <li><a href="g-resconvt.html">G-ResConvt</a></li>
+                        <li><a href="g-geopylanner.html">G-GeoPyLanner</a></li>
+                        <li><a href="resources.html">All Tools</a></li>
+                        <li><a href="news.html">News & Updates</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul class="footer-contact">
+                        <li><strong>Head Office:</strong><br>Kasangati, Uganda<br>HMK Building, Gayaza Road</li>
+                        <li><strong>Phone:</strong><br>+256 771 999 614<br>+256 772 876 300</li>
+                        <li><strong>Email:</strong><br><a href="mailto:info@georesolveafrica.com">info@georesolveafrica.com</a></li>
+                        <li><strong>Hours:</strong><br>Mon-Fri: 8:00 AM - 6:00 PM<br>Sat: 9:00 AM - 2:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2025 GeoResolve. All rights reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="contact.html">Privacy Policy</a>
+                        <a href="contact.html">Terms of Service</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                    <p class="footer-location">Serving Uganda, Rwanda, Burundi, DRC, South Sudan & East Africa</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>

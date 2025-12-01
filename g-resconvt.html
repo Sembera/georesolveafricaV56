@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G-Resconvt - Professional Coordinate Converter | Georesolve Africa</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4/2.9.0/proj4.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #345363, #4DA34D);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        .header .subtitle {
+            font-size: 0.85em;
+            margin-top: 5px;
+            opacity: 0.85;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .input-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: #4DA34D;
+            border-radius: 2px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        select, input[type="text"], input[type="number"], textarea {
+            padding: 12px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        select:focus, input:focus, textarea:focus {
+            outline: none;
+            border-color: #4DA34D;
+            box-shadow: 0 0 0 3px rgba(77, 163, 77, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: #4DA34D;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #3d8a3d;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(77, 163, 77, 0.4);
+        }
+
+        .btn-secondary {
+            background: #345363;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #2a4250;
+        }
+
+        .btn-success {
+            background: #27ae60;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-upload-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border: 2px dashed #4DA34D;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .file-upload-label:hover {
+            background: #e8f5e9;
+            border-color: #345363;
+        }
+
+        .file-upload-label::before {
+            content: '📁 ';
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
+        .results-section {
+            margin-top: 30px;
+            display: none;
+        }
+
+        .results-section.active {
+            display: block;
+        }
+
+        .alert {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            color: #856404;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        .results-table-wrapper {
+            overflow-x: auto;
+            border-radius: 8px;
+            border: 1px solid #e1e8ed;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th {
+            background: #2c3e50;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e1e8ed;
+            font-size: 14px;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .tab-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e1e8ed;
+        }
+
+        .tab {
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-weight: 600;
+            color: #6c757d;
+            transition: all 0.3s;
+        }
+
+        .tab:hover {
+            color: #4DA34D;
+        }
+
+        .tab.active {
+            color: #4DA34D;
+            border-bottom-color: #4DA34D;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #0c5460;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 22px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+
+            table {
+                font-size: 12px;
+            }
+
+            th, td {
+                padding: 8px;
+            }
+        }
+
+        .loader {
+            display: none;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4DA34D;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        .loader.active {
+            display: block;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .country-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            background: #4DA34D;
+            color: white;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .panel {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌍 G-Resconvt</h1>
+            <p>Professional Coordinate Conversion System - East Africa Edition</p>
+            <div class="subtitle">Powered by Georesolve Africa | World-Class Coordinate Transformation</div>
+        </div>
+
+        <div class="content">
+            <div class="tab-container">
+                <button class="tab active" onclick="switchTab('single')">Single Point</button>
+                <button class="tab" onclick="switchTab('batch')">Batch / CSV Upload</button>
+            </div>
+
+            <!-- Single Point Tab -->
+            <div id="single-tab" class="tab-content active">
+                <div class="input-section">
+                    <div class="section-title">Input Coordinate</div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Input Format</label>
+                            <select id="inputFormat" onchange="updateInputFields()">
+                                <option value="dd">Decimal Degrees (DD)</option>
+                                <option value="dms">Degrees Minutes Seconds (DMS)</option>
+                                <option value="ddm">Degrees + Decimal Minutes</option>
+                                <option value="utm">UTM (Easting, Northing)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Input CRS</label>
+                            <select id="inputCRS">
+                                <optgroup label="🌐 Global Systems">
+                                    <option value="EPSG:4326">WGS84 Geographic (EPSG:4326)</option>
+                                    <option value="EPSG:32635">WGS84 / UTM 35N (EPSG:32635)</option>
+                                    <option value="EPSG:32735">WGS84 / UTM 35S (EPSG:32735)</option>
+                                    <option value="EPSG:32636">WGS84 / UTM 36N (EPSG:32636)</option>
+                                    <option value="EPSG:32736">WGS84 / UTM 36S (EPSG:32736)</option>
+                                    <option value="EPSG:32637">WGS84 / UTM 37N (EPSG:32637)</option>
+                                    <option value="EPSG:32737">WGS84 / UTM 37S (EPSG:32737)</option>
+                                    <option value="EPSG:32638">WGS84 / UTM 38N (EPSG:32638)</option>
+                                    <option value="EPSG:32738">WGS84 / UTM 38S (EPSG:32738)</option>
+                                    <option value="EPSG:32639">WGS84 / UTM 39N (EPSG:32639)</option>
+                                    <option value="EPSG:32739">WGS84 / UTM 39S (EPSG:32739)</option>
+                                </optgroup>
+                                <optgroup label="🇺🇬 Uganda (Arc 1960)">
+                                    <option value="EPSG:4209">Arc 1960 Geographic (EPSG:4209)</option>
+                                    <option value="EPSG:21095">Arc 1960 / UTM 35N (EPSG:21095)</option>
+                                    <option value="EPSG:21035">Arc 1960 / UTM 35S (EPSG:21035)</option>
+                                    <option value="EPSG:21096">Arc 1960 / UTM 36N (EPSG:21096)</option>
+                                    <option value="EPSG:21036">Arc 1960 / UTM 36S (EPSG:21036)</option>
+                                </optgroup>
+                                <optgroup label="🇷🇼 Rwanda (RGR 2000)">
+                                    <option value="EPSG:4759">Rwanda 2000 Geographic (EPSG:4759)</option>
+                                    <option value="EPSG:32735">Rwanda 2000 / UTM 35S (EPSG:32735)</option>
+                                    <option value="EPSG:32736">Rwanda 2000 / UTM 36S (EPSG:32736)</option>
+                                </optgroup>
+                                <optgroup label="🇧🇮 Burundi (Arc 1960)">
+                                    <option value="EPSG:4209">Arc 1960 Geographic (EPSG:4209)</option>
+                                    <option value="EPSG:21035">Arc 1960 / UTM 35S (EPSG:21035)</option>
+                                    <option value="EPSG:21036">Arc 1960 / UTM 36S (EPSG:21036)</option>
+                                </optgroup>
+                                <optgroup label="🇹🇿 Tanzania (Arc 1960)">
+                                    <option value="EPSG:4209">Arc 1960 Geographic (EPSG:4209)</option>
+                                    <option value="EPSG:21035">Arc 1960 / UTM 35S (EPSG:21035)</option>
+                                    <option value="EPSG:21036">Arc 1960 / UTM 36S (EPSG:21036)</option>
+                                    <option value="EPSG:21037">Arc 1960 / UTM 37S (EPSG:21037)</option>
+                                </optgroup>
+                                <optgroup label="🇰🇪 Kenya">
+                                    <option value="EPSG:4210">Kenya 1960 Geographic (EPSG:4210)</option>
+                                    <option value="EPSG:21097">Arc 1960 / UTM 37N (EPSG:21097)</option>
+                                    <option value="EPSG:21037">Arc 1960 / UTM 37S (EPSG:21037)</option>
+                                </optgroup>
+                                <optgroup label="🇸🇴 Somalia (WGS84)">
+                                    <option value="EPSG:4326">WGS84 Geographic (EPSG:4326)</option>
+                                    <option value="EPSG:32638">WGS84 / UTM 38N (EPSG:32638)</option>
+                                    <option value="EPSG:32639">WGS84 / UTM 39N (EPSG:32639)</option>
+                                </optgroup>
+                                <optgroup label="🇨🇩 DRC (WGS84)">
+                                    <option value="EPSG:4326">WGS84 Geographic (EPSG:4326)</option>
+                                    <option value="EPSG:32732">WGS84 / UTM 32S (EPSG:32732)</option>
+                                    <option value="EPSG:32733">WGS84 / UTM 33S (EPSG:32733)</option>
+                                    <option value="EPSG:32734">WGS84 / UTM 34S (EPSG:32734)</option>
+                                    <option value="EPSG:32735">WGS84 / UTM 35S (EPSG:32735)</option>
+                                    <option value="EPSG:32736">WGS84 / UTM 36S (EPSG:32736)</option>
+                                </optgroup>
+                                <optgroup label="🇨🇩 DRC Legacy (Belgian Congo 1950)">
+                                    <option value="EPSG:4196">Belgian Congo 1950 Geographic (EPSG:4196)</option>
+                                    <option value="EPSG:3347">Belgian Congo 1950 / UTM 34S (EPSG:3347)</option>
+                                    <option value="EPSG:3348">Belgian Congo 1950 / UTM 35S (EPSG:3348)</option>
+                                </optgroup>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Output CRS</label>
+                            <select id="outputCRS">
+                                <optgroup label="🌐 Global Systems">
+                                    <option value="EPSG:4326" selected>WGS84 Geographic (EPSG:4326)</option>
+                                    <option value="EPSG:32635">WGS84 / UTM 35N (EPSG:32635)</option>
+                                    <option value="EPSG:32735">WGS84 / UTM 35S (EPSG:32735)</option>
+                                    <option value="EPSG:32636">WGS84 / UTM 36N (EPSG:32636)</option>
+                                    <option value="EPSG:32736">WGS84 / UTM 36S (EPSG:32736)</option>
+                                    <option value="EPSG:32637">WGS84 / UTM 37N (EPSG:32637)</option>
+                                    <option value="EPSG:32737">WGS84 / UTM 37S (EPSG:32737)</option>
+                                    <option value="EPSG:32638">WGS84 / UTM 38N (EPSG:32638)</option>
+                                    <option value="EPSG:32738">WGS84 / UTM 38S (EPSG:32738)</option>
+                                    <option value="EPSG:32639">WGS84 / UTM 39N (EPSG:32639)</option>
+                                    <option value="EPSG:32739">WGS84 / UTM 39S (EPSG:32739)</option>
+                                </optgroup>
+                                <optgroup label="🇺🇬 Uganda (Arc 1960)">
+                                    <option value="EPSG:4209">Arc 1960 Geographic (EPSG:4209)</option>
+                                    <option value="EPSG:21095">Arc 1960 / UTM 35N (EPSG:21095)</option>
+                                    <option value="EPSG:21035">Arc 1960 / UTM 35S (EPSG:21035)</option>
+                                    <option value="EPSG:21096">Arc 1960 / UTM 36N (EPSG:21096)</option>
+                                    <option value="EPSG:21036">Arc 1960 / UTM 36S (EPSG:21036)</option>
+                                </optgroup>
+                                <optgroup label="🇷🇼 Rwanda (RGR 2000)">
+                                    <option value="EPSG:4759">Rwanda 2000 Geographic (EPSG:4759)</option>
+                                    <option value="EPSG:32735">Rwanda 2000 / UTM 35S (EPSG:32735)</option>
+                                    <option value="EPSG:32736">Rwanda 2000 / UTM 36S (EPSG:32736)</option>
+                                </optgroup>
+                                <optgroup label="🇧🇮 Burundi (Arc 1960)">
+                                    <option value="EPSG:4209">Arc 1960 Geographic (EPSG:4209)</option>
+                                    <option value="EPSG:21035">Arc 1960 / UTM 35S (EPSG:21035)</option>
+                                    <option value="EPSG:21036">Arc 1960 / UTM 36S (EPSG:21036)</option>
+                                </optgroup>
+                                <optgroup label="🇹🇿 Tanzania (Arc 1960)">
+                                    <option value="EPSG:4209">Arc 1960 Geographic (EPSG:4209)</option>
+                                    <option value="EPSG:21035">Arc 1960 / UTM 35S (EPSG:21035)</option>
+                                    <option value="EPSG:21036">Arc 1960 / UTM 36S (EPSG:21036)</option>
+                                    <option value="EPSG:21037">Arc 1960 / UTM 37S (EPSG:21037)</option>
+                                </optgroup>
+                                <optgroup label="🇰🇪 Kenya">
+                                    <option value="EPSG:4210">Kenya 1960 Geographic (EPSG:4210)</option>
+                                    <option value="EPSG:21097">Arc 1960 / UTM 37N (EPSG:21097)</option>
+                                    <option value="EPSG:21037">Arc 1960 / UTM 37S (EPSG:21037)</option>
+                                </optgroup>
+                                <optgroup label="🇸🇴 Somalia (WGS84)">
+                                    <option value="EPSG:4326">WGS84 Geographic (EPSG:4326)</option>
+                                    <option value="EPSG:32638">WGS84 / UTM 38N (EPSG:32638)</option>
+                                    <option value="EPSG:32639">WGS84 / UTM 39N (EPSG:32639)</option>
+                                </optgroup>
+                                <optgroup label="🇨🇩 DRC (WGS84)">
+                                    <option value="EPSG:4326">WGS84 Geographic (EPSG:4326)</option>
+                                    <option value="EPSG:32732">WGS84 / UTM 32S (EPSG:32732)</option>
+                                    <option value="EPSG:32733">WGS84 / UTM 33S (EPSG:32733)</option>
+                                    <option value="EPSG:32734">WGS84 / UTM 34S (EPSG:32734)</option>
+                                    <option value="EPSG:32735">WGS84 / UTM 35S (EPSG:32735)</option>
+                                    <option value="EPSG:32736">WGS84 / UTM 36S (EPSG:32736)</option>
+                                </optgroup>
+                                <optgroup label="🇨🇩 DRC Legacy (Belgian Congo 1950)">
+                                    <option value="EPSG:4196">Belgian Congo 1950 Geographic (EPSG:4196)</option>
+                                    <option value="EPSG:3347">Belgian Congo 1950 / UTM 34S (EPSG:3347)</option>
+                                    <option value="EPSG:3348">Belgian Congo 1950 / UTM 35S (EPSG:3348)</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="inputFieldsDD" class="form-grid">
+                        <div class="form-group">
+                            <label>Latitude (Y)</label>
+                            <input type="text" id="latDD" placeholder="e.g., 0.3476">
+                        </div>
+                        <div class="form-group">
+                            <label>Longitude (X)</label>
+                            <input type="text" id="lonDD" placeholder="e.g., 32.5825">
+                        </div>
+                    </div>
+
+                    <div id="inputFieldsDMS" class="form-grid" style="display: none;">
+                        <div class="form-group">
+                            <label>Latitude</label>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
+                                <input type="number" id="latDeg" placeholder="Deg">
+                                <input type="number" id="latMin" placeholder="Min">
+                                <input type="number" id="latSec" placeholder="Sec" step="0.001">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Longitude</label>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
+                                <input type="number" id="lonDeg" placeholder="Deg">
+                                <input type="number" id="lonMin" placeholder="Min">
+                                <input type="number" id="lonSec" placeholder="Sec" step="0.001">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="inputFieldsDDM" class="form-grid" style="display: none;">
+                        <div class="form-group">
+                            <label>Latitude</label>
+                            <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 8px;">
+                                <input type="number" id="latDegDDM" placeholder="Deg">
+                                <input type="number" id="latMinDDM" placeholder="Dec Min" step="0.0001">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Longitude</label>
+                            <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 8px;">
+                                <input type="number" id="lonDegDDM" placeholder="Deg">
+                                <input type="number" id="lonMinDDM" placeholder="Dec Min" step="0.0001">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="inputFieldsUTM" class="form-grid" style="display: none;">
+                        <div class="form-group">
+                            <label>Easting (X)</label>
+                            <input type="number" id="easting" placeholder="e.g., 400000" step="0.001">
+                        </div>
+                        <div class="form-group">
+                            <label>Northing (Y)</label>
+                            <input type="number" id="northing" placeholder="e.g., 9900000" step="0.001">
+                        </div>
+                        <div class="form-group">
+                            <label>UTM Zone</label>
+                            <input type="number" id="utmZone" placeholder="e.g., 36" min="1" max="60">
+                        </div>
+                        <div class="form-group">
+                            <label>Hemisphere</label>
+                            <select id="hemisphere">
+                                <option value="N">North</option>
+                                <option value="S">South</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-primary" onclick="convertSingle()">Convert</button>
+                        <button class="btn-secondary" onclick="clearSingleForm()">Clear</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Batch/CSV Tab -->
+            <div id="batch-tab" class="tab-content">
+                <div class="input-section">
+                    <div class="section-title">Batch Processing</div>
+
+                    <div class="info-box">
+                        <strong>CSV Format:</strong> Upload a CSV file with columns: Latitude,Longitude (or X,Y for projected systems).
+                        Optional: add a "Name" or "ID" column for reference.
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Input CRS</label>
+                            <select id="batchInputCRS">
+                                <optgroup label="🌐 Global Systems">
+                                    <option value="EPSG:4326">WGS84 Geographic (EPSG:4326)</option>
+                                    <option value="EPSG:32635">WGS84 / UTM 35N (EPSG:32635)</option>
+                                    <option value="EPSG:32735">WGS84 / UTM 35S (EPSG:32735)</option>
+                                    <option value="EPSG:32636">WGS84 / UTM 36N (EPSG:32636)</option>
+                                    <option value="EPSG:32736">WGS84 / UTM 36S (EPSG:32736)</option>
+                                    <option value="EPSG:32637">WGS84 / UTM 37N (EPSG:32637)</option>
+                                    <option value="EPSG:32737">WGS84 / UTM 37S (EPSG:32737)</option>
+                                    <option value="EPSG:32638">WGS84 / UTM 38N (EPSG:32638)</option>
+                                    <option value="EPSG:32738">WGS84 / UTM 38S (EPSG:32738)</option>
+                                    <option value="EPSG:32639">WGS84 / UTM 39N (EPSG:32639)</option>
+                                    <option value="EPSG:32739">WGS84 / UTM 39S (EPSG:32739)</option>
+                                </optgroup>
+                                <optgroup label="🇺🇬 Uganda (Arc 1960)">
+                                    <option value="EPSG:4209">Arc 1960 Geographic (EPSG:4209)</option>
+                                    <option value="EPSG:21095">Arc 1960 / UTM 35N (EPSG:21095)</option>
+                                    <option value="EPSG:21035">Arc 1960 / UTM 35S (EPSG:21035)</option>
+                                    <option value="EPSG:21096">Arc 1960 / UTM 36N (EPSG:21096)</option>
+                                    <option value="EPSG:21036">Arc 1960 / UTM 36S (EPSG:21036)</option>
+                                </optgroup>
+                                <optgroup label="🇷🇼 Rwanda (RGR 2000)">
+                                    <option value="EPSG:4759">Rwanda 2000 Geographic (EPSG:4759)</option>
+                                    <option value="EPSG:32735">Rwanda 2000 / UTM 35S (EPSG:32735)</option>
+                                    <option value="EPSG:32736">Rwanda 2000 / UTM 36S (EPSG:32736)</option>
+                                </optgroup>
+                                <optgroup label="🇧🇮 Burundi (Arc 1960)">
+                                    <option value="EPSG:4209">Arc 1960 Geographic (EPSG:4209)</option>
+                                    <option value="EPSG:21035">Arc 1960 / UTM 35S (EPSG:21035)</option>
+                                    <option value="EPSG:21036">Arc 1960 / UTM 36S (EPSG:21036)</option>
+                                </optgroup>
+                                <optgroup label="🇹🇿 Tanzania (Arc 1960)">
+                                    <option value="EPSG:4209">Arc 1960 Geographic (EPSG:4209)</option>
+                                    <option value="EPSG:21035">Arc 1960 / UTM 35S (EPSG:21035)</option>
+                                    <option value="EPSG:21036">Arc 1960 / UTM 36S (EPSG:21036)</option>
+                                    <option value="EPSG:21037">Arc 1960 / UTM 37S (EPSG:21037)</option>
+                                </optgroup>
+                                <optgroup label="🇰🇪 Kenya">
+                                    <option value="EPSG:4210">Kenya 1960 Geographic (EPSG:4210)</option>
+                                    <option value="EPSG:21097">Arc 1960 / UTM 37N (EPSG:21097)</option>
+                                    <option value="EPSG:21037">Arc 1960 / UTM 37S (EPSG:21037)</option>
+                                </optgroup>
+                                <optgroup label="🇸🇴 Somalia (WGS84)">
+                                    <option value="EPSG:4326">WGS84 Geographic (EPSG:4326)</option>
+                                    <option value="EPSG:32638">WGS84 / UTM 38N (EPSG:32638)</option>
+                                    <option value="EPSG:32639">WGS84 / UTM 39N (EPSG:32639)</option>
+                                </optgroup>
+                                <optgroup label="🇨🇩 DRC (WGS84)">
+                                    <option value="EPSG:4326">WGS84 Geographic (EPSG:4326)</option>
+                                    <option value="EPSG:32732">WGS84 / UTM 32S (EPSG:32732)</option>
+                                    <option value="EPSG:32733">WGS84 / UTM 33S (EPSG:32733)</option>
+                                    <option value="EPSG:32734">WGS84 / UTM 34S (EPSG:32734)</option>
+                                    <option value="EPSG:32735">WGS84 / UTM 35S (EPSG:32735)</option>
+                                    <option value="EPSG:32736">WGS84 / UTM 36S (EPSG:32736)</option>
+                                </optgroup>
+                                <optgroup label="🇨🇩 DRC Legacy (Belgian Congo 1950)">
+                                    <option value="EPSG:4196">Belgian Congo 1950 Geographic (EPSG:4196)</option>
+                                    <option value="EPSG:3347">Belgian Congo 1950 / UTM 34S (EPSG:3347)</option>
+                                    <option value="EPSG:3348">Belgian Congo 1950 / UTM 35S (EPSG:3348)</option>
+                                </optgroup>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Output CRS</label>
+                            <select id="batchOutputCRS">
+                                <optgroup label="🌐 Global Systems">
+                                    <option value="EPSG:4326" selected>WGS84 Geographic (EPSG:4326)</option>
+                                    <option value="EPSG:32635">WGS84 / UTM 35N (EPSG:32635)</option>
+                                    <option value="EPSG:32735">WGS84 / UTM 35S (EPSG:32735)</option>
+                                    <option value="EPSG:32636">WGS84 / UTM 36N (EPSG:32636)</option>
+                                    <option value="EPSG:32736">WGS84 / UTM 36S (EPSG:32736)</option>
+                                    <option value="EPSG:32637">WGS84 / UTM 37N (EPSG:32637)</option>
+                                    <option value="EPSG:32737">WGS84 / UTM 37S (EPSG:32737)</option>
+                                    <option value="EPSG:32638">WGS84 / UTM 38N (EPSG:32638)</option>
+                                    <option value="EPSG:32738">WGS84 / UTM 38S (EPSG:32738)</option>
+                                    <option value="EPSG:32639">WGS84 / UTM 39N (EPSG:32639)</option>
+                                    <option value="EPSG:32739">WGS84 / UTM 39S (EPSG:32739)</option>
+                                </optgroup>
+                                <optgroup label="🇺🇬 Uganda (Arc 1960)">
+                                    <option value="EPSG:4209">Arc 1960 Geographic (EPSG:4209)</option>
+                                    <option value="EPSG:21095">Arc 1960 / UTM 35N (EPSG:21095)</option>
+                                    <option value="EPSG:21035">Arc 1960 / UTM 35S (EPSG:21035)</option>
+                                    <option value="EPSG:21096">Arc 1960 / UTM 36N (EPSG:21096)</option>
+                                    <option value="EPSG:21036">Arc 1960 / UTM 36S (EPSG:21036)</option>
+                                </optgroup>
+                                <optgroup label="🇷🇼 Rwanda (RGR 2000)">
+                                    <option value="EPSG:4759">Rwanda 2000 Geographic (EPSG:4759)</option>
+                                    <option value="EPSG:32735">Rwanda 2000 / UTM 35S (EPSG:32735)</option>
+                                    <option value="EPSG:32736">Rwanda 2000 / UTM 36S (EPSG:32736)</option>
+                                </optgroup>
+                                <optgroup label="🇧🇮 Burundi (Arc 1960)">
+                                    <option value="EPSG:4209">Arc 1960 Geographic (EPSG:4209)</option>
+                                    <option value="EPSG:21035">Arc 1960 / UTM 35S (EPSG:21035)</option>
+                                    <option value="EPSG:21036">Arc 1960 / UTM 36S (EPSG:21036)</option>
+                                </optgroup>
+                                <optgroup label="🇹🇿 Tanzania (Arc 1960)">
+                                    <option value="EPSG:4209">Arc 1960 Geographic (EPSG:4209)</option>
+                                    <option value="EPSG:21035">Arc 1960 / UTM 35S (EPSG:21035)</option>
+                                    <option value="EPSG:21036">Arc 1960 / UTM 36S (EPSG:21036)</option>
+                                    <option value="EPSG:21037">Arc 1960 / UTM 37S (EPSG:21037)</option>
+                                </optgroup>
+                                <optgroup label="🇰🇪 Kenya">
+                                    <option value="EPSG:4210">Kenya 1960 Geographic (EPSG:4210)</option>
+                                    <option value="EPSG:21097">Arc 1960 / UTM 37N (EPSG:21097)</option>
+                                    <option value="EPSG:21037">Arc 1960 / UTM 37S (EPSG:21037)</option>
+                                </optgroup>
+                                <optgroup label="🇸🇴 Somalia (WGS84)">
+                                    <option value="EPSG:4326">WGS84 Geographic (EPSG:4326)</option>
+                                    <option value="EPSG:32638">WGS84 / UTM 38N (EPSG:32638)</option>
+                                    <option value="EPSG:32639">WGS84 / UTM 39N (EPSG:32639)</option>
+                                </optgroup>
+                                <optgroup label="🇨🇩 DRC (WGS84)">
+                                    <option value="EPSG:4326">WGS84 Geographic (EPSG:4326)</option>
+                                    <option value="EPSG:32732">WGS84 / UTM 32S (EPSG:32732)</option>
+                                    <option value="EPSG:32733">WGS84 / UTM 33S (EPSG:32733)</option>
+                                    <option value="EPSG:32734">WGS84 / UTM 34S (EPSG:32734)</option>
+                                    <option value="EPSG:32735">WGS84 / UTM 35S (EPSG:32735)</option>
+                                    <option value="EPSG:32736">WGS84 / UTM 36S (EPSG:32736)</option>
+                                </optgroup>
+                                <optgroup label="🇨🇩 DRC Legacy (Belgian Congo 1950)">
+                                    <option value="EPSG:4196">Belgian Congo 1950 Geographic (EPSG:4196)</option>
+                                    <option value="EPSG:3347">Belgian Congo 1950 / UTM 34S (EPSG:3347)</option>
+                                    <option value="EPSG:3348">Belgian Congo 1950 / UTM 35S (EPSG:3348)</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Upload CSV File</label>
+                        <div class="file-upload">
+                            <input type="file" id="csvFile" accept=".csv" onchange="handleFileUpload(event)">
+                            <div class="file-upload-label">
+                                Drop CSV file here or click to browse
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label>Or Paste Coordinates (one per line: lat,lon or x,y)</label>
+                        <textarea id="batchInput" placeholder="Example:&#10;0.3476,32.5825&#10;-1.9441,30.0619&#10;-3.3731,29.9189"></textarea>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-primary" onclick="convertBatch()">Convert All</button>
+                        <button class="btn-secondary" onclick="clearBatchForm()">Clear</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="resultsSection" class="results-section">
+                <div class="loader" id="loader"></div>
+                <div id="alertContainer"></div>
+
+                <div id="resultsContent" style="display: none;">
+                    <div class="section-title">Results</div>
+                    <div class="results-table-wrapper">
+                        <table id="resultsTable">
+                            <thead>
+                                <tr id="resultsHeader"></tr>
+                            </thead>
+                            <tbody id="resultsBody"></tbody>
+                        </table>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-success" onclick="downloadCSV()">Download CSV</button>
+                        <button class="btn-secondary" onclick="copyToClipboard()">Copy to Clipboard</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize proj4 with all required CRS definitions
+        function initializeProjections() {
+            // Arc 1960 (Clarke 1880 RGS)
+            proj4.defs("EPSG:4209", "+proj=longlat +ellps=clrk80 +towgs84=-160,-6,-302,0,0,0,0 +no_defs");
+            proj4.defs("EPSG:21095", "+proj=utm +zone=35 +ellps=clrk80 +towgs84=-160,-6,-302,0,0,0,0 +units=m +no_defs");
+            proj4.defs("EPSG:21035", "+proj=utm +zone=35 +south +ellps=clrk80 +towgs84=-160,-6,-302,0,0,0,0 +units=m +no_defs");
+            proj4.defs("EPSG:21096", "+proj=utm +zone=36 +ellps=clrk80 +towgs84=-160,-6,-302,0,0,0,0 +units=m +no_defs");
+            proj4.defs("EPSG:21036", "+proj=utm +zone=36 +south +ellps=clrk80 +towgs84=-160,-6,-302,0,0,0,0 +units=m +no_defs");
+            proj4.defs("EPSG:21097", "+proj=utm +zone=37 +ellps=clrk80 +towgs84=-160,-6,-302,0,0,0,0 +units=m +no_defs");
+            proj4.defs("EPSG:21037", "+proj=utm +zone=37 +south +ellps=clrk80 +towgs84=-160,-6,-302,0,0,0,0 +units=m +no_defs");
+
+            // Rwanda 2000
+            proj4.defs("EPSG:4759", "+proj=longlat +ellps=WGS84 +towgs84=0,0,0,0,0,0,0 +no_defs");
+
+            // Kenya 1960
+            proj4.defs("EPSG:4210", "+proj=longlat +ellps=clrk80 +towgs84=-160,-6,-302,0,0,0,0 +no_defs");
+
+            // Belgian Congo 1950
+            proj4.defs("EPSG:4196", "+proj=longlat +ellps=clrk80 +towgs84=-103.746,-9.614,-255.95,0,0,0,0 +no_defs");
+            proj4.defs("EPSG:3347", "+proj=utm +zone=34 +south +ellps=clrk80 +towgs84=-103.746,-9.614,-255.95,0,0,0,0 +units=m +no_defs");
+            proj4.defs("EPSG:3348", "+proj=utm +zone=35 +south +ellps=clrk80 +towgs84=-103.746,-9.614,-255.95,0,0,0,0 +units=m +no_defs");
+
+            // WGS84 UTM zones
+            proj4.defs("EPSG:32635", "+proj=utm +zone=35 +datum=WGS84 +units=m +no_defs");
+            proj4.defs("EPSG:32735", "+proj=utm +zone=35 +south +datum=WGS84 +units=m +no_defs");
+            proj4.defs("EPSG:32636", "+proj=utm +zone=36 +datum=WGS84 +units=m +no_defs");
+            proj4.defs("EPSG:32736", "+proj=utm +zone=36 +south +datum=WGS84 +units=m +no_defs");
+            proj4.defs("EPSG:32637", "+proj=utm +zone=37 +datum=WGS84 +units=m +no_defs");
+            proj4.defs("EPSG:32737", "+proj=utm +zone=37 +south +datum=WGS84 +units=m +no_defs");
+            proj4.defs("EPSG:32638", "+proj=utm +zone=38 +datum=WGS84 +units=m +no_defs");
+            proj4.defs("EPSG:32738", "+proj=utm +zone=38 +south +datum=WGS84 +units=m +no_defs");
+            proj4.defs("EPSG:32639", "+proj=utm +zone=39 +datum=WGS84 +units=m +no_defs");
+            proj4.defs("EPSG:32739", "+proj=utm +zone=39 +south +datum=WGS84 +units=m +no_defs");
+            proj4.defs("EPSG:32732", "+proj=utm +zone=32 +south +datum=WGS84 +units=m +no_defs");
+            proj4.defs("EPSG:32733", "+proj=utm +zone=33 +south +datum=WGS84 +units=m +no_defs");
+            proj4.defs("EPSG:32734", "+proj=utm +zone=34 +south +datum=WGS84 +units=m +no_defs");
+        }
+
+        // Store converted results globally
+        let convertedResults = [];
+
+        // Initialize on load
+        window.onload = initializeProjections;
+
+        // Tab switching
+        function switchTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+            if (tab === 'single') {
+                document.querySelector('.tab:nth-child(1)').classList.add('active');
+                document.getElementById('single-tab').classList.add('active');
+            } else {
+                document.querySelector('.tab:nth-child(2)').classList.add('active');
+                document.getElementById('batch-tab').classList.add('active');
+            }
+        }
+
+        // Update input fields based on format
+        function updateInputFields() {
+            const format = document.getElementById('inputFormat').value;
+
+            document.getElementById('inputFieldsDD').style.display = 'none';
+            document.getElementById('inputFieldsDMS').style.display = 'none';
+            document.getElementById('inputFieldsDDM').style.display = 'none';
+            document.getElementById('inputFieldsUTM').style.display = 'none';
+
+            if (format === 'dd') {
+                document.getElementById('inputFieldsDD').style.display = 'grid';
+            } else if (format === 'dms') {
+                document.getElementById('inputFieldsDMS').style.display = 'grid';
+            } else if (format === 'ddm') {
+                document.getElementById('inputFieldsDDM').style.display = 'grid';
+            } else if (format === 'utm') {
+                document.getElementById('inputFieldsUTM').style.display = 'grid';
+            }
+        }
+
+        // Format conversion utilities
+        function dmsToDD(deg, min, sec) {
+            const sign = deg < 0 ? -1 : 1;
+            return sign * (Math.abs(deg) + min / 60 + sec / 3600);
+        }
+
+        function ddmToDD(deg, decMin) {
+            const sign = deg < 0 ? -1 : 1;
+            return sign * (Math.abs(deg) + decMin / 60);
+        }
+
+        function ddToDMS(dd) {
+            const sign = dd < 0 ? -1 : 1;
+            const abs = Math.abs(dd);
+            const deg = Math.floor(abs);
+            const minFloat = (abs - deg) * 60;
+            const min = Math.floor(minFloat);
+            const sec = (minFloat - min) * 60;
+            return {
+                deg: sign * deg,
+                min: min,
+                sec: parseFloat(sec.toFixed(4))
+            };
+        }
+
+        function ddToDDM(dd) {
+            const sign = dd < 0 ? -1 : 1;
+            const abs = Math.abs(dd);
+            const deg = Math.floor(abs);
+            const decMin = (abs - deg) * 60;
+            return {
+                deg: sign * deg,
+                decMin: parseFloat(decMin.toFixed(5))
+            };
+        }
+
+        // Get input coordinates based on selected format
+        function getInputCoordinates() {
+            const format = document.getElementById('inputFormat').value;
+            let lat, lon;
+
+            if (format === 'dd') {
+                lat = parseFloat(document.getElementById('latDD').value);
+                lon = parseFloat(document.getElementById('lonDD').value);
+            } else if (format === 'dms') {
+                const latDeg = parseFloat(document.getElementById('latDeg').value);
+                const latMin = parseFloat(document.getElementById('latMin').value);
+                const latSec = parseFloat(document.getElementById('latSec').value);
+                const lonDeg = parseFloat(document.getElementById('lonDeg').value);
+                const lonMin = parseFloat(document.getElementById('lonMin').value);
+                const lonSec = parseFloat(document.getElementById('lonSec').value);
+
+                lat = dmsToDD(latDeg, latMin, latSec);
+                lon = dmsToDD(lonDeg, lonMin, lonSec);
+            } else if (format === 'ddm') {
+                const latDeg = parseFloat(document.getElementById('latDegDDM').value);
+                const latMin = parseFloat(document.getElementById('latMinDDM').value);
+                const lonDeg = parseFloat(document.getElementById('lonDegDDM').value);
+                const lonMin = parseFloat(document.getElementById('lonMinDDM').value);
+
+                lat = ddmToDD(latDeg, latMin);
+                lon = ddmToDD(lonDeg, lonMin);
+            } else if (format === 'utm') {
+                // For UTM input, we need to construct the EPSG code from zone/hemisphere
+                return null; // Handle separately
+            }
+
+            if (isNaN(lat) || isNaN(lon)) {
+                throw new Error('Invalid coordinate values');
+            }
+
+            return [lon, lat]; // proj4 uses [x, y] = [lon, lat]
+        }
+
+        // Perform coordinate transformation
+        function transformCoordinates(coords, fromCRS, toCRS) {
+            try {
+                return proj4(fromCRS, toCRS, coords);
+            } catch (error) {
+                throw new Error(`Transformation failed: ${error.message}`);
+            }
+        }
+
+        // Validate coordinates
+        function validateCoordinates(coords, crs) {
+            if (!coords || coords.length !== 2) {
+                return 'Invalid coordinate format';
+            }
+
+            const [x, y] = coords;
+
+            // Check for geographic coordinates
+            if (crs.includes('4326') || crs.includes('4209') || crs.includes('4759') ||
+                crs.includes('4210') || crs.includes('4196')) {
+                if (Math.abs(y) > 90) return 'Latitude out of range (-90 to 90)';
+                if (Math.abs(x) > 180) return 'Longitude out of range (-180 to 180)';
+            }
+
+            return null;
+        }
+
+        // Convert single point
+        function convertSingle() {
+            try {
+                showLoader();
+                clearAlerts();
+
+                const inputCRS = document.getElementById('inputCRS').value;
+                const outputCRS = document.getElementById('outputCRS').value;
+                const format = document.getElementById('inputFormat').value;
+
+                let coords;
+
+                // Handle UTM input separately
+                if (format === 'utm') {
+                    const easting = parseFloat(document.getElementById('easting').value);
+                    const northing = parseFloat(document.getElementById('northing').value);
+                    const zone = parseInt(document.getElementById('utmZone').value);
+                    const hemisphere = document.getElementById('hemisphere').value;
+
+                    if (isNaN(easting) || isNaN(northing) || isNaN(zone)) {
+                        throw new Error('Please enter valid UTM coordinates');
+                    }
+
+                    coords = [easting, northing];
+                } else {
+                    coords = getInputCoordinates();
+                }
+
+                // Validate
+                const validationError = validateCoordinates(coords, inputCRS);
+                if (validationError) {
+                    throw new Error(validationError);
+                }
+
+                // Transform
+                const result = transformCoordinates(coords, inputCRS, outputCRS);
+
+                // Format output
+                const isOutputGeographic = outputCRS.includes('4326') || outputCRS.includes('4209') ||
+                                          outputCRS.includes('4759') || outputCRS.includes('4210') ||
+                                          outputCRS.includes('4196');
+
+                convertedResults = [{
+                    inputX: coords[0].toFixed(6),
+                    inputY: coords[1].toFixed(6),
+                    outputX: result[0].toFixed(6),
+                    outputY: result[1].toFixed(6),
+                    outputDD: isOutputGeographic ? `${result[1].toFixed(6)}, ${result[0].toFixed(6)}` : 'N/A',
+                    outputDMS: isOutputGeographic ? formatDMS(result[1], result[0]) : 'N/A',
+                    outputDDM: isOutputGeographic ? formatDDM(result[1], result[0]) : 'N/A'
+                }];
+
+                displayResults(inputCRS, outputCRS, isOutputGeographic);
+                hideLoader();
+            } catch (error) {
+                hideLoader();
+                showAlert('error', error.message);
+            }
+        }
+
+        // Format as DMS string
+        function formatDMS(lat, lon) {
+            const latDMS = ddToDMS(lat);
+            const lonDMS = ddToDMS(lon);
+            const latDir = lat >= 0 ? 'N' : 'S';
+            const lonDir = lon >= 0 ? 'E' : 'W';
+
+            return `${Math.abs(latDMS.deg)}°${latDMS.min}'${latDMS.sec}"${latDir}, ${Math.abs(lonDMS.deg)}°${lonDMS.min}'${lonDMS.sec}"${lonDir}`;
+        }
+
+        // Format as DDM string
+        function formatDDM(lat, lon) {
+            const latDDM = ddToDDM(lat);
+            const lonDDM = ddToDDM(lon);
+            const latDir = lat >= 0 ? 'N' : 'S';
+            const lonDir = lon >= 0 ? 'E' : 'W';
+
+            return `${Math.abs(latDDM.deg)}°${latDDM.decMin}'${latDir}, ${Math.abs(lonDDM.deg)}°${lonDDM.decMin}'${lonDir}`;
+        }
+
+        // Handle CSV file upload
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const content = e.target.result;
+                document.getElementById('batchInput').value = content;
+            };
+            reader.readAsText(file);
+        }
+
+        // Parse CSV content
+        function parseCSV(content) {
+            const lines = content.trim().split('\n');
+            const results = [];
+
+            // Check if first line is header
+            const firstLine = lines[0].toLowerCase();
+            const hasHeader = firstLine.includes('lat') || firstLine.includes('lon') ||
+                            firstLine.includes('x') || firstLine.includes('y') ||
+                            firstLine.includes('name') || firstLine.includes('id');
+
+            const startIndex = hasHeader ? 1 : 0;
+
+            for (let i = startIndex; i < lines.length; i++) {
+                const line = lines[i].trim();
+                if (!line) continue;
+
+                const parts = line.split(',').map(p => p.trim());
+
+                if (parts.length >= 2) {
+                    const y = parseFloat(parts[0]);
+                    const x = parseFloat(parts[1]);
+                    const name = parts.length > 2 ? parts[2] : `Point ${i}`;
+
+                    if (!isNaN(x) && !isNaN(y)) {
+                        results.push({ x, y, name });
+                    }
+                }
+            }
+
+            return results;
+        }
+
+        // Convert batch coordinates
+        function convertBatch() {
+            try {
+                showLoader();
+                clearAlerts();
+
+                const inputCRS = document.getElementById('batchInputCRS').value;
+                const outputCRS = document.getElementById('batchOutputCRS').value;
+                const batchInput = document.getElementById('batchInput').value.trim();
+
+                if (!batchInput) {
+                    throw new Error('Please provide input coordinates or upload a CSV file');
+                }
+
+                const points = parseCSV(batchInput);
+
+                if (points.length === 0) {
+                    throw new Error('No valid coordinates found in input');
+                }
+
+                convertedResults = [];
+                let errorCount = 0;
+
+                points.forEach((point, index) => {
+                    try {
+                        const coords = [point.x, point.y];
+                        const validationError = validateCoordinates(coords, inputCRS);
+
+                        if (validationError) {
+                            convertedResults.push({
+                                name: point.name,
+                                inputX: point.x.toFixed(6),
+                                inputY: point.y.toFixed(6),
+                                outputX: 'ERROR',
+                                outputY: validationError,
+                                outputDD: 'N/A',
+                                outputDMS: 'N/A',
+                                outputDDM: 'N/A'
+                            });
+                            errorCount++;
+                            return;
+                        }
+
+                        const result = transformCoordinates(coords, inputCRS, outputCRS);
+
+                        const isOutputGeographic = outputCRS.includes('4326') || outputCRS.includes('4209') ||
+                                                  outputCRS.includes('4759') || outputCRS.includes('4210') ||
+                                                  outputCRS.includes('4196');
+
+                        convertedResults.push({
+                            name: point.name,
+                            inputX: point.x.toFixed(6),
+                            inputY: point.y.toFixed(6),
+                            outputX: result[0].toFixed(6),
+                            outputY: result[1].toFixed(6),
+                            outputDD: isOutputGeographic ? `${result[1].toFixed(6)}, ${result[0].toFixed(6)}` : 'N/A',
+                            outputDMS: isOutputGeographic ? formatDMS(result[1], result[0]) : 'N/A',
+                            outputDDM: isOutputGeographic ? formatDDM(result[1], result[0]) : 'N/A'
+                        });
+                    } catch (error) {
+                        convertedResults.push({
+                            name: point.name,
+                            inputX: point.x.toFixed(6),
+                            inputY: point.y.toFixed(6),
+                            outputX: 'ERROR',
+                            outputY: error.message,
+                            outputDD: 'N/A',
+                            outputDMS: 'N/A',
+                            outputDDM: 'N/A'
+                        });
+                        errorCount++;
+                    }
+                });
+
+                const isOutputGeographic = outputCRS.includes('4326') || outputCRS.includes('4209') ||
+                                          outputCRS.includes('4759') || outputCRS.includes('4210') ||
+                                          outputCRS.includes('4196');
+
+                displayResults(inputCRS, outputCRS, isOutputGeographic, true);
+
+                if (errorCount > 0) {
+                    showAlert('warning', `${errorCount} coordinate(s) failed to convert. Check the results table for details.`);
+                } else {
+                    showAlert('success', `Successfully converted ${convertedResults.length} coordinates!`);
+                }
+
+                hideLoader();
+            } catch (error) {
+                hideLoader();
+                showAlert('error', error.message);
+            }
+        }
+
+        // Display results in table
+        function displayResults(inputCRS, outputCRS, isOutputGeographic, showName = false) {
+            const header = document.getElementById('resultsHeader');
+            const body = document.getElementById('resultsBody');
+
+            // Clear previous results
+            header.innerHTML = '';
+            body.innerHTML = '';
+
+            // Build header
+            const headers = showName ? ['Name', 'Input X', 'Input Y', 'Output X', 'Output Y'] :
+                                      ['Input X', 'Input Y', 'Output X', 'Output Y'];
+
+            if (isOutputGeographic) {
+                headers.push('Output DD', 'Output DMS', 'Output DDM');
+            }
+
+            headers.forEach(h => {
+                const th = document.createElement('th');
+                th.textContent = h;
+                header.appendChild(th);
+            });
+
+            // Build rows
+            convertedResults.forEach(result => {
+                const tr = document.createElement('tr');
+
+                if (showName) {
+                    tr.innerHTML += `<td>${result.name || ''}</td>`;
+                }
+
+                tr.innerHTML += `
+                    <td>${result.inputX}</td>
+                    <td>${result.inputY}</td>
+                    <td>${result.outputX}</td>
+                    <td>${result.outputY}</td>
+                `;
+
+                if (isOutputGeographic) {
+                    tr.innerHTML += `
+                        <td>${result.outputDD}</td>
+                        <td>${result.outputDMS}</td>
+                        <td>${result.outputDDM}</td>
+                    `;
+                }
+
+                body.appendChild(tr);
+            });
+
+            // Show results section
+            document.getElementById('resultsSection').classList.add('active');
+            document.getElementById('resultsContent').style.display = 'block';
+        }
+
+        // Download results as CSV
+        function downloadCSV() {
+            if (convertedResults.length === 0) return;
+
+            let csv = '';
+            const hasName = convertedResults[0].hasOwnProperty('name');
+
+            // Header
+            if (hasName) {
+                csv += 'Name,';
+            }
+            csv += 'Input_X,Input_Y,Output_X,Output_Y,Output_DD,Output_DMS,Output_DDM\n';
+
+            // Data
+            convertedResults.forEach(result => {
+                if (hasName) {
+                    csv += `"${result.name}",`;
+                }
+                csv += `${result.inputX},${result.inputY},${result.outputX},${result.outputY},"${result.outputDD}","${result.outputDMS}","${result.outputDDM}"\n`;
+            });
+
+            // Download
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `converted_coordinates_${Date.now()}.csv`;
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        // Copy to clipboard
+        function copyToClipboard() {
+            const table = document.getElementById('resultsTable');
+            const range = document.createRange();
+            range.selectNode(table);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand('copy');
+            window.getSelection().removeAllRanges();
+
+            showAlert('success', 'Results copied to clipboard!');
+        }
+
+        // UI utilities
+        function showLoader() {
+            document.getElementById('loader').classList.add('active');
+        }
+
+        function hideLoader() {
+            document.getElementById('loader').classList.remove('active');
+        }
+
+        function showAlert(type, message) {
+            const container = document.getElementById('alertContainer');
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type}`;
+            alert.innerHTML = `<strong>${type === 'error' ? '⚠️ Error:' : type === 'warning' ? '⚠️ Warning:' : '✓ Success:'}</strong> ${message}`;
+            container.appendChild(alert);
+
+            if (type === 'success') {
+                setTimeout(() => alert.remove(), 5000);
+            }
+        }
+
+        function clearAlerts() {
+            document.getElementById('alertContainer').innerHTML = '';
+        }
+
+        function clearSingleForm() {
+            document.getElementById('latDD').value = '';
+            document.getElementById('lonDD').value = '';
+            document.getElementById('latDeg').value = '';
+            document.getElementById('latMin').value = '';
+            document.getElementById('latSec').value = '';
+            document.getElementById('lonDeg').value = '';
+            document.getElementById('lonMin').value = '';
+            document.getElementById('lonSec').value = '';
+            document.getElementById('latDegDDM').value = '';
+            document.getElementById('latMinDDM').value = '';
+            document.getElementById('lonDegDDM').value = '';
+            document.getElementById('lonMinDDM').value = '';
+            document.getElementById('easting').value = '';
+            document.getElementById('northing').value = '';
+            document.getElementById('utmZone').value = '';
+            clearResults();
+        }
+
+        function clearBatchForm() {
+            document.getElementById('batchInput').value = '';
+            document.getElementById('csvFile').value = '';
+            clearResults();
+        }
+
+        function clearResults() {
+            document.getElementById('resultsSection').classList.remove('active');
+            document.getElementById('resultsContent').style.display = 'none';
+            convertedResults = [];
+            clearAlerts();
+        }
+    </script>
+</body>
+</html>

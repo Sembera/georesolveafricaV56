@@ -1,0 +1,28 @@
+{
+  "name": "georesolve-africa",
+  "version": "1.0.0",
+  "description": "Georesolve Africa - Premier Geoscience Consulting Website",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "deploy": "netlify deploy --prod"
+  },
+  "keywords": [
+    "geoscience",
+    "consulting",
+    "east-africa",
+    "geology",
+    "geophysics"
+  ],
+  "author": "Georesolve Africa",
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^4.4.5"
+  },
+  "dependencies": {
+    "contentful": "^10.6.1",
+    "dotenv": "^16.3.1"
+  }
+}

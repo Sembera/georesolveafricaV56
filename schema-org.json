@@ -1,0 +1,79 @@
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "GeoResolve Africa",
+  "alternateName": "GeoResolve",
+  "url": "https://georesolve.africa",
+  "logo": "https://georesolve.africa/resources/logo/georesolve-logo.svg.svg",
+  "image": "https://georesolve.africa/resources/about.png",
+  "description": "Premier geoscience consulting firm providing expert geophysical, geotechnical, and hydrogeology services across Uganda, Rwanda, Burundi, and East Africa.",
+  "slogan": "Data Driven, Research Based",
+  "telephone": "+256771999614",
+  "email": "info@georesolveafrica.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "HMK Building, Gayaza Road, Kasangati",
+    "addressLocality": "Kasangati",
+    "addressRegion": "Central Region",
+    "addressCountry": "UG"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "0.4373",
+    "longitude": "32.6094"
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "08:00",
+      "closes": "18:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Saturday",
+      "opens": "09:00",
+      "closes": "14:00"
+    }
+  ],
+  "areaServed": [
+    {
+      "@type": "Country",
+      "name": "Uganda"
+    },
+    {
+      "@type": "Country",
+      "name": "Rwanda"
+    },
+    {
+      "@type": "Country",
+      "name": "Burundi"
+    },
+    {
+      "@type": "Country",
+      "name": "Democratic Republic of Congo"
+    },
+    {
+      "@type": "Country",
+      "name": "South Sudan"
+    }
+  ],
+  "serviceType": [
+    "Geophysical Surveys",
+    "Geotechnical Engineering",
+    "Hydrogeology",
+    "Drilling Services",
+    "Geospatial Services",
+    "Topographic Surveys",
+    "Cadastral Surveys"
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "50"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/georesolve-africa",
+    "https://twitter.com/georesolveafrica"
+  ]
+}

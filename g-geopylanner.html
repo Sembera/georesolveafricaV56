@@ -1,0 +1,1655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G-Geopylanner - Unified Shallow Geophysics Survey Design Tool | Georesolve Africa</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4/2.9.0/proj4.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #345363, #4DA34D);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        .header .subtitle {
+            font-size: 0.85em;
+            margin-top: 5px;
+            opacity: 0.85;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .panel {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .module-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .module-btn {
+            padding: 12px;
+            background: #f8f9fa;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+            font-size: 14px;
+            font-weight: 600;
+            color: #345363;
+        }
+
+        .module-btn:hover {
+            background: #e8f5e9;
+            border-color: #4DA34D;
+        }
+
+        .module-btn.active {
+            background: #4DA34D;
+            color: white;
+            border-color: #4DA34D;
+        }
+
+        .module-icon {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        .module-content {
+            display: none;
+        }
+
+        .module-content.active {
+            display: block;
+        }
+
+        .form-section {
+            margin-bottom: 20px;
+        }
+
+        .form-section h3 {
+            color: #345363;
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #4DA34D;
+            font-size: 1.1em;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 4px;
+            font-weight: bold;
+            color: #555;
+            font-size: 0.9em;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 13px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #4DA34D;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .row-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+        }
+
+        .btn {
+            background: #4DA34D;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+            margin: 2px;
+        }
+
+        .btn:hover {
+            background: #3d8a3d;
+        }
+
+        .btn-secondary {
+            background: #345363;
+        }
+
+        .btn-secondary:hover {
+            background: #2a4250;
+        }
+
+        .btn-success {
+            background: #27ae60;
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+        }
+
+        .btn-info {
+            background: #17a2b8;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .results-section {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .results-section.active {
+            display: block;
+        }
+
+        .visualization-canvas {
+            width: 100%;
+            height: 400px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: auto;
+        }
+
+        canvas {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .results-table-wrapper {
+            overflow-x: auto;
+            border-radius: 8px;
+            border: 1px solid #e1e8ed;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th {
+            background: #345363;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e1e8ed;
+            font-size: 13px;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .alert {
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .alert-info {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            color: #0c5460;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            color: #155724;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            color: #856404;
+        }
+
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-upload-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border: 2px dashed #4DA34D;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .file-upload-label:hover {
+            background: #e8f5e9;
+            border-color: #345363;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #4DA34D, #27ae60);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .hyperbola-canvas {
+            border: 2px solid #ddd;
+            cursor: crosshair;
+            background: #f0f0f0;
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .row, .row-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚡ G-Geopylanner</h1>
+            <p>Unified Shallow Geophysics Survey Design Tool - Professional Edition</p>
+            <div class="subtitle">Powered by Georesolve Africa | Complete Survey Planning Solution</div>
+        </div>
+
+        <div class="main-content">
+            <!-- Module Navigation -->
+            <div class="panel">
+                <h3 style="color: #345363; margin-bottom: 15px;">Survey Modules</h3>
+                <div class="module-nav">
+                    <button class="module-btn active" onclick="switchModule('masw')">
+                        <span class="module-icon">📊</span>MASW
+                    </button>
+                    <button class="module-btn" onclick="switchModule('refraction')">
+                        <span class="module-icon">🌊</span>Seismic Refraction
+                    </button>
+                    <button class="module-btn" onclick="switchModule('ert')">
+                        <span class="module-icon">⚡</span>ERT / Resistivity
+                    </button>
+                    <button class="module-btn" onclick="switchModule('gpr')">
+                        <span class="module-icon">📡</span>GPR Analysis
+                    </button>
+                    <button class="module-btn" onclick="switchModule('magnetic')">
+                        <span class="module-icon">🧲</span>Magnetic Survey
+                    </button>
+                    <button class="module-btn" onclick="switchModule('gravity')">
+                        <span class="module-icon">🌍</span>Gravity Survey
+                    </button>
+                    <button class="module-btn" onclick="switchModule('coords')">
+                        <span class="module-icon">📍</span>Coordinates
+                    </button>
+                </div>
+
+                <div style="margin-top: 20px; padding: 10px; background: #9EDB9E; border-radius: 4px;">
+                    <strong>📋 Quick Guide</strong>
+                    <p style="font-size: 12px; margin-top: 5px;">Select a survey type, enter parameters, calculate, and export your survey design as CSV.</p>
+                </div>
+            </div>
+
+            <!-- Module Content Area -->
+            <div class="panel">
+                <!-- MASW Module -->
+                <div id="masw-module" class="module-content active">
+                    <h2 style="color: #345363; margin-bottom: 15px;">📊 MASW Geometry Generator</h2>
+
+                    <div class="form-section">
+                        <h3>Survey Parameters</h3>
+                        <div class="row">
+                            <div class="form-group">
+                                <label>Number of Channels:</label>
+                                <input type="number" id="masw-channels" value="24" min="12" max="96">
+                            </div>
+                            <div class="form-group">
+                                <label>Channel Spacing (m):</label>
+                                <input type="number" id="masw-spacing" value="2" step="0.5" min="0.5">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label>Desired Depth (m):</label>
+                                <input type="number" id="masw-depth" value="30" min="5">
+                            </div>
+                            <div class="form-group">
+                                <label>Shot Offset (m):</label>
+                                <input type="number" id="masw-offset" value="5" step="1">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Starting Coordinate (optional):</label>
+                            <input type="text" id="masw-start" placeholder="e.g., 32.5825, 0.3476">
+                        </div>
+                    </div>
+
+                    <div class="toolbar">
+                        <button class="btn" onclick="calculateMASW()">Calculate MASW</button>
+                        <button class="btn btn-secondary" onclick="clearMASW()">Clear</button>
+                        <button class="btn btn-success" onclick="exportMASW()">Export CSV</button>
+                    </div>
+
+                    <div id="masw-results" class="results-section">
+                        <div class="visualization-canvas">
+                            <canvas id="masw-canvas"></canvas>
+                        </div>
+                        <div id="masw-stats"></div>
+                        <div class="results-table-wrapper">
+                            <table id="masw-table"></table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seismic Refraction Module -->
+                <div id="refraction-module" class="module-content">
+                    <h2 style="color: #345363; margin-bottom: 15px;">🌊 Seismic Refraction Layout</h2>
+
+                    <div class="form-section">
+                        <h3>Survey Parameters</h3>
+                        <div class="row">
+                            <div class="form-group">
+                                <label>Number of Geophones:</label>
+                                <input type="number" id="ref-channels" value="24" min="12" max="96">
+                            </div>
+                            <div class="form-group">
+                                <label>Geophone Spacing (m):</label>
+                                <input type="number" id="ref-spacing" value="5" step="0.5" min="1">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label>Number of Shots:</label>
+                                <input type="number" id="ref-shots" value="3" min="2" max="10">
+                            </div>
+                            <div class="form-group">
+                                <label>Expected P-wave Velocity (m/s):</label>
+                                <input type="number" id="ref-velocity" value="1500" min="300">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Starting Coordinate (optional):</label>
+                            <input type="text" id="ref-start" placeholder="e.g., 32.5825, 0.3476">
+                        </div>
+                    </div>
+
+                    <div class="toolbar">
+                        <button class="btn" onclick="calculateRefraction()">Calculate Layout</button>
+                        <button class="btn btn-secondary" onclick="clearRefraction()">Clear</button>
+                        <button class="btn btn-success" onclick="exportRefraction()">Export CSV</button>
+                    </div>
+
+                    <div id="ref-results" class="results-section">
+                        <div class="visualization-canvas">
+                            <canvas id="ref-canvas"></canvas>
+                        </div>
+                        <div id="ref-stats"></div>
+                        <div class="results-table-wrapper">
+                            <table id="ref-table"></table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ERT Module -->
+                <div id="ert-module" class="module-content">
+                    <h2 style="color: #345363; margin-bottom: 15px;">⚡ ERT Electrode Configuration</h2>
+
+                    <div class="form-section">
+                        <h3>Array Parameters</h3>
+                        <div class="row">
+                            <div class="form-group">
+                                <label>Number of Electrodes:</label>
+                                <input type="number" id="ert-electrodes" value="48" min="16" max="256">
+                            </div>
+                            <div class="form-group">
+                                <label>Electrode Spacing (m):</label>
+                                <input type="number" id="ert-spacing" value="5" step="0.5" min="0.5">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Array Type:</label>
+                            <select id="ert-array">
+                                <option value="wenner">Wenner</option>
+                                <option value="schlumberger">Schlumberger</option>
+                                <option value="dipole-dipole">Dipole-Dipole</option>
+                                <option value="gradient">Gradient</option>
+                                <option value="pole-pole">Pole-Pole</option>
+                                <option value="pole-dipole">Pole-Dipole</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Starting Coordinate (optional):</label>
+                            <input type="text" id="ert-start" placeholder="e.g., 32.5825, 0.3476">
+                        </div>
+                    </div>
+
+                    <div class="toolbar">
+                        <button class="btn" onclick="calculateERT()">Calculate ERT</button>
+                        <button class="btn btn-secondary" onclick="clearERT()">Clear</button>
+                        <button class="btn btn-success" onclick="exportERT()">Export CSV/DAT</button>
+                    </div>
+
+                    <div id="ert-results" class="results-section">
+                        <div class="visualization-canvas">
+                            <canvas id="ert-canvas"></canvas>
+                        </div>
+                        <div id="ert-stats"></div>
+                        <div class="results-table-wrapper">
+                            <table id="ert-table"></table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GPR Module -->
+                <div id="gpr-module" class="module-content">
+                    <h2 style="color: #345363; margin-bottom: 15px;">📡 GPR Hyperbola Velocity Analysis</h2>
+
+                    <div class="alert alert-info">
+                        <strong>How to use:</strong> Upload a radargram image, then click on the hyperbola apex and two points on the arms to calculate EM velocity and depth.
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Radargram Upload</h3>
+                        <div class="form-group">
+                            <label>Upload Radargram Image:</label>
+                            <div class="file-upload">
+                                <input type="file" id="gpr-image" accept="image/*" onchange="loadGPRImage(event)">
+                                <div class="file-upload-label">
+                                    📁 Click to upload radargram image
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label>Time Window (ns):</label>
+                                <input type="number" id="gpr-time" value="100" min="10">
+                            </div>
+                            <div class="form-group">
+                                <label>Trace Spacing (m):</label>
+                                <input type="number" id="gpr-trace" value="0.05" step="0.01">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Pick Points (Click on canvas)</h3>
+                        <div class="visualization-canvas" style="height: 500px;">
+                            <canvas id="gpr-canvas" class="hyperbola-canvas" onclick="pickGPRPoint(event)"></canvas>
+                        </div>
+                        <div id="gpr-picks" style="margin-top: 10px;"></div>
+                    </div>
+
+                    <div class="toolbar">
+                        <button class="btn" onclick="calculateGPRVelocity()">Calculate Velocity</button>
+                        <button class="btn btn-secondary" onclick="clearGPR()">Clear Picks</button>
+                        <button class="btn btn-success" onclick="exportGPR()">Export Results</button>
+                    </div>
+
+                    <div id="gpr-results" class="results-section">
+                        <div id="gpr-stats"></div>
+                    </div>
+                </div>
+
+                <!-- Magnetic Survey Module -->
+                <div id="magnetic-module" class="module-content">
+                    <h2 style="color: #345363; margin-bottom: 15px;">🧲 Magnetic Survey Planner</h2>
+
+                    <div class="form-section">
+                        <h3>Survey Area</h3>
+                        <div class="row">
+                            <div class="form-group">
+                                <label>Area Length (m):</label>
+                                <input type="number" id="mag-length" value="500" min="50">
+                            </div>
+                            <div class="form-group">
+                                <label>Area Width (m):</label>
+                                <input type="number" id="mag-width" value="300" min="50">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label>Line Spacing (m):</label>
+                                <input type="number" id="mag-line-spacing" value="10" step="1" min="1">
+                            </div>
+                            <div class="form-group">
+                                <label>Tie-line Spacing (m):</label>
+                                <input type="number" id="mag-tie-spacing" value="50" step="5" min="10">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label>Line Direction:</label>
+                                <select id="mag-direction">
+                                    <option value="ns">North-South</option>
+                                    <option value="ew">East-West</option>
+                                    <option value="ne-sw">NE-SW</option>
+                                    <option value="nw-se">NW-SE</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Station Spacing (m):</label>
+                                <input type="number" id="mag-station" value="2" step="0.5" min="0.5">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Starting Coordinate (optional):</label>
+                            <input type="text" id="mag-start" placeholder="e.g., 32.5825, 0.3476">
+                        </div>
+                    </div>
+
+                    <div class="toolbar">
+                        <button class="btn" onclick="calculateMagnetic()">Generate Grid</button>
+                        <button class="btn btn-secondary" onclick="clearMagnetic()">Clear</button>
+                        <button class="btn btn-success" onclick="exportMagnetic()">Export CSV</button>
+                    </div>
+
+                    <div id="mag-results" class="results-section">
+                        <div class="visualization-canvas">
+                            <canvas id="mag-canvas"></canvas>
+                        </div>
+                        <div id="mag-stats"></div>
+                        <div class="results-table-wrapper">
+                            <table id="mag-table"></table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gravity Survey Module -->
+                <div id="gravity-module" class="module-content">
+                    <h2 style="color: #345363; margin-bottom: 15px;">🌍 Gravity Survey Planner</h2>
+
+                    <div class="form-section">
+                        <h3>Survey Parameters</h3>
+                        <div class="row">
+                            <div class="form-group">
+                                <label>Area Length (m):</label>
+                                <input type="number" id="grav-length" value="1000" min="100">
+                            </div>
+                            <div class="form-group">
+                                <label>Area Width (m):</label>
+                                <input type="number" id="grav-width" value="1000" min="100">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label>Station Spacing (m):</label>
+                                <input type="number" id="grav-spacing" value="50" step="10" min="10">
+                            </div>
+                            <div class="form-group">
+                                <label>Density Contrast (kg/m³):</label>
+                                <input type="number" id="grav-density" value="200" step="50">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Grid Type:</label>
+                            <select id="grav-grid">
+                                <option value="regular">Regular Grid</option>
+                                <option value="profile">Profile Lines</option>
+                                <option value="random">Semi-random</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Starting Coordinate (optional):</label>
+                            <input type="text" id="grav-start" placeholder="e.g., 32.5825, 0.3476">
+                        </div>
+                    </div>
+
+                    <div class="toolbar">
+                        <button class="btn" onclick="calculateGravity()">Generate Layout</button>
+                        <button class="btn btn-secondary" onclick="clearGravity()">Clear</button>
+                        <button class="btn btn-success" onclick="exportGravity()">Export CSV</button>
+                    </div>
+
+                    <div id="grav-results" class="results-section">
+                        <div class="visualization-canvas">
+                            <canvas id="grav-canvas"></canvas>
+                        </div>
+                        <div id="grav-stats"></div>
+                        <div class="results-table-wrapper">
+                            <table id="grav-table"></table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coordinate Converter Module -->
+                <div id="coords-module" class="module-content">
+                    <h2 style="color: #345363; margin-bottom: 15px;">📍 GPS/Coordinate Converter</h2>
+
+                    <div class="alert alert-info">
+                        <strong>Note:</strong> This module uses the same engine as G-Resconvt. For full coordinate conversion features, use <a href="g-resconvt.html" target="_blank">G-Resconvt</a>.
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Quick Converter</h3>
+                        <div class="row">
+                            <div class="form-group">
+                                <label>Latitude (DD):</label>
+                                <input type="number" id="coord-lat" placeholder="e.g., 0.3476" step="any">
+                            </div>
+                            <div class="form-group">
+                                <label>Longitude (DD):</label>
+                                <input type="number" id="coord-lon" placeholder="e.g., 32.5825" step="any">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Target CRS:</label>
+                            <select id="coord-target">
+                                <option value="EPSG:4326">WGS84 Geographic</option>
+                                <option value="EPSG:32636">WGS84 / UTM 36N</option>
+                                <option value="EPSG:32736">WGS84 / UTM 36S</option>
+                                <option value="EPSG:4209">Arc 1960 Geographic</option>
+                                <option value="EPSG:21096">Arc 1960 / UTM 36N</option>
+                                <option value="EPSG:4759">Rwanda 2000 Geographic</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="toolbar">
+                        <button class="btn" onclick="convertCoordinates()">Convert</button>
+                        <button class="btn btn-secondary" onclick="clearCoords()">Clear</button>
+                        <button class="btn btn-info" onclick="window.open('g-resconvt.html', '_blank')">Open G-Resconvt →</button>
+                    </div>
+
+                    <div id="coord-results" class="results-section">
+                        <div id="coord-output"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let currentModule = 'masw';
+        let maswData = [];
+        let refractionData = [];
+        let ertData = [];
+        let magneticData = [];
+        let gravityData = [];
+        let gprImage = null;
+        let gprPicks = [];
+
+        // Initialize proj4 definitions
+        function initializeProjections() {
+            proj4.defs("EPSG:4209", "+proj=longlat +ellps=clrk80 +towgs84=-160,-6,-302,0,0,0,0 +no_defs");
+            proj4.defs("EPSG:21096", "+proj=utm +zone=36 +ellps=clrk80 +towgs84=-160,-6,-302,0,0,0,0 +units=m +no_defs");
+            proj4.defs("EPSG:4759", "+proj=longlat +ellps=WGS84 +towgs84=0,0,0,0,0,0,0 +no_defs");
+            proj4.defs("EPSG:32636", "+proj=utm +zone=36 +datum=WGS84 +units=m +no_defs");
+            proj4.defs("EPSG:32736", "+proj=utm +zone=36 +south +datum=WGS84 +units=m +no_defs");
+        }
+
+        window.onload = initializeProjections;
+
+        // Module switching
+        function switchModule(module) {
+            // Update buttons
+            document.querySelectorAll('.module-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.module-btn').classList.add('active');
+
+            // Update content
+            document.querySelectorAll('.module-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(module + '-module').classList.add('active');
+
+            currentModule = module;
+        }
+
+        // MASW Functions
+        function calculateMASW() {
+            const channels = parseInt(document.getElementById('masw-channels').value);
+            const spacing = parseFloat(document.getElementById('masw-spacing').value);
+            const depth = parseFloat(document.getElementById('masw-depth').value);
+            const offset = parseFloat(document.getElementById('masw-offset').value);
+            const startCoord = document.getElementById('masw-start').value;
+
+            maswData = [];
+            const profileLength = (channels - 1) * spacing;
+            const estimatedDepth = profileLength / 2; // Rule of thumb
+
+            // Generate receiver positions
+            for (let i = 0; i < channels; i++) {
+                maswData.push({
+                    type: 'Receiver',
+                    number: i + 1,
+                    position: i * spacing,
+                    x: 0,
+                    y: i * spacing
+                });
+            }
+
+            // Add shot positions
+            maswData.push({
+                type: 'Shot',
+                number: 1,
+                position: -offset,
+                x: 0,
+                y: -offset
+            });
+            maswData.push({
+                type: 'Shot',
+                number: 2,
+                position: profileLength + offset,
+                x: 0,
+                y: profileLength + offset
+            });
+
+            // Display statistics
+            const stats = `
+                <div class="stat-card">
+                    <div class="stat-label">Profile Length</div>
+                    <div class="stat-value">${profileLength.toFixed(1)} m</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Estimated Investigation Depth</div>
+                    <div class="stat-value">${estimatedDepth.toFixed(1)} m</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Total Channels</div>
+                    <div class="stat-value">${channels}</div>
+                </div>
+            `;
+            document.getElementById('masw-stats').innerHTML = stats;
+
+            // Draw visualization
+            drawMASWCanvas();
+
+            // Create table
+            createMASWTable();
+
+            document.getElementById('masw-results').classList.add('active');
+        }
+
+        function drawMASWCanvas() {
+            const canvas = document.getElementById('masw-canvas');
+            canvas.width = 800;
+            canvas.height = 300;
+            const ctx = canvas.getContext('2d');
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const margin = 50;
+            const maxY = Math.max(...maswData.map(d => d.y));
+            const minY = Math.min(...maswData.map(d => d.y));
+            const scale = (canvas.height - 2 * margin) / (maxY - minY + 10);
+
+            // Draw receivers
+            maswData.filter(d => d.type === 'Receiver').forEach(receiver => {
+                const x = canvas.width / 2;
+                const y = margin + (receiver.y - minY + 5) * scale;
+
+                ctx.fillStyle = '#4DA34D';
+                ctx.beginPath();
+                ctx.arc(x, y, 5, 0, 2 * Math.PI);
+                ctx.fill();
+
+                ctx.fillStyle = '#345363';
+                ctx.font = '10px Arial';
+                ctx.fillText(`R${receiver.number}`, x + 10, y + 3);
+            });
+
+            // Draw shots
+            maswData.filter(d => d.type === 'Shot').forEach(shot => {
+                const x = canvas.width / 2;
+                const y = margin + (shot.y - minY + 5) * scale;
+
+                ctx.fillStyle = '#e74c3c';
+                ctx.beginPath();
+                ctx.moveTo(x, y - 8);
+                ctx.lineTo(x - 6, y + 8);
+                ctx.lineTo(x + 6, y + 8);
+                ctx.closePath();
+                ctx.fill();
+
+                ctx.fillStyle = '#e74c3c';
+                ctx.font = 'bold 10px Arial';
+                ctx.fillText(`S${shot.number}`, x + 10, y + 3);
+            });
+
+            // Draw profile line
+            const firstY = margin + (maswData.filter(d => d.type === 'Receiver')[0].y - minY + 5) * scale;
+            const lastReceiver = maswData.filter(d => d.type === 'Receiver').slice(-1)[0];
+            const lastY = margin + (lastReceiver.y - minY + 5) * scale;
+
+            ctx.strokeStyle = '#345363';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(canvas.width / 2, firstY);
+            ctx.lineTo(canvas.width / 2, lastY);
+            ctx.stroke();
+        }
+
+        function createMASWTable() {
+            const table = document.getElementById('masw-table');
+            let html = '<thead><tr><th>Type</th><th>Number</th><th>Position (m)</th><th>X</th><th>Y</th></tr></thead><tbody>';
+
+            maswData.forEach(item => {
+                html += `<tr>
+                    <td>${item.type}</td>
+                    <td>${item.number}</td>
+                    <td>${item.position.toFixed(2)}</td>
+                    <td>${item.x.toFixed(2)}</td>
+                    <td>${item.y.toFixed(2)}</td>
+                </tr>`;
+            });
+
+            html += '</tbody>';
+            table.innerHTML = html;
+        }
+
+        function clearMASW() {
+            maswData = [];
+            document.getElementById('masw-results').classList.remove('active');
+        }
+
+        function exportMASW() {
+            if (maswData.length === 0) {
+                alert('No data to export. Please calculate first.');
+                return;
+            }
+
+            let csv = 'Type,Number,Position_m,X,Y\n';
+            maswData.forEach(item => {
+                csv += `${item.type},${item.number},${item.position.toFixed(2)},${item.x.toFixed(2)},${item.y.toFixed(2)}\n`;
+            });
+
+            downloadCSV(csv, 'MASW_Layout.csv');
+        }
+
+        // Seismic Refraction Functions
+        function calculateRefraction() {
+            const channels = parseInt(document.getElementById('ref-channels').value);
+            const spacing = parseFloat(document.getElementById('ref-spacing').value);
+            const shots = parseInt(document.getElementById('ref-shots').value);
+            const velocity = parseFloat(document.getElementById('ref-velocity').value);
+
+            refractionData = [];
+            const profileLength = (channels - 1) * spacing;
+            const estimatedDepth = profileLength / 3; // Simplified
+
+            // Generate geophone positions
+            for (let i = 0; i < channels; i++) {
+                refractionData.push({
+                    type: 'Geophone',
+                    number: i + 1,
+                    position: i * spacing,
+                    x: 0,
+                    y: i * spacing
+                });
+            }
+
+            // Generate shot positions
+            const shotSpacing = profileLength / (shots - 1);
+            for (let i = 0; i < shots; i++) {
+                refractionData.push({
+                    type: 'Shot',
+                    number: i + 1,
+                    position: i * shotSpacing,
+                    x: 0,
+                    y: i * shotSpacing
+                });
+            }
+
+            // Statistics
+            const stats = `
+                <div class="stat-card">
+                    <div class="stat-label">Profile Length</div>
+                    <div class="stat-value">${profileLength.toFixed(1)} m</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Estimated Penetration Depth</div>
+                    <div class="stat-value">${estimatedDepth.toFixed(1)} m</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Total Geophones</div>
+                    <div class="stat-value">${channels}</div>
+                </div>
+            `;
+            document.getElementById('ref-stats').innerHTML = stats;
+
+            drawRefractionCanvas();
+            createRefractionTable();
+            document.getElementById('ref-results').classList.add('active');
+        }
+
+        function drawRefractionCanvas() {
+            const canvas = document.getElementById('ref-canvas');
+            canvas.width = 800;
+            canvas.height = 300;
+            const ctx = canvas.getContext('2d');
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const margin = 50;
+            const maxY = Math.max(...refractionData.map(d => d.y));
+            const scale = (canvas.height - 2 * margin) / maxY;
+
+            // Draw geophones
+            refractionData.filter(d => d.type === 'Geophone').forEach(geo => {
+                const x = canvas.width / 2;
+                const y = margin + geo.y * scale;
+
+                ctx.fillStyle = '#4DA34D';
+                ctx.fillRect(x - 4, y - 4, 8, 8);
+
+                ctx.fillStyle = '#345363';
+                ctx.font = '9px Arial';
+                ctx.fillText(`G${geo.number}`, x + 8, y + 3);
+            });
+
+            // Draw shots
+            refractionData.filter(d => d.type === 'Shot').forEach(shot => {
+                const x = canvas.width / 2;
+                const y = margin + shot.y * scale;
+
+                ctx.fillStyle = '#e74c3c';
+                ctx.beginPath();
+                ctx.arc(x, y, 6, 0, 2 * Math.PI);
+                ctx.fill();
+
+                ctx.fillStyle = '#e74c3c';
+                ctx.font = 'bold 10px Arial';
+                ctx.fillText(`SP${shot.number}`, x + 10, y + 3);
+            });
+        }
+
+        function createRefractionTable() {
+            const table = document.getElementById('ref-table');
+            let html = '<thead><tr><th>Type</th><th>Number</th><th>Position (m)</th><th>X</th><th>Y</th></tr></thead><tbody>';
+
+            refractionData.forEach(item => {
+                html += `<tr>
+                    <td>${item.type}</td>
+                    <td>${item.number}</td>
+                    <td>${item.position.toFixed(2)}</td>
+                    <td>${item.x.toFixed(2)}</td>
+                    <td>${item.y.toFixed(2)}</td>
+                </tr>`;
+            });
+
+            html += '</tbody>';
+            table.innerHTML = html;
+        }
+
+        function clearRefraction() {
+            refractionData = [];
+            document.getElementById('ref-results').classList.remove('active');
+        }
+
+        function exportRefraction() {
+            if (refractionData.length === 0) {
+                alert('No data to export. Please calculate first.');
+                return;
+            }
+
+            let csv = 'Type,Number,Position_m,X,Y\n';
+            refractionData.forEach(item => {
+                csv += `${item.type},${item.number},${item.position.toFixed(2)},${item.x.toFixed(2)},${item.y.toFixed(2)}\n`;
+            });
+
+            downloadCSV(csv, 'Seismic_Refraction_Layout.csv');
+        }
+
+        // ERT Functions
+        function calculateERT() {
+            const electrodes = parseInt(document.getElementById('ert-electrodes').value);
+            const spacing = parseFloat(document.getElementById('ert-spacing').value);
+            const arrayType = document.getElementById('ert-array').value;
+
+            ertData = [];
+            const profileLength = (electrodes - 1) * spacing;
+
+            // Depth estimation based on array type
+            let depthFactor = 0.25; // Wenner default
+            if (arrayType === 'schlumberger') depthFactor = 0.3;
+            else if (arrayType === 'dipole-dipole') depthFactor = 0.2;
+            else if (arrayType === 'gradient') depthFactor = 0.15;
+            else if (arrayType === 'pole-pole') depthFactor = 0.35;
+
+            const estimatedDepth = profileLength * depthFactor;
+
+            // Generate electrode positions
+            for (let i = 0; i < electrodes; i++) {
+                ertData.push({
+                    electrode: i + 1,
+                    position: i * spacing,
+                    x: 0,
+                    y: i * spacing
+                });
+            }
+
+            // Statistics
+            const stats = `
+                <div class="stat-card">
+                    <div class="stat-label">Profile Length</div>
+                    <div class="stat-value">${profileLength.toFixed(1)} m</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Array Type</div>
+                    <div class="stat-value">${arrayType.toUpperCase()}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Estimated Investigation Depth</div>
+                    <div class="stat-value">${estimatedDepth.toFixed(1)} m</div>
+                </div>
+            `;
+            document.getElementById('ert-stats').innerHTML = stats;
+
+            drawERTCanvas();
+            createERTTable();
+            document.getElementById('ert-results').classList.add('active');
+        }
+
+        function drawERTCanvas() {
+            const canvas = document.getElementById('ert-canvas');
+            canvas.width = 800;
+            canvas.height = 200;
+            const ctx = canvas.getContext('2d');
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const margin = 50;
+            const maxY = Math.max(...ertData.map(d => d.y));
+            const scale = (canvas.width - 2 * margin) / maxY;
+
+            // Draw electrode line
+            ctx.strokeStyle = '#345363';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(margin, canvas.height / 2);
+            ctx.lineTo(canvas.width - margin, canvas.height / 2);
+            ctx.stroke();
+
+            // Draw electrodes
+            ertData.forEach(electrode => {
+                const x = margin + electrode.y * scale;
+                const y = canvas.height / 2;
+
+                ctx.fillStyle = '#4DA34D';
+                ctx.beginPath();
+                ctx.arc(x, y, 5, 0, 2 * Math.PI);
+                ctx.fill();
+
+                ctx.fillStyle = '#345363';
+                ctx.font = '9px Arial';
+                ctx.fillText(`E${electrode.electrode}`, x - 8, y + 20);
+            });
+        }
+
+        function createERTTable() {
+            const table = document.getElementById('ert-table');
+            let html = '<thead><tr><th>Electrode</th><th>Position (m)</th><th>X</th><th>Y</th></tr></thead><tbody>';
+
+            ertData.forEach(item => {
+                html += `<tr>
+                    <td>${item.electrode}</td>
+                    <td>${item.position.toFixed(2)}</td>
+                    <td>${item.x.toFixed(2)}</td>
+                    <td>${item.y.toFixed(2)}</td>
+                </tr>`;
+            });
+
+            html += '</tbody>';
+            table.innerHTML = html;
+        }
+
+        function clearERT() {
+            ertData = [];
+            document.getElementById('ert-results').classList.remove('active');
+        }
+
+        function exportERT() {
+            if (ertData.length === 0) {
+                alert('No data to export. Please calculate first.');
+                return;
+            }
+
+            let csv = 'Electrode,Position_m,X,Y\n';
+            ertData.forEach(item => {
+                csv += `${item.electrode},${item.position.toFixed(2)},${item.x.toFixed(2)},${item.y.toFixed(2)}\n`;
+            });
+
+            downloadCSV(csv, 'ERT_Electrode_Layout.csv');
+        }
+
+        // GPR Functions
+        function loadGPRImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.onload = function() {
+                        gprImage = img;
+                        const canvas = document.getElementById('gpr-canvas');
+                        canvas.width = Math.min(img.width, 800);
+                        canvas.height = Math.min(img.height, 500);
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function pickGPRPoint(event) {
+            if (!gprImage) {
+                alert('Please upload a radargram image first.');
+                return;
+            }
+
+            const canvas = document.getElementById('gpr-canvas');
+            const rect = canvas.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            gprPicks.push({x, y});
+
+            // Draw pick
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#e74c3c';
+            ctx.beginPath();
+            ctx.arc(x, y, 5, 0, 2 * Math.PI);
+            ctx.fill();
+
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 12px Arial';
+            ctx.fillText(gprPicks.length, x + 8, y - 8);
+
+            // Update picks display
+            document.getElementById('gpr-picks').innerHTML = `
+                <strong>Picked Points:</strong> ${gprPicks.length}
+                ${gprPicks.length >= 3 ? '(Ready to calculate)' : '(Need ' + (3 - gprPicks.length) + ' more)'}
+            `;
+        }
+
+        function calculateGPRVelocity() {
+            if (gprPicks.length < 3) {
+                alert('Please pick at least 3 points: apex and two arms.');
+                return;
+            }
+
+            const timeWindow = parseFloat(document.getElementById('gpr-time').value);
+            const traceSpacing = parseFloat(document.getElementById('gpr-trace').value);
+            const canvas = document.getElementById('gpr-canvas');
+
+            // Assume first pick is apex, next two are arms
+            const apex = gprPicks[0];
+            const arm1 = gprPicks[1];
+            const arm2 = gprPicks[2];
+
+            // Calculate velocity (simplified hyperbola fitting)
+            const dx = Math.abs(arm1.x - apex.x) * traceSpacing / canvas.width;
+            const dt = Math.abs(arm1.y - apex.y) * timeWindow / canvas.height;
+
+            const velocity = (2 * dx / dt) * 1e9; // Convert to m/s
+            const depth = (velocity * (apex.y * timeWindow / canvas.height)) / 2 * 1e-9;
+
+            const stats = `
+                <div class="alert alert-success">
+                    <strong>Velocity Calculation Complete</strong>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">EM Wave Velocity</div>
+                    <div class="stat-value">${(velocity / 1e6).toFixed(1)} m/µs</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Estimated Depth to Reflector</div>
+                    <div class="stat-value">${depth.toFixed(2)} m</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Relative Permittivity (εr)</div>
+                    <div class="stat-value">${((3e8 / velocity) ** 2).toFixed(1)}</div>
+                </div>
+            `;
+            document.getElementById('gpr-stats').innerHTML = stats;
+            document.getElementById('gpr-results').classList.add('active');
+        }
+
+        function clearGPR() {
+            gprPicks = [];
+            if (gprImage) {
+                const canvas = document.getElementById('gpr-canvas');
+                const ctx = canvas.getContext('2d');
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(gprImage, 0, 0, canvas.width, canvas.height);
+            }
+            document.getElementById('gpr-picks').innerHTML = '';
+        }
+
+        function exportGPR() {
+            if (gprPicks.length === 0) {
+                alert('No picks to export.');
+                return;
+            }
+
+            let csv = 'Pick,X_pixel,Y_pixel\n';
+            gprPicks.forEach((pick, i) => {
+                csv += `${i + 1},${pick.x.toFixed(2)},${pick.y.toFixed(2)}\n`;
+            });
+
+            downloadCSV(csv, 'GPR_Picks.csv');
+        }
+
+        // Magnetic Survey Functions
+        function calculateMagnetic() {
+            const length = parseFloat(document.getElementById('mag-length').value);
+            const width = parseFloat(document.getElementById('mag-width').value);
+            const lineSpacing = parseFloat(document.getElementById('mag-line-spacing').value);
+            const tieSpacing = parseFloat(document.getElementById('mag-tie-spacing').value);
+            const stationSpacing = parseFloat(document.getElementById('mag-station').value);
+
+            magneticData = [];
+
+            const numLines = Math.floor(width / lineSpacing) + 1;
+            const numTies = Math.floor(length / tieSpacing) + 1;
+            const stationsPerLine = Math.floor(length / stationSpacing) + 1;
+
+            // Generate survey lines
+            for (let i = 0; i < numLines; i++) {
+                const y = i * lineSpacing;
+                for (let j = 0; j < stationsPerLine; j++) {
+                    const x = j * stationSpacing;
+                    magneticData.push({
+                        type: 'Line',
+                        line: i + 1,
+                        station: j + 1,
+                        x: x,
+                        y: y
+                    });
+                }
+            }
+
+            // Generate tie lines
+            for (let i = 0; i < numTies; i++) {
+                const x = i * tieSpacing;
+                const stationsPerTie = Math.floor(width / stationSpacing) + 1;
+                for (let j = 0; j < stationsPerTie; j++) {
+                    const y = j * stationSpacing;
+                    magneticData.push({
+                        type: 'Tie',
+                        line: 900 + i + 1,
+                        station: j + 1,
+                        x: x,
+                        y: y
+                    });
+                }
+            }
+
+            const stats = `
+                <div class="stat-card">
+                    <div class="stat-label">Survey Area</div>
+                    <div class="stat-value">${length} × ${width} m</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Total Stations</div>
+                    <div class="stat-value">${magneticData.length}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Survey Lines / Tie Lines</div>
+                    <div class="stat-value">${numLines} / ${numTies}</div>
+                </div>
+            `;
+            document.getElementById('mag-stats').innerHTML = stats;
+
+            drawMagneticCanvas();
+            createMagneticTable();
+            document.getElementById('mag-results').classList.add('active');
+        }
+
+        function drawMagneticCanvas() {
+            const canvas = document.getElementById('mag-canvas');
+            canvas.width = 800;
+            canvas.height = 500;
+            const ctx = canvas.getContext('2d');
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const margin = 50;
+            const maxX = Math.max(...magneticData.map(d => d.x));
+            const maxY = Math.max(...magneticData.map(d => d.y));
+            const scaleX = (canvas.width - 2 * margin) / maxX;
+            const scaleY = (canvas.height - 2 * margin) / maxY;
+
+            // Draw survey lines
+            ctx.strokeStyle = '#4DA34D';
+            ctx.lineWidth = 1;
+            magneticData.filter(d => d.type === 'Line').forEach(point => {
+                const x = margin + point.x * scaleX;
+                const y = margin + point.y * scaleY;
+                ctx.fillStyle = '#4DA34D';
+                ctx.fillRect(x - 1, y - 1, 2, 2);
+            });
+
+            // Draw tie lines
+            ctx.strokeStyle = '#e74c3c';
+            magneticData.filter(d => d.type === 'Tie').forEach(point => {
+                const x = margin + point.x * scaleX;
+                const y = margin + point.y * scaleY;
+                ctx.fillStyle = '#e74c3c';
+                ctx.fillRect(x - 1, y - 1, 2, 2);
+            });
+        }
+
+        function createMagneticTable() {
+            const table = document.getElementById('mag-table');
+            let html = '<thead><tr><th>Type</th><th>Line</th><th>Station</th><th>X (m)</th><th>Y (m)</th></tr></thead><tbody>';
+
+            magneticData.slice(0, 100).forEach(item => {
+                html += `<tr>
+                    <td>${item.type}</td>
+                    <td>${item.line}</td>
+                    <td>${item.station}</td>
+                    <td>${item.x.toFixed(2)}</td>
+                    <td>${item.y.toFixed(2)}</td>
+                </tr>`;
+            });
+
+            if (magneticData.length > 100) {
+                html += `<tr><td colspan="5" style="text-align:center; font-style:italic;">... ${magneticData.length - 100} more rows (download CSV for full data)</td></tr>`;
+            }
+
+            html += '</tbody>';
+            table.innerHTML = html;
+        }
+
+        function clearMagnetic() {
+            magneticData = [];
+            document.getElementById('mag-results').classList.remove('active');
+        }
+
+        function exportMagnetic() {
+            if (magneticData.length === 0) {
+                alert('No data to export. Please calculate first.');
+                return;
+            }
+
+            let csv = 'Type,Line,Station,X_m,Y_m\n';
+            magneticData.forEach(item => {
+                csv += `${item.type},${item.line},${item.station},${item.x.toFixed(2)},${item.y.toFixed(2)}\n`;
+            });
+
+            downloadCSV(csv, 'Magnetic_Survey_Grid.csv');
+        }
+
+        // Gravity Survey Functions
+        function calculateGravity() {
+            const length = parseFloat(document.getElementById('grav-length').value);
+            const width = parseFloat(document.getElementById('grav-width').value);
+            const spacing = parseFloat(document.getElementById('grav-spacing').value);
+            const gridType = document.getElementById('grav-grid').value;
+
+            gravityData = [];
+
+            const numX = Math.floor(length / spacing) + 1;
+            const numY = Math.floor(width / spacing) + 1;
+
+            if (gridType === 'regular') {
+                for (let i = 0; i < numX; i++) {
+                    for (let j = 0; j < numY; j++) {
+                        gravityData.push({
+                            station: gravityData.length + 1,
+                            x: i * spacing,
+                            y: j * spacing
+                        });
+                    }
+                }
+            } else if (gridType === 'profile') {
+                for (let i = 0; i < numX; i++) {
+                    gravityData.push({
+                        station: gravityData.length + 1,
+                        x: i * spacing,
+                        y: width / 2
+                    });
+                }
+            }
+
+            const stats = `
+                <div class="stat-card">
+                    <div class="stat-label">Survey Area</div>
+                    <div class="stat-value">${length} × ${width} m</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Total Stations</div>
+                    <div class="stat-value">${gravityData.length}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Grid Type</div>
+                    <div class="stat-value">${gridType.toUpperCase()}</div>
+                </div>
+            `;
+            document.getElementById('grav-stats').innerHTML = stats;
+
+            drawGravityCanvas();
+            createGravityTable();
+            document.getElementById('grav-results').classList.add('active');
+        }
+
+        function drawGravityCanvas() {
+            const canvas = document.getElementById('grav-canvas');
+            canvas.width = 800;
+            canvas.height = 500;
+            const ctx = canvas.getContext('2d');
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const margin = 50;
+            const maxX = Math.max(...gravityData.map(d => d.x));
+            const maxY = Math.max(...gravityData.map(d => d.y));
+            const scaleX = (canvas.width - 2 * margin) / maxX;
+            const scaleY = (canvas.height - 2 * margin) / maxY;
+
+            gravityData.forEach(point => {
+                const x = margin + point.x * scaleX;
+                const y = margin + point.y * scaleY;
+                ctx.fillStyle = '#4DA34D';
+                ctx.beginPath();
+                ctx.arc(x, y, 3, 0, 2 * Math.PI);
+                ctx.fill();
+            });
+        }
+
+        function createGravityTable() {
+            const table = document.getElementById('grav-table');
+            let html = '<thead><tr><th>Station</th><th>X (m)</th><th>Y (m)</th></tr></thead><tbody>';
+
+            gravityData.slice(0, 100).forEach(item => {
+                html += `<tr>
+                    <td>${item.station}</td>
+                    <td>${item.x.toFixed(2)}</td>
+                    <td>${item.y.toFixed(2)}</td>
+                </tr>`;
+            });
+
+            if (gravityData.length > 100) {
+                html += `<tr><td colspan="3" style="text-align:center; font-style:italic;">... ${gravityData.length - 100} more rows (download CSV for full data)</td></tr>`;
+            }
+
+            html += '</tbody>';
+            table.innerHTML = html;
+        }
+
+        function clearGravity() {
+            gravityData = [];
+            document.getElementById('grav-results').classList.remove('active');
+        }
+
+        function exportGravity() {
+            if (gravityData.length === 0) {
+                alert('No data to export. Please calculate first.');
+                return;
+            }
+
+            let csv = 'Station,X_m,Y_m\n';
+            gravityData.forEach(item => {
+                csv += `${item.station},${item.x.toFixed(2)},${item.y.toFixed(2)}\n`;
+            });
+
+            downloadCSV(csv, 'Gravity_Survey_Grid.csv');
+        }
+
+        // Coordinate Converter Functions
+        function convertCoordinates() {
+            const lat = parseFloat(document.getElementById('coord-lat').value);
+            const lon = parseFloat(document.getElementById('coord-lon').value);
+            const targetCRS = document.getElementById('coord-target').value;
+
+            if (isNaN(lat) || isNaN(lon)) {
+                alert('Please enter valid coordinates.');
+                return;
+            }
+
+            try {
+                const result = proj4('EPSG:4326', targetCRS, [lon, lat]);
+
+                let output = `
+                    <div class="alert alert-success">
+                        <strong>Conversion Successful</strong>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Input (WGS84)</div>
+                        <div class="stat-value">${lat.toFixed(6)}°, ${lon.toFixed(6)}°</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Output (${targetCRS})</div>
+                        <div class="stat-value">${result[0].toFixed(2)}, ${result[1].toFixed(2)}</div>
+                    </div>
+                `;
+
+                document.getElementById('coord-output').innerHTML = output;
+                document.getElementById('coord-results').classList.add('active');
+            } catch (error) {
+                alert('Conversion error: ' + error.message);
+            }
+        }
+
+        function clearCoords() {
+            document.getElementById('coord-lat').value = '';
+            document.getElementById('coord-lon').value = '';
+            document.getElementById('coord-results').classList.remove('active');
+        }
+
+        // Utility function
+        function downloadCSV(content, filename) {
+            const blob = new Blob([content], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>

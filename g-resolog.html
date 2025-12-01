@@ -1,0 +1,3229 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>G-Resolog Pro - Professional Geotechnical Core Logger | Georesolve Africa</title>
+
+ 
+
+    <!-- html2pdf library for PDF generation -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
+
+    <!-- SheetJS for Excel export -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+ 
+
+    <style>
+
+        * {
+
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+ 
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            background-color: #f5f5f5;
+
+            color: #333;
+
+            line-height: 1.4;
+
+        }
+
+ 
+
+        .container {
+
+            max-width: 1800px;
+
+            margin: 0 auto;
+
+            padding: 10px;
+
+        }
+
+ 
+
+        .header {
+
+            background: linear-gradient(135deg, #345363, #4DA34D);
+
+            color: white;
+
+            padding: 15px;
+
+            border-radius: 8px;
+
+            margin-bottom: 15px;
+
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+            position: relative;
+
+        }
+
+ 
+
+        .header h1 {
+
+            font-size: 2em;
+
+            margin-bottom: 8px;
+
+        }
+
+ 
+
+        .save-indicator {
+
+            position: absolute;
+
+            right: 20px;
+
+            top: 20px;
+
+            background: #27ae60;
+
+            color: white;
+
+            padding: 8px 12px;
+
+            border-radius: 4px;
+
+            font-size: 0.9em;
+
+            display: none;
+
+        }
+
+ 
+
+        .save-indicator.show {
+
+            display: block;
+
+            animation: fadeInOut 2s;
+
+        }
+
+ 
+
+        @keyframes fadeInOut {
+
+            0%, 100% { opacity: 0; }
+
+            50% { opacity: 1; }
+
+        }
+
+ 
+
+        .main-content {
+
+            display: grid;
+
+            grid-template-columns: 420px 1fr;
+
+            gap: 15px;
+
+            margin-bottom: 15px;
+
+        }
+
+ 
+
+        .panel {
+
+            background: white;
+
+            border-radius: 8px;
+
+            padding: 15px;
+
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+            max-height: calc(100vh - 200px);
+
+            overflow-y: auto;
+
+        }
+
+ 
+
+        .form-section {
+
+            margin-bottom: 20px;
+
+        }
+
+ 
+
+        .form-section h3 {
+
+            color: #345363;
+
+            margin-bottom: 12px;
+
+            padding-bottom: 6px;
+
+            border-bottom: 2px solid #4DA34D;
+
+            font-size: 1.1em;
+
+        }
+
+ 
+
+        .form-group {
+
+            margin-bottom: 12px;
+
+        }
+
+ 
+
+        label {
+
+            display: block;
+
+            margin-bottom: 4px;
+
+            font-weight: bold;
+
+            color: #555;
+
+            font-size: 0.9em;
+
+        }
+
+ 
+
+        input, select, textarea {
+
+            width: 100%;
+
+            padding: 8px;
+
+            border: 2px solid #ddd;
+
+            border-radius: 4px;
+
+            font-size: 13px;
+
+            transition: border-color 0.3s;
+
+        }
+
+ 
+
+        input:focus, select:focus, textarea:focus {
+
+            outline: none;
+
+            border-color: #4DA34D;
+
+        }
+
+ 
+
+        .row {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 10px;
+
+        }
+
+ 
+
+        .row-3 {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr 1fr;
+
+            gap: 10px;
+
+        }
+
+ 
+
+        .row-4 {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+
+            gap: 10px;
+
+        }
+
+ 
+
+        .btn {
+
+            background: #4DA34D;
+
+            color: white;
+
+            border: none;
+
+            padding: 10px 18px;
+
+            border-radius: 4px;
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+            transition: background 0.3s;
+
+            margin: 2px;
+
+        }
+
+ 
+
+        .btn:hover {
+
+            background: #3d8a3d;
+
+        }
+
+ 
+
+        .btn-secondary {
+
+            background: #345363;
+
+        }
+
+ 
+
+        .btn-secondary:hover {
+
+            background: #2a4250;
+
+        }
+
+ 
+
+        .btn-success {
+
+            background: #27ae60;
+
+        }
+
+ 
+
+        .btn-danger {
+
+            background: #e74c3c;
+
+        }
+
+ 
+
+        .btn-info {
+
+            background: #17a2b8;
+
+        }
+
+ 
+
+        .btn-warning {
+
+            background: #f39c12;
+
+        }
+
+ 
+
+        .toolbar {
+
+            display: flex;
+
+            gap: 8px;
+
+            margin-bottom: 15px;
+
+            flex-wrap: wrap;
+
+        }
+
+ 
+
+        .layer-entry {
+
+            background: #f8f9fa;
+
+            border: 1px solid #ddd;
+
+            border-radius: 4px;
+
+            padding: 12px;
+
+            margin-bottom: 8px;
+
+            position: relative;
+
+        }
+
+ 
+
+        .layer-header {
+
+            background: #345363;
+
+            color: white;
+
+            padding: 6px 10px;
+
+            margin: -12px -12px 10px -12px;
+
+            border-radius: 4px 4px 0 0;
+
+            font-weight: bold;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+        }
+
+ 
+
+        .layer-controls {
+
+            display: flex;
+
+            gap: 8px;
+
+            margin-top: 8px;
+
+        }
+
+ 
+
+        .field-test-entry {
+
+            background: #e8f5e9;
+
+            border: 1px solid #4DA34D;
+
+            border-radius: 4px;
+
+            padding: 8px;
+
+            margin-bottom: 6px;
+
+        }
+
+ 
+
+        .field-test-header {
+
+            font-weight: bold;
+
+            margin-bottom: 6px;
+
+            color: #345363;
+
+        }
+
+ 
+
+        /* Pattern Selector */
+
+        .pattern-selector {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+
+            gap: 8px;
+
+            margin-top: 8px;
+
+        }
+
+ 
+
+        .pattern-option {
+
+            border: 2px solid #ddd;
+
+            border-radius: 4px;
+
+            padding: 8px;
+
+            cursor: pointer;
+
+            text-align: center;
+
+            transition: all 0.3s;
+
+            min-height: 60px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+        }
+
+ 
+
+        .pattern-option:hover {
+
+            border-color: #4DA34D;
+
+            transform: scale(1.05);
+
+        }
+
+ 
+
+        .pattern-option.selected {
+
+            border-color: #4DA34D;
+
+            background: #e8f5e9;
+
+        }
+
+ 
+
+        .pattern-preview {
+
+            width: 50px;
+
+            height: 40px;
+
+            border: 1px solid #999;
+
+            margin-bottom: 4px;
+
+        }
+
+ 
+
+        .pattern-name {
+
+            font-size: 10px;
+
+            font-weight: bold;
+
+        }
+
+ 
+
+        /* Graphic patterns */
+
+        .pattern-clay {
+
+            background: repeating-linear-gradient(
+
+                45deg,
+
+                transparent,
+
+                transparent 2px,
+
+                #8B4513 2px,
+
+                #8B4513 3px
+
+            );
+
+        }
+
+ 
+
+        .pattern-silty-clay {
+
+            background:
+
+                repeating-linear-gradient(45deg, transparent, transparent 2px, #8B4513 2px, #8B4513 3px),
+
+                radial-gradient(circle, #8B4513 0.5px, transparent 0.5px);
+
+            background-size: 100% 100%, 4px 4px;
+
+        }
+
+ 
+
+        .pattern-sand {
+
+            background: radial-gradient(circle, #D2B48C 1px, transparent 1px);
+
+            background-size: 4px 4px;
+
+            background-color: #FFF;
+
+        }
+
+ 
+
+        .pattern-sandy-gravel {
+
+            background:
+
+                radial-gradient(circle, #D2B48C 1px, transparent 1px),
+
+                radial-gradient(circle, #8B4513 2px, transparent 2px);
+
+            background-size: 4px 4px, 8px 8px;
+
+            background-position: 0 0, 4px 4px;
+
+        }
+
+ 
+
+        .pattern-gravel {
+
+            background: radial-gradient(circle, #8B7355 2.5px, transparent 2.5px);
+
+            background-size: 8px 8px;
+
+            background-color: #FFF;
+
+        }
+
+ 
+
+        .pattern-clayey-gravel {
+
+            background:
+
+                radial-gradient(circle, #8B7355 2px, transparent 2px),
+
+                repeating-linear-gradient(45deg, transparent, transparent 2px, #8B4513 2px, #8B4513 3px);
+
+            background-size: 8px 8px, 100% 100%;
+
+        }
+
+ 
+
+        .pattern-granite {
+
+            background:
+
+                repeating-linear-gradient(45deg, #b8b8b8, #b8b8b8 1px, transparent 1px, transparent 3px),
+
+                repeating-linear-gradient(-45deg, #b8b8b8, #b8b8b8 1px, transparent 1px, transparent 3px);
+
+            background-color: #d3d3d3;
+
+        }
+
+ 
+
+        .pattern-sandstone {
+
+            background: radial-gradient(circle, #d2b48c 1px, transparent 1px);
+
+            background-size: 5px 5px;
+
+            background-color: #f5deb3;
+
+        }
+
+ 
+
+        .pattern-limestone {
+
+            background: #f0e68c;
+
+            border: 1px solid #d4c46a;
+
+        }
+
+ 
+
+        .pattern-shale {
+
+            background: repeating-linear-gradient(
+
+                0deg,
+
+                #696969,
+
+                #696969 1px,
+
+                #808080 1px,
+
+                #808080 3px
+
+            );
+
+        }
+
+ 
+
+        .pattern-basalt {
+
+            background: #2f4f4f;
+
+        }
+
+ 
+
+        .pattern-topsoil {
+
+            background:
+
+                repeating-linear-gradient(90deg, transparent, transparent 3px, #654321 3px, #654321 4px),
+
+                radial-gradient(circle, #654321 0.5px, transparent 0.5px);
+
+            background-size: 100% 100%, 6px 6px;
+
+            background-color: #8B7355;
+
+        }
+
+ 
+
+        .pattern-fill {
+
+            background:
+
+                repeating-linear-gradient(25deg, transparent, transparent 5px, #999 5px, #999 6px),
+
+                repeating-linear-gradient(-25deg, transparent, transparent 5px, #999 5px, #999 6px);
+
+            background-color: #ccc;
+
+        }
+
+ 
+
+        .pattern-weathered {
+
+            background: repeating-linear-gradient(
+
+                135deg,
+
+                #a0522d,
+
+                #a0522d 3px,
+
+                #d2691e 3px,
+
+                #d2691e 6px
+
+            );
+
+        }
+
+ 
+
+        /* Log Preview Styles */
+
+        .log-preview {
+
+            background: white;
+
+            border: 2px solid #333;
+
+            padding: 0;
+
+            overflow: auto;
+
+            font-size: 10px;
+
+        }
+
+ 
+
+        .log-header-section {
+
+            border-bottom: 2px solid #333;
+
+        }
+
+ 
+
+        .log-info-table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            font-size: 9px;
+
+        }
+
+ 
+
+        .log-info-table td {
+
+            border: 1px solid #333;
+
+            padding: 3px 6px;
+
+            vertical-align: top;
+
+        }
+
+ 
+
+        .log-info-label {
+
+            font-weight: bold;
+
+            width: 100px;
+
+        }
+
+ 
+
+        /* Main log table */
+
+        .log-table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            font-size: 8px;
+
+        }
+
+ 
+
+        .log-table th,
+
+        .log-table td {
+
+            border: 1px solid #333;
+
+            padding: 2px;
+
+            text-align: center;
+
+            vertical-align: middle;
+
+        }
+
+ 
+
+        .log-table th {
+
+            background: #f0f0f0;
+
+            font-weight: bold;
+
+            font-size: 7px;
+
+        }
+
+ 
+
+        .log-table th.vertical {
+
+            writing-mode: vertical-rl;
+
+            text-orientation: mixed;
+
+            height: 100px;
+
+            padding: 4px 2px;
+
+        }
+
+ 
+
+        .log-table .depth-cell {
+
+            font-weight: bold;
+
+            font-size: 9px;
+
+            width: 40px;
+
+        }
+
+ 
+
+        .log-table .description-cell {
+
+            text-align: left;
+
+            padding: 4px;
+
+            font-size: 8px;
+
+            line-height: 1.3;
+
+        }
+
+ 
+
+        .log-table .graphic-cell {
+
+            width: 60px;
+
+            height: 100%;
+
+            padding: 0;
+
+        }
+
+ 
+
+        .log-table .method-cell {
+
+            width: 30px;
+
+        }
+
+ 
+
+        .log-table .water-cell {
+
+            width: 35px;
+
+        }
+
+ 
+
+        .log-table .recovery-cell {
+
+            width: 35px;
+
+        }
+
+ 
+
+        .log-table .weathering-cell {
+
+            width: 40px;
+
+        }
+
+ 
+
+        .log-table .strength-cell {
+
+            width: 40px;
+
+        }
+
+ 
+
+        .log-table .defect-spacing-header {
+
+            font-size: 7px;
+
+        }
+
+ 
+
+        .log-table .defect-col {
+
+            width: 20px;
+
+            font-size: 6px;
+
+        }
+
+ 
+
+        .log-table .field-tests-cell {
+
+            text-align: left;
+
+            padding: 4px;
+
+            font-size: 7px;
+
+            min-width: 120px;
+
+        }
+
+ 
+
+        .defect-marker {
+
+            width: 100%;
+
+            height: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+        }
+
+ 
+
+        .defect-marker.active {
+
+            background: #333;
+
+            color: white;
+
+            font-weight: bold;
+
+        }
+
+ 
+
+        .file-operations {
+
+            background: #e8f4f8;
+
+            border: 1px solid #17a2b8;
+
+            border-radius: 4px;
+
+            padding: 15px;
+
+            margin-bottom: 15px;
+
+        }
+
+ 
+
+        .progress-bar {
+
+            width: 100%;
+
+            height: 20px;
+
+            background: #f0f0f0;
+
+            border-radius: 10px;
+
+            overflow: hidden;
+
+            margin-top: 10px;
+
+            display: none;
+
+        }
+
+ 
+
+        .progress-fill {
+
+            height: 100%;
+
+            background: linear-gradient(90deg, #4DA34D, #27ae60);
+
+            width: 0%;
+
+            transition: width 0.3s ease;
+
+        }
+
+ 
+
+        .preloaded-data {
+
+            background: #9EDB9E;
+
+            border: 1px solid #4DA34D;
+
+            padding: 10px;
+
+            border-radius: 4px;
+
+            margin-bottom: 15px;
+
+        }
+
+ 
+
+        @media print {
+
+            .panel:first-child,
+
+            .toolbar,
+
+            .file-operations,
+
+            .preloaded-data,
+
+            .header {
+
+                display: none !important;
+
+            }
+
+ 
+
+            .main-content {
+
+                grid-template-columns: 1fr;
+
+            }
+
+ 
+
+            .log-preview {
+
+                border: 2px solid #000;
+
+            }
+
+ 
+
+            body {
+
+                background: white;
+
+            }
+
+        }
+
+ 
+
+        @media (max-width: 1200px) {
+
+            .main-content {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="header">
+
+            <h1>🪨 G-Resolog Pro</h1>
+
+            <p>Professional Geotechnical Logging System - Enhanced Edition</p>
+
+            <div style="font-size: 0.85em; margin-top: 5px; opacity: 0.85;">Powered by Georesolve Africa | World-Class Logging Solution</div>
+
+            <div class="save-indicator" id="saveIndicator">💾 Auto-saved</div>
+
+        </div>
+
+ 
+
+        <div class="preloaded-data">
+
+            <strong>📋 Sample Soil Investigation Log Available</strong>
+
+            <button class="btn" onclick="loadSampleData()" style="float: right; margin-top: -5px;">Load Sample Data</button>
+
+            <div style="clear: both;"></div>
+
+        </div>
+
+ 
+
+        <!-- File Operations Panel -->
+
+        <div class="file-operations">
+
+            <h4 style="margin-bottom: 10px;">💾 File Operations & Export</h4>
+
+            <div class="toolbar">
+
+                <button class="btn btn-info" onclick="saveToLocalStorage()">💾 Save</button>
+
+                <button class="btn btn-info" onclick="loadFromLocalStorage()">📁 Load</button>
+
+                <button class="btn btn-warning" onclick="exportToJSON()">📄 Export JSON</button>
+
+                <button class="btn btn-warning" onclick="importFromJSON()">📂 Import JSON</button>
+
+                <button class="btn btn-success" onclick="generatePDF()">📄 PDF</button>
+
+                <button class="btn btn-success" onclick="exportExcel()">📊 Excel</button>
+
+                <button class="btn btn-secondary" onclick="window.print()">🖨️ Print</button>
+
+            </div>
+
+            <div class="progress-bar" id="progressBar">
+
+                <div class="progress-fill" id="progressFill"></div>
+
+            </div>
+
+        </div>
+
+ 
+
+        <div class="main-content">
+
+            <!-- Left Panel - Data Entry -->
+
+            <div class="panel">
+
+                <div class="form-section">
+
+                    <h3>📋 Project Information</h3>
+
+                    <div class="form-group">
+
+                        <label>Client:</label>
+
+                        <input type="text" id="client" placeholder="Client name">
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="form-group">
+
+                            <label>Job No:</label>
+
+                            <input type="text" id="jobNo" placeholder="e.g., FBT500-3">
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>Borehole No:</label>
+
+                            <input type="text" id="boreholeNo" placeholder="e.g., BH105">
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Address:</label>
+
+                        <input type="text" id="address" placeholder="Site address">
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="form-group">
+
+                            <label>Suburb/Town:</label>
+
+                            <input type="text" id="suburb" placeholder="Location">
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>Easting:</label>
+
+                            <input type="text" id="easting" placeholder="Coordinate">
+
+                        </div>
+
+                    </div>
+
+                    <div class="row-3">
+
+                        <div class="form-group">
+
+                            <label>Northing:</label>
+
+                            <input type="text" id="northing" placeholder="Coordinate">
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>RL Surface:</label>
+
+                            <input type="text" id="rlSurface" placeholder="m">
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>Datum:</label>
+
+                            <input type="text" id="datum" placeholder="e.g., WGS84">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+ 
+
+                <div class="form-section">
+
+                    <h3>🔧 Drilling Information</h3>
+
+                    <div class="row">
+
+                        <div class="form-group">
+
+                            <label>Drill Model:</label>
+
+                            <input type="text" id="drillModel" placeholder="e.g., CS14">
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>Date:</label>
+
+                            <input type="date" id="drillingDate">
+
+                        </div>
+
+                    </div>
+
+                    <div class="row-3">
+
+                        <div class="form-group">
+
+                            <label>Slope (°):</label>
+
+                            <input type="text" id="slope" placeholder="e.g., -90">
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>Hole Diameter:</label>
+
+                            <input type="text" id="holeDiameter" placeholder="mm">
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>Bearing (°):</label>
+
+                            <input type="text" id="bearing" placeholder="0-360">
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Drilling Fluid:</label>
+
+                        <input type="text" id="drillingFluid" placeholder="e.g., Water, Bentonite">
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="form-group">
+
+                            <label>Project:</label>
+
+                            <input type="text" id="projectName" placeholder="Project name">
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>Method:</label>
+
+                            <select id="drillingMethod">
+
+                                <option value="AD">AD - Auger Drilling</option>
+
+                                <option value="RD">RD - Rotary Drilling</option>
+
+                                <option value="CD">CD - Core Drilling</option>
+
+                                <option value="PD">PD - Percussion Drilling</option>
+
+                                <option value="RCD">RCD - Reverse Circulation</option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="form-group">
+
+                            <label>Logged By:</label>
+
+                            <input type="text" id="loggedBy" placeholder="Initials">
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>Checked By:</label>
+
+                            <input type="text" id="checkedBy" placeholder="Initials">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+ 
+
+                <div class="form-section">
+
+                    <h3>🪨 Soil/Rock Layers</h3>
+
+                    <button class="btn" onclick="addLayer()">➕ Add Layer</button>
+
+                    <button class="btn btn-secondary" onclick="clearAllLayers()">🗑️ Clear All</button>
+
+                    <div id="layersContainer" style="margin-top: 10px;">
+
+                        <!-- Layers added dynamically -->
+
+                    </div>
+
+                </div>
+
+            </div>
+
+ 
+
+            <!-- Right Panel - Preview -->
+
+            <div class="panel" style="max-height: none;">
+
+                <h3 style="color: #345363; margin-bottom: 15px;">📄 Borehole Log Preview</h3>
+
+                <div class="log-preview" id="logPreview">
+
+                    <!-- Header Section -->
+
+                    <div class="log-header-section">
+
+                        <table class="log-info-table">
+
+                            <tr>
+
+                                <td class="log-info-label">Client:</td>
+
+                                <td id="previewClient">-</td>
+
+                                <td class="log-info-label">Borehole no.:</td>
+
+                                <td id="previewBoreholeNo">-</td>
+
+                                <td class="log-info-label">Easting:</td>
+
+                                <td id="previewEasting">-</td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td class="log-info-label">Job No:</td>
+
+                                <td id="previewJobNo">-</td>
+
+                                <td class="log-info-label">Slope:</td>
+
+                                <td id="previewSlope">-</td>
+
+                                <td class="log-info-label">Northing:</td>
+
+                                <td id="previewNorthing">-</td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td class="log-info-label">Address:</td>
+
+                                <td id="previewAddress">-</td>
+
+                                <td class="log-info-label">Hole Diameter:</td>
+
+                                <td id="previewDiameter">-</td>
+
+                                <td class="log-info-label">RL Surface:</td>
+
+                                <td id="previewRL">-</td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td class="log-info-label">Suburb/Town:</td>
+
+                                <td id="previewSuburb">-</td>
+
+                                <td class="log-info-label">Drilling Fluid:</td>
+
+                                <td id="previewFluid">-</td>
+
+                                <td class="log-info-label">Datum:</td>
+
+                                <td id="previewDatum">-</td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td class="log-info-label">Drill Model:</td>
+
+                                <td id="previewDrill">-</td>
+
+                                <td class="log-info-label">Project:</td>
+
+                                <td colspan="3" id="previewProject">-</td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td class="log-info-label">Date:</td>
+
+                                <td id="previewDate">-</td>
+
+                                <td class="log-info-label">Logged By:</td>
+
+                                <td id="previewLoggedBy">-</td>
+
+                                <td class="log-info-label">Checked By:</td>
+
+                                <td id="previewCheckedBy">-</td>
+
+                            </tr>
+
+                        </table>
+
+                    </div>
+
+ 
+
+                    <!-- Main Log Table -->
+
+                    <table class="log-table" id="logTable">
+
+                        <thead>
+
+                            <tr>
+
+                                <th class="vertical">Method</th>
+
+                                <th class="vertical">Core-lift</th>
+
+                                <th class="vertical">Water</th>
+
+                                <th class="vertical">Depth (m)</th>
+
+                                <th style="width: 60px;">Graphic Log</th>
+
+                                <th class="vertical">Core Recovery (%)</th>
+
+                                <th style="min-width: 200px;">Rock type; grain, characteristics, colour, structure, minor components</th>
+
+                                <th class="vertical">Weathering/Alteration</th>
+
+                                <th class="vertical">Estimated Strength</th>
+
+                                <th class="vertical">Is(50) MPa D-diametral A-axial</th>
+
+                                <th class="vertical">RQD %</th>
+
+                                <th colspan="5" class="defect-spacing-header">Defect Spacing (mm)<br>30 | 100 | 300 | 1000 | 3000</th>
+
+                                <th style="min-width: 100px;">Field Tests & Measurements</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="logTableBody">
+
+                            <!-- Rows added dynamically -->
+
+                        </tbody>
+
+                    </table>
+
+ 
+
+                    <div style="margin-top: 15px; padding: 10px; background: #fff3cd; border: 1px solid #ffc107; font-size: 9px;">
+
+                        <strong>G-Resolog Professional Logging System</strong> | Generated by Georesolve Africa | <span id="genDate"></span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+ 
+
+    <script>
+
+        let autoSaveTimer;
+
+        let layerCounter = 0;
+
+ 
+
+        // Sample data
+
+        const sampleData = {
+
+            client: "East-West Rail Link",
+
+            jobNo: "FBT500-3",
+
+            boreholeNo: "BH105",
+
+            address: "Railway Corridor",
+
+            suburb: "Industrial Area",
+
+            easting: "678543",
+
+            northing: "9876234",
+
+            rlSurface: "245.5",
+
+            datum: "WGS84",
+
+            drillModel: "Atlas Copco",
+
+            drillingDate: "2024-03-15",
+
+            slope: "-90",
+
+            holeDiameter: "150",
+
+            bearing: "0",
+
+            drillingFluid: "Water",
+
+            projectName: "Geotechnical Investigation",
+
+            drillingMethod: "AD",
+
+            loggedBy: "JM",
+
+            checkedBy: "RS",
+
+            layers: [
+
+                {
+
+                    method: "AD",
+
+                    coreLift: "",
+
+                    water: "",
+
+                    topDepth: "0",
+
+                    bottomDepth: "0.5",
+
+                    pattern: "topsoil",
+
+                    recovery: "",
+
+                    description: "TOPSOIL: Silty CLAY (CI) medium plasticity, brown root fibres, moist, firm",
+
+                    weathering: "",
+
+                    strength: "",
+
+                    is50: "",
+
+                    rqd: "",
+
+                    defectSpacing: [],
+
+                    fieldTests: []
+
+                },
+
+                {
+
+                    method: "AD",
+
+                    coreLift: "",
+
+                    water: "",
+
+                    topDepth: "0.5",
+
+                    bottomDepth: "2.5",
+
+                    pattern: "silty-clay",
+
+                    recovery: "",
+
+                    description: "Silty CLAY (CI) - medium plasticity, brown, moist, firm to stiff, Alluvial soil",
+
+                    weathering: "",
+
+                    strength: "",
+
+                    is50: "",
+
+                    rqd: "",
+
+                    defectSpacing: [],
+
+                    fieldTests: [
+
+                        { type: "U", value: "U63" },
+
+                        { type: "SPT", blows: "2,3,4", n: "7" }
+
+                    ]
+
+                },
+
+                {
+
+                    method: "AD",
+
+                    coreLift: "Y",
+
+                    water: "",
+
+                    topDepth: "2.5",
+
+                    bottomDepth: "3.5",
+
+                    pattern: "sandy-gravel",
+
+                    recovery: "",
+
+                    description: "Sandy GRAVEL (GW) - fine to coarse, grey and pale brown, angular, medium to coarse grained sand trace clay, wet, loose to medium dense, Alluvial soil, Quartzite, chlorite, siltstone gravel",
+
+                    weathering: "",
+
+                    strength: "",
+
+                    is50: "",
+
+                    rqd: "",
+
+                    defectSpacing: [],
+
+                    fieldTests: [
+
+                        { type: "SPT", blows: "3,5,3", n: "8" }
+
+                    ]
+
+                },
+
+                {
+
+                    method: "AD",
+
+                    coreLift: "",
+
+                    water: "",
+
+                    topDepth: "3.5",
+
+                    bottomDepth: "4.5",
+
+                    pattern: "silty-clay",
+
+                    recovery: "",
+
+                    description: "Gravelly CLAY (CI) - medium plasticity, pale brown mottled pale grey, fine to medium angular gravel with fine to medium grained sand, moist, hard, Alluvial soil",
+
+                    weathering: "",
+
+                    strength: "",
+
+                    is50: "",
+
+                    rqd: "",
+
+                    defectSpacing: [],
+
+                    fieldTests: [
+
+                        { type: "SPT", blows: "20,25,25", n: "50" }
+
+                    ]
+
+                },
+
+                {
+
+                    method: "AD",
+
+                    coreLift: "",
+
+                    water: "",
+
+                    topDepth: "4.5",
+
+                    bottomDepth: "5.5",
+
+                    pattern: "sand",
+
+                    recovery: "50",
+
+                    description: "Silty SAND (SM) - fine grained, dark brown, moist, dense, Alluvial soil",
+
+                    weathering: "",
+
+                    strength: "",
+
+                    is50: "",
+
+                    rqd: "",
+
+                    defectSpacing: [],
+
+                    fieldTests: [
+
+                        { type: "text", value: "too hard to do U63" },
+
+                        { type: "D", value: "D" }
+
+                    ]
+
+                },
+
+                {
+
+                    method: "AD",
+
+                    coreLift: "",
+
+                    water: "",
+
+                    topDepth: "5.5",
+
+                    bottomDepth: "6.5",
+
+                    pattern: "silty-clay",
+
+                    recovery: "100",
+
+                    description: "Silty CLAY (CI) - medium plasticity, brown, with fine to coarse gravel and fine to coarse grained sand, moist, hard, Alluvial soil, Thin sandy layer at 6m",
+
+                    weathering: "SW",
+
+                    strength: "L",
+
+                    is50: "",
+
+                    rqd: "",
+
+                    defectSpacing: [],
+
+                    fieldTests: [
+
+                        { type: "text", value: "auger refusal @ 5.5 m" },
+
+                        { type: "SWL", value: "SWL N=13.0" },
+
+                        { type: "text", value: "UT Dip=45.0°, CN, VRO, ST" }
+
+                    ]
+
+                }
+
+            ]
+
+        };
+
+ 
+
+        // Initialize
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+            setupAutoSave();
+
+            checkForSavedData();
+
+            updatePreview();
+
+            document.getElementById('genDate').textContent = new Date().toLocaleDateString();
+
+        });
+
+ 
+
+        // Load sample data
+
+        function loadSampleData() {
+
+            Object.keys(sampleData).forEach(key => {
+
+                const element = document.getElementById(key);
+
+                if (element && key !== 'layers') {
+
+                    element.value = sampleData[key];
+
+                }
+
+            });
+
+ 
+
+            document.getElementById('layersContainer').innerHTML = '';
+
+            layerCounter = 0;
+
+            sampleData.layers.forEach(layer => {
+
+                addLayerWithData(layer);
+
+            });
+
+ 
+
+            updatePreview();
+
+            alert('✅ Sample data loaded successfully!');
+
+        }
+
+ 
+
+        // Add layer
+
+        function addLayer() {
+
+            addLayerWithData({
+
+                method: document.getElementById('drillingMethod').value,
+
+                coreLift: "",
+
+                water: "",
+
+                topDepth: "",
+
+                bottomDepth: "",
+
+                pattern: "clay",
+
+                recovery: "",
+
+                description: "",
+
+                weathering: "",
+
+                strength: "",
+
+                is50: "",
+
+                rqd: "",
+
+                defectSpacing: [],
+
+                fieldTests: []
+
+            });
+
+        }
+
+ 
+
+        function addLayerWithData(data) {
+
+            const container = document.getElementById('layersContainer');
+
+            const layerIndex = layerCounter++;
+
+ 
+
+            const layerDiv = document.createElement('div');
+
+            layerDiv.className = 'layer-entry';
+
+            layerDiv.dataset.index = layerIndex;
+
+ 
+
+            layerDiv.innerHTML = `
+
+                <div class="layer-header">
+
+                    <span>Layer #${layerIndex + 1} (${data.topDepth || '?'} - ${data.bottomDepth || '?'} m)</span>
+
+                    <button class="btn btn-danger" style="padding: 4px 8px; margin: 0;" onclick="removeLayer(${layerIndex})">🗑️</button>
+
+                </div>
+
+ 
+
+                <div class="row-4">
+
+                    <div class="form-group">
+
+                        <label>Top Depth (m):</label>
+
+                        <input type="number" step="0.1" value="${data.topDepth}" onchange="updatePreview()" data-field="topDepth">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Bottom Depth (m):</label>
+
+                        <input type="number" step="0.1" value="${data.bottomDepth}" onchange="updatePreview()" data-field="bottomDepth">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Core-lift:</label>
+
+                        <input type="text" value="${data.coreLift}" placeholder="Y/N" onchange="updatePreview()" data-field="coreLift">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Water:</label>
+
+                        <input type="text" value="${data.water}" placeholder="e.g., 8.5m" onchange="updatePreview()" data-field="water">
+
+                    </div>
+
+                </div>
+
+ 
+
+                <div class="form-group">
+
+                    <label>Graphic Pattern:</label>
+
+                    <div class="pattern-selector">
+
+                        ${createPatternOptions(data.pattern)}
+
+                    </div>
+
+                </div>
+
+ 
+
+                <div class="row-3">
+
+                    <div class="form-group">
+
+                        <label>Recovery (%):</label>
+
+                        <input type="number" value="${data.recovery}" placeholder="95" onchange="updatePreview()" data-field="recovery">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>RQD (%):</label>
+
+                        <input type="number" value="${data.rqd}" placeholder="75" onchange="updatePreview()" data-field="rqd">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Is(50) MPa:</label>
+
+                        <input type="text" value="${data.is50}" placeholder="5.0" onchange="updatePreview()" data-field="is50">
+
+                    </div>
+
+                </div>
+
+ 
+
+                <div class="row">
+
+                    <div class="form-group">
+
+                        <label>Weathering:</label>
+
+                        <select onchange="updatePreview()" data-field="weathering">
+
+                            <option value="">-</option>
+
+                            <option value="F" ${data.weathering === 'F' ? 'selected' : ''}>F - Fresh</option>
+
+                            <option value="SW" ${data.weathering === 'SW' ? 'selected' : ''}>SW - Slightly Weathered</option>
+
+                            <option value="MW" ${data.weathering === 'MW' ? 'selected' : ''}>MW - Moderately Weathered</option>
+
+                            <option value="HW" ${data.weathering === 'HW' ? 'selected' : ''}>HW - Highly Weathered</option>
+
+                            <option value="CW" ${data.weathering === 'CW' ? 'selected' : ''}>CW - Completely Weathered</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Strength:</label>
+
+                        <select onchange="updatePreview()" data-field="strength">
+
+                            <option value="">-</option>
+
+                            <option value="EH" ${data.strength === 'EH' ? 'selected' : ''}>EH - Extremely High</option>
+
+                            <option value="VH" ${data.strength === 'VH' ? 'selected' : ''}>VH - Very High</option>
+
+                            <option value="H" ${data.strength === 'H' ? 'selected' : ''}>H - High</option>
+
+                            <option value="M" ${data.strength === 'M' ? 'selected' : ''}>M - Medium</option>
+
+                            <option value="L" ${data.strength === 'L' ? 'selected' : ''}>L - Low</option>
+
+                            <option value="VL" ${data.strength === 'VL' ? 'selected' : ''}>VL - Very Low</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+ 
+
+                <div class="form-group">
+
+                    <label>Defect Spacing:</label>
+
+                    <div class="row" style="grid-template-columns: repeat(5, 1fr);">
+
+                        <label><input type="checkbox" ${data.defectSpacing.includes('30') ? 'checked' : ''} value="30" onchange="updatePreview()" data-field="defect"> 30mm</label>
+
+                        <label><input type="checkbox" ${data.defectSpacing.includes('100') ? 'checked' : ''} value="100" onchange="updatePreview()" data-field="defect"> 100mm</label>
+
+                        <label><input type="checkbox" ${data.defectSpacing.includes('300') ? 'checked' : ''} value="300" onchange="updatePreview()" data-field="defect"> 300mm</label>
+
+                        <label><input type="checkbox" ${data.defectSpacing.includes('1000') ? 'checked' : ''} value="1000" onchange="updatePreview()" data-field="defect"> 1000mm</label>
+
+                        <label><input type="checkbox" ${data.defectSpacing.includes('3000') ? 'checked' : ''} value="3000" onchange="updatePreview()" data-field="defect"> 3000mm</label>
+
+                    </div>
+
+                </div>
+
+ 
+
+                <div class="form-group">
+
+                    <label>Description:</label>
+
+                    <textarea rows="3" onchange="updatePreview()" data-field="description">${data.description}</textarea>
+
+                </div>
+
+ 
+
+                <div class="form-group">
+
+                    <label>Field Tests & Measurements:</label>
+
+                    <div id="fieldTests${layerIndex}">
+
+                        ${data.fieldTests.map((test, i) => createFieldTestHTML(layerIndex, i, test)).join('')}
+
+                    </div>
+
+                    <button class="btn btn-secondary" onclick="addFieldTest(${layerIndex}, 'SPT')">+ SPT</button>
+
+                    <button class="btn btn-secondary" onclick="addFieldTest(${layerIndex}, 'U')">+ U Test</button>
+
+                    <button class="btn btn-secondary" onclick="addFieldTest(${layerIndex}, 'D')">+ D Test</button>
+
+                    <button class="btn btn-secondary" onclick="addFieldTest(${layerIndex}, 'text')">+ Other</button>
+
+                </div>
+
+            `;
+
+ 
+
+            container.appendChild(layerDiv);
+
+ 
+
+            // Add pattern selection listeners
+
+            layerDiv.querySelectorAll('.pattern-option').forEach(option => {
+
+                option.addEventListener('click', function() {
+
+                    layerDiv.querySelectorAll('.pattern-option').forEach(o => o.classList.remove('selected'));
+
+                    this.classList.add('selected');
+
+                    updatePreview();
+
+                });
+
+            });
+
+ 
+
+            updatePreview();
+
+        }
+
+ 
+
+        function createPatternOptions(selectedPattern) {
+
+            const patterns = [
+
+                { name: 'Clay', value: 'clay' },
+
+                { name: 'Silty Clay', value: 'silty-clay' },
+
+                { name: 'Sand', value: 'sand' },
+
+                { name: 'Sandy Gravel', value: 'sandy-gravel' },
+
+                { name: 'Gravel', value: 'gravel' },
+
+                { name: 'Clayey Gravel', value: 'clayey-gravel' },
+
+                { name: 'Granite', value: 'granite' },
+
+                { name: 'Sandstone', value: 'sandstone' },
+
+                { name: 'Limestone', value: 'limestone' },
+
+                { name: 'Shale', value: 'shale' },
+
+                { name: 'Basalt', value: 'basalt' },
+
+                { name: 'Topsoil', value: 'topsoil' },
+
+                { name: 'Fill', value: 'fill' },
+
+                { name: 'Weathered', value: 'weathered' }
+
+            ];
+
+ 
+
+            return patterns.map(p => `
+
+                <div class="pattern-option ${p.value === selectedPattern ? 'selected' : ''}" data-pattern="${p.value}">
+
+                    <div class="pattern-preview pattern-${p.value}"></div>
+
+                    <div class="pattern-name">${p.name}</div>
+
+                </div>
+
+            `).join('');
+
+        }
+
+ 
+
+        function createFieldTestHTML(layerIndex, testIndex, test) {
+
+            if (test.type === 'SPT') {
+
+                return `
+
+                    <div class="field-test-entry">
+
+                        <div class="field-test-header">SPT Test #${testIndex + 1}</div>
+
+                        <div class="row-3">
+
+                            <div class="form-group">
+
+                                <label>Blows (0-15cm):</label>
+
+                                <input type="text" value="${test.blows || ''}" placeholder="5,7,8" onchange="updatePreview()" data-test="${testIndex}" data-testfield="blows">
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label>N-value:</label>
+
+                                <input type="text" value="${test.n || ''}" placeholder="15" onchange="updatePreview()" data-test="${testIndex}" data-testfield="n">
+
+                            </div>
+
+                            <div>
+
+                                <button class="btn btn-danger" style="margin-top: 20px; padding: 6px 10px;" onclick="removeFieldTest(${layerIndex}, ${testIndex})">Remove</button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            } else if (test.type === 'U') {
+
+                return `
+
+                    <div class="field-test-entry">
+
+                        <div class="field-test-header">U Test #${testIndex + 1}</div>
+
+                        <div class="row">
+
+                            <div class="form-group">
+
+                                <label>Value:</label>
+
+                                <input type="text" value="${test.value || ''}" placeholder="U63" onchange="updatePreview()" data-test="${testIndex}" data-testfield="value">
+
+                            </div>
+
+                            <div>
+
+                                <button class="btn btn-danger" style="margin-top: 20px; padding: 6px 10px;" onclick="removeFieldTest(${layerIndex}, ${testIndex})">Remove</button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            } else if (test.type === 'D') {
+
+                return `
+
+                    <div class="field-test-entry">
+
+                        <div class="field-test-header">D Test #${testIndex + 1}</div>
+
+                        <div class="row">
+
+                            <div class="form-group">
+
+                                <label>Value:</label>
+
+                                <input type="text" value="${test.value || ''}" placeholder="D" onchange="updatePreview()" data-test="${testIndex}" data-testfield="value">
+
+                            </div>
+
+                            <div>
+
+                                <button class="btn btn-danger" style="margin-top: 20px; padding: 6px 10px;" onclick="removeFieldTest(${layerIndex}, ${testIndex})">Remove</button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            } else {
+
+                return `
+
+                    <div class="field-test-entry">
+
+                        <div class="field-test-header">Other Test #${testIndex + 1}</div>
+
+                        <div class="row">
+
+                            <div class="form-group">
+
+                                <label>Description:</label>
+
+                                <input type="text" value="${test.value || ''}" placeholder="e.g., auger refusal @ 5.5 m" onchange="updatePreview()" data-test="${testIndex}" data-testfield="value">
+
+                            </div>
+
+                            <div>
+
+                                <button class="btn btn-danger" style="margin-top: 20px; padding: 6px 10px;" onclick="removeFieldTest(${layerIndex}, ${testIndex})">Remove</button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+ 
+
+        function addFieldTest(layerIndex, type) {
+
+            const layer = document.querySelector(`[data-index="${layerIndex}"]`);
+
+            const container = layer.querySelector(`#fieldTests${layerIndex}`);
+
+            const testIndex = container.children.length;
+
+ 
+
+            const testData = { type: type };
+
+            if (type === 'SPT') {
+
+                testData.blows = '';
+
+                testData.n = '';
+
+            } else {
+
+                testData.value = '';
+
+            }
+
+ 
+
+            container.insertAdjacentHTML('beforeend', createFieldTestHTML(layerIndex, testIndex, testData));
+
+            updatePreview();
+
+        }
+
+ 
+
+        function removeFieldTest(layerIndex, testIndex) {
+
+            const layer = document.querySelector(`[data-index="${layerIndex}"]`);
+
+            const container = layer.querySelector(`#fieldTests${layerIndex}`);
+
+            if (container.children[testIndex]) {
+
+                container.children[testIndex].remove();
+
+                updatePreview();
+
+            }
+
+        }
+
+ 
+
+        function removeLayer(layerIndex) {
+
+            const layer = document.querySelector(`[data-index="${layerIndex}"]`);
+
+            if (layer && confirm('Remove this layer?')) {
+
+                layer.remove();
+
+                updatePreview();
+
+            }
+
+        }
+
+ 
+
+        function clearAllLayers() {
+
+            if (confirm('Clear all layers? This cannot be undone.')) {
+
+                document.getElementById('layersContainer').innerHTML = '';
+
+                layerCounter = 0;
+
+                updatePreview();
+
+            }
+
+        }
+
+ 
+
+        // Update preview
+
+        function updatePreview() {
+
+            // Update header info
+
+            document.getElementById('previewClient').textContent = document.getElementById('client').value || '-';
+
+            document.getElementById('previewJobNo').textContent = document.getElementById('jobNo').value || '-';
+
+            document.getElementById('previewBoreholeNo').textContent = document.getElementById('boreholeNo').value || '-';
+
+            document.getElementById('previewAddress').textContent = document.getElementById('address').value || '-';
+
+            document.getElementById('previewSuburb').textContent = document.getElementById('suburb').value || '-';
+
+            document.getElementById('previewEasting').textContent = document.getElementById('easting').value || '-';
+
+            document.getElementById('previewNorthing').textContent = document.getElementById('northing').value || '-';
+
+            document.getElementById('previewRL').textContent = document.getElementById('rlSurface').value || '-';
+
+            document.getElementById('previewDatum').textContent = document.getElementById('datum').value || '-';
+
+            document.getElementById('previewDrill').textContent = document.getElementById('drillModel').value || '-';
+
+            document.getElementById('previewDate').textContent = formatDate(document.getElementById('drillingDate').value);
+
+            document.getElementById('previewSlope').textContent = document.getElementById('slope').value || '-';
+
+            document.getElementById('previewDiameter').textContent = document.getElementById('holeDiameter').value || '-';
+
+            document.getElementById('previewFluid').textContent = document.getElementById('drillingFluid').value || '-';
+
+            document.getElementById('previewProject').textContent = document.getElementById('projectName').value || '-';
+
+            document.getElementById('previewLoggedBy').textContent = document.getElementById('loggedBy').value || '-';
+
+            document.getElementById('previewCheckedBy').textContent = document.getElementById('checkedBy').value || '-';
+
+ 
+
+            updateLogTable();
+
+        }
+
+ 
+
+        function updateLogTable() {
+
+            const tbody = document.getElementById('logTableBody');
+
+            tbody.innerHTML = '';
+
+ 
+
+            const layers = document.querySelectorAll('#layersContainer .layer-entry');
+
+            const method = document.getElementById('drillingMethod').value || 'AD';
+
+ 
+
+            layers.forEach(layer => {
+
+                const inputs = layer.querySelectorAll('input, select, textarea');
+
+                const checkboxes = layer.querySelectorAll('input[type="checkbox"]');
+
+                const selectedPattern = layer.querySelector('.pattern-option.selected');
+
+ 
+
+                const topDepth = layer.querySelector('[data-field="topDepth"]').value || '0';
+
+                const bottomDepth = layer.querySelector('[data-field="bottomDepth"]').value || '0';
+
+                const coreLift = layer.querySelector('[data-field="coreLift"]').value || '';
+
+                const water = layer.querySelector('[data-field="water"]').value || '';
+
+                const pattern = selectedPattern ? selectedPattern.dataset.pattern : 'clay';
+
+                const recovery = layer.querySelector('[data-field="recovery"]').value || '';
+
+                const description = layer.querySelector('[data-field="description"]').value || '';
+
+                const weathering = layer.querySelector('[data-field="weathering"]').value || '';
+
+                const strength = layer.querySelector('[data-field="strength"]').value || '';
+
+                const is50 = layer.querySelector('[data-field="is50"]').value || '';
+
+                const rqd = layer.querySelector('[data-field="rqd"]').value || '';
+
+ 
+
+                const defectSpacing = [];
+
+                checkboxes.forEach(cb => {
+
+                    if (cb.checked) defectSpacing.push(cb.value);
+
+                });
+
+ 
+
+                // Get field tests
+
+                const fieldTestsContainer = layer.querySelector('[id^="fieldTests"]');
+
+                const fieldTests = [];
+
+                if (fieldTestsContainer) {
+
+                    const testEntries = fieldTestsContainer.querySelectorAll('.field-test-entry');
+
+                    testEntries.forEach(entry => {
+
+                        const header = entry.querySelector('.field-test-header').textContent;
+
+                        if (header.includes('SPT')) {
+
+                            const blows = entry.querySelector('[data-testfield="blows"]').value;
+
+                            const n = entry.querySelector('[data-testfield="n"]').value;
+
+                            if (blows || n) {
+
+                                fieldTests.push(`SPT ${blows} N=${n}`);
+
+                            }
+
+                        } else {
+
+                            const value = entry.querySelector('[data-testfield="value"]').value;
+
+                            if (value) {
+
+                                fieldTests.push(value);
+
+                            }
+
+                        }
+
+                    });
+
+                }
+
+ 
+
+                const row = document.createElement('tr');
+
+                row.innerHTML = `
+
+                    <td class="method-cell">${method}</td>
+
+                    <td>${coreLift}</td>
+
+                    <td class="water-cell">${water}</td>
+
+                    <td class="depth-cell">${topDepth}-${bottomDepth}</td>
+
+                    <td class="graphic-cell"><div class="pattern-${pattern}" style="width: 100%; height: 100%; min-height: 50px;"></div></td>
+
+                    <td class="recovery-cell">${recovery}</td>
+
+                    <td class="description-cell">${description}</td>
+
+                    <td class="weathering-cell">${weathering}</td>
+
+                    <td class="strength-cell">${strength}</td>
+
+                    <td>${is50}</td>
+
+                    <td>${rqd}</td>
+
+                    <td class="defect-col"><div class="defect-marker ${defectSpacing.includes('30') ? 'active' : ''}"></div></td>
+
+                    <td class="defect-col"><div class="defect-marker ${defectSpacing.includes('100') ? 'active' : ''}"></div></td>
+
+                    <td class="defect-col"><div class="defect-marker ${defectSpacing.includes('300') ? 'active' : ''}"></div></td>
+
+                    <td class="defect-col"><div class="defect-marker ${defectSpacing.includes('1000') ? 'active' : ''}"></div></td>
+
+                    <td class="defect-col"><div class="defect-marker ${defectSpacing.includes('3000') ? 'active' : ''}"></div></td>
+
+                    <td class="field-tests-cell">${fieldTests.join('<br>')}</td>
+
+                `;
+
+ 
+
+                tbody.appendChild(row);
+
+            });
+
+        }
+
+ 
+
+        function formatDate(dateString) {
+
+            if (!dateString) return '-';
+
+            const date = new Date(dateString);
+
+            return date.getDate() + '/' + String(date.getMonth() + 1).padStart(2, '0') + '/' + date.getFullYear();
+
+        }
+
+ 
+
+        // Auto-save
+
+        function setupAutoSave() {
+
+            setInterval(() => {
+
+                if (hasData()) {
+
+                    saveToLocalStorage(true);
+
+                }
+
+            }, 30000);
+
+        }
+
+ 
+
+        function hasData() {
+
+            return document.getElementById('boreholeNo').value !== '' ||
+
+                   document.getElementById('layersContainer').children.length > 0;
+
+        }
+
+ 
+
+        function showSaveIndicator() {
+
+            const indicator = document.getElementById('saveIndicator');
+
+            indicator.classList.add('show');
+
+            setTimeout(() => indicator.classList.remove('show'), 2000);
+
+        }
+
+ 
+
+        // Save/Load
+
+        function saveToLocalStorage(auto = false) {
+
+            const data = collectAllData();
+
+            localStorage.setItem('gresolog_enhanced', JSON.stringify(data));
+
+            if (!auto) {
+
+                alert('💾 Data saved successfully!');
+
+            } else {
+
+                showSaveIndicator();
+
+            }
+
+        }
+
+ 
+
+        function loadFromLocalStorage() {
+
+            const saved = localStorage.getItem('gresolog_enhanced');
+
+            if (saved) {
+
+                try {
+
+                    const data = JSON.parse(saved);
+
+                    populateFormData(data);
+
+                    alert('📁 Data loaded successfully!');
+
+                } catch (e) {
+
+                    alert('❌ Error loading data');
+
+                }
+
+            } else {
+
+                alert('No saved data found');
+
+            }
+
+        }
+
+ 
+
+        function checkForSavedData() {
+
+            const saved = localStorage.getItem('gresolog_enhanced');
+
+            if (saved) {
+
+                if (confirm('Found saved data. Load it?')) {
+
+                    loadFromLocalStorage();
+
+                }
+
+            }
+
+        }
+
+ 
+
+        function collectAllData() {
+
+            const data = {
+
+                projectInfo: {},
+
+                layers: []
+
+            };
+
+ 
+
+            // Collect project info
+
+            ['client', 'jobNo', 'boreholeNo', 'address', 'suburb', 'easting', 'northing',
+
+             'rlSurface', 'datum', 'drillModel', 'drillingDate', 'slope', 'holeDiameter',
+
+             'bearing', 'drillingFluid', 'projectName', 'drillingMethod', 'loggedBy', 'checkedBy'].forEach(field => {
+
+                const el = document.getElementById(field);
+
+                if (el) data.projectInfo[field] = el.value;
+
+            });
+
+ 
+
+            // Collect layers
+
+            const layers = document.querySelectorAll('#layersContainer .layer-entry');
+
+            layers.forEach(layer => {
+
+                const selectedPattern = layer.querySelector('.pattern-option.selected');
+
+                const layerData = {
+
+                    topDepth: layer.querySelector('[data-field="topDepth"]').value,
+
+                    bottomDepth: layer.querySelector('[data-field="bottomDepth"]').value,
+
+                    coreLift: layer.querySelector('[data-field="coreLift"]').value,
+
+                    water: layer.querySelector('[data-field="water"]').value,
+
+                    pattern: selectedPattern ? selectedPattern.dataset.pattern : 'clay',
+
+                    recovery: layer.querySelector('[data-field="recovery"]').value,
+
+                    description: layer.querySelector('[data-field="description"]').value,
+
+                    weathering: layer.querySelector('[data-field="weathering"]').value,
+
+                    strength: layer.querySelector('[data-field="strength"]').value,
+
+                    is50: layer.querySelector('[data-field="is50"]').value,
+
+                    rqd: layer.querySelector('[data-field="rqd"]').value,
+
+                    defectSpacing: [],
+
+                    fieldTests: []
+
+                };
+
+ 
+
+                // Defect spacing
+
+                layer.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+
+                    if (cb.checked) layerData.defectSpacing.push(cb.value);
+
+                });
+
+ 
+
+                // Field tests
+
+                const fieldTestsContainer = layer.querySelector('[id^="fieldTests"]');
+
+                if (fieldTestsContainer) {
+
+                    const testEntries = fieldTestsContainer.querySelectorAll('.field-test-entry');
+
+                    testEntries.forEach(entry => {
+
+                        const header = entry.querySelector('.field-test-header').textContent;
+
+                        if (header.includes('SPT')) {
+
+                            layerData.fieldTests.push({
+
+                                type: 'SPT',
+
+                                blows: entry.querySelector('[data-testfield="blows"]').value,
+
+                                n: entry.querySelector('[data-testfield="n"]').value
+
+                            });
+
+                        } else if (header.includes('U Test')) {
+
+                            layerData.fieldTests.push({
+
+                                type: 'U',
+
+                                value: entry.querySelector('[data-testfield="value"]').value
+
+                            });
+
+                        } else if (header.includes('D Test')) {
+
+                            layerData.fieldTests.push({
+
+                                type: 'D',
+
+                                value: entry.querySelector('[data-testfield="value"]').value
+
+                            });
+
+                        } else {
+
+                            layerData.fieldTests.push({
+
+                                type: 'text',
+
+                                value: entry.querySelector('[data-testfield="value"]').value
+
+                            });
+
+                        }
+
+                    });
+
+                }
+
+ 
+
+                data.layers.push(layerData);
+
+            });
+
+ 
+
+            return data;
+
+        }
+
+ 
+
+        function populateFormData(data) {
+
+            if (data.projectInfo) {
+
+                Object.keys(data.projectInfo).forEach(key => {
+
+                    const el = document.getElementById(key);
+
+                    if (el) el.value = data.projectInfo[key];
+
+                });
+
+            }
+
+ 
+
+            document.getElementById('layersContainer').innerHTML = '';
+
+            layerCounter = 0;
+
+            if (data.layers) {
+
+                data.layers.forEach(layer => {
+
+                    addLayerWithData(layer);
+
+                });
+
+            }
+
+ 
+
+            updatePreview();
+
+        }
+
+ 
+
+        // Export functions
+
+        function exportToJSON() {
+
+            const data = collectAllData();
+
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+
+            a.href = url;
+
+            a.download = `GResolog_${document.getElementById('boreholeNo').value || 'Log'}_${new Date().toISOString().split('T')[0]}.json`;
+
+            a.click();
+
+            URL.revokeObjectURL(url);
+
+        }
+
+ 
+
+        function importFromJSON() {
+
+            const input = document.createElement('input');
+
+            input.type = 'file';
+
+            input.accept = '.json';
+
+            input.onchange = function(e) {
+
+                const file = e.target.files[0];
+
+                if (file) {
+
+                    const reader = new FileReader();
+
+                    reader.onload = function(event) {
+
+                        try {
+
+                            const data = JSON.parse(event.target.result);
+
+                            populateFormData(data);
+
+                            alert('📂 Data imported successfully!');
+
+                        } catch (error) {
+
+                            alert('❌ Error importing file');
+
+                        }
+
+                    };
+
+                    reader.readAsText(file);
+
+                }
+
+            };
+
+            input.click();
+
+        }
+
+ 
+
+        function generatePDF() {
+
+            const element = document.getElementById('logPreview');
+
+            const progressBar = document.getElementById('progressBar');
+
+            const progressFill = document.getElementById('progressFill');
+
+ 
+
+            progressBar.style.display = 'block';
+
+            progressFill.style.width = '30%';
+
+ 
+
+            const options = {
+
+                margin: 5,
+
+                filename: `GResolog_${document.getElementById('boreholeNo').value || 'Log'}_${new Date().toISOString().split('T')[0]}.pdf`,
+
+                image: { type: 'jpeg', quality: 0.98 },
+
+                html2canvas: { scale: 2 },
+
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' }
+
+            };
+
+ 
+
+            setTimeout(() => progressFill.style.width = '60%', 500);
+
+ 
+
+            html2pdf().set(options).from(element).save().then(() => {
+
+                progressFill.style.width = '100%';
+
+                setTimeout(() => {
+
+                    progressBar.style.display = 'none';
+
+                    progressFill.style.width = '0%';
+
+                }, 1000);
+
+            }).catch(() => {
+
+                alert('❌ PDF generation failed');
+
+                progressBar.style.display = 'none';
+
+            });
+
+        }
+
+ 
+
+        function exportExcel() {
+
+            const data = collectAllData();
+
+            const excelData = [];
+
+ 
+
+            excelData.push(['G-Resolog Professional Borehole Log']);
+
+            excelData.push([]);
+
+            excelData.push(['Client:', data.projectInfo.client]);
+
+            excelData.push(['Job No:', data.projectInfo.jobNo]);
+
+            excelData.push(['Borehole No:', data.projectInfo.boreholeNo]);
+
+            excelData.push([]);
+
+ 
+
+            excelData.push([
+
+                'Method', 'Core-lift', 'Water', 'Top Depth', 'Bottom Depth',
+
+                'Recovery %', 'Description', 'Weathering', 'Strength',
+
+                'Is(50)', 'RQD %', 'Defect Spacing', 'Field Tests'
+
+            ]);
+
+ 
+
+            data.layers.forEach(layer => {
+
+                const fieldTests = layer.fieldTests.map(t => {
+
+                    if (t.type === 'SPT') return `SPT ${t.blows} N=${t.n}`;
+
+                    return t.value;
+
+                }).join('; ');
+
+ 
+
+                excelData.push([
+
+                    data.projectInfo.drillingMethod, layer.coreLift, layer.water,
+
+                    layer.topDepth, layer.bottomDepth, layer.recovery,
+
+                    layer.description, layer.weathering, layer.strength,
+
+                    layer.is50, layer.rqd, layer.defectSpacing.join(','),
+
+                    fieldTests
+
+                ]);
+
+            });
+
+ 
+
+            const ws = XLSX.utils.aoa_to_sheet(excelData);
+
+            const wb = XLSX.utils.book_new();
+
+            XLSX.utils.book_append_sheet(wb, ws, 'Borehole Log');
+
+ 
+
+            XLSX.writeFile(wb, `GResolog_${document.getElementById('boreholeNo').value || 'Log'}_${new Date().toISOString().split('T')[0]}.xlsx`);
+
+        }
+
+ 
+
+        // Real-time updates
+
+        document.addEventListener('input', function(e) {
+
+            if (e.target.matches('input, select, textarea')) {
+
+                updatePreview();
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>

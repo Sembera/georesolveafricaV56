@@ -1,0 +1,1693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources | Georesolve Africa</title>
+    <meta name="description" content="Access our comprehensive geoscience resources including coordinate converters, unit calculators, groundwater tools, and technical documents. Free tools for professionals.">
+    <meta name="keywords" content="geoscience tools, coordinate converter, unit calculator, groundwater calculator, geological formulas, technical resources">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Geoscience Resources | Georesolve Africa">
+    <meta property="og:description" content="Free geoscience tools and resources for professionals in East Africa.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://georesolve.africa/resources.html">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="resources/favicon/Icon-Flavicon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    
+    <style>
+        :root {
+            --primary-color: #345363;
+            --secondary-color: #9EDB9E;
+            --accent-color: #4DA34D;
+            --text-dark: #1a1a1a;
+            --text-light: #ffffff;
+            --background-light: #f8f9fa;
+            --border-color: #e9ecef;
+            --shadow-light: 0 2px 10px rgba(52, 83, 99, 0.1);
+            --shadow-medium: 0 8px 30px rgba(52, 83, 99, 0.15);
+            --shadow-heavy: 0 20px 60px rgba(52, 83, 99, 0.2);
+            --transition-fast: 0.2s ease;
+            --transition-medium: 0.3s ease;
+            --transition-slow: 0.5s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+            padding-top: 80px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            transition: var(--transition-medium);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-decoration: none;
+            gap: 0.25rem;
+        }
+
+        .logo img {
+            height: 55px;
+            width: auto;
+        }
+
+        .logo-tagline {
+            font-size: 0.65rem;
+            color: var(--primary-color);
+            font-weight: 500;
+            font-style: italic;
+            letter-spacing: 0.5px;
+            margin-left: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: var(--transition-fast);
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-color);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: var(--transition-fast);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: var(--text-light);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Tools Section */
+        .tools-section {
+            padding: 6rem 0;
+            background: var(--background-light);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .tool-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition-medium);
+            cursor: pointer;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            transform: scaleX(0);
+            transition: var(--transition-medium);
+        }
+
+        .tool-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .tool-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .tool-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .tool-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .tool-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .tool-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .tool-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        .tool-features li::before {
+            content: '→';
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* Modal Styles */
+        .tool-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-medium);
+        }
+
+        .tool-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            margin: 2rem;
+            position: relative;
+            width: 100%;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-subtitle {
+            opacity: 0.9;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input,
+        .form-select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: var(--transition-fast);
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition-medium);
+            border: 2px solid transparent;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: var(--text-light);
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-full {
+            width: 100%;
+            justify-content: center;
+        }
+
+        /* Results Display */
+        .result-container {
+            background: var(--background-light);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .result-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .result-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        .result-details {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .result-details p {
+            margin-bottom: 0.5rem;
+            color: #666;
+        }
+
+        /* Downloads Section */
+        .downloads-section {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .downloads-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .download-card {
+            background: var(--background-light);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition-medium);
+            border: 2px solid transparent;
+        }
+
+        .download-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .download-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .download-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .download-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .download-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .download-btn:hover {
+            background: var(--accent-color);
+        }
+
+        /* Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .downloads-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .modal-content {
+                margin: 1rem;
+            }
+        }
+
+        /* Filter and Table Styles */
+        .filter-section {
+            background: var(--background-light);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+
+        .filter-select {
+            padding: 10px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 14px;
+            background: white;
+            transition: var(--transition-fast);
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .resources-table-container {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: var(--shadow-light);
+        }
+
+        .resources-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        .resources-table th {
+            background: var(--primary-color);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-size: 14px;
+            font-weight: 600;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .resources-table td {
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 14px;
+            vertical-align: middle;
+        }
+
+        .resources-table tbody tr:hover {
+            background: var(--background-light);
+        }
+
+        .resource-category-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .resource-format-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .resource-download-btn {
+            background: var(--accent-color);
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: var(--transition-fast);
+        }
+
+        .resource-download-btn:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .contribution-section a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+            .filter-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .resources-table {
+                font-size: 12px;
+            }
+
+            .resources-table th,
+            .resources-table td {
+                padding: 10px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="footer-styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="resources/logo/Georesolve Logo.png" alt="GeoResolve Logo">
+                <span class="logo-tagline">Data Driven, Research Based</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="methods.html" class="nav-link">Methods</a></li>
+                <li><a href="applications.html" class="nav-link">Applications</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="resources.html" class="nav-link active">Resources</a></li>
+                <li><a href="news.html" class="nav-link">News</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Geoscience Resources</h1>
+            <p class="page-subtitle">Comprehensive collection of tools, calculators, and technical resources for geoscience professionals working in East Africa</p>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section class="tools-section">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">Interactive Tools</h2>
+                <p class="section-subtitle">Professional-grade calculators and converters designed specifically for geoscience applications</p>
+            </div>
+            
+            <div class="tools-grid">
+                <div class="tool-card animate-on-scroll" style="border: 2px solid #4DA34D;">
+                    <div class="tool-icon">📋</div>
+                    <h3 class="tool-title">G-Resolog - Borehole Logger</h3>
+                    <p class="tool-description">Professional borehole and geotechnical log creation tool with ESlog-compatible format. Create standardized drilling logs with depth intervals, soil descriptions, SPT data, and well construction details.</p>
+                    <ul class="tool-features">
+                        <li>ESlog-compatible format</li>
+                        <li>Real-time log preview</li>
+                        <li>SPT test recording</li>
+                        <li>Sample data included</li>
+                    </ul>
+                    <a href="g-resolog.html" target="_blank" class="btn btn-primary" style="display: block; text-align: center; margin-top: 15px; text-decoration: none; background: #4DA34D; color: white; padding: 10px; border-radius: 4px;">Launch G-Resolog →</a>
+                </div>
+
+                <div class="tool-card animate-on-scroll" style="border: 2px solid #4DA34D;">
+                    <div class="tool-icon">📍</div>
+                    <h3 class="tool-title">G-Resconvt - Coordinate Converter</h3>
+                    <p class="tool-description">Professional coordinate system converter for East Africa supporting WGS84, Arc 1960, Rwanda 2000, and all regional CRS systems with batch CSV processing.</p>
+                    <ul class="tool-features">
+                        <li>45+ East African CRS systems</li>
+                        <li>DD, DMS, DDM, UTM formats</li>
+                        <li>Single & Batch CSV conversion</li>
+                        <li>Accurate datum transformations</li>
+                    </ul>
+                    <a href="g-resconvt.html" target="_blank" class="btn btn-primary" style="display: block; text-align: center; margin-top: 15px; text-decoration: none; background: #4DA34D; color: white; padding: 10px; border-radius: 4px;">Launch G-Resconvt →</a>
+                </div>
+
+                <div class="tool-card animate-on-scroll" style="border: 2px solid #4DA34D;">
+                    <div class="tool-icon">⚡</div>
+                    <h3 class="tool-title">G-Geopylanner - Geophysics Survey Planner</h3>
+                    <p class="tool-description">Unified shallow geophysics survey design tool for MASW, seismic refraction, ERT, GPR, magnetic, and gravity surveys with visual layouts and CSV export.</p>
+                    <ul class="tool-features">
+                        <li>7 geophysical survey modules</li>
+                        <li>Auto depth estimation</li>
+                        <li>Visual survey layouts</li>
+                        <li>CSV export for field use</li>
+                    </ul>
+                    <a href="g-geopylanner.html" target="_blank" class="btn btn-primary" style="display: block; text-align: center; margin-top: 15px; text-decoration: none; background: #4DA34D; color: white; padding: 10px; border-radius: 4px;">Launch G-Geopylanner →</a>
+                </div>
+
+                <!-- Future tools will be added here -->
+                <!-- Unit Converter - Coming Soon -->
+                <!-- Groundwater Calculator - Coming Soon -->
+                <!-- Formula Sheets - Coming Soon -->
+                <!-- Seismic Calculator - Coming Soon -->
+                <!-- Rock Mechanics - Coming Soon -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Resources Section -->
+    <section class="downloads-section">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">Technical Resources & Documents</h2>
+                <p class="section-subtitle">Access our comprehensive library of geoscience documents, standards, and technical data</p>
+            </div>
+
+            <!-- Filter Section -->
+            <div class="filter-section" style="display: none;" id="resource-filters">
+                <div class="filter-header">
+                    <h3 style="color: #345363; margin-bottom: 10px;">Filter Resources</h3>
+                    <p style="color: #666; font-size: 14px;">Narrow down your search by category, file type, or publication date</p>
+                </div>
+
+                <div class="filter-grid">
+                    <div class="filter-group">
+                        <label class="filter-label">Category</label>
+                        <select id="filter-category" class="filter-select">
+                            <option value="">All Categories</option>
+                            <option value="standards">Standards & Guidelines</option>
+                            <option value="case-studies">Case Studies</option>
+                            <option value="data-sheets">Technical Data Sheets</option>
+                            <option value="research">Research Papers</option>
+                            <option value="tools">Tools & Software</option>
+                            <option value="templates">Templates</option>
+                            <option value="free-software">Free Geotechnical Software</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">File Type</label>
+                        <select id="filter-filetype" class="filter-select">
+                            <option value="">All Types</option>
+                            <option value="pdf">PDF Documents</option>
+                            <option value="excel">Excel Spreadsheets</option>
+                            <option value="word">Word Documents</option>
+                            <option value="ppt">Presentations</option>
+                            <option value="cad">CAD Files</option>
+                            <option value="archive">Archives</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <button class="btn btn-primary" onclick="applyFilters()">Apply Filters</button>
+                        <button class="btn btn-secondary" onclick="resetFilters()">Reset</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resources Table -->
+            <div class="resources-table-container" style="display: none;" id="resources-table-container">
+                <div style="overflow-x: auto;">
+                    <table class="resources-table">
+                        <thead>
+                            <tr>
+                                <th>Resource Name</th>
+                                <th>Category</th>
+                                <th>Format</th>
+                                <th>Description</th>
+                                <th>Size</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resources-table-body">
+                            <!-- Dynamic content will be loaded here from Contentful -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="no-resources-message" class="alert alert-info" style="margin-top: 20px;">
+                    <strong>Resource Library Coming Soon</strong>
+                    <p>We're building Eastern Africa's largest geoscientific knowledge base. Documents will be available here once uploaded from our content management system.</p>
+                </div>
+            </div>
+
+            <!-- Contribution Section -->
+            <div class="contribution-section" style="background: linear-gradient(135deg, #345363, #4DA34D); padding: 50px 30px; border-radius: 15px; color: white; margin-top: 40px;">
+                <div class="section-header" style="text-align: center; margin-bottom: 40px;">
+                    <h2 style="color: white; font-size: 2em; margin-bottom: 15px;">Contribute to Our Resource Library</h2>
+                    <p style="color: rgba(255,255,255,0.9); font-size: 1.1em; max-width: 800px; margin: 0 auto;">
+                        Share your expertise with the geoscience community. Submit technical resources, research papers, case studies, or tools to help build Eastern Africa's largest geoscientific knowledge base.
+                    </p>
+                </div>
+
+                <div class="contribution-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-bottom: 40px;">
+                    <div class="contribution-card" style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 12px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+                        <div style="font-size: 2.5em; margin-bottom: 15px;">📄</div>
+                        <h3 style="font-size: 1.2em; margin-bottom: 10px; color: white;">Research Papers</h3>
+                        <p style="font-size: 0.9em; color: rgba(255,255,255,0.85); line-height: 1.5;">
+                            Share your latest research findings and contribute to scientific knowledge
+                        </p>
+                    </div>
+
+                    <div class="contribution-card" style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 12px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+                        <div style="font-size: 2.5em; margin-bottom: 15px;">📊</div>
+                        <h3 style="font-size: 1.2em; margin-bottom: 10px; color: white;">Case Studies</h3>
+                        <p style="font-size: 0.9em; color: rgba(255,255,255,0.85); line-height: 1.5;">
+                            Document project experiences and lessons learned for the community
+                        </p>
+                    </div>
+
+                    <div class="contribution-card" style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 12px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+                        <div style="font-size: 2.5em; margin-bottom: 15px;">🛠️</div>
+                        <h3 style="font-size: 1.2em; margin-bottom: 10px; color: white;">Tools & Templates</h3>
+                        <p style="font-size: 0.9em; color: rgba(255,255,255,0.85); line-height: 1.5;">
+                            Share calculation tools and templates to accelerate project delivery
+                        </p>
+                    </div>
+
+                    <div class="contribution-card" style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 12px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+                        <div style="font-size: 2.5em; margin-bottom: 15px;">💡</div>
+                        <h3 style="font-size: 1.2em; margin-bottom: 10px; color: white;">Suggest New Tools</h3>
+                        <p style="font-size: 0.9em; color: rgba(255,255,255,0.85); line-height: 1.5;">
+                            Propose geoscientific calculation tools that would benefit the East African community
+                        </p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <a href="contact.html" class="btn" style="background: white; color: #345363; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: 600; transition: all 0.3s;">
+                        Submit Your Resource
+                    </a>
+                    <a href="contact.html" class="btn" style="background: rgba(255,255,255,0.2); color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: 600; border: 2px solid white; transition: all 0.3s;">
+                        Suggest a Tool
+                    </a>
+                    <a href="contact.html" class="btn" style="background: transparent; color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: 600; border: 2px solid white; transition: all 0.3s;">
+                        Contact Our Team
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tool Modals -->
+    <div class="tool-modal" id="coordinate-modal">
+        <div class="modal-content">
+            <button class="modal-close">×</button>
+            <div class="modal-header">
+                <h2 class="modal-title">Coordinate Converter</h2>
+                <p class="modal-subtitle">Convert between geographic coordinate systems</p>
+            </div>
+            <div class="modal-body">
+                <form class="coordinate-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Input System</label>
+                            <select class="form-select" name="input-system">
+                                <option value="latlong">Latitude/Longitude</option>
+                                <option value="utm">UTM</option>
+                                <option value="mgrs">MGRS</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Output System</label>
+                            <select class="form-select" name="output-system">
+                                <option value="utm">UTM</option>
+                                <option value="latlong">Latitude/Longitude</option>
+                                <option value="mgrs">MGRS</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Latitude</label>
+                            <input type="number" class="form-input" name="latitude" placeholder="Enter latitude" step="any">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Longitude</label>
+                            <input type="number" class="form-input" name="longitude" placeholder="Enter longitude" step="any">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">UTM Zone</label>
+                            <select class="form-select" name="utm-zone">
+                                <option value="">Select zone</option>
+                                <option value="37N">37N (East Africa)</option>
+                                <option value="36N">36N (Central Africa)</option>
+                                <option value="35N">35N (West Africa)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Easting</label>
+                            <input type="number" class="form-input" name="easting" placeholder="Enter easting">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Northing</label>
+                        <input type="number" class="form-input" name="northing" placeholder="Enter northing">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full">Convert Coordinates</button>
+                </form>
+
+                <div class="result-container" id="coordinate-result" style="display: none;">
+                    <div class="result-title">Conversion Results</div>
+                    <div class="result-value" id="coordinate-output"></div>
+                    <div class="result-details" id="coordinate-details"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tool-modal" id="unit-modal">
+        <div class="modal-content">
+            <button class="modal-close">×</button>
+            <div class="modal-header">
+                <h2 class="modal-title">Unit Converter</h2>
+                <p class="modal-subtitle">Convert between different geological and engineering units</p>
+            </div>
+            <div class="modal-body">
+                <form class="unit-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Unit Category</label>
+                            <select class="form-select" name="unit-category">
+                                <option value="pressure">Pressure</option>
+                                <option value="length">Length/Depth</option>
+                                <option value="density">Density</option>
+                                <option value="flow">Flow Rate</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Input Unit</label>
+                            <select class="form-select" name="input-unit">
+                                <option value="pa">Pascals (Pa)</option>
+                                <option value="kpa">Kilopascals (kPa)</option>
+                                <option value="psi">Pounds/sq inch (psi)</option>
+                                <option value="bar">Bar</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Input Value</label>
+                            <input type="number" class="form-input" name="input-value" placeholder="Enter value" step="any">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Output Unit</label>
+                            <select class="form-select" name="output-unit">
+                                <option value="psi">Pounds/sq inch (psi)</option>
+                                <option value="pa">Pascals (Pa)</option>
+                                <option value="kpa">Kilopascals (kPa)</option>
+                                <option value="bar">Bar</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full">Convert Units</button>
+                </form>
+
+                <div class="result-container" id="unit-result" style="display: none;">
+                    <div class="result-title">Conversion Result</div>
+                    <div class="result-value" id="unit-output"></div>
+                    <div class="result-details" id="unit-details"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tool-modal" id="groundwater-modal">
+        <div class="modal-content">
+            <button class="modal-close">×</button>
+            <div class="modal-header">
+                <h2 class="modal-title">Groundwater Calculator</h2>
+                <p class="modal-subtitle">Calculate groundwater parameters and well performance</p>
+            </div>
+            <div class="modal-body">
+                <form class="groundwater-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Calculation Type</label>
+                            <select class="form-select" name="calculation-type">
+                                <option value="well-yield">Well Yield</option>
+                                <option value="drawdown">Drawdown Analysis</option>
+                                <option value="aquifer-params">Aquifer Parameters</option>
+                                <option value="pump-test">Pump Test Analysis</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Aquifer Type</label>
+                            <select class="form-select" name="aquifer-type">
+                                <option value="confined">Confined Aquifer</option>
+                                <option value="unconfined">Unconfined Aquifer</option>
+                                <option value="leaky">Leaky Confined Aquifer</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Transmissivity (m²/day)</label>
+                            <input type="number" class="form-input" name="transmissivity" placeholder="Enter transmissivity" step="any">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Storage Coefficient</label>
+                            <input type="number" class="form-input" name="storage-coefficient" placeholder="Enter storage coefficient" step="any">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Well Radius (m)</label>
+                            <input type="number" class="form-input" name="well-radius" placeholder="Enter well radius" step="any">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Pumping Rate (m³/day)</label>
+                            <input type="number" class="form-input" name="pumping-rate" placeholder="Enter pumping rate" step="any">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full">Calculate Parameters</button>
+                </form>
+
+                <div class="result-container" id="groundwater-result" style="display: none;">
+                    <div class="result-title">Groundwater Analysis Results</div>
+                    <div class="result-value" id="groundwater-output"></div>
+                    <div class="result-details" id="groundwater-details"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize resources page
+        document.addEventListener('DOMContentLoaded', function() {
+            setupToolCards();
+            setupModals();
+            setupForms();
+            loadResources();
+        });
+
+        // Load resources from Contentful
+        async function loadResources() {
+            try {
+                const resources = await contentfulClient.getResources(20);
+                renderResources(resources);
+            } catch (error) {
+                console.log('Using fallback resources');
+                renderResources(getFallbackResources());
+            }
+        }
+
+        // Render resources
+        function renderResources(resources) {
+            const grid = document.getElementById('resources-grid');
+            grid.innerHTML = '';
+
+            resources.forEach(resource => {
+                const card = createResourceCard(resource);
+                grid.appendChild(card);
+            });
+        }
+
+        // Create resource card
+        function createResourceCard(resource) {
+            const card = document.createElement('div');
+            card.className = 'download-card animate-on-scroll';
+
+            const imageUrl = resource.image?.url || `https://via.placeholder.com/300x200/345363/ffffff?text=${encodeURIComponent(resource.title)}`;
+            const fileUrl = resource.file?.url || '#';
+            const fileName = resource.file?.fileName || 'document.pdf';
+
+            card.innerHTML = `
+                <div class="download-icon">📄</div>
+                <h3 class="download-title">${resource.title}</h3>
+                <p class="download-description">${resource.description}</p>
+                <button class="download-btn" onclick="downloadResource('${fileUrl}', '${fileName}')">Download PDF</button>
+            `;
+
+            return card;
+        }
+
+        // Download resource function
+        function downloadResource(url, filename) {
+            if (url === '#') {
+                showNotification('Resource file not available yet', 'info');
+                return;
+            }
+            
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            link.click();
+            
+            showNotification(`Downloading ${filename}...`, 'success');
+        }
+
+        // Fallback resources for development
+        function getFallbackResources() {
+            return [
+                {
+                    sys: { id: '1' },
+                    title: 'Geological Mapping Guidelines',
+                    description: 'Comprehensive guide to geological mapping techniques and standards for East African geological surveys.',
+                    type: 'document',
+                    file: {
+                        url: '#',
+                        fileName: 'geological-mapping-guide.pdf',
+                        contentType: 'application/pdf'
+                    }
+                },
+                {
+                    sys: { id: '2' },
+                    title: 'Geophysical Survey Standards',
+                    description: 'Technical specifications and quality control procedures for geophysical investigations in the region.',
+                    type: 'document',
+                    file: {
+                        url: '#',
+                        fileName: 'geophysical-standards.pdf',
+                        contentType: 'application/pdf'
+                    }
+                }
+            ];
+        }
+
+        // Setup tool cards
+        function setupToolCards() {
+            const toolCards = document.querySelectorAll('.tool-card');
+            
+            toolCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const toolType = this.dataset.tool;
+                    openToolModal(toolType);
+                });
+            });
+        }
+
+        // Open tool modal
+        function openToolModal(toolType) {
+            const modal = document.getElementById(`${toolType}-modal`);
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        // Setup modals
+        function setupModals() {
+            const modals = document.querySelectorAll('.tool-modal');
+            const closeButtons = document.querySelectorAll('.modal-close');
+
+            closeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const modal = this.closest('.tool-modal');
+                    closeModal(modal);
+                });
+            });
+
+            modals.forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        closeModal(modal);
+                    }
+                });
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    const activeModal = document.querySelector('.tool-modal.active');
+                    if (activeModal) {
+                        closeModal(activeModal);
+                    }
+                }
+            });
+        }
+
+        // Close modal
+        function closeModal(modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Setup forms
+        function setupForms() {
+            // Coordinate converter form
+            const coordinateForm = document.querySelector('.coordinate-form');
+            if (coordinateForm) {
+                coordinateForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    handleCoordinateConversion();
+                });
+            }
+
+            // Unit converter form
+            const unitForm = document.querySelector('.unit-form');
+            if (unitForm) {
+                unitForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    handleUnitConversion();
+                });
+            }
+
+            // Groundwater calculator form
+            const groundwaterForm = document.querySelector('.groundwater-form');
+            if (groundwaterForm) {
+                groundwaterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    handleGroundwaterCalculation();
+                });
+            }
+        }
+
+        // Handle coordinate conversion
+        function handleCoordinateConversion() {
+            const form = document.querySelector('.coordinate-form');
+            const formData = new FormData(form);
+            
+            const inputSystem = formData.get('input-system');
+            const outputSystem = formData.get('output-system');
+            const latitude = parseFloat(formData.get('latitude'));
+            const longitude = parseFloat(formData.get('longitude'));
+            const utmZone = formData.get('utm-zone');
+            const easting = parseFloat(formData.get('easting'));
+            const northing = parseFloat(formData.get('northing'));
+
+            // Simplified coordinate conversion logic
+            let result = {};
+            
+            if (inputSystem === 'latlong' && outputSystem === 'utm') {
+                // Convert Lat/Long to UTM (simplified)
+                const zone = Math.floor((longitude + 180) / 6) + 1;
+                const eastingCalc = 500000 + (longitude - (zone - 1) * 6 - 3) * 111320 * Math.cos(latitude * Math.PI / 180);
+                const northingCalc = latitude * 110540;
+                
+                result = {
+                    zone: zone + 'N',
+                    easting: Math.round(eastingCalc),
+                    northing: Math.round(northingCalc),
+                    latitude: latitude,
+                    longitude: longitude
+                };
+            } else if (inputSystem === 'utm' && outputSystem === 'latlong') {
+                // Convert UTM to Lat/Long (simplified)
+                const zoneNumber = parseInt(utmZone);
+                const lon = (zoneNumber - 1) * 6 - 180 + 3;
+                const lat = northing / 110540;
+                
+                result = {
+                    latitude: lat.toFixed(6),
+                    longitude: lon.toFixed(6),
+                    zone: utmZone,
+                    easting: easting,
+                    northing: northing
+                };
+            }
+
+            // Display results
+            const resultContainer = document.getElementById('coordinate-result');
+            const output = document.getElementById('coordinate-output');
+            const details = document.getElementById('coordinate-details');
+
+            if (outputSystem === 'utm') {
+                output.textContent = `Zone ${result.zone}: ${result.easting}E, ${result.northing}N`;
+                details.innerHTML = `
+                    <p><strong>Zone:</strong> ${result.zone}</p>
+                    <p><strong>Easting:</strong> ${result.easting.toLocaleString()} meters</p>
+                    <p><strong>Northing:</strong> ${result.northing.toLocaleString()} meters</p>
+                `;
+            } else {
+                output.textContent = `${result.latitude}°, ${result.longitude}°`;
+                details.innerHTML = `
+                    <p><strong>Latitude:</strong> ${result.latitude}°</p>
+                    <p><strong>Longitude:</strong> ${result.longitude}°</p>
+                `;
+            }
+
+            resultContainer.style.display = 'block';
+        }
+
+        // Handle unit conversion
+        function handleUnitConversion() {
+            const form = document.querySelector('.unit-form');
+            const formData = new FormData(form);
+            
+            const category = formData.get('unit-category');
+            const inputUnit = formData.get('input-unit');
+            const outputUnit = formData.get('output-unit');
+            const inputValue = parseFloat(formData.get('input-value'));
+
+            // Conversion factors (simplified)
+            const conversions = {
+                pressure: {
+                    pa: { pa: 1, kpa: 0.001, psi: 0.000145038, bar: 0.00001 },
+                    kpa: { pa: 1000, kpa: 1, psi: 0.145038, bar: 0.01 },
+                    psi: { pa: 6894.76, kpa: 6.89476, psi: 1, bar: 0.0689476 },
+                    bar: { pa: 100000, kpa: 100, psi: 14.5038, bar: 1 }
+                }
+            };
+
+            let result = inputValue * conversions[category][inputUnit][outputUnit];
+
+            // Display results
+            const resultContainer = document.getElementById('unit-result');
+            const output = document.getElementById('unit-output');
+            const details = document.getElementById('unit-details');
+
+            output.textContent = `${result.toFixed(6)} ${outputUnit.toUpperCase()}`;
+            details.innerHTML = `
+                <p><strong>Input:</strong> ${inputValue} ${inputUnit.toUpperCase()}</p>
+                <p><strong>Output:</strong> ${result.toFixed(6)} ${outputUnit.toUpperCase()}</p>
+                <p><strong>Category:</strong> ${category.charAt(0).toUpperCase() + category.slice(1)}</p>
+            `;
+
+            resultContainer.style.display = 'block';
+        }
+
+        // Handle groundwater calculation
+        function handleGroundwaterCalculation() {
+            const form = document.querySelector('.groundwater-form');
+            const formData = new FormData(form);
+            
+            const calculationType = formData.get('calculation-type');
+            const aquiferType = formData.get('aquifer-type');
+            const transmissivity = parseFloat(formData.get('transmissivity'));
+            const storageCoefficient = parseFloat(formData.get('storage-coefficient'));
+            const wellRadius = parseFloat(formData.get('well-radius'));
+            const pumpingRate = parseFloat(formData.get('pumping-rate'));
+
+            let result = {};
+
+            // Simplified groundwater calculations
+            if (calculationType === 'well-yield') {
+                const yield = transmissivity * storageCoefficient * 1000; // Simplified calculation
+                result = {
+                    type: 'Well Yield',
+                    value: yield.toFixed(2),
+                    unit: 'm³/day',
+                    details: `Estimated well yield based on aquifer parameters`
+                };
+            } else if (calculationType === 'drawdown') {
+                const time = 1; // 1 day
+                const drawdown = (pumpingRate * Math.log(time * 24 * 60 * 60)) / (4 * Math.PI * transmissivity);
+                result = {
+                    type: 'Drawdown',
+                    value: drawdown.toFixed(3),
+                    unit: 'meters',
+                    details: `Drawdown after 1 day of pumping`
+                };
+            }
+
+            // Display results
+            const resultContainer = document.getElementById('groundwater-result');
+            const output = document.getElementById('groundwater-output');
+            const details = document.getElementById('groundwater-details');
+
+            output.textContent = `${result.value} ${result.unit}`;
+            details.innerHTML = `
+                <p><strong>Calculation Type:</strong> ${result.type}</p>
+                <p><strong>Aquifer Type:</strong> ${aquiferType.charAt(0).toUpperCase() + aquiferType.slice(1)}</p>
+                <p><strong>Result:</strong> ${result.details}</p>
+            `;
+
+            resultContainer.style.display = 'block';
+        }
+
+        // Download file function
+        function downloadFile(filename) {
+            // Simulate file download
+            const link = document.createElement('a');
+            link.href = '#';
+            link.download = filename;
+            link.click();
+            
+            // Show notification
+            showNotification(`Downloading ${filename}...`, 'info');
+        }
+
+        // Notification function
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 2rem;
+                background: var(--accent-color);
+                color: white;
+                padding: 1rem 2rem;
+                border-radius: 10px;
+                box-shadow: var(--shadow-medium);
+                z-index: 3000;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Resource Filter Functions
+        let allResources = []; // Will be populated from Contentful
+
+        function applyFilters() {
+            const category = document.getElementById('filter-category').value;
+            const fileType = document.getElementById('filter-filetype').value;
+
+            // Filter logic will be implemented when resources are loaded from Contentful
+            const filteredResources = allResources.filter(resource => {
+                const categoryMatch = !category || resource.category === category;
+                const typeMatch = !fileType || resource.fileType === fileType;
+                return categoryMatch && typeMatch;
+            });
+
+            renderResourcesTable(filteredResources);
+        }
+
+        function resetFilters() {
+            document.getElementById('filter-category').value = '';
+            document.getElementById('filter-filetype').value = '';
+            renderResourcesTable(allResources);
+        }
+
+        function renderResourcesTable(resources) {
+            const tbody = document.getElementById('resources-table-body');
+
+            if (!resources || resources.length === 0) {
+                // Show no resources message
+                document.getElementById('no-resources-message').style.display = 'block';
+                tbody.innerHTML = '';
+                return;
+            }
+
+            document.getElementById('no-resources-message').style.display = 'none';
+
+            let html = '';
+            resources.forEach(resource => {
+                html += `
+                    <tr>
+                        <td><strong>${resource.name}</strong></td>
+                        <td><span class="resource-category-badge">${resource.category}</span></td>
+                        <td><span class="resource-format-badge">${resource.format}</span></td>
+                        <td>${resource.description}</td>
+                        <td>${resource.size}</td>
+                        <td>
+                            <button class="resource-download-btn" onclick="downloadResource('${resource.url}', '${resource.name}')">
+                                Download
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tbody.innerHTML = html;
+        }
+
+        function downloadResource(url, filename) {
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            link.click();
+            showNotification(`Downloading ${filename}...`, 'success');
+        }
+
+        // Initialize resources when page loads
+        // This will be connected to Contentful later
+        document.addEventListener('DOMContentLoaded', function() {
+            // When resources are available from Contentful, uncomment these lines:
+            // document.getElementById('resource-filters').style.display = 'block';
+            // document.getElementById('resources-table-container').style.display = 'block';
+            // allResources = fetchResourcesFromContentful();
+            // renderResourcesTable(allResources);
+        });
+    </script>
+
+    <!-- Clients Section -->
+    <section class="clients-section">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">Trusted by Leading Organizations</h2>
+                <p class="section-subtitle">GeoResolve partners with government agencies, consulting firms, and private sector clients across East Africa</p>
+            </div>
+
+            <div class="clients-grid animate-on-scroll">
+                <div class="client-card">
+                    <img src="resources/Clients/zv-consulting.png" alt="ZV Consulting Ltd - Rwanda" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/atc-uganda.png" alt="ATC Uganda" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/ministry-energy-uganda.png" alt="Ministry of Energy - Uganda" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/fichtner.png.png" alt="Fichtner GmbH - Germany" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/Artelia.png" alt="Artelia - France" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/Aecom.png" alt="Aecom - International" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/Songa.png" alt="Songa Energy - Burundi" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/virunga-power.png" alt="Virunga Power - Burundi" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/anzana-electric.png" alt="Anzana Electric Group - Burundi" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/MBW.png" alt="MBW Consulting - Uganda" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/razel-bec.png" alt="Razel-Bec - International" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/Tectoni.png" alt="Tectoni Africa - Uganda" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/RSV.png" alt="RSV Engineering - Uganda" class="client-logo">
+                </div>
+                <div class="client-card">
+                    <img src="resources/Clients/paraa.png" alt="Paraa Safari Lodge - Uganda" class="client-logo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>GeoResolve</h3>
+                    <p class="footer-tagline">Data-Driven, Research-Based</p>
+                    <p>Premier geoscience consulting firm providing expert geophysical, geotechnical, and hydrogeology services across Uganda, Rwanda, Burundi, and East Africa.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="LinkedIn">LinkedIn</a>
+                        <a href="#" aria-label="Twitter">Twitter</a>
+                        <a href="#" aria-label="Email">Email</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="methods.html#geophysics">Geophysical Surveys</a></li>
+                        <li><a href="methods.html#geotechnical">Geotechnical Investigation</a></li>
+                        <li><a href="methods.html#hydrogeology">Hydrogeology Studies</a></li>
+                        <li><a href="methods.html#drilling">Drilling Services</a></li>
+                        <li><a href="methods.html#geospatial">Geospatial Services</a></li>
+                        <li><a href="methods.html#surveys">Topographic Surveys</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="g-resolog.html">G-ResoLog</a></li>
+                        <li><a href="g-resconvt.html">G-ResConvt</a></li>
+                        <li><a href="g-geopylanner.html">G-GeoPyLanner</a></li>
+                        <li><a href="resources.html">All Tools</a></li>
+                        <li><a href="news.html">News & Updates</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul class="footer-contact">
+                        <li><strong>Head Office:</strong><br>Kasangati, Uganda<br>HMK Building, Gayaza Road</li>
+                        <li><strong>Phone:</strong><br>+256 771 999 614<br>+256 772 876 300</li>
+                        <li><strong>Email:</strong><br><a href="mailto:info@georesolveafrica.com">info@georesolveafrica.com</a></li>
+                        <li><strong>Hours:</strong><br>Mon-Fri: 8:00 AM - 6:00 PM<br>Sat: 9:00 AM - 2:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2025 GeoResolve. All rights reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="contact.html">Privacy Policy</a>
+                        <a href="contact.html">Terms of Service</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                    <p class="footer-location">Serving Uganda, Rwanda, Burundi, DRC, South Sudan & East Africa</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>

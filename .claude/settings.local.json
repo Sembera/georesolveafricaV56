@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -c:*)",
+      "Bash(for file in applications.html projects.html contact.html news.html resources.html)",
+      "Bash(do echo \"Processing $file...\")",
+      "Bash(done)",
+      "Bash(test:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
