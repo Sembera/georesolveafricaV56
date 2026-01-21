@@ -567,16 +567,20 @@ a:hover {
     font-size: 0.9rem;
 }
 
-/* Animations */
+/* Animations - Improved Fallback */
 .animate-on-scroll {
-    opacity: 0;
-    transform: translateY(30px);
     transition: all 0.6s ease;
 }
 
+/* Only hide if JS is ready to animate */
+body.animation-ready .animate-on-scroll:not(.animate-in) {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
 .animate-on-scroll.animate-in {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1 !important;
+    transform: translateY(0) !important;
 }
 
 /* Responsive Design */
@@ -609,11 +613,13 @@ a:hover {
     }
 
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
+        /* Reduced from 2.5rem */
     }
 
     .hero-subtitle {
-        font-size: 1.1rem;
+        font-size: 1rem;
+        /* Reduced from 1.1rem */
     }
 
     .services-grid {
@@ -631,11 +637,22 @@ a:hover {
     }
 
     .section-title {
-        font-size: 2rem;
+        font-size: 1.8rem;
+        /* Reduced from 2rem */
     }
 
     .cta-content h2 {
-        font-size: 2rem;
+        font-size: 1.8rem;
+        /* Reduced from 2rem */
+    }
+
+    .clients-section {
+        overflow: hidden;
+        /* Prevent horizontal overflow from animation */
+    }
+
+    .clients-grid {
+        padding: 1rem 0;
     }
 }
 
@@ -645,11 +662,22 @@ a:hover {
     }
 
     .hero-content {
+        padding: 0 1.25rem;
+    }
+
+    .hero-cta {
+        flex-direction: column;
+        width: 100%;
         padding: 0 1rem;
     }
 
+    .hero-cta .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
     .container {
-        padding: 0 1rem;
+        padding: 0 1.25rem;
     }
 
     .about-stats {
@@ -1262,6 +1290,7 @@ a:hover {
 @media (max-width: 768px) {
     .page-header {
         margin-top: 0;
+        padding: 2rem 0;
     }
 
     .filters-container {

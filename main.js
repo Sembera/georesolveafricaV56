@@ -37,6 +37,9 @@ function initializeApp() {
 
 // Scroll animations
 function setupScrollAnimations() {
+    // Enable animations only if we reach this point
+    document.body.classList.add('animation-ready');
+
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'

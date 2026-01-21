@@ -24,20 +24,20 @@ function injectClients() {
             </div>
 
             <div class="clients-grid animate-scroll">
-                <div class="client-card"><img src="resources/Clients/zv-consulting.png" alt="ZV Consulting Ltd" class="client-logo"></div>
-                <div class="client-card"><img src="resources/Clients/atc-uganda.png" alt="ATC Uganda" class="client-logo"></div>
-                <div class="client-card"><img src="resources/Clients/ministry-energy-uganda.png" alt="Ministry of Energy" class="client-logo"></div>
-                <div class="client-card"><img src="resources/Clients/fichtner.png.png" alt="Fichtner GmbH" class="client-logo"></div>
-                <div class="client-card"><img src="resources/Clients/Artelia.png" alt="Artelia" class="client-logo"></div>
-                <div class="client-card"><img src="resources/Clients/Aecom.png" alt="Aecom" class="client-logo"></div>
-                <div class="client-card"><img src="resources/Clients/Songa.png" alt="Songa Energy" class="client-logo"></div>
-                <div class="client-card"><img src="resources/Clients/virunga-power.png" alt="Virunga Power" class="client-logo"></div>
-                <div class="client-card"><img src="resources/Clients/anzana-electric.png" alt="Anzana Electric Group" class="client-logo"></div>
-                <div class="client-card"><img src="resources/Clients/MBW.png" alt="MBW Consulting" class="client-logo"></div>
-                <div class="client-card"><img src="resources/Clients/razel-bec.png" alt="Razel-Bec" class="client-logo"></div>
-                <div class="client-card"><img src="resources/Clients/Tectoni.png" alt="Tectoni Africa" class="client-logo"></div>
-                <div class="client-card"><img src="resources/Clients/RSV.png" alt="RSV Engineering" class="client-logo"></div>
-                <div class="client-card"><img src="resources/Clients/paraa.png" alt="Paraa Safari Lodge" class="client-logo"></div>
+                <div class="client-card"><img src="resources/Clients/zv-consulting.png" alt="ZV Consulting Ltd" class="client-logo" loading="lazy"></div>
+                <div class="client-card"><img src="resources/Clients/atc-uganda.png" alt="ATC Uganda" class="client-logo" loading="lazy"></div>
+                <div class="client-card"><img src="resources/Clients/ministry-energy-uganda.png" alt="Ministry of Energy" class="client-logo" loading="lazy"></div>
+                <div class="client-card"><img src="resources/Clients/fichtner.png.png" alt="Fichtner GmbH" class="client-logo" loading="lazy"></div>
+                <div class="client-card"><img src="resources/Clients/Artelia.png" alt="Artelia" class="client-logo" loading="lazy"></div>
+                <div class="client-card"><img src="resources/Clients/Aecom.png" alt="Aecom" class="client-logo" loading="lazy"></div>
+                <div class="client-card"><img src="resources/Clients/Songa.png" alt="Songa Energy" class="client-logo" loading="lazy"></div>
+                <div class="client-card"><img src="resources/Clients/virunga-power.png" alt="Virunga Power" class="client-logo" loading="lazy"></div>
+                <div class="client-card"><img src="resources/Clients/anzana-electric.png" alt="Anzana Electric Group" class="client-logo" loading="lazy"></div>
+                <div class="client-card"><img src="resources/Clients/MBW.png" alt="MBW Consulting" class="client-logo" loading="lazy"></div>
+                <div class="client-card"><img src="resources/Clients/razel-bec.png" alt="Razel-Bec" class="client-logo" loading="lazy"></div>
+                <div class="client-card"><img src="resources/Clients/Tectoni.png" alt="Tectoni Africa" class="client-logo" loading="lazy"></div>
+                <div class="client-card"><img src="resources/Clients/RSV.png" alt="RSV Engineering" class="client-logo" loading="lazy"></div>
+                <div class="client-card"><img src="resources/Clients/paraa.png" alt="Paraa Safari Lodge" class="client-logo" loading="lazy"></div>
             </div>
         </div>
     </section>

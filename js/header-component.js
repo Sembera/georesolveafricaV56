@@ -30,6 +30,7 @@ function injectHeader() {
                         <li><a href="methods.html#hydrogeology">Hydrogeology</a></li>
                         <li><a href="methods.html#drilling">Drilling</a></li>
                         <li><a href="methods.html#geospatial">Geospatial & Surveys</a></li>
+                        <li class="mobile-only"><a href="methods.html" style="font-weight: 600; color: var(--accent-color);">View All Methods →</a></li>
                     </ul>
                 </li>
                 <li><a href="applications.html" class="nav-link">Applications</a></li>
@@ -40,6 +41,7 @@ function injectHeader() {
                         <li><a href="g-resolog.html">G-Resolog - Borehole Logger</a></li>
                         <li><a href="g-resconvt.html">G-Resconvt - Coordinate Converter</a></li>
                         <li><a href="g-geopylanner.html">G-Geopylanner - Geophysics Survey Planner</a></li>
+                        <li class="mobile-only"><a href="resources.html" style="font-weight: 600; color: var(--accent-color);">View All Resources →</a></li>
                     </ul>
                 </li>
                 <li><a href="news.html" class="nav-link">News</a></li>
@@ -85,20 +87,29 @@ function setupNavigation() {
             mobileToggle.classList.toggle('active');
         });
 
-        // Dropdown toggle for mobile
-        document.querySelectorAll('.has-dropdown > a').forEach(dropdownLabel => {
-            dropdownLabel.addEventListener('click', function (e) {
-                if (window.innerWidth <= 768) {
-                    e.preventDefault();
-                    const parent = this.parentElement;
-                    parent.classList.toggle('active');
+        // Dropdown toggle for mobile - Split logic for arrow vs label
+        document.querySelectorAll('.has-dropdown').forEach(dropdown => {
+            const label = dropdown.querySelector('.nav-link');
+            const arrow = dropdown.querySelector('.dropdown-arrow');
 
-                    // Close other dropdowns
-                    document.querySelectorAll('.has-dropdown').forEach(other => {
-                        if (other !== parent) other.classList.remove('active');
-                    });
-                }
-            });
+            if (arrow) {
+                arrow.addEventListener('click', function (e) {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const parent = this.closest('.has-dropdown');
+                        parent.classList.toggle('active');
+
+                        // Close other dropdowns
+                        document.querySelectorAll('.has-dropdown').forEach(other => {
+                            if (other !== parent) other.classList.remove('active');
+                        });
+                    }
+                });
+            }
+
+            // Label maintains its default link behavior (navigates) on mobile
+            // but we ensure the menu closes when navigating
         });
 
         // Close menu when clicking outside
