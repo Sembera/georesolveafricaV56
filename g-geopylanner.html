@@ -1,9 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>G-Geopylanner - Unified Shallow Geophysics Survey Design Tool | Georesolve Africa</title>
+    <meta name="description"
+        content="Complete geophysical survey planning tool. Design layouts for MASW, Seismic Refraction, ERT, GPR, and gravimetric surveys.">
+    <meta name="keywords"
+        content="geophysical survey planning, MASW design, ERT layout, seismic refraction planner, GPR analysis, Georesolve tools">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="G-Geopylanner | Unified Geophysics Survey Design">
+    <meta property="og:description"
+        content="Professional planning and design for shallow geophysical surveys. Optimize your field data acquisition with better design.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://georesolve.africa/g-geopylanner.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="footer-styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4/2.9.0/proj4.js"></script>
     <style>
         * {
@@ -13,15 +34,18 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
             color: #333;
             line-height: 1.4;
+            padding-top: 100px;
+            /* Offset for fixed navbar */
+            padding-bottom: 60px;
         }
 
         .container {
             max-width: 1800px;
-            margin: 0 auto;
+            margin: 20px auto 0 auto;
             padding: 10px;
         }
 
@@ -31,10 +55,11 @@
             padding: 15px;
             border-radius: 8px;
             margin-bottom: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .header h1 {
+            font-family: 'Playfair Display', serif;
             font-size: 2em;
             margin-bottom: 8px;
         }
@@ -61,7 +86,7 @@
             background: white;
             border-radius: 8px;
             padding: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .module-nav {
@@ -131,7 +156,9 @@
             font-size: 0.9em;
         }
 
-        input, select, textarea {
+        input,
+        select,
+        textarea {
             width: 100%;
             padding: 8px;
             border: 2px solid #ddd;
@@ -140,7 +167,9 @@
             transition: border-color 0.3s;
         }
 
-        input:focus, select:focus, textarea:focus {
+        input:focus,
+        select:focus,
+        textarea:focus {
             outline: none;
             border-color: #4DA34D;
         }
@@ -344,19 +373,17 @@
         }
 
         @media (max-width: 768px) {
-            .row, .row-3 {
+
+            .row,
+            .row-3 {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
+
 <body>
     <div class="container">
-        <div class="header">
-            <h1>⚡ G-Geopylanner</h1>
-            <p>Unified Shallow Geophysics Survey Design Tool - Professional Edition</p>
-            <div class="subtitle">Powered by Georesolve Africa | Complete Survey Planning Solution</div>
-        </div>
 
         <div class="main-content">
             <!-- Module Navigation -->
@@ -388,7 +415,8 @@
 
                 <div style="margin-top: 20px; padding: 10px; background: #9EDB9E; border-radius: 4px;">
                     <strong>📋 Quick Guide</strong>
-                    <p style="font-size: 12px; margin-top: 5px;">Select a survey type, enter parameters, calculate, and export your survey design as CSV.</p>
+                    <p style="font-size: 12px; margin-top: 5px;">Select a survey type, enter parameters, calculate, and
+                        export your survey design as CSV.</p>
                 </div>
             </div>
 
@@ -547,7 +575,8 @@
                     <h2 style="color: #345363; margin-bottom: 15px;">📡 GPR Hyperbola Velocity Analysis</h2>
 
                     <div class="alert alert-info">
-                        <strong>How to use:</strong> Upload a radargram image, then click on the hyperbola apex and two points on the arms to calculate EM velocity and depth.
+                        <strong>How to use:</strong> Upload a radargram image, then click on the hyperbola apex and two
+                        points on the arms to calculate EM velocity and depth.
                     </div>
 
                     <div class="form-section">
@@ -718,7 +747,8 @@
                     <h2 style="color: #345363; margin-bottom: 15px;">📍 GPS/Coordinate Converter</h2>
 
                     <div class="alert alert-info">
-                        <strong>Note:</strong> This module uses the same engine as G-Resconvt. For full coordinate conversion features, use <a href="g-resconvt.html" target="_blank">G-Resconvt</a>.
+                        <strong>Note:</strong> This module uses the same engine as G-Resconvt. For full coordinate
+                        conversion features, use <a href="g-resconvt.html" target="_blank">G-Resconvt</a>.
                     </div>
 
                     <div class="form-section">
@@ -749,7 +779,8 @@
                     <div class="toolbar">
                         <button class="btn" onclick="convertCoordinates()">Convert</button>
                         <button class="btn btn-secondary" onclick="clearCoords()">Clear</button>
-                        <button class="btn btn-info" onclick="window.open('g-resconvt.html', '_blank')">Open G-Resconvt →</button>
+                        <button class="btn btn-info" onclick="window.open('g-resconvt.html', '_blank')">Open G-Resconvt
+                            →</button>
                     </div>
 
                     <div id="coord-results" class="results-section">
@@ -1223,9 +1254,9 @@
             const file = event.target.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = function (e) {
                     const img = new Image();
-                    img.onload = function() {
+                    img.onload = function () {
                         gprImage = img;
                         const canvas = document.getElementById('gpr-canvas');
                         canvas.width = Math.min(img.width, 800);
@@ -1250,7 +1281,7 @@
             const x = event.clientX - rect.left;
             const y = event.clientY - rect.top;
 
-            gprPicks.push({x, y});
+            gprPicks.push({ x, y });
 
             // Draw pick
             const ctx = canvas.getContext('2d');
@@ -1651,5 +1682,13 @@
             URL.revokeObjectURL(url);
         }
     </script>
+    <!-- Footer & Clients injected by footer-component.js -->
+
+    <!-- Local Components -->
+    <script src="js/header-component.js" defer></script>
+    <script src="footer-component.js" defer></script>
+
+    <script type="module" src="main.js"></script>
 </body>
+
 </html>

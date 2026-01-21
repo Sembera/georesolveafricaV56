@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects | GeoResolve - Geotechnical & Geophysical Projects Uganda, Rwanda, Burundi</title>
-    <meta name="description" content="Explore GeoResolve's portfolio of geophysical surveys, geotechnical investigations, and dam foundation studies across Uganda, Rwanda, Burundi, and East Africa. Data-driven, research-based solutions.">
-    <meta name="keywords" content="geotechnical investigation Uganda, geophysical surveys Rwanda, dam foundation studies Burundi, seismic refraction East Africa, ERT surveys Uganda, drilling services Rwanda, slope stability analysis, hydrogeology Uganda, topographic surveys Burundi, cadastral surveys East Africa">
-    
+    <meta name="description"
+        content="Explore GeoResolve's portfolio of geophysical surveys, geotechnical investigations, and dam foundation studies across Uganda, Rwanda, Burundi, and East Africa. Data-driven, research-based solutions.">
+    <meta name="keywords"
+        content="geotechnical investigation Uganda, geophysical surveys Rwanda, dam foundation studies Burundi, seismic refraction East Africa, ERT surveys Uganda, drilling services Rwanda, slope stability analysis, hydrogeology Uganda, topographic surveys Burundi, cadastral surveys East Africa">
+
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Geoscience Projects | Georesolve Africa">
-    <meta property="og:description" content="Portfolio of geoscience projects across East Africa showcasing our expertise.">
+    <meta property="og:description"
+        content="Portfolio of geoscience projects across East Africa showcasing our expertise.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://georesolve.africa/projects.html">
 
@@ -19,8 +23,11 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/navbar.css">
+
     <!-- Core Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <!-- Map library temporarily disabled for Phase 2 -->
@@ -29,7 +36,7 @@
 
     <!-- GeoResolve Projects Data -->
     <script src="projects-data.js"></script>
-    
+
     <style>
         :root {
             --primary-color: #345363;
@@ -61,85 +68,7 @@
             padding-top: 80px;
         }
 
-        /* Navigation */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
-            z-index: 1000;
-            transition: var(--transition-medium);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 80px;
-        }
-
-        .logo {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            text-decoration: none;
-            gap: 0.25rem;
-        }
-
-        .logo img {
-            height: 55px;
-            width: auto;
-        }
-
-        .logo-tagline {
-            font-size: 0.65rem;
-            color: var(--primary-color);
-            font-weight: 500;
-            font-style: italic;
-            letter-spacing: 0.5px;
-            margin-left: 2px;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 500;
-            transition: var(--transition-fast);
-            position: relative;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--primary-color);
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-color);
-            transition: var(--transition-fast);
-        }
-
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 100%;
-        }
+        /* Navigation moved to css/navbar.css */
 
         /* Page Header */
         .page-header {
@@ -315,7 +244,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.7));
+            background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.7));
             display: flex;
             align-items: flex-end;
             padding: 1.5rem;
@@ -827,31 +756,18 @@
     </style>
     <link rel="stylesheet" href="footer-styles.css">
 </head>
+
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <img src="resources/logo/Georesolve Logo.png" alt="GeoResolve Logo">
-                <span class="logo-tagline">Data Driven, Research Based</span>
-            </a>
-            <ul class="nav-links">
-                <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="methods.html" class="nav-link">Methods</a></li>
-                <li><a href="applications.html" class="nav-link">Applications</a></li>
-                <li><a href="projects.html" class="nav-link active">Projects</a></li>
-                <li><a href="resources.html" class="nav-link">Resources</a></li>
-                <li><a href="news.html" class="nav-link">News</a></li>
-                <li><a href="contact.html" class="nav-link">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
+    <!-- Header injected by js/header-component.js -->
 
     <!-- Page Header -->
     <section class="page-header">
         <div class="container">
             <h1 class="page-title">Our Projects</h1>
-            <p class="page-subtitle">Explore GeoResolve's comprehensive portfolio of geophysical, geotechnical, and hydrogeology projects across Uganda, Rwanda, Burundi, and East Africa. Data-driven, research-based solutions delivering measurable results.</p>
+            <p class="page-subtitle">Explore GeoResolve's comprehensive portfolio of geophysical, geotechnical, and
+                hydrogeology projects across Uganda, Rwanda, Burundi, and East Africa. Data-driven, research-based
+                solutions delivering measurable results.</p>
         </div>
     </section>
 
@@ -863,11 +779,13 @@
                     <div class="filter-label">Sector</div>
                     <div class="filter-buttons">
                         <button class="filter-btn active" data-filter="sector" data-value="all">All Sectors</button>
-                        <button class="filter-btn" data-filter="sector" data-value="infrastructure">Infrastructure</button>
+                        <button class="filter-btn" data-filter="sector"
+                            data-value="infrastructure">Infrastructure</button>
                         <button class="filter-btn" data-filter="sector" data-value="energy">Energy</button>
                         <button class="filter-btn" data-filter="sector" data-value="water">Water Resources</button>
                         <button class="filter-btn" data-filter="sector" data-value="mining">Mining</button>
-                        <button class="filter-btn" data-filter="sector" data-value="environmental">Environmental</button>
+                        <button class="filter-btn" data-filter="sector"
+                            data-value="environmental">Environmental</button>
                     </div>
                 </div>
 
@@ -889,7 +807,7 @@
                         <button class="filter-btn" data-filter="status" data-value="ongoing">Ongoing</button>
                     </div>
                 </div>
-                
+
                 <div class="search-container">
                     <input type="text" class="project-search" placeholder="Search projects..." data-filter="search">
                 </div>
@@ -911,10 +829,12 @@
         <div class="container">
             <div class="section-header animate-on-scroll">
                 <h2 class="section-title">Project Locations</h2>
-                <p class="section-subtitle">Interactive map coming in Phase 2 - Geographic distribution of our geoscience projects across Uganda, Rwanda, Burundi, and East Africa</p>
+                <p class="section-subtitle">Interactive map coming in Phase 2 - Geographic distribution of our
+                    geoscience projects across Uganda, Rwanda, Burundi, and East Africa</p>
             </div>
 
-            <div class="map-container animate-on-scroll" style="background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: 600;">
+            <div class="map-container animate-on-scroll"
+                style="background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: 600;">
                 <div style="text-align: center; padding: 3rem;">
                     <div style="font-size: 4rem; margin-bottom: 1rem;">🗺️</div>
                     <div>Interactive Project Map</div>
@@ -945,7 +865,8 @@
         <div class="container">
             <div class="section-header animate-on-scroll">
                 <h2 class="section-title">Trusted by Leading Organizations</h2>
-                <p class="section-subtitle">GeoResolve partners with government agencies, consulting firms, and private sector clients across East Africa</p>
+                <p class="section-subtitle">GeoResolve partners with government agencies, consulting firms, and private
+                    sector clients across East Africa</p>
             </div>
 
             <div class="clients-grid animate-on-scroll">
@@ -956,7 +877,8 @@
                     <img src="resources/Clients/atc-uganda.png" alt="ATC Uganda" class="client-logo">
                 </div>
                 <div class="client-card">
-                    <img src="resources/Clients/ministry-energy-uganda.png" alt="Ministry of Energy - Uganda" class="client-logo">
+                    <img src="resources/Clients/ministry-energy-uganda.png" alt="Ministry of Energy - Uganda"
+                        class="client-logo">
                 </div>
                 <div class="client-card">
                     <img src="resources/Clients/fichtner.png.png" alt="Fichtner GmbH - Germany" class="client-logo">
@@ -974,7 +896,8 @@
                     <img src="resources/Clients/virunga-power.png" alt="Virunga Power - Burundi" class="client-logo">
                 </div>
                 <div class="client-card">
-                    <img src="resources/Clients/anzana-electric.png" alt="Anzana Electric Group - Burundi" class="client-logo">
+                    <img src="resources/Clients/anzana-electric.png" alt="Anzana Electric Group - Burundi"
+                        class="client-logo">
                 </div>
                 <div class="client-card">
                     <img src="resources/Clients/MBW.png" alt="MBW Consulting - Uganda" class="client-logo">
@@ -1002,7 +925,8 @@
                 <div class="footer-section">
                     <h3>GeoResolve</h3>
                     <p class="footer-tagline">Data-Driven, Research-Based</p>
-                    <p>Premier geoscience consulting firm providing expert geophysical, geotechnical, and hydrogeology services across Uganda, Rwanda, Burundi, and East Africa.</p>
+                    <p>Premier geoscience consulting firm providing expert geophysical, geotechnical, and hydrogeology
+                        services across Uganda, Rwanda, Burundi, and East Africa.</p>
                     <div class="footer-social">
                         <a href="#" aria-label="LinkedIn">LinkedIn</a>
                         <a href="#" aria-label="Twitter">Twitter</a>
@@ -1036,7 +960,8 @@
                     <ul class="footer-contact">
                         <li><strong>Head Office:</strong><br>Kasangati, Uganda<br>HMK Building, Gayaza Road</li>
                         <li><strong>Phone:</strong><br>+256 771 999 614<br>+256 772 876 300</li>
-                        <li><strong>Email:</strong><br><a href="mailto:info@georesolveafrica.com">info@georesolveafrica.com</a></li>
+                        <li><strong>Email:</strong><br><a
+                                href="mailto:info@georesolveafrica.com">info@georesolveafrica.com</a></li>
                         <li><strong>Hours:</strong><br>Mon-Fri: 8:00 AM - 6:00 PM<br>Sat: 9:00 AM - 2:00 PM</li>
                     </ul>
                 </div>
@@ -1056,7 +981,16 @@
     </footer>
 
     <!-- GeoResolve Projects JavaScript -->
-    <script src="projects-script.js"></script>
-    <script src="main.js"></script>
+    <script src="projects-script.js" defer></script>
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
+    <script src="projects-data.js" defer></script>
+
+    <!-- Local Components -->
+    <script src="js/header-component.js" defer></script>
+    <script src="footer-component.js" defer></script>
+
+    <script type="module" src="main.js"></script>
 </body>
+
 </html>

@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News & Insights | Georesolve Africa</title>
-    <meta name="description" content="Latest news and insights from Georesolve Africa. Industry updates, technical articles, and project announcements from East Africa's leading geoscience firm.">
-    <meta name="keywords" content="geoscience news, East Africa geology, industry insights, technical articles, project updates, geological research">
-    
+    <meta name="description"
+        content="Latest news and insights from Georesolve Africa. Industry updates, technical articles, and project announcements from East Africa's leading geoscience firm.">
+    <meta name="keywords"
+        content="geoscience news, East Africa geology, industry insights, technical articles, project updates, geological research">
+
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="News & Insights | Georesolve Africa">
-    <meta property="og:description" content="Latest news and insights from East Africa's leading geoscience consulting firm.">
+    <meta property="og:description"
+        content="Latest news and insights from East Africa's leading geoscience consulting firm.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://georesolve.africa/news.html">
 
@@ -19,11 +23,15 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/navbar.css">
+
     <!-- Core Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-    
+
     <style>
         :root {
             --primary-color: #345363;
@@ -55,85 +63,7 @@
             padding-top: 80px;
         }
 
-        /* Navigation */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
-            z-index: 1000;
-            transition: var(--transition-medium);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 80px;
-        }
-
-        .logo {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            text-decoration: none;
-            gap: 0.25rem;
-        }
-
-        .logo img {
-            height: 55px;
-            width: auto;
-        }
-
-        .logo-tagline {
-            font-size: 0.65rem;
-            color: var(--primary-color);
-            font-weight: 500;
-            font-style: italic;
-            letter-spacing: 0.5px;
-            margin-left: 2px;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 500;
-            transition: var(--transition-fast);
-            position: relative;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--primary-color);
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-color);
-            transition: var(--transition-fast);
-        }
-
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 100%;
-        }
+        /* Navigation moved to css/navbar.css */
 
         /* Page Header */
         .page-header {
@@ -194,7 +124,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.8));
+            background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.8));
             display: flex;
             align-items: flex-end;
             padding: 2rem;
@@ -624,31 +554,17 @@
     </style>
     <link rel="stylesheet" href="footer-styles.css">
 </head>
+
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <img src="resources/logo/Georesolve Logo.png" alt="GeoResolve Logo">
-                <span class="logo-tagline">Data Driven, Research Based</span>
-            </a>
-            <ul class="nav-links">
-                <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="methods.html" class="nav-link">Methods</a></li>
-                <li><a href="applications.html" class="nav-link">Applications</a></li>
-                <li><a href="projects.html" class="nav-link">Projects</a></li>
-                <li><a href="resources.html" class="nav-link">Resources</a></li>
-                <li><a href="news.html" class="nav-link active">News</a></li>
-                <li><a href="contact.html" class="nav-link">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
+    <!-- Header injected by js/header-component.js -->
 
     <!-- Page Header -->
     <section class="page-header">
         <div class="container">
             <h1 class="page-title">News & Insights</h1>
-            <p class="page-subtitle">Stay updated with the latest developments in geoscience, project announcements, and industry insights from across East Africa</p>
+            <p class="page-subtitle">Stay updated with the latest developments in geoscience, project announcements, and
+                industry insights from across East Africa</p>
         </div>
     </section>
 
@@ -663,8 +579,14 @@
                         <span id="featured-category">Climate Tech & Innovation</span>
                         <span id="featured-read-time">8 min read</span>
                     </div>
-                    <p class="featured-excerpt" id="featured-excerpt">Kenya has emerged as a global leader in direct air capture (DAC) technology, with Octavia Carbon commissioning Project Hummingbird - the first commercial DAC plant on the African continent. The East African Rift Valley's unique combination of abundant geothermal energy and basaltic rock formations provides ideal conditions for carbon removal and permanent storage, positioning the region to potentially contribute 20% of global carbon dioxide removal by 2035.</p>
-                    <a href="https://rmi.org/the-opportunity-for-direct-air-capture-in-africa/" target="_blank" class="btn btn-primary" id="featured-link">Read Full Article</a>
+                    <p class="featured-excerpt" id="featured-excerpt">Kenya has emerged as a global leader in direct air
+                        capture (DAC) technology, with Octavia Carbon commissioning Project Hummingbird - the first
+                        commercial DAC plant on the African continent. The East African Rift Valley's unique combination
+                        of abundant geothermal energy and basaltic rock formations provides ideal conditions for carbon
+                        removal and permanent storage, positioning the region to potentially contribute 20% of global
+                        carbon dioxide removal by 2035.</p>
+                    <a href="https://rmi.org/the-opportunity-for-direct-air-capture-in-africa/" target="_blank"
+                        class="btn btn-primary" id="featured-link">Read Full Article</a>
                 </div>
                 <div class="featured-image">
                     <img src="resources/Kenya-DAC.jpeg" alt="Direct Air Capture in Kenya" id="featured-image">
@@ -689,7 +611,7 @@
                         <button class="filter-btn" data-category="research">Research</button>
                     </div>
                 </div>
-                
+
                 <div class="search-container">
                     <input type="text" class="news-search" placeholder="Search articles...">
                 </div>
@@ -711,10 +633,12 @@
         <div class="container">
             <div class="newsletter-content animate-on-scroll">
                 <h2>Stay Informed</h2>
-                <p>Subscribe to our newsletter for the latest geoscience insights, project updates, and industry developments across East Africa.</p>
+                <p>Subscribe to our newsletter for the latest geoscience insights, project updates, and industry
+                    developments across East Africa.</p>
                 <form class="newsletter-form" name="newsletter" method="POST" data-netlify="true">
                     <input type="hidden" name="form-name" value="newsletter">
-                    <input type="email" name="email" class="newsletter-input" placeholder="Enter your email address" required>
+                    <input type="email" name="email" class="newsletter-input" placeholder="Enter your email address"
+                        required>
                     <button type="submit" class="btn btn-secondary">Subscribe</button>
                 </form>
             </div>
@@ -728,33 +652,37 @@
                 <h2 class="section-title">Follow Our Work</h2>
                 <p class="section-subtitle">Connect with us on social media for real-time updates and insights</p>
             </div>
-            
+
             <div class="social-grid">
                 <div class="social-card animate-on-scroll">
                     <div class="social-icon">📘</div>
                     <div class="social-handle">@GeoresolveAfrica</div>
-                    <p class="social-description">Follow us on LinkedIn for professional updates, project announcements, and industry insights.</p>
+                    <p class="social-description">Follow us on LinkedIn for professional updates, project announcements,
+                        and industry insights.</p>
                     <a href="#" class="social-link">Connect on LinkedIn</a>
                 </div>
-                
+
                 <div class="social-card animate-on-scroll">
                     <div class="social-icon">📷</div>
                     <div class="social-handle">@Georesolve_Africa</div>
-                    <p class="social-description">See our field work in action through photos and stories from projects across East Africa.</p>
+                    <p class="social-description">See our field work in action through photos and stories from projects
+                        across East Africa.</p>
                     <a href="#" class="social-link">Follow on Instagram</a>
                 </div>
-                
+
                 <div class="social-card animate-on-scroll">
                     <div class="social-icon">🐦</div>
                     <div class="social-handle">@GeoresolveAfrica</div>
-                    <p class="social-description">Get real-time updates on project milestones, industry news, and technical insights.</p>
+                    <p class="social-description">Get real-time updates on project milestones, industry news, and
+                        technical insights.</p>
                     <a href="#" class="social-link">Follow on Twitter</a>
                 </div>
-                
+
                 <div class="social-card animate-on-scroll">
                     <div class="social-icon">📺</div>
                     <div class="social-handle">Georesolve Africa</div>
-                    <p class="social-description">Watch project documentaries, technical tutorials, and educational content about geoscience.</p>
+                    <p class="social-description">Watch project documentaries, technical tutorials, and educational
+                        content about geoscience.</p>
                     <a href="#" class="social-link">Subscribe on YouTube</a>
                 </div>
             </div>
@@ -888,7 +816,7 @@
         function updateFeaturedArticle(articleId) {
             const article = articlesData.find(a => a.id === articleId);
             if (!article) return;
-            
+
             document.getElementById('featured-title').textContent = article.title;
             document.getElementById('featured-date').textContent = article.date;
             document.getElementById('featured-category').textContent = article.category;
@@ -897,11 +825,11 @@
             document.getElementById('featured-link').href = article.link;
             document.getElementById('featured-image').src = article.image;
             document.getElementById('featured-image').alt = article.title;
-            
+
             document.getElementById('featured-section').scrollIntoView({ behavior: 'smooth' });
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             renderArticles(articlesData);
             setupNewsFilters();
             setupNewsletterForm();
@@ -960,9 +888,9 @@
 
         function setupNewsFilters() {
             const filterButtons = document.querySelectorAll('.filter-btn');
-            
+
             filterButtons.forEach(button => {
-                button.addEventListener('click', function() {
+                button.addEventListener('click', function () {
                     const category = this.dataset.category;
                     filterButtons.forEach(btn => btn.classList.remove('active'));
                     this.classList.add('active');
@@ -972,44 +900,44 @@
         }
 
         function filterArticles(category) {
-            const filteredArticles = category === 'all' 
-                ? articlesData 
+            const filteredArticles = category === 'all'
+                ? articlesData
                 : articlesData.filter(article => article.category === category);
-            
+
             renderArticles(filteredArticles);
         }
 
         function setupSearch() {
             const searchInput = document.querySelector('.news-search');
-            
-            searchInput.addEventListener('input', function() {
+
+            searchInput.addEventListener('input', function () {
                 const searchTerm = this.value.toLowerCase();
                 const activeCategory = document.querySelector('.filter-btn.active').dataset.category;
-                
-                let filteredArticles = activeCategory === 'all' 
-                    ? articlesData 
+
+                let filteredArticles = activeCategory === 'all'
+                    ? articlesData
                     : articlesData.filter(article => article.category === activeCategory);
-                
+
                 if (searchTerm) {
-                    filteredArticles = filteredArticles.filter(article => 
+                    filteredArticles = filteredArticles.filter(article =>
                         article.title.toLowerCase().includes(searchTerm) ||
                         article.excerpt.toLowerCase().includes(searchTerm) ||
                         article.tags.some(tag => tag.toLowerCase().includes(searchTerm))
                     );
                 }
-                
+
                 renderArticles(filteredArticles);
             });
         }
 
         function setupNewsletterForm() {
             const form = document.querySelector('.newsletter-form');
-            
+
             if (form) {
-                form.addEventListener('submit', async function(e) {
+                form.addEventListener('submit', async function (e) {
                     e.preventDefault();
                     const email = this.querySelector('input[name="email"]').value;
-                    
+
                     // Try Netlify Forms first (works in production)
                     try {
                         await fetch('/', {
@@ -1042,121 +970,17 @@
         });
     </script>
 
-    <!-- Clients Section -->
-    <section class="clients-section">
-        <div class="container">
-            <div class="section-header animate-on-scroll">
-                <h2 class="section-title">Trusted by Leading Organizations</h2>
-                <p class="section-subtitle">GeoResolve partners with government agencies, consulting firms, and private sector clients across East Africa</p>
-            </div>
-
-            <div class="clients-grid animate-on-scroll">
-                <div class="client-card">
-                    <img src="resources/Clients/zv-consulting.png" alt="ZV Consulting Ltd - Rwanda" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/atc-uganda.png" alt="ATC Uganda" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/ministry-energy-uganda.png" alt="Ministry of Energy - Uganda" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/fichtner.png.png" alt="Fichtner GmbH - Germany" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/Artelia.png" alt="Artelia - France" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/Aecom.png" alt="Aecom - International" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/Songa.png" alt="Songa Energy - Burundi" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/virunga-power.png" alt="Virunga Power - Burundi" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/anzana-electric.png" alt="Anzana Electric Group - Burundi" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/MBW.png" alt="MBW Consulting - Uganda" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/razel-bec.png" alt="Razel-Bec - International" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/Tectoni.png" alt="Tectoni Africa - Uganda" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/RSV.png" alt="RSV Engineering - Uganda" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/paraa.png" alt="Paraa Safari Lodge - Uganda" class="client-logo">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>GeoResolve</h3>
-                    <p class="footer-tagline">Data-Driven, Research-Based</p>
-                    <p>Premier geoscience consulting firm providing expert geophysical, geotechnical, and hydrogeology services across Uganda, Rwanda, Burundi, and East Africa.</p>
-                    <div class="footer-social">
-                        <a href="#" aria-label="LinkedIn">LinkedIn</a>
-                        <a href="#" aria-label="Twitter">Twitter</a>
-                        <a href="#" aria-label="Email">Email</a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h3>Services</h3>
-                    <ul class="footer-links">
-                        <li><a href="methods.html#geophysics">Geophysical Surveys</a></li>
-                        <li><a href="methods.html#geotechnical">Geotechnical Investigation</a></li>
-                        <li><a href="methods.html#hydrogeology">Hydrogeology Studies</a></li>
-                        <li><a href="methods.html#drilling">Drilling Services</a></li>
-                        <li><a href="methods.html#geospatial">Geospatial Services</a></li>
-                        <li><a href="methods.html#surveys">Topographic Surveys</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Resources</h3>
-                    <ul class="footer-links">
-                        <li><a href="g-resolog.html">G-ResoLog</a></li>
-                        <li><a href="g-resconvt.html">G-ResConvt</a></li>
-                        <li><a href="g-geopylanner.html">G-GeoPyLanner</a></li>
-                        <li><a href="resources.html">All Tools</a></li>
-                        <li><a href="news.html">News & Updates</a></li>
-                        <li><a href="projects.html">Projects</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Contact</h3>
-                    <ul class="footer-contact">
-                        <li><strong>Head Office:</strong><br>Kasangati, Uganda<br>HMK Building, Gayaza Road</li>
-                        <li><strong>Phone:</strong><br>+256 771 999 614<br>+256 772 876 300</li>
-                        <li><strong>Email:</strong><br><a href="mailto:info@georesolveafrica.com">info@georesolveafrica.com</a></li>
-                        <li><strong>Hours:</strong><br>Mon-Fri: 8:00 AM - 6:00 PM<br>Sat: 9:00 AM - 2:00 PM</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <div class="footer-bottom-content">
-                    <p>&copy; 2025 GeoResolve. All rights reserved.</p>
-                    <div class="footer-bottom-links">
-                        <a href="contact.html">Privacy Policy</a>
-                        <a href="contact.html">Terms of Service</a>
-                        <a href="contact.html">Contact</a>
-                    </div>
-                    <p class="footer-location">Serving Uganda, Rwanda, Burundi, DRC, South Sudan & East Africa</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <!-- Footer & Clients injected by footer-component.js -->
 
     <script src="main.js"></script>
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
+
+    <!-- Local Components -->
+    <script src="js/header-component.js" defer></script>
+    <script src="footer-component.js" defer></script>
+
+    <script type="module" src="main.js"></script>
 </body>
+
 </html>

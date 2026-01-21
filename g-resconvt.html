@@ -1,9 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>G-Resconvt - Professional Coordinate Converter | Georesolve Africa</title>
+    <meta name="description"
+        content="Professional coordinate conversion tool for East Africa. Convert between WGS84, Arc 1960, and local projections for Uganda, Rwanda, Burundi, and more.">
+    <meta name="keywords"
+        content="coordinate converter, Arc 1960 to WGS84, UTM conversion, East Africa mapping, Georesolve tools">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="G-Resconvt | Professional Coordinate Converter">
+    <meta property="og:description"
+        content="Advanced coordinate transformation system for East Africa. Accurate conversions for professional surveyors and geoscientists.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://georesolve.africa/g-resconvt.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="footer-styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4/2.9.0/proj4.js"></script>
     <style>
         * {
@@ -13,15 +34,18 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
             color: #333;
             line-height: 1.4;
+            padding-top: 100px;
+            /* Offset for fixed navbar */
+            padding-bottom: 60px;
         }
 
         .container {
             max-width: 1800px;
-            margin: 0 auto;
+            margin: 20px auto 0 auto;
             padding: 10px;
         }
 
@@ -31,10 +55,11 @@
             padding: 15px;
             border-radius: 8px;
             margin-bottom: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .header h1 {
+            font-family: 'Playfair Display', serif;
             font-size: 2em;
             margin-bottom: 8px;
         }
@@ -100,7 +125,10 @@
             letter-spacing: 0.5px;
         }
 
-        select, input[type="text"], input[type="number"], textarea {
+        select,
+        input[type="text"],
+        input[type="number"],
+        textarea {
             padding: 12px;
             border: 2px solid #e1e8ed;
             border-radius: 8px;
@@ -109,7 +137,9 @@
             font-family: inherit;
         }
 
-        select:focus, input:focus, textarea:focus {
+        select:focus,
+        input:focus,
+        textarea:focus {
             outline: none;
             border-color: #4DA34D;
             box-shadow: 0 0 0 3px rgba(77, 163, 77, 0.1);
@@ -345,7 +375,8 @@
                 font-size: 12px;
             }
 
-            th, td {
+            th,
+            td {
                 padding: 8px;
             }
         }
@@ -366,8 +397,13 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .country-badge {
@@ -385,17 +421,13 @@
             background: white;
             border-radius: 8px;
             padding: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
+
 <body>
     <div class="container">
-        <div class="header">
-            <h1>🌍 G-Resconvt</h1>
-            <p>Professional Coordinate Conversion System - East Africa Edition</p>
-            <div class="subtitle">Powered by Georesolve Africa | World-Class Coordinate Transformation</div>
-        </div>
 
         <div class="content">
             <div class="tab-container">
@@ -632,7 +664,8 @@
                     <div class="section-title">Batch Processing</div>
 
                     <div class="info-box">
-                        <strong>CSV Format:</strong> Upload a CSV file with columns: Latitude,Longitude (or X,Y for projected systems).
+                        <strong>CSV Format:</strong> Upload a CSV file with columns: Latitude,Longitude (or X,Y for
+                        projected systems).
                         Optional: add a "Name" or "ID" column for reference.
                     </div>
 
@@ -780,7 +813,8 @@
 
                     <div class="form-group" style="margin-top: 20px;">
                         <label>Or Paste Coordinates (one per line: lat,lon or x,y)</label>
-                        <textarea id="batchInput" placeholder="Example:&#10;0.3476,32.5825&#10;-1.9441,30.0619&#10;-3.3731,29.9189"></textarea>
+                        <textarea id="batchInput"
+                            placeholder="Example:&#10;0.3476,32.5825&#10;-1.9441,30.0619&#10;-3.3731,29.9189"></textarea>
                     </div>
 
                     <div class="button-group">
@@ -1034,8 +1068,8 @@
 
                 // Format output
                 const isOutputGeographic = outputCRS.includes('4326') || outputCRS.includes('4209') ||
-                                          outputCRS.includes('4759') || outputCRS.includes('4210') ||
-                                          outputCRS.includes('4196');
+                    outputCRS.includes('4759') || outputCRS.includes('4210') ||
+                    outputCRS.includes('4196');
 
                 convertedResults = [{
                     inputX: coords[0].toFixed(6),
@@ -1081,7 +1115,7 @@
             if (!file) return;
 
             const reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 const content = e.target.result;
                 document.getElementById('batchInput').value = content;
             };
@@ -1096,8 +1130,8 @@
             // Check if first line is header
             const firstLine = lines[0].toLowerCase();
             const hasHeader = firstLine.includes('lat') || firstLine.includes('lon') ||
-                            firstLine.includes('x') || firstLine.includes('y') ||
-                            firstLine.includes('name') || firstLine.includes('id');
+                firstLine.includes('x') || firstLine.includes('y') ||
+                firstLine.includes('name') || firstLine.includes('id');
 
             const startIndex = hasHeader ? 1 : 0;
 
@@ -1167,8 +1201,8 @@
                         const result = transformCoordinates(coords, inputCRS, outputCRS);
 
                         const isOutputGeographic = outputCRS.includes('4326') || outputCRS.includes('4209') ||
-                                                  outputCRS.includes('4759') || outputCRS.includes('4210') ||
-                                                  outputCRS.includes('4196');
+                            outputCRS.includes('4759') || outputCRS.includes('4210') ||
+                            outputCRS.includes('4196');
 
                         convertedResults.push({
                             name: point.name,
@@ -1196,8 +1230,8 @@
                 });
 
                 const isOutputGeographic = outputCRS.includes('4326') || outputCRS.includes('4209') ||
-                                          outputCRS.includes('4759') || outputCRS.includes('4210') ||
-                                          outputCRS.includes('4196');
+                    outputCRS.includes('4759') || outputCRS.includes('4210') ||
+                    outputCRS.includes('4196');
 
                 displayResults(inputCRS, outputCRS, isOutputGeographic, true);
 
@@ -1225,7 +1259,7 @@
 
             // Build header
             const headers = showName ? ['Name', 'Input X', 'Input Y', 'Output X', 'Output Y'] :
-                                      ['Input X', 'Input Y', 'Output X', 'Output Y'];
+                ['Input X', 'Input Y', 'Output X', 'Output Y'];
 
             if (isOutputGeographic) {
                 headers.push('Output DD', 'Output DMS', 'Output DDM');
@@ -1369,5 +1403,13 @@
             clearAlerts();
         }
     </script>
+    <!-- Footer & Clients injected by footer-component.js -->
+
+    <!-- Local Components -->
+    <script src="js/header-component.js" defer></script>
+    <script src="footer-component.js" defer></script>
+
+    <script type="module" src="main.js"></script>
 </body>
+
 </html>

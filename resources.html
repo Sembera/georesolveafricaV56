@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resources | Georesolve Africa</title>
-    <meta name="description" content="Access our comprehensive geoscience resources including coordinate converters, unit calculators, groundwater tools, and technical documents. Free tools for professionals.">
-    <meta name="keywords" content="geoscience tools, coordinate converter, unit calculator, groundwater calculator, geological formulas, technical resources">
-    
+    <meta name="description"
+        content="Access our comprehensive geoscience resources including coordinate converters, unit calculators, groundwater tools, and technical documents. Free tools for professionals.">
+    <meta name="keywords"
+        content="geoscience tools, coordinate converter, unit calculator, groundwater calculator, geological formulas, technical resources">
+
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Geoscience Resources | Georesolve Africa">
     <meta property="og:description" content="Free geoscience tools and resources for professionals in East Africa.">
@@ -19,12 +22,18 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="footer-styles.css">
+
     <!-- Core Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
-    
+
     <style>
         :root {
             --primary-color: #345363;
@@ -56,85 +65,7 @@
             padding-top: 80px;
         }
 
-        /* Navigation */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
-            z-index: 1000;
-            transition: var(--transition-medium);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 80px;
-        }
-
-        .logo {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            text-decoration: none;
-            gap: 0.25rem;
-        }
-
-        .logo img {
-            height: 55px;
-            width: auto;
-        }
-
-        .logo-tagline {
-            font-size: 0.65rem;
-            color: var(--primary-color);
-            font-weight: 500;
-            font-style: italic;
-            letter-spacing: 0.5px;
-            margin-left: 2px;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 500;
-            transition: var(--transition-fast);
-            position: relative;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--primary-color);
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-color);
-            transition: var(--transition-fast);
-        }
-
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 100%;
-        }
+        /* Navigation moved to css/navbar.css */
 
         /* Page Header */
         .page-header {
@@ -686,7 +617,7 @@
 
         .contribution-section a:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
 
         @media (max-width: 768px) {
@@ -706,31 +637,17 @@
     </style>
     <link rel="stylesheet" href="footer-styles.css">
 </head>
+
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <img src="resources/logo/Georesolve Logo.png" alt="GeoResolve Logo">
-                <span class="logo-tagline">Data Driven, Research Based</span>
-            </a>
-            <ul class="nav-links">
-                <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="methods.html" class="nav-link">Methods</a></li>
-                <li><a href="applications.html" class="nav-link">Applications</a></li>
-                <li><a href="projects.html" class="nav-link">Projects</a></li>
-                <li><a href="resources.html" class="nav-link active">Resources</a></li>
-                <li><a href="news.html" class="nav-link">News</a></li>
-                <li><a href="contact.html" class="nav-link">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
+    <!-- Header injected by js/header-component.js -->
 
     <!-- Page Header -->
     <section class="page-header">
         <div class="container">
             <h1 class="page-title">Geoscience Resources</h1>
-            <p class="page-subtitle">Comprehensive collection of tools, calculators, and technical resources for geoscience professionals working in East Africa</p>
+            <p class="page-subtitle">Comprehensive collection of tools, calculators, and technical resources for
+                geoscience professionals working in East Africa</p>
         </div>
     </section>
 
@@ -739,47 +656,58 @@
         <div class="container">
             <div class="section-header animate-on-scroll">
                 <h2 class="section-title">Interactive Tools</h2>
-                <p class="section-subtitle">Professional-grade calculators and converters designed specifically for geoscience applications</p>
+                <p class="section-subtitle">Professional-grade calculators and converters designed specifically for
+                    geoscience applications</p>
             </div>
-            
+
             <div class="tools-grid">
                 <div class="tool-card animate-on-scroll" style="border: 2px solid #4DA34D;">
                     <div class="tool-icon">📋</div>
                     <h3 class="tool-title">G-Resolog - Borehole Logger</h3>
-                    <p class="tool-description">Professional borehole and geotechnical log creation tool with ESlog-compatible format. Create standardized drilling logs with depth intervals, soil descriptions, SPT data, and well construction details.</p>
+                    <p class="tool-description">Professional borehole and geotechnical log creation tool with
+                        ESlog-compatible format. Create standardized drilling logs with depth intervals, soil
+                        descriptions, SPT data, and well construction details.</p>
                     <ul class="tool-features">
                         <li>ESlog-compatible format</li>
                         <li>Real-time log preview</li>
                         <li>SPT test recording</li>
                         <li>Sample data included</li>
                     </ul>
-                    <a href="g-resolog.html" target="_blank" class="btn btn-primary" style="display: block; text-align: center; margin-top: 15px; text-decoration: none; background: #4DA34D; color: white; padding: 10px; border-radius: 4px;">Launch G-Resolog →</a>
+                    <a href="g-resolog.html" class="btn btn-primary"
+                        style="display: block; text-align: center; margin-top: 15px; text-decoration: none; background: #4DA34D; color: white; padding: 10px; border-radius: 4px;">Launch
+                        G-Resolog →</a>
                 </div>
 
                 <div class="tool-card animate-on-scroll" style="border: 2px solid #4DA34D;">
                     <div class="tool-icon">📍</div>
                     <h3 class="tool-title">G-Resconvt - Coordinate Converter</h3>
-                    <p class="tool-description">Professional coordinate system converter for East Africa supporting WGS84, Arc 1960, Rwanda 2000, and all regional CRS systems with batch CSV processing.</p>
+                    <p class="tool-description">Professional coordinate system converter for East Africa supporting
+                        WGS84, Arc 1960, Rwanda 2000, and all regional CRS systems with batch CSV processing.</p>
                     <ul class="tool-features">
                         <li>45+ East African CRS systems</li>
                         <li>DD, DMS, DDM, UTM formats</li>
                         <li>Single & Batch CSV conversion</li>
                         <li>Accurate datum transformations</li>
                     </ul>
-                    <a href="g-resconvt.html" target="_blank" class="btn btn-primary" style="display: block; text-align: center; margin-top: 15px; text-decoration: none; background: #4DA34D; color: white; padding: 10px; border-radius: 4px;">Launch G-Resconvt →</a>
+                    <a href="g-resconvt.html" class="btn btn-primary"
+                        style="display: block; text-align: center; margin-top: 15px; text-decoration: none; background: #4DA34D; color: white; padding: 10px; border-radius: 4px;">Launch
+                        G-Resconvt →</a>
                 </div>
 
                 <div class="tool-card animate-on-scroll" style="border: 2px solid #4DA34D;">
                     <div class="tool-icon">⚡</div>
                     <h3 class="tool-title">G-Geopylanner - Geophysics Survey Planner</h3>
-                    <p class="tool-description">Unified shallow geophysics survey design tool for MASW, seismic refraction, ERT, GPR, magnetic, and gravity surveys with visual layouts and CSV export.</p>
+                    <p class="tool-description">Unified shallow geophysics survey design tool for MASW, seismic
+                        refraction, ERT, GPR, magnetic, and gravity surveys with visual layouts and CSV export.</p>
                     <ul class="tool-features">
                         <li>7 geophysical survey modules</li>
                         <li>Auto depth estimation</li>
                         <li>Visual survey layouts</li>
                         <li>CSV export for field use</li>
                     </ul>
-                    <a href="g-geopylanner.html" target="_blank" class="btn btn-primary" style="display: block; text-align: center; margin-top: 15px; text-decoration: none; background: #4DA34D; color: white; padding: 10px; border-radius: 4px;">Launch G-Geopylanner →</a>
+                    <a href="g-geopylanner.html" class="btn btn-primary"
+                        style="display: block; text-align: center; margin-top: 15px; text-decoration: none; background: #4DA34D; color: white; padding: 10px; border-radius: 4px;">Launch
+                        G-Geopylanner →</a>
                 </div>
 
                 <!-- Future tools will be added here -->
@@ -797,14 +725,16 @@
         <div class="container">
             <div class="section-header animate-on-scroll">
                 <h2 class="section-title">Technical Resources & Documents</h2>
-                <p class="section-subtitle">Access our comprehensive library of geoscience documents, standards, and technical data</p>
+                <p class="section-subtitle">Access our comprehensive library of geoscience documents, standards, and
+                    technical data</p>
             </div>
 
             <!-- Filter Section -->
             <div class="filter-section" style="display: none;" id="resource-filters">
                 <div class="filter-header">
                     <h3 style="color: #345363; margin-bottom: 10px;">Filter Resources</h3>
-                    <p style="color: #666; font-size: 14px;">Narrow down your search by category, file type, or publication date</p>
+                    <p style="color: #666; font-size: 14px;">Narrow down your search by category, file type, or
+                        publication date</p>
                 </div>
 
                 <div class="filter-grid">
@@ -864,21 +794,27 @@
 
                 <div id="no-resources-message" class="alert alert-info" style="margin-top: 20px;">
                     <strong>Resource Library Coming Soon</strong>
-                    <p>We're building Eastern Africa's largest geoscientific knowledge base. Documents will be available here once uploaded from our content management system.</p>
+                    <p>We're building Eastern Africa's largest geoscientific knowledge base. Documents will be available
+                        here once uploaded from our content management system.</p>
                 </div>
             </div>
 
             <!-- Contribution Section -->
-            <div class="contribution-section" style="background: linear-gradient(135deg, #345363, #4DA34D); padding: 50px 30px; border-radius: 15px; color: white; margin-top: 40px;">
+            <div class="contribution-section"
+                style="background: linear-gradient(135deg, #345363, #4DA34D); padding: 50px 30px; border-radius: 15px; color: white; margin-top: 40px;">
                 <div class="section-header" style="text-align: center; margin-bottom: 40px;">
-                    <h2 style="color: white; font-size: 2em; margin-bottom: 15px;">Contribute to Our Resource Library</h2>
+                    <h2 style="color: white; font-size: 2em; margin-bottom: 15px;">Contribute to Our Resource Library
+                    </h2>
                     <p style="color: rgba(255,255,255,0.9); font-size: 1.1em; max-width: 800px; margin: 0 auto;">
-                        Share your expertise with the geoscience community. Submit technical resources, research papers, case studies, or tools to help build Eastern Africa's largest geoscientific knowledge base.
+                        Share your expertise with the geoscience community. Submit technical resources, research papers,
+                        case studies, or tools to help build Eastern Africa's largest geoscientific knowledge base.
                     </p>
                 </div>
 
-                <div class="contribution-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-bottom: 40px;">
-                    <div class="contribution-card" style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 12px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+                <div class="contribution-grid"
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-bottom: 40px;">
+                    <div class="contribution-card"
+                        style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 12px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
                         <div style="font-size: 2.5em; margin-bottom: 15px;">📄</div>
                         <h3 style="font-size: 1.2em; margin-bottom: 10px; color: white;">Research Papers</h3>
                         <p style="font-size: 0.9em; color: rgba(255,255,255,0.85); line-height: 1.5;">
@@ -886,7 +822,8 @@
                         </p>
                     </div>
 
-                    <div class="contribution-card" style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 12px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+                    <div class="contribution-card"
+                        style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 12px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
                         <div style="font-size: 2.5em; margin-bottom: 15px;">📊</div>
                         <h3 style="font-size: 1.2em; margin-bottom: 10px; color: white;">Case Studies</h3>
                         <p style="font-size: 0.9em; color: rgba(255,255,255,0.85); line-height: 1.5;">
@@ -894,7 +831,8 @@
                         </p>
                     </div>
 
-                    <div class="contribution-card" style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 12px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+                    <div class="contribution-card"
+                        style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 12px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
                         <div style="font-size: 2.5em; margin-bottom: 15px;">🛠️</div>
                         <h3 style="font-size: 1.2em; margin-bottom: 10px; color: white;">Tools & Templates</h3>
                         <p style="font-size: 0.9em; color: rgba(255,255,255,0.85); line-height: 1.5;">
@@ -902,7 +840,8 @@
                         </p>
                     </div>
 
-                    <div class="contribution-card" style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 12px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+                    <div class="contribution-card"
+                        style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 12px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
                         <div style="font-size: 2.5em; margin-bottom: 15px;">💡</div>
                         <h3 style="font-size: 1.2em; margin-bottom: 10px; color: white;">Suggest New Tools</h3>
                         <p style="font-size: 0.9em; color: rgba(255,255,255,0.85); line-height: 1.5;">
@@ -912,13 +851,16 @@
                 </div>
 
                 <div style="text-align: center; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                    <a href="contact.html" class="btn" style="background: white; color: #345363; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: 600; transition: all 0.3s;">
+                    <a href="contact.html" class="btn"
+                        style="background: white; color: #345363; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: 600; transition: all 0.3s;">
                         Submit Your Resource
                     </a>
-                    <a href="contact.html" class="btn" style="background: rgba(255,255,255,0.2); color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: 600; border: 2px solid white; transition: all 0.3s;">
+                    <a href="contact.html" class="btn"
+                        style="background: rgba(255,255,255,0.2); color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: 600; border: 2px solid white; transition: all 0.3s;">
                         Suggest a Tool
                     </a>
-                    <a href="contact.html" class="btn" style="background: transparent; color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: 600; border: 2px solid white; transition: all 0.3s;">
+                    <a href="contact.html" class="btn"
+                        style="background: transparent; color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: 600; border: 2px solid white; transition: all 0.3s;">
                         Contact Our Team
                     </a>
                 </div>
@@ -958,11 +900,13 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label class="form-label">Latitude</label>
-                            <input type="number" class="form-input" name="latitude" placeholder="Enter latitude" step="any">
+                            <input type="number" class="form-input" name="latitude" placeholder="Enter latitude"
+                                step="any">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Longitude</label>
-                            <input type="number" class="form-input" name="longitude" placeholder="Enter longitude" step="any">
+                            <input type="number" class="form-input" name="longitude" placeholder="Enter longitude"
+                                step="any">
                         </div>
                     </div>
 
@@ -1032,7 +976,8 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label class="form-label">Input Value</label>
-                            <input type="number" class="form-input" name="input-value" placeholder="Enter value" step="any">
+                            <input type="number" class="form-input" name="input-value" placeholder="Enter value"
+                                step="any">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Output Unit</label>
@@ -1089,22 +1034,26 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label class="form-label">Transmissivity (m²/day)</label>
-                            <input type="number" class="form-input" name="transmissivity" placeholder="Enter transmissivity" step="any">
+                            <input type="number" class="form-input" name="transmissivity"
+                                placeholder="Enter transmissivity" step="any">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Storage Coefficient</label>
-                            <input type="number" class="form-input" name="storage-coefficient" placeholder="Enter storage coefficient" step="any">
+                            <input type="number" class="form-input" name="storage-coefficient"
+                                placeholder="Enter storage coefficient" step="any">
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
                             <label class="form-label">Well Radius (m)</label>
-                            <input type="number" class="form-input" name="well-radius" placeholder="Enter well radius" step="any">
+                            <input type="number" class="form-input" name="well-radius" placeholder="Enter well radius"
+                                step="any">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Pumping Rate (m³/day)</label>
-                            <input type="number" class="form-input" name="pumping-rate" placeholder="Enter pumping rate" step="any">
+                            <input type="number" class="form-input" name="pumping-rate" placeholder="Enter pumping rate"
+                                step="any">
                         </div>
                     </div>
 
@@ -1122,7 +1071,7 @@
 
     <script>
         // Initialize resources page
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             setupToolCards();
             setupModals();
             setupForms();
@@ -1176,12 +1125,12 @@
                 showNotification('Resource file not available yet', 'info');
                 return;
             }
-            
+
             const link = document.createElement('a');
             link.href = url;
             link.download = filename;
             link.click();
-            
+
             showNotification(`Downloading ${filename}...`, 'success');
         }
 
@@ -1216,9 +1165,9 @@
         // Setup tool cards
         function setupToolCards() {
             const toolCards = document.querySelectorAll('.tool-card');
-            
+
             toolCards.forEach(card => {
-                card.addEventListener('click', function() {
+                card.addEventListener('click', function () {
                     const toolType = this.dataset.tool;
                     openToolModal(toolType);
                 });
@@ -1240,21 +1189,21 @@
             const closeButtons = document.querySelectorAll('.modal-close');
 
             closeButtons.forEach(button => {
-                button.addEventListener('click', function() {
+                button.addEventListener('click', function () {
                     const modal = this.closest('.tool-modal');
                     closeModal(modal);
                 });
             });
 
             modals.forEach(modal => {
-                modal.addEventListener('click', function(e) {
+                modal.addEventListener('click', function (e) {
                     if (e.target === modal) {
                         closeModal(modal);
                     }
                 });
             });
 
-            document.addEventListener('keydown', function(e) {
+            document.addEventListener('keydown', function (e) {
                 if (e.key === 'Escape') {
                     const activeModal = document.querySelector('.tool-modal.active');
                     if (activeModal) {
@@ -1275,7 +1224,7 @@
             // Coordinate converter form
             const coordinateForm = document.querySelector('.coordinate-form');
             if (coordinateForm) {
-                coordinateForm.addEventListener('submit', function(e) {
+                coordinateForm.addEventListener('submit', function (e) {
                     e.preventDefault();
                     handleCoordinateConversion();
                 });
@@ -1284,7 +1233,7 @@
             // Unit converter form
             const unitForm = document.querySelector('.unit-form');
             if (unitForm) {
-                unitForm.addEventListener('submit', function(e) {
+                unitForm.addEventListener('submit', function (e) {
                     e.preventDefault();
                     handleUnitConversion();
                 });
@@ -1293,7 +1242,7 @@
             // Groundwater calculator form
             const groundwaterForm = document.querySelector('.groundwater-form');
             if (groundwaterForm) {
-                groundwaterForm.addEventListener('submit', function(e) {
+                groundwaterForm.addEventListener('submit', function (e) {
                     e.preventDefault();
                     handleGroundwaterCalculation();
                 });
@@ -1304,7 +1253,7 @@
         function handleCoordinateConversion() {
             const form = document.querySelector('.coordinate-form');
             const formData = new FormData(form);
-            
+
             const inputSystem = formData.get('input-system');
             const outputSystem = formData.get('output-system');
             const latitude = parseFloat(formData.get('latitude'));
@@ -1315,13 +1264,13 @@
 
             // Simplified coordinate conversion logic
             let result = {};
-            
+
             if (inputSystem === 'latlong' && outputSystem === 'utm') {
                 // Convert Lat/Long to UTM (simplified)
                 const zone = Math.floor((longitude + 180) / 6) + 1;
                 const eastingCalc = 500000 + (longitude - (zone - 1) * 6 - 3) * 111320 * Math.cos(latitude * Math.PI / 180);
                 const northingCalc = latitude * 110540;
-                
+
                 result = {
                     zone: zone + 'N',
                     easting: Math.round(eastingCalc),
@@ -1334,7 +1283,7 @@
                 const zoneNumber = parseInt(utmZone);
                 const lon = (zoneNumber - 1) * 6 - 180 + 3;
                 const lat = northing / 110540;
-                
+
                 result = {
                     latitude: lat.toFixed(6),
                     longitude: lon.toFixed(6),
@@ -1371,7 +1320,7 @@
         function handleUnitConversion() {
             const form = document.querySelector('.unit-form');
             const formData = new FormData(form);
-            
+
             const category = formData.get('unit-category');
             const inputUnit = formData.get('input-unit');
             const outputUnit = formData.get('output-unit');
@@ -1408,7 +1357,7 @@
         function handleGroundwaterCalculation() {
             const form = document.querySelector('.groundwater-form');
             const formData = new FormData(form);
-            
+
             const calculationType = formData.get('calculation-type');
             const aquiferType = formData.get('aquifer-type');
             const transmissivity = parseFloat(formData.get('transmissivity'));
@@ -1460,7 +1409,7 @@
             link.href = '#';
             link.download = filename;
             link.click();
-            
+
             // Show notification
             showNotification(`Downloading ${filename}...`, 'info');
         }
@@ -1483,13 +1432,13 @@
                 transform: translateX(100%);
                 transition: transform 0.3s ease;
             `;
-            
+
             document.body.appendChild(notification);
-            
+
             setTimeout(() => {
                 notification.style.transform = 'translateX(0)';
             }, 100);
-            
+
             setTimeout(() => {
                 notification.style.transform = 'translateX(100%)';
                 setTimeout(() => {
@@ -1564,7 +1513,7 @@
 
         // Initialize resources when page loads
         // This will be connected to Contentful later
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // When resources are available from Contentful, uncomment these lines:
             // document.getElementById('resource-filters').style.display = 'block';
             // document.getElementById('resources-table-container').style.display = 'block';
@@ -1573,121 +1522,18 @@
         });
     </script>
 
-    <!-- Clients Section -->
-    <section class="clients-section">
-        <div class="container">
-            <div class="section-header animate-on-scroll">
-                <h2 class="section-title">Trusted by Leading Organizations</h2>
-                <p class="section-subtitle">GeoResolve partners with government agencies, consulting firms, and private sector clients across East Africa</p>
-            </div>
-
-            <div class="clients-grid animate-on-scroll">
-                <div class="client-card">
-                    <img src="resources/Clients/zv-consulting.png" alt="ZV Consulting Ltd - Rwanda" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/atc-uganda.png" alt="ATC Uganda" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/ministry-energy-uganda.png" alt="Ministry of Energy - Uganda" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/fichtner.png.png" alt="Fichtner GmbH - Germany" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/Artelia.png" alt="Artelia - France" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/Aecom.png" alt="Aecom - International" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/Songa.png" alt="Songa Energy - Burundi" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/virunga-power.png" alt="Virunga Power - Burundi" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/anzana-electric.png" alt="Anzana Electric Group - Burundi" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/MBW.png" alt="MBW Consulting - Uganda" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/razel-bec.png" alt="Razel-Bec - International" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/Tectoni.png" alt="Tectoni Africa - Uganda" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/RSV.png" alt="RSV Engineering - Uganda" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/paraa.png" alt="Paraa Safari Lodge - Uganda" class="client-logo">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>GeoResolve</h3>
-                    <p class="footer-tagline">Data-Driven, Research-Based</p>
-                    <p>Premier geoscience consulting firm providing expert geophysical, geotechnical, and hydrogeology services across Uganda, Rwanda, Burundi, and East Africa.</p>
-                    <div class="footer-social">
-                        <a href="#" aria-label="LinkedIn">LinkedIn</a>
-                        <a href="#" aria-label="Twitter">Twitter</a>
-                        <a href="#" aria-label="Email">Email</a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h3>Services</h3>
-                    <ul class="footer-links">
-                        <li><a href="methods.html#geophysics">Geophysical Surveys</a></li>
-                        <li><a href="methods.html#geotechnical">Geotechnical Investigation</a></li>
-                        <li><a href="methods.html#hydrogeology">Hydrogeology Studies</a></li>
-                        <li><a href="methods.html#drilling">Drilling Services</a></li>
-                        <li><a href="methods.html#geospatial">Geospatial Services</a></li>
-                        <li><a href="methods.html#surveys">Topographic Surveys</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Resources</h3>
-                    <ul class="footer-links">
-                        <li><a href="g-resolog.html">G-ResoLog</a></li>
-                        <li><a href="g-resconvt.html">G-ResConvt</a></li>
-                        <li><a href="g-geopylanner.html">G-GeoPyLanner</a></li>
-                        <li><a href="resources.html">All Tools</a></li>
-                        <li><a href="news.html">News & Updates</a></li>
-                        <li><a href="projects.html">Projects</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Contact</h3>
-                    <ul class="footer-contact">
-                        <li><strong>Head Office:</strong><br>Kasangati, Uganda<br>HMK Building, Gayaza Road</li>
-                        <li><strong>Phone:</strong><br>+256 771 999 614<br>+256 772 876 300</li>
-                        <li><strong>Email:</strong><br><a href="mailto:info@georesolveafrica.com">info@georesolveafrica.com</a></li>
-                        <li><strong>Hours:</strong><br>Mon-Fri: 8:00 AM - 6:00 PM<br>Sat: 9:00 AM - 2:00 PM</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <div class="footer-bottom-content">
-                    <p>&copy; 2025 GeoResolve. All rights reserved.</p>
-                    <div class="footer-bottom-links">
-                        <a href="contact.html">Privacy Policy</a>
-                        <a href="contact.html">Terms of Service</a>
-                        <a href="contact.html">Contact</a>
-                    </div>
-                    <p class="footer-location">Serving Uganda, Rwanda, Burundi, DRC, South Sudan & East Africa</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <!-- Footer & Clients injected by footer-component.js -->
 
     <script src="main.js"></script>
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js" defer></script>
+
+    <!-- Local Components -->
+    <script src="js/header-component.js" defer></script>
+    <script src="footer-component.js" defer></script>
+
+    <script type="module" src="main.js"></script>
 </body>
+
 </html>

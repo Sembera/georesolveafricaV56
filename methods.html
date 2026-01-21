@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geoscience Methods | GeoResolve - Geophysical, Geotechnical, GIS Services Uganda, Rwanda, Burundi</title>
-    <meta name="description" content="Expert geoscience methods: Seismic Refraction, ERT surveys, MASW, geotechnical investigation, drilling, drone surveys, GIS analysis, topographic & cadastral surveys across Uganda, Rwanda, Burundi & East Africa.">
-    <meta name="keywords" content="seismic refraction Uganda, ERT surveys East Africa, MASW surveys Rwanda, geotechnical investigation Burundi, diamond drilling Uganda, drone surveys East Africa, GIS data acquisition Uganda, topographic surveys Rwanda, cadastral surveys Burundi, hydrogeology studies, slope stability analysis, geophysical methods East Africa">
-    
+    <meta name="description"
+        content="Expert geoscience methods: Seismic Refraction, ERT surveys, MASW, geotechnical investigation, drilling, drone surveys, GIS analysis, topographic & cadastral surveys across Uganda, Rwanda, Burundi & East Africa.">
+    <meta name="keywords"
+        content="seismic refraction Uganda, ERT surveys East Africa, MASW surveys Rwanda, geotechnical investigation Burundi, diamond drilling Uganda, drone surveys East Africa, GIS data acquisition Uganda, topographic surveys Rwanda, cadastral surveys Burundi, hydrogeology studies, slope stability analysis, geophysical methods East Africa">
+
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Geoscience Methods | Georesolve Africa">
-    <meta property="og:description" content="Comprehensive geoscience methods for infrastructure, mining, and water projects in East Africa.">
+    <meta property="og:description"
+        content="Comprehensive geoscience methods for infrastructure, mining, and water projects in East Africa.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://georesolve.africa/methods.html">
 
@@ -19,8 +23,12 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/style.css">
+
     <!-- Core Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
@@ -57,87 +65,11 @@
             color: var(--text-dark);
             background-color: var(--background-light);
             padding-top: 80px;
+            padding-bottom: 15vw;
+            /* Extra clearance for sticky header + tabs + footer */
         }
 
-        /* Navigation */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
-            z-index: 1000;
-            transition: var(--transition-medium);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 80px;
-        }
-
-        .logo {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            text-decoration: none;
-            gap: 0.25rem;
-        }
-
-        .logo img {
-            height: 55px;
-            width: auto;
-        }
-
-        .logo-tagline {
-            font-size: 0.65rem;
-            color: var(--primary-color);
-            font-weight: 500;
-            font-style: italic;
-            letter-spacing: 0.5px;
-            margin-left: 2px;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 500;
-            transition: var(--transition-fast);
-            position: relative;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--primary-color);
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-color);
-            transition: var(--transition-fast);
-        }
-
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 100%;
-        }
+        /* Navigation moved to css/navbar.css */
 
         /* Page Header */
         .page-header {
@@ -284,7 +216,7 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
             color: white;
             padding: 2rem;
         }
@@ -556,13 +488,22 @@
                 gap: 1rem;
             }
 
+            .comparison-table-container {
+                overflow-x: auto;
+                margin-bottom: 2rem;
+                border-radius: 15px;
+                box-shadow: var(--shadow-light);
+            }
+
             .comparison-table {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
+                min-width: 800px;
+                /* Ensure table doesn't squash */
             }
 
             .comparison-table th,
             .comparison-table td {
-                padding: 1rem;
+                padding: 1rem 0.75rem;
             }
         }
 
@@ -581,31 +522,17 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <img src="resources/logo/Georesolve Logo.png" alt="GeoResolve Logo">
-                <span class="logo-tagline">Data Driven, Research Based</span>
-            </a>
-            <ul class="nav-links">
-                <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="methods.html" class="nav-link active">Methods</a></li>
-                <li><a href="applications.html" class="nav-link">Applications</a></li>
-                <li><a href="projects.html" class="nav-link">Projects</a></li>
-                <li><a href="resources.html" class="nav-link">Resources</a></li>
-                <li><a href="news.html" class="nav-link">News</a></li>
-                <li><a href="contact.html" class="nav-link">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
+    <!-- Header injected by js/header-component.js -->
 
     <!-- Page Header -->
     <section class="page-header">
         <div class="container">
             <h1 class="page-title">Geoscience Methods</h1>
-            <p class="page-subtitle">Advanced techniques and technologies for comprehensive geological investigation and analysis across East Africa</p>
+            <p class="page-subtitle">Advanced techniques and technologies for comprehensive geological investigation and
+                analysis across East Africa</p>
         </div>
     </section>
 
@@ -626,9 +553,12 @@
             <div class="method-grid animate-on-scroll">
                 <div class="method-text">
                     <h2>Geophysical Surveys</h2>
-                    <p>Our geophysical surveys employ advanced techniques to map subsurface structures, identify geological features, and characterize physical properties of earth materials without invasive procedures.</p>
-                    <p>Using state-of-the-art equipment and methodologies, we provide detailed subsurface imaging for infrastructure planning, mineral exploration, and environmental assessment projects.</p>
-                    
+                    <p>Our geophysical surveys employ advanced techniques to map subsurface structures, identify
+                        geological features, and characterize physical properties of earth materials without invasive
+                        procedures.</p>
+                    <p>Using state-of-the-art equipment and methodologies, we provide detailed subsurface imaging for
+                        infrastructure planning, mineral exploration, and environmental assessment projects.</p>
+
                     <ul class="method-features">
                         <li>Seismic refraction and reflection surveys</li>
                         <li>Electrical resistivity tomography (ERT)</li>
@@ -655,9 +585,11 @@
             <div class="method-grid animate-on-scroll">
                 <div class="method-text">
                     <h2>Geotechnical Engineering</h2>
-                    <p>Comprehensive soil and rock mechanics analysis to support safe and economical design of foundations, slopes, and underground structures in diverse geological conditions.</p>
-                    <p>Our geotechnical services ensure structural integrity and long-term stability for infrastructure projects across East Africa's varied terrain.</p>
-                    
+                    <p>Comprehensive soil and rock mechanics analysis to support safe and economical design of
+                        foundations, slopes, and underground structures in diverse geological conditions.</p>
+                    <p>Our geotechnical services ensure structural integrity and long-term stability for infrastructure
+                        projects across East Africa's varied terrain.</p>
+
                     <ul class="method-features">
                         <li>Soil classification and characterization</li>
                         <li>Foundation analysis and design</li>
@@ -684,9 +616,11 @@
             <div class="method-grid animate-on-scroll">
                 <div class="method-text">
                     <h2>Hydrogeology</h2>
-                    <p>Groundwater resource assessment and management services to ensure sustainable water supply for communities, agriculture, and industrial development across East Africa.</p>
-                    <p>Our hydrogeological expertise combines geological understanding with advanced testing methods to optimize groundwater development and protection.</p>
-                    
+                    <p>Groundwater resource assessment and management services to ensure sustainable water supply for
+                        communities, agriculture, and industrial development across East Africa.</p>
+                    <p>Our hydrogeological expertise combines geological understanding with advanced testing methods to
+                        optimize groundwater development and protection.</p>
+
                     <ul class="method-features">
                         <li>Aquifer characterization and mapping</li>
                         <li>Well design and installation</li>
@@ -713,9 +647,11 @@
             <div class="method-grid animate-on-scroll">
                 <div class="method-text">
                     <h2>Drilling Services</h2>
-                    <p>Professional drilling services for exploration, geotechnical investigation, and groundwater development using advanced drilling equipment and techniques.</p>
-                    <p>Our drilling capabilities support a wide range of applications from mineral exploration to water well construction across diverse geological conditions.</p>
-                    
+                    <p>Professional drilling services for exploration, geotechnical investigation, and groundwater
+                        development using advanced drilling equipment and techniques.</p>
+                    <p>Our drilling capabilities support a wide range of applications from mineral exploration to water
+                        well construction across diverse geological conditions.</p>
+
                     <ul class="method-features">
                         <li>Mineral exploration drilling</li>
                         <li>Geotechnical core drilling</li>
@@ -742,8 +678,12 @@
             <div class="method-grid animate-on-scroll">
                 <div class="method-text">
                     <h2>Geospatial Services & Surveys</h2>
-                    <p>Advanced geospatial services combining modern drone technology, GIS data acquisition and analysis, topographic surveys, and cadastral mapping for comprehensive spatial solutions across East Africa.</p>
-                    <p>Our geospatial team integrates cutting-edge technology with traditional surveying methods to deliver accurate, high-resolution spatial data for infrastructure, land management, and development projects.</p>
+                    <p>Advanced geospatial services combining modern drone technology, GIS data acquisition and
+                        analysis, topographic surveys, and cadastral mapping for comprehensive spatial solutions across
+                        East Africa.</p>
+                    <p>Our geospatial team integrates cutting-edge technology with traditional surveying methods to
+                        deliver accurate, high-resolution spatial data for infrastructure, land management, and
+                        development projects.</p>
 
                     <ul class="method-features">
                         <li>Drone surveys and aerial photogrammetry</li>
@@ -775,21 +715,31 @@
                     </div>
                 </div>
                 <div class="method-text">
-                    <h3 style="color: var(--primary-color); font-size: 1.8rem; margin-bottom: 1rem;">Drone Survey Applications</h3>
-                    <p><strong>Aerial Photogrammetry:</strong> High-resolution orthophotos and 3D models for site planning, construction monitoring, and environmental assessment.</p>
-                    <p><strong>LiDAR Integration:</strong> Precision terrain mapping penetrating vegetation for accurate topographic data in challenging environments.</p>
-                    <p><strong>Infrastructure Monitoring:</strong> Regular aerial surveys for dam safety, pipeline corridors, road networks, and large infrastructure projects.</p>
-                    <p><strong>Volumetric Analysis:</strong> Stockpile measurements, cut-and-fill calculations, and earthwork volume estimation for mining and construction.</p>
+                    <h3 style="color: var(--primary-color); font-size: 1.8rem; margin-bottom: 1rem;">Drone Survey
+                        Applications</h3>
+                    <p><strong>Aerial Photogrammetry:</strong> High-resolution orthophotos and 3D models for site
+                        planning, construction monitoring, and environmental assessment.</p>
+                    <p><strong>LiDAR Integration:</strong> Precision terrain mapping penetrating vegetation for accurate
+                        topographic data in challenging environments.</p>
+                    <p><strong>Infrastructure Monitoring:</strong> Regular aerial surveys for dam safety, pipeline
+                        corridors, road networks, and large infrastructure projects.</p>
+                    <p><strong>Volumetric Analysis:</strong> Stockpile measurements, cut-and-fill calculations, and
+                        earthwork volume estimation for mining and construction.</p>
                 </div>
             </div>
 
             <div class="method-grid animate-on-scroll" style="margin-top: 4rem;">
                 <div class="method-text">
-                    <h3 style="color: var(--primary-color); font-size: 1.8rem; margin-bottom: 1rem;">GIS Data Acquisition & Analysis</h3>
-                    <p><strong>Spatial Database Development:</strong> Custom GIS databases integrating geological, geotechnical, and environmental data for comprehensive project management.</p>
-                    <p><strong>Multi-Source Data Integration:</strong> Combining satellite imagery, field surveys, drone data, and existing datasets for holistic spatial analysis.</p>
-                    <p><strong>Geospatial Modeling:</strong> Terrain analysis, watershed delineation, visibility studies, and site suitability assessments using advanced GIS tools.</p>
-                    <p><strong>Web GIS Solutions:</strong> Interactive web-based mapping platforms for data sharing and stakeholder collaboration.</p>
+                    <h3 style="color: var(--primary-color); font-size: 1.8rem; margin-bottom: 1rem;">GIS Data
+                        Acquisition & Analysis</h3>
+                    <p><strong>Spatial Database Development:</strong> Custom GIS databases integrating geological,
+                        geotechnical, and environmental data for comprehensive project management.</p>
+                    <p><strong>Multi-Source Data Integration:</strong> Combining satellite imagery, field surveys, drone
+                        data, and existing datasets for holistic spatial analysis.</p>
+                    <p><strong>Geospatial Modeling:</strong> Terrain analysis, watershed delineation, visibility
+                        studies, and site suitability assessments using advanced GIS tools.</p>
+                    <p><strong>Web GIS Solutions:</strong> Interactive web-based mapping platforms for data sharing and
+                        stakeholder collaboration.</p>
                 </div>
                 <div class="method-visual">
                     <img src="resources/Methods/GIS Data Acquisition & Analysis.jpeg" alt="GIS data analysis">
@@ -809,11 +759,16 @@
                     </div>
                 </div>
                 <div class="method-text">
-                    <h3 style="color: var(--primary-color); font-size: 1.8rem; margin-bottom: 1rem;">Topographic & Cadastral Surveys</h3>
-                    <p><strong>Precision Topographic Mapping:</strong> Detailed contour mapping, DTM/DEM generation for engineering design, route alignment, and drainage planning.</p>
-                    <p><strong>Cadastral Surveys:</strong> Land boundary surveys, title survey plans, subdivision layouts, and legal boundary determination for property transactions.</p>
-                    <p><strong>Control Network Establishment:</strong> GNSS base stations and benchmark networks for large-scale projects across Uganda, Rwanda, and Burundi.</p>
-                    <p><strong>Engineering Surveys:</strong> Setting-out surveys, as-built documentation, deformation monitoring, and construction quality control.</p>
+                    <h3 style="color: var(--primary-color); font-size: 1.8rem; margin-bottom: 1rem;">Topographic &
+                        Cadastral Surveys</h3>
+                    <p><strong>Precision Topographic Mapping:</strong> Detailed contour mapping, DTM/DEM generation for
+                        engineering design, route alignment, and drainage planning.</p>
+                    <p><strong>Cadastral Surveys:</strong> Land boundary surveys, title survey plans, subdivision
+                        layouts, and legal boundary determination for property transactions.</p>
+                    <p><strong>Control Network Establishment:</strong> GNSS base stations and benchmark networks for
+                        large-scale projects across Uganda, Rwanda, and Burundi.</p>
+                    <p><strong>Engineering Surveys:</strong> Setting-out surveys, as-built documentation, deformation
+                        monitoring, and construction quality control.</p>
                 </div>
             </div>
         </div>
@@ -824,44 +779,51 @@
         <div class="container">
             <div class="section-header animate-on-scroll">
                 <h2 class="section-title">Method Applications</h2>
-                <p class="section-subtitle">Our geoscience methods are applied across diverse sectors to solve complex geological challenges</p>
+                <p class="section-subtitle">Our geoscience methods are applied across diverse sectors to solve complex
+                    geological challenges</p>
             </div>
-            
+
             <div class="applications-grid">
                 <div class="application-card animate-on-scroll">
                     <div class="application-icon">🏗</div>
                     <h3 class="application-title">Infrastructure Development</h3>
-                    <p class="application-description">Foundation analysis, slope stability assessment, and subsurface investigation for roads, bridges, dams, and buildings.</p>
+                    <p class="application-description">Foundation analysis, slope stability assessment, and subsurface
+                        investigation for roads, bridges, dams, and buildings.</p>
                 </div>
-                
+
                 <div class="application-card animate-on-scroll">
                     <div class="application-icon">⛏</div>
                     <h3 class="application-title">Mining & Exploration</h3>
-                    <p class="application-description">Mineral exploration, resource estimation, and mine planning through advanced geophysical and geological techniques.</p>
+                    <p class="application-description">Mineral exploration, resource estimation, and mine planning
+                        through advanced geophysical and geological techniques.</p>
                 </div>
-                
+
                 <div class="application-card animate-on-scroll">
                     <div class="application-icon">💧</div>
                     <h3 class="application-title">Water Resources</h3>
-                    <p class="application-description">Groundwater exploration, well field development, and aquifer management for sustainable water supply.</p>
+                    <p class="application-description">Groundwater exploration, well field development, and aquifer
+                        management for sustainable water supply.</p>
                 </div>
-                
+
                 <div class="application-card animate-on-scroll">
                     <div class="application-icon">⚠</div>
                     <h3 class="application-title">Environmental Assessment</h3>
-                    <p class="application-description">Site characterization, contamination assessment, and remediation planning for environmental protection.</p>
+                    <p class="application-description">Site characterization, contamination assessment, and remediation
+                        planning for environmental protection.</p>
                 </div>
-                
+
                 <div class="application-card animate-on-scroll">
                     <div class="application-icon">🔥</div>
                     <h3 class="application-title">Energy Projects</h3>
-                    <p class="application-description">Geothermal exploration, hydrocarbon assessment, and renewable energy site characterization.</p>
+                    <p class="application-description">Geothermal exploration, hydrocarbon assessment, and renewable
+                        energy site characterization.</p>
                 </div>
-                
+
                 <div class="application-card animate-on-scroll">
                     <div class="application-icon">📊</div>
                     <h3 class="application-title">Research & Development</h3>
-                    <p class="application-description">Academic research, geological mapping, and scientific investigation for advancing geological knowledge.</p>
+                    <p class="application-description">Academic research, geological mapping, and scientific
+                        investigation for advancing geological knowledge.</p>
                 </div>
             </div>
         </div>
@@ -872,9 +834,10 @@
         <div class="container">
             <div class="section-header animate-on-scroll">
                 <h2 class="section-title">Method Comparison Tool</h2>
-                <p class="section-subtitle">Compare different geoscience methods to select the most appropriate approach for your project</p>
+                <p class="section-subtitle">Compare different geoscience methods to select the most appropriate approach
+                    for your project</p>
             </div>
-            
+
             <div class="comparison-controls animate-on-scroll">
                 <div class="method-selector">
                     <input type="checkbox" id="seismic" value="seismic" class="method-checkbox" checked>
@@ -894,7 +857,7 @@
                 </div>
                 <button class="toggle-all-btn" id="toggleAllMethods">Select All</button>
             </div>
-            
+
             <div class="comparison-table-container animate-on-scroll">
                 <table class="comparison-table">
                     <thead>
@@ -986,9 +949,10 @@
         <div class="container">
             <div class="section-header animate-on-scroll">
                 <h2 class="section-title">Equipment & Technology</h2>
-                <p class="section-subtitle">Advanced instrumentation and equipment for precise geological investigation</p>
+                <p class="section-subtitle">Advanced instrumentation and equipment for precise geological investigation
+                </p>
             </div>
-            
+
             <div class="equipment-grid">
                 <div class="equipment-card animate-on-scroll">
                     <div class="equipment-image">
@@ -996,152 +960,132 @@
                     </div>
                     <div class="equipment-info">
                         <h3 class="equipment-title">Seismic Instruments</h3>
-                        <p class="equipment-description">Multi-channel seismographs, geophones, and energy sources for refraction and reflection surveys</p>
+                        <p class="equipment-description">Multi-channel seismographs, geophones, and energy sources for
+                            refraction and reflection surveys</p>
                     </div>
                 </div>
-                
+
                 <div class="equipment-card animate-on-scroll">
                     <div class="equipment-image">
                         <img src="resources/Methods/Electrical Systems.jpeg" alt="Electrical survey equipment">
                     </div>
                     <div class="equipment-info">
                         <h3 class="equipment-title">Electrical Systems</h3>
-                        <p class="equipment-description">Multi-electrode resistivity meters and data acquisition systems for ERT surveys</p>
+                        <p class="equipment-description">Multi-electrode resistivity meters and data acquisition systems
+                            for ERT surveys</p>
                     </div>
                 </div>
-                
+
                 <div class="equipment-card animate-on-scroll">
                     <div class="equipment-image">
                         <img src="resources/Methods/Drilling Rigs.jpeg" alt="Drilling equipment">
                     </div>
                     <div class="equipment-info">
                         <h3 class="equipment-title">Drilling Rigs</h3>
-                        <p class="equipment-description">Versatile drilling systems for geotechnical and exploration applications</p>
+                        <p class="equipment-description">Versatile drilling systems for geotechnical and exploration
+                            applications</p>
                     </div>
                 </div>
-                
+
                 <div class="equipment-card animate-on-scroll">
                     <div class="equipment-image">
                         <img src="resources/Methods/Mapping Tools.jpeg" alt="Field mapping equipment">
                     </div>
                     <div class="equipment-info">
                         <h3 class="equipment-title">Mapping Tools</h3>
-                        <p class="equipment-description">GPS systems, total stations, and digital mapping equipment for precise geological surveys</p>
+                        <p class="equipment-description">GPS systems, total stations, and digital mapping equipment for
+                            precise geological surveys</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Clients Section -->
-    <section class="clients-section">
-        <div class="container">
-            <div class="section-header animate-on-scroll">
-                <h2 class="section-title">Trusted by Leading Organizations</h2>
-                <p class="section-subtitle">GeoResolve partners with government agencies, consulting firms, and private sector clients across East Africa</p>
-            </div>
+    <!-- Footer & Clients injected by footer-component.js -->
 
-            <div class="clients-grid animate-on-scroll">
-                <div class="client-card">
-                    <img src="resources/Clients/zv-consulting.png" alt="ZV Consulting Ltd - Rwanda" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/atc-uganda.png" alt="ATC Uganda" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/ministry-energy-uganda.png" alt="Ministry of Energy - Uganda" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/fichtner.png.png" alt="Fichtner GmbH - Germany" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/Artelia.png" alt="Artelia - France" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/Aecom.png" alt="Aecom - International" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/Songa.png" alt="Songa Energy - Burundi" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/virunga-power.png" alt="Virunga Power - Burundi" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/anzana-electric.png" alt="Anzana Electric Group - Burundi" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/MBW.png" alt="MBW Consulting - Uganda" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/razel-bec.png" alt="Razel-Bec - International" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/Tectoni.png" alt="Tectoni Africa - Uganda" class="client-logo">
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js" defer></script>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>GeoResolve</h3>
-                    <p class="footer-tagline">Data-Driven, Research-Based</p>
-                    <p>Premier geoscience consulting firm providing expert geophysical, geotechnical, and hydrogeology services across Uganda, Rwanda, Burundi, and East Africa.</p>
-                    <div class="footer-social">
-                        <a href="#" aria-label="LinkedIn">LinkedIn</a>
-                        <a href="#" aria-label="Twitter">Twitter</a>
-                        <a href="#" aria-label="Email">Email</a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h3>Services</h3>
-                    <ul class="footer-links">
-                        <li><a href="methods.html#geophysics">Geophysical Surveys</a></li>
-                        <li><a href="methods.html#geotechnical">Geotechnical Investigation</a></li>
-                        <li><a href="methods.html#hydrogeology">Hydrogeology Studies</a></li>
-                        <li><a href="methods.html#drilling">Drilling Services</a></li>
-                        <li><a href="methods.html#geospatial">Geospatial Services</a></li>
-                        <li><a href="methods.html#surveys">Topographic Surveys</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Resources</h3>
-                    <ul class="footer-links">
-                        <li><a href="g-resolog.html">G-ResoLog</a></li>
-                        <li><a href="g-resconvt.html">G-ResConvt</a></li>
-                        <li><a href="g-geopylanner.html">G-GeoPyLanner</a></li>
-                        <li><a href="resources.html">All Tools</a></li>
-                        <li><a href="news.html">News & Updates</a></li>
-                        <li><a href="projects.html">Projects</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Contact</h3>
-                    <ul class="footer-contact">
-                        <li><strong>Head Office:</strong><br>Kasangati, Uganda<br>HMK Building, Gayaza Road</li>
-                        <li><strong>Phone:</strong><br>+256 771 999 614<br>+256 772 876 300</li>
-                        <li><strong>Email:</strong><br><a href="mailto:info@georesolveafrica.com">info@georesolveafrica.com</a></li>
-                        <li><strong>Hours:</strong><br>Mon-Fri: 8:00 AM - 6:00 PM<br>Sat: 9:00 AM - 2:00 PM</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <div class="footer-bottom-content">
-                    <p>&copy; 2025 GeoResolve. All rights reserved.</p>
-                    <div class="footer-bottom-links">
-                        <a href="contact.html">Privacy Policy</a>
-                        <a href="contact.html">Terms of Service</a>
-                        <a href="contact.html">Contact</a>
-                    </div>
-                    <p class="footer-location">Serving Uganda, Rwanda, Burundi, DRC, South Sudan & East Africa</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <!-- Local Components -->
+    <script src="js/header-component.js" defer></script>
+    <script src="footer-component.js" defer></script>
 
-    <script src="main.js"></script>
+    <script type="module" src="main.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Tab Switching Logic
+            const tabs = document.querySelectorAll('.method-tab');
+            const contents = document.querySelectorAll('.method-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const target = tab.getAttribute('data-tab');
+
+                    // Update active tab
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    // Update active content
+                    contents.forEach(content => {
+                        content.classList.remove('active');
+                        if (content.id === target) {
+                            content.classList.add('active');
+                        }
+                    });
+
+                    // Scroll to top of content
+                    const contentSection = document.getElementById(target);
+                    if (contentSection) {
+                        window.scrollTo({
+                            top: contentSection.offsetTop - 120,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Handle anchor links from other pages
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                const targetTab = document.querySelector(`.method-tab[data-tab="${hash}"]`);
+                if (targetTab) targetTab.click();
+            }
+
+            // Method Comparison Tool Logic
+            const checkboxes = document.querySelectorAll('.method-checkbox');
+            const toggleAllBtn = document.getElementById('toggleAllMethods');
+            const methodRows = document.querySelectorAll('.method-row');
+
+            function updateTable() {
+                checkboxes.forEach(cb => {
+                    const method = cb.value;
+                    const rows = document.querySelectorAll(`.method-row[data-method="${method}"]`);
+                    rows.forEach(row => {
+                        if (cb.checked) {
+                            row.classList.remove('hidden');
+                        } else {
+                            row.classList.add('hidden');
+                        }
+                    });
+                });
+            }
+
+            checkboxes.forEach(cb => {
+                cb.addEventListener('change', updateTable);
+            });
+
+            if (toggleAllBtn) {
+                toggleAllBtn.addEventListener('click', () => {
+                    const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+                    checkboxes.forEach(cb => cb.checked = !allChecked);
+                    toggleAllBtn.textContent = allChecked ? 'Select All' : 'Deselect All';
+                    updateTable();
+                });
+            }
+        });
+    </script>
 </body>
+
 </html>

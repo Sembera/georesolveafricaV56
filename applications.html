@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Applications | GeoResolve - Dam Foundations, Infrastructure, Energy Projects Uganda, Rwanda, Burundi</title>
-    <meta name="description" content="GeoResolve geoscience applications: dam foundation studies, hydropower projects, infrastructure development, mining exploration, water supply systems across Uganda, Rwanda, Burundi & East Africa.">
-    <meta name="keywords" content="dam foundation investigation Uganda, hydropower geotechnical studies Rwanda, infrastructure geophysics Burundi, water supply geoscience East Africa, mining geotechnical Uganda, slope stability analysis Rwanda, flood management geophysics, nuclear facility site characterization">
-    
+    <meta name="description"
+        content="GeoResolve geoscience applications: dam foundation studies, hydropower projects, infrastructure development, mining exploration, water supply systems across Uganda, Rwanda, Burundi & East Africa.">
+    <meta name="keywords"
+        content="dam foundation investigation Uganda, hydropower geotechnical studies Rwanda, infrastructure geophysics Burundi, water supply geoscience East Africa, mining geotechnical Uganda, slope stability analysis Rwanda, flood management geophysics, nuclear facility site characterization">
+
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Geoscience Applications | Georesolve Africa">
-    <meta property="og:description" content="Comprehensive geoscience applications across multiple sectors in East Africa.">
+    <meta property="og:description"
+        content="Comprehensive geoscience applications across multiple sectors in East Africa.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://georesolve.africa/applications.html">
 
@@ -19,14 +23,17 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
     <!-- Core Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    <!-- Core Libraries (Deferred) -->
 
     <!-- Footer & Clients Styles -->
     <link rel="stylesheet" href="footer-styles.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <style>
         :root {
@@ -59,85 +66,7 @@
             padding-top: 80px;
         }
 
-        /* Navigation */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
-            z-index: 1000;
-            transition: var(--transition-medium);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 80px;
-        }
-
-        .logo {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            text-decoration: none;
-            gap: 0.25rem;
-        }
-
-        .logo img {
-            height: 55px;
-            width: auto;
-        }
-
-        .logo-tagline {
-            font-size: 0.65rem;
-            color: var(--primary-color);
-            font-weight: 500;
-            font-style: italic;
-            letter-spacing: 0.5px;
-            margin-left: 2px;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 500;
-            transition: var(--transition-fast);
-            position: relative;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--primary-color);
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-color);
-            transition: var(--transition-fast);
-        }
-
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 100%;
-        }
+        /* Navigation moved to css/navbar.css */
 
         /* Page Header */
         .page-header {
@@ -232,7 +161,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.7));
+            background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.7));
             display: flex;
             align-items: flex-end;
             padding: 1.5rem;
@@ -403,7 +332,7 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
             color: white;
             padding: 2rem;
         }
@@ -576,31 +505,16 @@
         }
     </style>
 </head>
+
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <img src="resources/logo/Georesolve Logo.png" alt="GeoResolve Logo">
-                <span class="logo-tagline">Data Driven, Research Based</span>
-            </a>
-            <ul class="nav-links">
-                <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="methods.html" class="nav-link">Methods</a></li>
-                <li><a href="applications.html" class="nav-link active">Applications</a></li>
-                <li><a href="projects.html" class="nav-link">Projects</a></li>
-                <li><a href="resources.html" class="nav-link">Resources</a></li>
-                <li><a href="news.html" class="nav-link">News</a></li>
-                <li><a href="contact.html" class="nav-link">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
+    <!-- Header injected by js/header-component.js -->
 
     <!-- Page Header -->
     <section class="page-header">
         <div class="container">
             <h1 class="page-title">Geoscience Applications</h1>
-            <p class="page-subtitle">Comprehensive geoscience solutions across diverse sectors, delivering expertise for infrastructure, mining, water resources, environmental, and energy projects</p>
+            <p class="page-subtitle">Comprehensive geoscience solutions across diverse sectors, delivering expertise for
+                infrastructure, mining, water resources, environmental, and energy projects</p>
         </div>
     </section>
 
@@ -610,7 +524,8 @@
             <div class="applications-grid">
                 <div class="application-card animate-on-scroll">
                     <div class="application-image">
-                        <img src="resources/Applications/Infrastructure Development.jpeg" alt="Infrastructure development">
+                        <img src="resources/Applications/Infrastructure Development.jpeg"
+                            alt="Infrastructure development">
                         <div class="application-overlay">
                             <span class="application-icon">🏗</span>
                             <span class="application-title-overlay">Infrastructure Development</span>
@@ -618,8 +533,10 @@
                     </div>
                     <div class="application-content">
                         <h3 class="application-title">Infrastructure Development</h3>
-                        <p class="application-description">Comprehensive geoscience support for major infrastructure projects including roads, bridges, dams, buildings, and industrial facilities across East Africa.</p>
-                        
+                        <p class="application-description">Comprehensive geoscience support for major infrastructure
+                            projects including roads, bridges, dams, buildings, and industrial facilities across East
+                            Africa.</p>
+
                         <ul class="application-features">
                             <li>Foundation analysis and design optimization</li>
                             <li>Slope stability assessment and mitigation</li>
@@ -628,7 +545,7 @@
                             <li>Seismic hazard assessment and design parameters</li>
                             <li>Ground improvement recommendations</li>
                         </ul>
-                        
+
                         <div class="application-stats">
                             <div class="stat-item">
                                 <span class="stat-number">50+</span>
@@ -656,8 +573,10 @@
                     </div>
                     <div class="application-content">
                         <h3 class="application-title">Mining & Exploration</h3>
-                        <p class="application-description">Advanced geological and geophysical services for mineral exploration, resource estimation, and mine planning across East Africa's rich mineral belts.</p>
-                        
+                        <p class="application-description">Advanced geological and geophysical services for mineral
+                            exploration, resource estimation, and mine planning across East Africa's rich mineral belts.
+                        </p>
+
                         <ul class="application-features">
                             <li>Mineral exploration and target generation</li>
                             <li>Resource estimation and modeling</li>
@@ -666,7 +585,7 @@
                             <li>Mine planning and optimization</li>
                             <li>Environmental baseline studies</li>
                         </ul>
-                        
+
                         <div class="application-stats">
                             <div class="stat-item">
                                 <span class="stat-number">#1</span>
@@ -694,8 +613,10 @@
                     </div>
                     <div class="application-content">
                         <h3 class="application-title">Water Resources</h3>
-                        <p class="application-description">Sustainable groundwater development and management solutions for communities, agriculture, and industrial water supply across arid and semi-arid regions.</p>
-                        
+                        <p class="application-description">Sustainable groundwater development and management solutions
+                            for communities, agriculture, and industrial water supply across arid and semi-arid regions.
+                        </p>
+
                         <ul class="application-features">
                             <li>Groundwater exploration and assessment</li>
                             <li>Well field design and development</li>
@@ -704,7 +625,7 @@
                             <li>Water resource management planning</li>
                             <li>Climate change impact assessment</li>
                         </ul>
-                        
+
                         <div class="application-stats">
                             <div class="stat-item">
                                 <span class="stat-number">10.3km</span>
@@ -732,8 +653,9 @@
                     </div>
                     <div class="application-content">
                         <h3 class="application-title">Environmental Assessment</h3>
-                        <p class="application-description">Comprehensive environmental geoscience services for site characterization, contamination assessment, and remediation planning.</p>
-                        
+                        <p class="application-description">Comprehensive environmental geoscience services for site
+                            characterization, contamination assessment, and remediation planning.</p>
+
                         <ul class="application-features">
                             <li>Environmental site assessment</li>
                             <li>Contamination characterization</li>
@@ -742,7 +664,7 @@
                             <li>Impact assessment and mitigation</li>
                             <li>Monitoring and compliance reporting</li>
                         </ul>
-                        
+
                         <div class="application-stats">
                             <div class="stat-item">
                                 <span class="stat-number">67</span>
@@ -770,8 +692,9 @@
                     </div>
                     <div class="application-content">
                         <h3 class="application-title">Energy Projects</h3>
-                        <p class="application-description">Geoscience support for renewable energy development including geothermal, hydroelectric, and solar projects across East Africa.</p>
-                        
+                        <p class="application-description">Geoscience support for renewable energy development including
+                            geothermal, hydroelectric, and solar projects across East Africa.</p>
+
                         <ul class="application-features">
                             <li>Geothermal resource exploration</li>
                             <li>Hydroelectric site assessment</li>
@@ -780,7 +703,7 @@
                             <li>Energy storage facility siting</li>
                             <li>Transmission line route optimization</li>
                         </ul>
-                        
+
                         <div class="application-stats">
                             <div class="stat-item">
                                 <span class="stat-number">10+</span>
@@ -808,8 +731,9 @@
                     </div>
                     <div class="application-content">
                         <h3 class="application-title">Research & Development</h3>
-                        <p class="application-description">Collaborative research programs with academic institutions and international organizations to advance geological knowledge in East Africa.</p>
-                        
+                        <p class="application-description">Collaborative research programs with academic institutions
+                            and international organizations to advance geological knowledge in East Africa.</p>
+
                         <ul class="application-features">
                             <li>Geological mapping and research</li>
                             <li>Climate change impact studies</li>
@@ -818,7 +742,7 @@
                             <li>Groundwater system research</li>
                             <li>Technology development and innovation</li>
                         </ul>
-                        
+
                         <div class="application-stats">
                             <div class="stat-item">
                                 <span class="stat-number">1200m</span>
@@ -844,9 +768,10 @@
         <div class="container">
             <div class="section-header animate-on-scroll">
                 <h2 class="section-title">Sector Case Studies</h2>
-                <p class="section-subtitle">Real-world examples of our geoscience applications solving complex challenges across East Africa</p>
+                <p class="section-subtitle">Real-world examples of our geoscience applications solving complex
+                    challenges across East Africa</p>
             </div>
-            
+
             <div class="case-studies">
                 <div class="case-study animate-on-scroll">
                     <div class="case-study-content">
@@ -856,7 +781,9 @@
                             <span>Rwanda</span>
                             <span>2025</span>
                         </div>
-                        <p class="case-study-description">Integrated geophysical and geotechnical investigation for three critical dam sites in Rwanda. Deployed advanced seismic refraction and MASW techniques for comprehensive subsurface characterization and dam foundation analysis.</p>
+                        <p class="case-study-description">Integrated geophysical and geotechnical investigation for
+                            three critical dam sites in Rwanda. Deployed advanced seismic refraction and MASW techniques
+                            for comprehensive subsurface characterization and dam foundation analysis.</p>
 
                         <div class="case-study-results">
                             <h4>Project Outcomes</h4>
@@ -869,7 +796,8 @@
                         </div>
                     </div>
                     <div class="case-study-visual">
-                        <img src="resources/Applications/Mwogo, Rukarara & Kavili Dam Sites - Rwanda.jpeg" alt="Dam foundation investigation">
+                        <img src="resources/Applications/Mwogo, Rukarara & Kavili Dam Sites - Rwanda.jpeg"
+                            alt="Dam foundation investigation">
                         <div class="case-study-overlay">
                             <h4>Dam Foundation Excellence</h4>
                             <p>Advanced geophysical surveys for critical water infrastructure</p>
@@ -885,7 +813,10 @@
                             <span>Burundi</span>
                             <span>2024</span>
                         </div>
-                        <p class="case-study-description">Comprehensive geophysical and geotechnical investigation for a pioneering 1MW hydro-solar hybrid power facility serving Anzana Electric/Songa Energy operations in Burundi, combining renewable energy sources for a sustainable energy mix for Mutambu, Burundi.</p>
+                        <p class="case-study-description">Comprehensive geophysical and geotechnical investigation for a
+                            pioneering 1MW hydro-solar hybrid power facility serving Anzana Electric/Songa Energy
+                            operations in Burundi, combining renewable energy sources for a sustainable energy mix for
+                            Mutambu, Burundi.</p>
 
                         <div class="case-study-results">
                             <h4>Hybrid Energy Solution</h4>
@@ -898,7 +829,8 @@
                         </div>
                     </div>
                     <div class="case-study-visual">
-                        <img src="resources/Applications/Mutambu 1MW Hydro-Solar Hybrid - Burundi.jpeg" alt="Hybrid renewable energy">
+                        <img src="resources/Applications/Mutambu 1MW Hydro-Solar Hybrid - Burundi.jpeg"
+                            alt="Hybrid renewable energy">
                         <div class="case-study-overlay">
                             <h4>Hybrid Renewable Energy</h4>
                             <p>Innovative hydro-solar solution for mining operations</p>
@@ -914,7 +846,9 @@
                             <span>Uganda</span>
                             <span>2023</span>
                         </div>
-                        <p class="case-study-description">Geophysical surveys supporting the design and construction of a 10.3km water supply distribution system in Isingiro District, ensuring optimal pipeline routing and installation depths.</p>
+                        <p class="case-study-description">Geophysical surveys supporting the design and construction of
+                            a 10.3km water supply distribution system in Isingiro District, ensuring optimal pipeline
+                            routing and installation depths.</p>
 
                         <div class="case-study-results">
                             <h4>Water Infrastructure Delivered</h4>
@@ -927,7 +861,8 @@
                         </div>
                     </div>
                     <div class="case-study-visual">
-                        <img src="resources/Applications/Isingiro Water Supply System - Uganda.jpeg" alt="Water supply infrastructure">
+                        <img src="resources/Applications/Isingiro Water Supply System - Uganda.jpeg"
+                            alt="Water supply infrastructure">
                         <div class="case-study-overlay">
                             <h4>Water Infrastructure</h4>
                             <p>Geophysical support for community water supply</p>
@@ -943,44 +878,51 @@
         <div class="container">
             <div class="section-header animate-on-scroll">
                 <h2 class="section-title">Why Choose GeoResolve</h2>
-                <p class="section-subtitle">Key benefits of partnering with East Africa's leading geoscience consulting firm</p>
+                <p class="section-subtitle">Key benefits of partnering with East Africa's leading geoscience consulting
+                    firm</p>
             </div>
-            
+
             <div class="benefits-grid">
                 <div class="benefit-card animate-on-scroll">
                     <div class="benefit-icon">🎯</div>
                     <h3 class="benefit-title">Local Expertise</h3>
-                    <p class="benefit-description">Deep understanding of East African geology, climate, and regulatory environment with 7+ years of regional experience across Uganda, Rwanda, Burundi, and beyond.</p>
+                    <p class="benefit-description">Deep understanding of East African geology, climate, and regulatory
+                        environment with 7+ years of regional experience across Uganda, Rwanda, Burundi, and beyond.</p>
                 </div>
-                
+
                 <div class="benefit-card animate-on-scroll">
                     <div class="benefit-icon">🔬</div>
                     <h3 class="benefit-title">Advanced Technology</h3>
-                    <p class="benefit-description">State-of-the-art equipment and methodologies ensuring accurate results and cost-effective solutions for every project.</p>
+                    <p class="benefit-description">State-of-the-art equipment and methodologies ensuring accurate
+                        results and cost-effective solutions for every project.</p>
                 </div>
-                
+
                 <div class="benefit-card animate-on-scroll">
                     <div class="benefit-icon">⚡</div>
                     <h3 class="benefit-title">Rapid Response</h3>
-                    <p class="benefit-description">Quick mobilization and efficient project execution with established presence across East African countries.</p>
+                    <p class="benefit-description">Quick mobilization and efficient project execution with established
+                        presence across East African countries.</p>
                 </div>
-                
+
                 <div class="benefit-card animate-on-scroll">
                     <div class="benefit-icon">🌟</div>
                     <h3 class="benefit-title">Quality Assurance</h3>
-                    <p class="benefit-description">Rigorous quality control processes and international standards compliance ensuring reliable, defensible results.</p>
+                    <p class="benefit-description">Rigorous quality control processes and international standards
+                        compliance ensuring reliable, defensible results.</p>
                 </div>
-                
+
                 <div class="benefit-card animate-on-scroll">
                     <div class="benefit-icon">🤝</div>
                     <h3 class="benefit-title">Integrated Solutions</h3>
-                    <p class="benefit-description">Comprehensive services covering the complete project lifecycle from initial investigation to ongoing monitoring.</p>
+                    <p class="benefit-description">Comprehensive services covering the complete project lifecycle from
+                        initial investigation to ongoing monitoring.</p>
                 </div>
-                
+
                 <div class="benefit-card animate-on-scroll">
                     <div class="benefit-icon">💰</div>
                     <h3 class="benefit-title">Cost Optimization</h3>
-                    <p class="benefit-description">Efficient methodologies and local expertise reducing project costs while maintaining the highest quality standards.</p>
+                    <p class="benefit-description">Efficient methodologies and local expertise reducing project costs
+                        while maintaining the highest quality standards.</p>
                 </div>
             </div>
         </div>
@@ -991,7 +933,8 @@
         <div class="container">
             <div class="cta-content animate-on-scroll">
                 <h2>Ready to Apply Our Expertise to Your Project?</h2>
-                <p>Contact our team today to discuss how our geoscience applications can add value to your infrastructure, mining, water, or energy project in East Africa.</p>
+                <p>Contact our team today to discuss how our geoscience applications can add value to your
+                    infrastructure, mining, water, or energy project in East Africa.</p>
                 <div class="hero-cta">
                     <a href="contact.html" class="btn btn-primary">Discuss Your Project</a>
                     <a href="projects.html" class="btn btn-secondary">View Case Studies</a>
@@ -1000,115 +943,18 @@
         </div>
     </section>
 
-    <!-- Clients Section -->
-    <section class="clients-section">
-        <div class="container">
-            <div class="section-header animate-on-scroll">
-                <h2 class="section-title">Trusted by Leading Organizations</h2>
-                <p class="section-subtitle">GeoResolve partners with government agencies, consulting firms, and private sector clients across East Africa</p>
-            </div>
+    <!-- Footer & Clients injected by footer-component.js -->
 
-            <div class="clients-grid animate-on-scroll">
-                <div class="client-card">
-                    <img src="resources/Clients/zv-consulting.png" alt="ZV Consulting Ltd - Rwanda" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/atc-uganda.png" alt="ATC Uganda" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/ministry-energy-uganda.png" alt="Ministry of Energy - Uganda" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/fichtner.png.png" alt="Fichtner GmbH - Germany" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/Artelia.png" alt="Artelia - France" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/Aecom.png" alt="Aecom - International" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/Songa.png" alt="Songa Energy - Burundi" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/virunga-power.png" alt="Virunga Power - Burundi" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/anzana-electric.png" alt="Anzana Electric Group - Burundi" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/MBW.png" alt="MBW Consulting - Uganda" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/razel-bec.png" alt="Razel-Bec - International" class="client-logo">
-                </div>
-                <div class="client-card">
-                    <img src="resources/Clients/Tectoni.png" alt="Tectoni Africa - Uganda" class="client-logo">
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js" defer></script>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>GeoResolve</h3>
-                    <p class="footer-tagline">Data-Driven, Research-Based</p>
-                    <p>Premier geoscience consulting firm providing expert geophysical, geotechnical, and hydrogeology services across Uganda, Rwanda, Burundi, and East Africa.</p>
-                    <div class="footer-social">
-                        <a href="#" aria-label="LinkedIn">LinkedIn</a>
-                        <a href="#" aria-label="Twitter">Twitter</a>
-                        <a href="#" aria-label="Email">Email</a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h3>Services</h3>
-                    <ul class="footer-links">
-                        <li><a href="methods.html#geophysics">Geophysical Surveys</a></li>
-                        <li><a href="methods.html#geotechnical">Geotechnical Investigation</a></li>
-                        <li><a href="methods.html#hydrogeology">Hydrogeology Studies</a></li>
-                        <li><a href="methods.html#drilling">Drilling Services</a></li>
-                        <li><a href="methods.html#geospatial">Geospatial Services</a></li>
-                        <li><a href="methods.html#surveys">Topographic Surveys</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Resources</h3>
-                    <ul class="footer-links">
-                        <li><a href="g-resolog.html">G-ResoLog</a></li>
-                        <li><a href="g-resconvt.html">G-ResConvt</a></li>
-                        <li><a href="g-geopylanner.html">G-GeoPyLanner</a></li>
-                        <li><a href="resources.html">All Tools</a></li>
-                        <li><a href="news.html">News & Updates</a></li>
-                        <li><a href="projects.html">Projects</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Contact</h3>
-                    <ul class="footer-contact">
-                        <li><strong>Head Office:</strong><br>Kasangati, Uganda<br>HMK Building, Gayaza Road</li>
-                        <li><strong>Phone:</strong><br>+256 771 999 614<br>+256 772 876 300</li>
-                        <li><strong>Email:</strong><br><a href="mailto:info@georesolveafrica.com">info@georesolveafrica.com</a></li>
-                        <li><strong>Hours:</strong><br>Mon-Fri: 8:00 AM - 6:00 PM<br>Sat: 9:00 AM - 2:00 PM</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <div class="footer-bottom-content">
-                    <p>&copy; 2025 GeoResolve. All rights reserved.</p>
-                    <div class="footer-bottom-links">
-                        <a href="contact.html">Privacy Policy</a>
-                        <a href="contact.html">Terms of Service</a>
-                        <a href="contact.html">Contact</a>
-                    </div>
-                    <p class="footer-location">Serving Uganda, Rwanda, Burundi, DRC, South Sudan & East Africa</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <!-- Local Components -->
+    <script src="js/header-component.js" defer></script>
+    <script src="footer-component.js" defer></script>
 
-    <script src="main.js"></script>
+    <!-- Main Application -->
+    <script type="module" src="main.js"></script>
 </body>
+
 </html>
