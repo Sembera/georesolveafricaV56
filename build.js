@@ -157,7 +157,7 @@ function findAllFiles(dir) {
 function assertDistSafe() {
   const files = findAllFiles(DIST);
   for (const filePath of files) {
-    const relativePath = path.relative(DIST, filePath).replace(/\/g, '/');
+    const relativePath = path.relative(DIST, filePath).replace(/\\/g, '/');
     const parts = relativePath.split('/');
 
     for (const privatePath of DIST_PRIVATE_PATHS) {
