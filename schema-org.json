@@ -3,9 +3,9 @@
   "@type": "ProfessionalService",
   "name": "GeoResolve Africa",
   "alternateName": "GeoResolve",
-  "url": "https://georesolve.africa",
-  "logo": "https://georesolve.africa/resources/logo/georesolve-logo.svg.svg",
-  "image": "https://georesolve.africa/resources/about.png",
+  "url": "https://georesolveafrica.com",
+  "logo": "https://georesolveafrica.com/resources/logo/georesolve-logo.svg.svg",
+  "image": "https://georesolveafrica.com/resources/about.png",
   "description": "Premier geoscience consulting firm providing expert geophysical, geotechnical, and hydrogeology services across Uganda, Rwanda, Burundi, and East Africa.",
   "slogan": "Data Driven, Research Based",
   "telephone": "+256771999614",
@@ -67,11 +67,6 @@
     "Topographic Surveys",
     "Cadastral Surveys"
   ],
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.8",
-    "reviewCount": "50"
-  },
   "sameAs": [
     "https://www.linkedin.com/company/georesolve-africa",
     "https://twitter.com/georesolveafrica"

@@ -26,8 +26,8 @@ function injectHeader() {
                     <a href="methods.html" class="nav-link">Methods <span class="dropdown-arrow">▼</span></a>
                     <ul class="dropdown-menu">
                         <li><a href="methods.html#geophysics">Geophysics</a></li>
+                        <li><a href="methods.html#mining">Mining & Exploration</a></li>
                         <li><a href="methods.html#geotechnical">Geotechnical</a></li>
-                        <li><a href="methods.html#hydrogeology">Hydrogeology</a></li>
                         <li><a href="methods.html#drilling">Drilling</a></li>
                         <li><a href="methods.html#geospatial">Geospatial & Surveys</a></li>
                         <li class="mobile-only"><a href="methods.html" style="font-weight: 600; color: var(--accent-color);">View All Methods →</a></li>

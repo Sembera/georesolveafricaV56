@@ -1,20 +1,22 @@
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://www.georesolveafrica.com/sitemap.xml
+User-agent: GPTBot
+Allow: /
 
-# Crawl delay for better server performance
-Crawl-delay: 1
+User-agent: ClaudeBot
+Allow: /
 
-# Specific paths
-Allow: /methods.html
-Allow: /applications.html
-Allow: /projects.html
-Allow: /resources.html
-Allow: /news.html
-Allow: /contact.html
+User-agent: Claude-Web
+Allow: /
 
-# Block specific directories if needed
-Disallow: /node_modules/
-Disallow: /_drafts/
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://georesolveafrica.com/sitemap.xml

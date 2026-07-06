@@ -60,7 +60,7 @@ function injectFooter() {
                 <div class="footer-section">
                     <h3>GeoResolve</h3>
                     <p class="footer-tagline">Data-Driven, Research-Based</p>
-                    <p>Premier geoscience consulting firm providing expert geophysical, geotechnical, and hydrogeology services across Uganda, Rwanda, Burundi, and East Africa.</p>
+                    <p>Premier geoscience consulting firm providing expert geophysical, geotechnical, and mineral exploration services across Uganda, Rwanda, Burundi, and East Africa.</p>
                     <div class="footer-social">
                         <a href="#" class="social-link" aria-label="LinkedIn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
@@ -77,11 +77,10 @@ function injectFooter() {
                     <h3>Services</h3>
                     <ul class="footer-links">
                         <li><a href="methods.html#geophysics">Geophysical Surveys</a></li>
+                        <li><a href="methods.html#mining">Mining & Exploration</a></li>
                         <li><a href="methods.html#geotechnical">Geotechnical Investigation</a></li>
-                        <li><a href="methods.html#hydrogeology">Hydrogeology Studies</a></li>
                         <li><a href="methods.html#drilling">Drilling Services</a></li>
                         <li><a href="methods.html#geospatial">Geospatial Services</a></li>
-                        <li><a href="methods.html#surveys">Topographic Surveys</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
