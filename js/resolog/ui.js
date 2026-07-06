@@ -2,10 +2,10 @@
 // G-Resolog Pro v2 - Main UI Controller (ES Module)
 // =============================================================================
 
-import { Model } from './model.js';
-import { StripLog } from './striplog.js';
-import { Exports } from './exports.js';
-import { DescBuilder } from './description-builder.js';
+import { Model } from './model.js?v=20260707-4';
+import { StripLog } from './striplog.js?v=20260707-4';
+import { Exports } from './exports.js?v=20260707-6';
+import { DescBuilder } from './description-builder.js?v=20260707-4';
 
 // ─── Embedded Stylesheet ─────────────────────────────────────────────────────
 
@@ -200,9 +200,12 @@ function h(tag, attrs, children) {
       else el.setAttribute(k, v);
     }
   }
-  if (children) {
-    if (typeof children === 'string') el.textContent = children;
-    else if (Array.isArray(children)) children.forEach(c => el.appendChild(c));
+  if (children != null) {
+    if (typeof children === 'string' || typeof children === 'number') el.textContent = children;
+    else if (Array.isArray(children)) children.forEach(c => {
+      if (c == null) return;
+      el.appendChild(typeof c === 'string' || typeof c === 'number' ? document.createTextNode(c) : c);
+    });
     else el.appendChild(children);
   }
   return el;
@@ -248,7 +251,7 @@ export const UI = {
     Exports.setupPrintStyles();
     this.setupKeyboardShortcuts();
     this.setupAutoSave();
-    if (Model.projects.length > 0) { await this.renderProjectManager(); }
+    if (Model.projects.length > 0) { await this.showProjectManager(); }
     else { this._showCreateProjectModal(); }
   },
 
@@ -318,9 +321,15 @@ export const UI = {
   },
 
   async _quickAddHole() {
-    const name = prompt('Borehole name:', 'BH-01'); if (!name) return;
-    try { await Model.createHole({ projectId: Model.currentProject.id, name, type: 'soil' }); await this._loadHoleView(); }
-    catch (e) { console.error(e); }
+    this._showModal('Add Borehole', `
+      <div class="form-group"><label class="form-label">Borehole Name *</label><input class="form-input" id="mh-name" value="BH-01" required></div>
+      <div class="form-group mt-8"><label class="form-label">Type</label><select class="form-select" id="mh-type"><option value="soil" selected>Soil Borehole</option><option value="core">Core Borehole</option><option value="rc">RC Borehole</option><option value="testpit">Test Pit</option></select></div>
+    `, async () => {
+      const name = $('#mh-name')?.value.trim(); if (!name) return alert('Borehole name is required');
+      const type = $('#mh-type')?.value || 'soil';
+      try { await Model.createHole({ projectId: Model.currentProject.id, name, type }); await this._loadHoleView(); }
+      catch (e) { console.error(e); }
+    });
   },
 
   // ===========================================================================
@@ -337,7 +346,7 @@ export const UI = {
     const impInp = h('input', { type: 'file', accept: '.json', style: { display: 'none' }, onchange: (e) => this._handleImportProject(e) });
     impLbl.appendChild(impInp); acts.appendChild(newBtn); acts.appendChild(impLbl); hdr.appendChild(acts); pm.appendChild(hdr);
     if (Model.projects.length === 0) {
-      pm.appendChild(h('div', { className: 'empty-state' }, [h('h2', {}, 'Welcome to G-Resolog Pro v2'), h('p', {}, 'Create your first project to start logging boreholes.'), h('button', { className: 'btn btn-primary mt-8', onclick: () => this._showCreateProjectModal() }, 'Create Your First Project')]));
+      pm.appendChild(h('div', { className: 'empty-state' }, [h('h2', {}, 'Welcome to G-Resolog'), h('p', {}, 'Create your first project to start logging boreholes.'), h('button', { className: 'btn btn-primary mt-8', onclick: () => this._showCreateProjectModal() }, 'Create Your First Project')]));
       return;
     }
     const grid = h('div', { className: 'project-grid' });
@@ -416,7 +425,7 @@ export const UI = {
         }
       }
     } else {
-      left.appendChild(h('span', { className: 'toolbar-title' }, 'G-Resolog Pro'));
+      left.appendChild(h('span', { className: 'toolbar-title' }, 'G-Resolog'));
     }
     tb.appendChild(left);
 
@@ -1013,31 +1022,31 @@ export const UI = {
 
   async _addFieldTest(type) {
     if (!Model.currentHole) return;
-    const depth = prompt('Depth (m):', '0'); if (depth === null) return;
-    let data = {};
-    if (type === 'SPT') {
-      data.seating = parseInt(prompt('Seating blows:', '0')) || 0;
-      data.blow1 = prompt('75mm #1:', '0') || '0';
-      data.blow2 = prompt('75mm #2:', '0') || '0';
-      data.blow3 = prompt('75mm #3:', '0') || '0';
-      const hasR = data.blow1 === 'R' || data.blow2 === 'R' || data.blow3 === 'R';
-      data.n = hasR ? 'R' : ((parseInt(data.blow2)||0) + (parseInt(data.blow3)||0));
-    } else if (type === 'PP') {
-      data.reading = parseFloat(prompt('Reading (kPa):', '0')) || 0;
-    } else if (type === 'SV') {
-      data.reading = parseFloat(prompt('Reading (kPa):', '0')) || 0;
-    } else if (type === 'PL') {
-      data.is50 = parseFloat(prompt('Is(50) value:', '0')) || 0;
-      data.type = prompt('Type (Diametral/Axial):', 'Diametral') || 'Diametral';
-    } else if (type === 'DCP') {
-      data.blows = parseInt(prompt('Blows/100mm:', '0')) || 0;
-    } else {
-      data.desc = prompt('Description:', '') || '';
-    }
-    try {
-      await Model.createFieldTest({ intervalId: '', holeId: Model.currentHole.id, type, depth: parseFloat(depth)||0, data });
-      await this.renderFieldTests(); this.refreshStripLog();
-    } catch (e) { console.error(e); }
+    const body = type === 'SPT' ? `
+      <div class="form-group"><label class="form-label">Depth (m)</label><input class="form-input" id="ft-depth" type="number" step="0.01" value="1.5"></div>
+      <div class="form-row form-row-4 mt-8"><div class="form-group"><label class="form-label">Seating</label><input class="form-input" id="ft-seating" type="number" value="5"></div><div class="form-group"><label class="form-label">75mm #1</label><input class="form-input" id="ft-b1" value="4"></div><div class="form-group"><label class="form-label">75mm #2</label><input class="form-input" id="ft-b2" value="6"></div><div class="form-group"><label class="form-label">75mm #3</label><input class="form-input" id="ft-b3" value="8"></div></div>
+    ` : `
+      <div class="form-group"><label class="form-label">Depth (m)</label><input class="form-input" id="ft-depth" type="number" step="0.01" value="0"></div>
+      <div class="form-group mt-8"><label class="form-label">Reading / Description</label><input class="form-input" id="ft-reading" value="0"></div>
+    `;
+    this._showModal(`Add ${FT_LABELS[type] || type}`, body, async () => {
+      const depth = parseFloat($('#ft-depth')?.value) || 0;
+      let data = {};
+      if (type === 'SPT') {
+        data.seating = parseInt($('#ft-seating')?.value) || 0;
+        data.blow1 = $('#ft-b1')?.value || '0';
+        data.blow2 = $('#ft-b2')?.value || '0';
+        data.blow3 = $('#ft-b3')?.value || '0';
+        const hasR = data.blow1 === 'R' || data.blow2 === 'R' || data.blow3 === 'R';
+        data.n = hasR ? 'R' : ((parseInt(data.blow2)||0) + (parseInt(data.blow3)||0));
+      } else {
+        data.reading = $('#ft-reading')?.value || '0';
+      }
+      try {
+        await Model.createFieldTest({ intervalId: '', holeId: Model.currentHole.id, type, depth, data });
+        await this.renderFieldTests(); this.refreshStripLog();
+      } catch (e) { console.error(e); }
+    });
   },
 
   async _editFieldTest(ft) {

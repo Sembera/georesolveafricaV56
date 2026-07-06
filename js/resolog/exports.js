@@ -1,8 +1,8 @@
-// G-Resolog Pro v2 - Export Module (ES Module)
+// G-Resolog - Export Module (ES Module)
 // Handles PDF (vector), Excel, CSV, and Print output.
 // CDN deps: svg2pdf.js, jsPDF, SheetJS — loaded dynamically.
 
-import { StripLog } from './striplog.js';
+import { StripLog } from './striplog.js?v=20260707-4';
 
 // ─── Private Helpers ──────────────────────────────────────────
 
@@ -18,10 +18,11 @@ function loadScript(src) {
 
 async function _ensurePDFLibs() {
   if (!window.jspdf) {
-    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js');
+    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');
   }
-  if (!window.svg2pdf) {
-    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/svg2pdf.js/2.2.3/svg2pdf.bundle.min.js');
+  const hasSvg2Pdf = typeof window.svg2pdf === 'function' || typeof window.svg2pdf?.svg2pdf === 'function';
+  if (!hasSvg2Pdf) {
+    await loadScript('https://unpkg.com/svg2pdf.js@2.2.3/dist/svg2pdf.umd.min.js');
   }
 }
 
@@ -130,7 +131,7 @@ function _makeSVGFooter(pageW, footerH) {
   y += 4;
 
   // App branding
-  html += `<text x="${marginX}" y="${y}" font-family="Arial, sans-serif" font-size="${fontSize}" fill="#555">G-Resolog Pro v2 — Georesolve Africa</text>`;
+  html += `<text x="${marginX}" y="${y}" font-family="Arial, sans-serif" font-size="${fontSize}" fill="#555">G-Resolog — Georesolve Africa</text>`;
   html += `<text x="${pageW - marginX}" y="${y}" font-family="Arial, sans-serif" font-size="${fontSize}" fill="#555" text-anchor="end">Generated: ${_fmtDate()}</text>`;
   y += 6;
 
@@ -218,7 +219,7 @@ export const Exports = {
 
       const { jspdf } = window;
       // eslint-disable-next-line no-undef
-      const svg2pdf = window.svg2pdf;
+      const svg2pdf = typeof window.svg2pdf === 'function' ? window.svg2pdf : window.svg2pdf?.svg2pdf;
 
       // Page dimensions in mm
       const pageW = opts.landscape ? 297 : 210;
@@ -337,11 +338,13 @@ export const Exports = {
           svgContent += _makeSVGFooter(pageW, footerHeight);
         }
 
-        // Wrap in full SVG
+        // Wrap in full SVG and parse it into an element for svg2pdf.
         const fullSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="${pageW}mm" height="${pageH}mm" viewBox="0 0 ${pageW} ${pageH}">${svgContent}</svg>`;
+        const svgDoc = new DOMParser().parseFromString(fullSVG, 'image/svg+xml');
+        const svgElement = svgDoc.documentElement;
 
         // Convert SVG to PDF via svg2pdf
-        await svg2pdf(fullSVG, doc, {
+        await svg2pdf(svgElement, doc, {
           x: 0,
           y: 0,
           width: pageW,

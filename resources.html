@@ -1093,6 +1093,7 @@
         // Render resources
         function renderResources(resources) {
             const grid = document.getElementById('resources-grid');
+            if (!grid) return;
             grid.innerHTML = '';
 
             resources.forEach(resource => {
@@ -1525,7 +1526,6 @@
 
     <!-- Footer & Clients injected by footer-component.js -->
 
-    <script src="main.js"></script>
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js" defer></script>

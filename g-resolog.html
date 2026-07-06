@@ -29,8 +29,8 @@
 
     <!-- Export libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/svg2pdf.js/2.2.3/svg2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://unpkg.com/svg2pdf.js@2.2.3/dist/svg2pdf.umd.min.js"></script>
 
     <style>
         body {
@@ -93,7 +93,7 @@
     <!-- Footer & Clients injected by footer-component.js -->
 
     <script type="module">
-        import { UI } from './js/resolog/ui.js';
+        import { UI } from './js/resolog/ui.js?v=20260707-9';
 
         // Remove loading state
         const loadingEl = document.getElementById('app-loading');
