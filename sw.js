@@ -1,9 +1,9 @@
-// G-Resolog Pro v2 - Service Worker
+// G-Resolog - Service Worker
 // Provides offline support by caching the application shell and CDN libraries.
 
-const CACHE_NAME = 'gresolog-v2-v1';
+// bump CACHE_NAME on every release
+const CACHE_NAME = 'gresolog-2026-07-07';
 const APP_SHELL = [
-    '/',
     '/g-resolog.html',
     '/css/navbar.css',
     '/css/style.css',
