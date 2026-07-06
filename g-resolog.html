@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>G-Resolog Pro v2 - Professional Borehole & Test-Pit Logger | Georesolve Africa</title>
+    <title>G-Resolog - Borehole & Test Pit Logging Software | Georesolve Africa</title>
     <meta name="description"
         content="Professional client-side borehole and test-pit logging application. BS 5930 / ISO 14688-14689 / AS 1726 compliant. Vector PDF exports, Excel workbooks, SVG strip logs.">
     <meta name="keywords"
         content="borehole logging, geotechnical logging, core logging, test pit logging, BS 5930, ISO 14688, G-Resolog, Georesolve">
 
-    <meta property="og:title" content="G-Resolog Pro v2 | Professional Borehole Logger">
+    <meta property="og:title" content="G-Resolog | Borehole & Test Pit Logging Software">
     <meta property="og:description"
         content="Professional client-side borehole and test-pit logging with BS 5930 / ISO 14688 compliant description builder and vector PDF exports.">
     <meta property="og:type" content="website">
@@ -85,7 +85,7 @@
     <div id="app-root">
         <div class="app-loading" id="app-loading">
             <div class="spinner"></div>
-            <span>Loading G-Resolog Pro...</span>
+            <span>Loading G-Resolog...</span>
         </div>
     </div>
 
@@ -101,11 +101,11 @@
 
         // Initialize the application
         UI.init().catch(err => {
-            console.error('G-Resolog Pro v2 initialization failed:', err);
+            console.error('G-Resolog initialization failed:', err);
             const root = document.getElementById('app-root');
             if (root) {
                 root.innerHTML = `<div style="padding:40px;text-align:center;color:#d9534f;">
-                    <h2>Failed to load G-Resolog Pro v2</h2>
+                    <h2>Failed to load G-Resolog</h2>
                     <p>${err.message || 'Unknown error'}</p>
                     <p>Please check your browser supports IndexedDB and ES modules, then refresh.</p>
                 </div>`;

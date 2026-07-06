@@ -36,15 +36,15 @@ const PAGES_WITH_HARDCODED_FOOTER = new Set([
 // Tool pages that get JSON-LD injection
 const TOOL_PAGES = {
   'g-resolog.html': {
-    name: 'G-ResoLog',
+    name: 'G-Resolog',
     description: 'Professional borehole core logging tool for geotechnical and soil investigation with pattern-based lithology classification, SPT testing, and PDF/Excel export.'
   },
   'g-resconvt.html': {
-    name: 'G-ResConvt',
+    name: 'G-Resconvt',
     description: 'Professional coordinate conversion tool for East Africa supporting 45+ CRS systems across 8 countries with batch CSV processing.'
   },
   'g-geopylanner.html': {
-    name: 'G-GeoPyLanner',
+    name: 'G-Geopylanner',
     description: 'Unified geophysics survey planning tool for MASW, Seismic Refraction, ERT, GPR, magnetic, and gravity survey design with CSV export.'
   }
 };

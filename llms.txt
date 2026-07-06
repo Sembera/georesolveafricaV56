@@ -1,15 +1,15 @@
 # Georesolve Africa
 
-Georesolve Africa is a premier geoscience consultancy providing expert geophysical surveys, geotechnical investigations, mining and exploration services, drilling, GIS and drone surveys across Uganda, Rwanda, Burundi, DRC, and South Sudan. Headquartered in Kasangati, Kampala, Uganda, the firm delivers data-driven, research-based geoscience solutions for infrastructure, energy, mining, water, and environmental projects.
+Georesolve Africa is a geoscience consultancy (founded in Uganda) providing expert geophysical surveys, geotechnical investigations, mining and exploration services, drilling, GIS and drone surveys across Uganda, Rwanda, Burundi, DRC, and South Sudan. Headquartered in Kasangati, Kampala, Uganda, the firm delivers data-driven, research-based geoscience solutions for infrastructure, energy, mining, water, and environmental projects.
 
 ## Services
 - [Methods & Services](https://georesolveafrica.com/methods.html) - Geophysical surveys, geotechnical engineering, mineral exploration, drilling, GIS and geospatial services.
 - [Applications](https://georesolveafrica.com/applications.html) - Dam foundations, hydropower, infrastructure, mining, water supply, environmental projects.
 
 ## Free Tools
-- [G-ResoLog](https://georesolveafrica.com/g-resolog.html) - Professional borehole core logger for geotechnical and soil investigation with pattern-based lithology classification, SPT testing, and PDF/Excel export.
-- [G-ResConvt](https://georesolveafrica.com/g-resconvt.html) - Professional coordinate converter for East Africa supporting 45+ CRS systems across 8 countries with batch CSV processing.
-- [G-GeoPyLanner](https://georesolveafrica.com/g-geopylanner.html) - Unified geophysics survey planner for MASW, Seismic Refraction, ERT, GPR, magnetic, and gravity survey design.
+- [G-Resolog](https://georesolveafrica.com/g-resolog.html) - Professional borehole core logger for geotechnical and soil investigation with pattern-based lithology classification, SPT testing, and PDF/Excel export.
+- [G-Resconvt](https://georesolveafrica.com/g-resconvt.html) - Professional coordinate converter for East Africa supporting 45+ CRS systems across 8 countries with batch CSV processing.
+- [G-Geopylanner](https://georesolveafrica.com/g-geopylanner.html) - Unified geophysics survey planner for MASW, Seismic Refraction, ERT, GPR, magnetic, and gravity survey design.
 
 ## Key Projects
 - [Projects Portfolio](https://georesolveafrica.com/projects.html) - 15+ completed and ongoing geoscience projects across Uganda, Rwanda, and Burundi in infrastructure, energy, water, mining, and environmental sectors.
