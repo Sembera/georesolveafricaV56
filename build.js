@@ -8,7 +8,21 @@ const SRC = '.';
 const EXCLUDES = new Set([
   'dist', 'node_modules', '.git', '.claude', 'partials',
   'build.js', 'package-lock.json', 'quick-footer-inject.html',
-  'vite.config.js', '.env.template', '.gitignore'
+  'vite.config.js', '.env.template', '.gitignore',
+  'IMPROVEMENT-PLAN.md', 'WEBSITE-IMPROVEMENT-PLAN.md',
+  'Updates', 'docs', 'README.md'
+]);
+
+const DIST_PRIVATE_PATHS = new Set([
+  'IMPROVEMENT-PLAN.md',
+  'WEBSITE-IMPROVEMENT-PLAN.md',
+  'Updates',
+  'docs',
+  'README.md'
+]);
+
+const TEXT_EXTENSIONS = new Set([
+  '.html', '.js', '.css', '.json', '.txt', '.xml', '.toml', '.md', '.svg', '.webmanifest'
 ]);
 
 // HTML files that should NOT appear in sitemap
@@ -72,6 +86,9 @@ function main() {
     fs.copyFileSync('llms.txt', path.join(DIST, 'llms.txt'));
   }
 
+  // 8. Fail the build if private files or corrupt text would be published.
+  assertDistSafe();
+
   log('Build complete! Output in dist/');
 }
 
@@ -121,6 +138,41 @@ function findFiles(dir, ext) {
     }
   }
   return results;
+}
+
+function findAllFiles(dir) {
+  const results = [];
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      results.push(...findAllFiles(fullPath));
+    } else {
+      results.push(fullPath);
+    }
+  }
+  return results;
+}
+
+function assertDistSafe() {
+  const files = findAllFiles(DIST);
+  for (const filePath of files) {
+    const relativePath = path.relative(DIST, filePath).replace(/\/g, '/');
+    const parts = relativePath.split('/');
+
+    for (const privatePath of DIST_PRIVATE_PATHS) {
+      if (parts.includes(privatePath) || relativePath === privatePath) {
+        throw new Error(`Private file would be published: ${relativePath}`);
+      }
+    }
+
+    if (TEXT_EXTENSIONS.has(path.extname(filePath).toLowerCase())) {
+      const bytes = fs.readFileSync(filePath);
+      if (bytes.includes(0)) {
+        throw new Error(`Null byte found in dist text file: ${relativePath}`);
+      }
+    }
+  }
 }
 
 // ---------------------------------------------------------------------------
