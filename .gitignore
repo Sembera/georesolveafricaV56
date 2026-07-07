@@ -56,3 +56,8 @@ WEBSITE-IMPROVEMENT-PLAN.md
 Updates/
 IMPROVEMENT-PLAN.md
 docs/archive/WEBSITE-IMPROVEMENT-PLAN.md
+
+# Local assistant/tooling state
+.trae/
+.agents/
+.codex/

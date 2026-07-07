@@ -1,12 +1,13 @@
 const fs = require('fs');
 const path = require('path');
+const marked = require('marked');
 
 const DIST = 'dist';
 const SRC = '.';
 
 // Directories / files to exclude from copy
 const EXCLUDES = new Set([
-  'dist', 'node_modules', '.git', '.claude', 'partials',
+  'dist', 'node_modules', '.git', '.claude', '.agents', '.codex', '.trae', 'partials',
   'build.js', 'package-lock.json', 'quick-footer-inject.html',
   'vite.config.js', '.env.template', '.gitignore',
   'IMPROVEMENT-PLAN.md', 'WEBSITE-IMPROVEMENT-PLAN.md',
@@ -18,7 +19,10 @@ const DIST_PRIVATE_PATHS = new Set([
   'WEBSITE-IMPROVEMENT-PLAN.md',
   'Updates',
   'docs',
-  'README.md'
+  'README.md',
+  '.agents',
+  '.codex',
+  '.trae'
 ]);
 
 const TEXT_EXTENSIONS = new Set([
@@ -29,9 +33,7 @@ const TEXT_EXTENSIONS = new Set([
 const SITEMAP_EXCLUDES = new Set([]);
 
 // Pages that should NOT get footer injection (already hardcoded)
-const PAGES_WITH_HARDCODED_FOOTER = new Set([
-  'projects.html'
-]);
+const PAGES_WITH_HARDCODED_FOOTER = new Set([]);
 
 // Tool pages that get JSON-LD injection
 const TOOL_PAGES = {
@@ -46,6 +48,10 @@ const TOOL_PAGES = {
   'g-geopylanner.html': {
     name: 'G-Geopylanner',
     description: 'Unified geophysics survey planning tool for MASW, Seismic Refraction, ERT, GPR, magnetic, and gravity survey design with CSV export.'
+  },
+  'g-flightplanner.html': {
+    name: 'G-FlightPlanner',
+    description: 'Drone mapping planner for photogrammetry missions with GSD, overlap, flight-line, and KML/Litchi CSV export tools.'
   }
 };
 
@@ -72,21 +78,27 @@ function main() {
   // 4. Read projects data
   const projects = JSON.parse(fs.readFileSync('projects.json', 'utf8'));
 
-  // 5. Process each HTML file in dist/
+  // 5. Build news article pages (before HTML pass so they get header/footer)
+  const newsArticles = buildNewsArticles(headerHTML, footerHTML);
+
+  // 6. Build news.html index (fill placeholders)
+  buildNewsIndex(newsArticles);
+
+  // 7. Process each HTML file in dist/
   const htmlFiles = findFiles(DIST, '.html');
   for (const filePath of htmlFiles) {
     processHTML(filePath, headerHTML, footerHTML, projects);
   }
 
-  // 6. Generate sitemap.xml
+  // 8. Generate sitemap.xml
   generateSitemap();
 
-  // 7. Copy llms.txt to dist/ (already done by copyDir, but ensure it exists)
+  // 9. Copy llms.txt to dist/ (already done by copyDir, but ensure it exists)
   if (fs.existsSync('llms.txt')) {
     fs.copyFileSync('llms.txt', path.join(DIST, 'llms.txt'));
   }
 
-  // 8. Fail the build if private files or corrupt text would be published.
+  // 10. Fail the build if private files or corrupt text would be published.
   assertDistSafe();
 
   log('Build complete! Output in dist/');
@@ -219,6 +231,11 @@ function processHTML(filePath, headerHTML, footerHTML, projects) {
     html = injectJSONLD(html, fileName);
   }
 
+  // --- Render method comparison table (methods.html) ---
+  if (fileName === 'methods.html') {
+    html = renderMethodComparison(html);
+  }
+
   fs.writeFileSync(filePath, html, 'utf8');
 }
 
@@ -311,6 +328,559 @@ function renderFeaturedCarousel(html, projects) {
 }
 
 // ---------------------------------------------------------------------------
+// METHOD COMPARISON TABLE
+// ---------------------------------------------------------------------------
+
+function renderMethodComparison(html) {
+  const dataPath = path.join(SRC, 'methods-data.json');
+  if (!fs.existsSync(dataPath)) {
+    log('WARNING: methods-data.json not found; skipping method table render');
+    return html;
+  }
+  const data = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
+
+  // 1. Render table rows (static HTML for crawlers)
+  const rows = data.methods.map(m => {
+    return `                        <tr class="method-row" data-method-id="${m.id}">
+                            <td class="method-name">${escapeHTML(m.name)}</td>
+                            <td>${formatDepthRange(m.depthRange_m)}</td>
+                            <td>${dotRating(m.resolution)}</td>
+                            <td>${dotRating(m.relCost, true)}</td>
+                            <td>${m.speed_km_per_day} km/day</td>
+                            <td>${m.bestFor.map(escapeHTML).join(', ')}</td>
+                            <td>${m.deliverables.map(d => `<span style="display:inline-block;background:var(--background-light);border-radius:6px;padding:2px 6px;margin:1px;font-size:0.78rem">${escapeHTML(d)}</span>`).join('')}</td>
+                            <td style="font-size:0.85rem;color:#555">${m.limitations.map(escapeHTML).join(' ')}</td>
+                        </tr>`;
+  }).join('\n');
+
+  html = html.replace(
+    /(<tbody id="comparison-tbody">)\s*<!-- Rows rendered by build\.js from methods-data\.json -->\s*(<\/tbody>)/,
+    `$1\n${rows}\n                    $2`
+  );
+
+  // 2. Render show/hide checkboxes
+  const checkboxes = data.methods.map(m => {
+    return `                <div class="method-selector">
+                    <input type="checkbox" id="cb-${m.id}" value="${m.id}" class="method-checkbox" checked>
+                    <label for="cb-${m.id}">${escapeHTML(m.name)}</label>
+                </div>`;
+  }).join('\n');
+  const toggleBtn = `                <button class="toggle-all-btn" type="button">Deselect All</button>`;
+
+  html = html.replace(
+    /(<div class="comparison-controls animate-on-scroll" id="comparison-controls">)\s*<!-- Method show\/hide checkboxes populated by build\.js -->\s*(<\/div>)/,
+    `$1\n${checkboxes}\n${toggleBtn}\n            $2`
+  );
+
+  // 3. Embed method data for the wizard
+  const dataEmbed = `<script type="application/json" id="methods-data">\n${JSON.stringify(data)}\n    </script>`;
+  html = html.replace(
+    /<script type="application\/json" id="methods-data">\s*\{\s*\}\s*<\/script>/,
+    dataEmbed
+  );
+
+  log('Rendered method comparison table + wizard data');
+  return html;
+}
+
+function formatDepthRange(range) {
+  if (!Array.isArray(range) || range.length < 2) return '—';
+  const [min, max] = range;
+  if (min < 1) return `${min}-${max} m`;
+  return `${min}-${max} m`;
+}
+
+function dotRating(value, inverse) {
+  // value 1-5. If inverse (cost), lower = better → we still show 1-5 dots but
+  // the meaning is "relative cost" (more dots = more expensive).
+  const v = Math.max(1, Math.min(5, value));
+  let dots = '';
+  for (let i = 0; i < 5; i++) {
+    dots += `<span class="dot${i < v ? '' : ' empty'}"></span>`;
+  }
+  return `<span class="dot-rating">${dots}</span>`;
+}
+
+function escapeHTML(str) {
+  if (str == null) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+// ---------------------------------------------------------------------------
+// NEWS SYSTEM
+// ---------------------------------------------------------------------------
+
+const NEWS_SRC_DIR = path.join(SRC, 'news');
+const NEWS_DIST_DIR = path.join(DIST, 'news');
+const NEWS_CATEGORIES = [
+  { id: 'project-update', label: 'Project updates' },
+  { id: 'technical-insight', label: 'Technical insights' },
+  { id: 'company', label: 'Company' }
+];
+
+/**
+ * Parse a Markdown file with YAML-like frontmatter into { meta, body, slug }.
+ * Skips files with draft: true. Skips _template.md.
+ */
+function parseNewsArticle(filePath) {
+  const fileName = path.basename(filePath, '.md');
+  if (fileName === '_template') return null;
+
+  const raw = fs.readFileSync(filePath, 'utf8');
+  const fmMatch = raw.match(/^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/);
+  if (!fmMatch) {
+    log(`WARNING: ${fileName}.md has no frontmatter; skipping`);
+    return null;
+  }
+
+  const meta = parseFrontmatter(fmMatch[1]);
+  const body = fmMatch[2];
+
+  if (meta.draft === true || meta.draft === 'true') {
+    return { slug: fileName, draft: true, meta, body };
+  }
+
+  return { slug: fileName, draft: false, meta, body };
+}
+
+/**
+ * Minimal frontmatter parser. Handles:
+ *   key: value
+ *   key: "quoted value"
+ *   key: 2026-01-15
+ *   key: ["a", "b"]
+ *   key: true | false
+ */
+function parseFrontmatter(text) {
+  const meta = {};
+  const lines = text.split('\n');
+  for (const line of lines) {
+    const m = line.match(/^([a-zA-Z_][a-zA-Z0-9_-]*)\s*:\s*(.*)$/);
+    if (!m) continue;
+    const key = m[1];
+    let val = m[2].trim();
+    if (val === '') continue;
+
+    // Boolean
+    if (val === 'true' || val === 'false') {
+      meta[key] = val === 'true';
+      continue;
+    }
+    // JSON array
+    if (val.startsWith('[') && val.endsWith(']')) {
+      try {
+        meta[key] = JSON.parse(val);
+      } catch (e) {
+        meta[key] = val;
+      }
+      continue;
+    }
+    // Quoted string
+    if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+      meta[key] = val.slice(1, -1);
+      continue;
+    }
+    // Bare value (date, string, number)
+    meta[key] = val;
+  }
+  return meta;
+}
+
+/**
+ * Format an ISO date (YYYY-MM-DD) into a human-readable "Month Year" string.
+ */
+function formatDate(iso) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return iso;
+  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
+}
+
+/**
+ * Read all .md files in news/, parse them, and render each non-draft article
+ * to dist/news/{slug}.html. Returns the list of published articles (with meta
+ * + slug) for the index. Drafts are excluded entirely.
+ */
+function buildNewsArticles(headerHTML, footerHTML) {
+  if (!fs.existsSync(NEWS_SRC_DIR)) {
+    log('No news/ folder; skipping article build');
+    return [];
+  }
+
+  fs.mkdirSync(NEWS_DIST_DIR, { recursive: true });
+
+  const mdFiles = findFiles(NEWS_SRC_DIR, '.md');
+  const published = [];
+
+  for (const mdPath of mdFiles) {
+    const article = parseNewsArticle(mdPath);
+    if (!article) continue;
+    if (article.draft) {
+      log(`NEWS: skipping draft "${article.slug}"`);
+      continue;
+    }
+
+    const html = renderArticlePage(article, headerHTML, footerHTML);
+    const outPath = path.join(NEWS_DIST_DIR, `${article.slug}.html`);
+    fs.writeFileSync(outPath, html, 'utf8');
+    log(`NEWS: built article ${article.slug}.html`);
+    published.push(article);
+  }
+
+  // Clean up: remove the .md files and reading-list.json from dist/news/ so
+  // only the rendered HTML pages are published.
+  const distNewsFiles = findAllFiles(NEWS_DIST_DIR);
+  for (const f of distNewsFiles) {
+    if (f.endsWith('.md') || f.endsWith('reading-list.json')) {
+      fs.unlinkSync(f);
+    }
+  }
+
+  // Sort published by date descending
+  published.sort((a, b) => {
+    const da = new Date(a.meta.date || '1970-01-01').getTime();
+    const db = new Date(b.meta.date || '1970-01-01').getTime();
+    return db - da;
+  });
+
+  return published;
+}
+
+/**
+ * Render a full article HTML page from a parsed article.
+ */
+function renderArticlePage(article, headerHTML, footerHTML) {
+  const { meta, body, slug } = article;
+  const title = escapeHTML(meta.title || slug);
+  const excerpt = escapeHTML(meta.excerpt || '');
+  const image = meta.image || 'resources/hero-geoscience.jpeg';
+  const dateStr = formatDate(meta.date);
+  const category = meta.category || 'company';
+  const categoryLabel = categoryLabelFor(category);
+  const author = escapeHTML(meta.author || 'Georesolve Africa');
+  const tags = Array.isArray(meta.tags) ? meta.tags : [];
+  const tagsHtml = tags.map(t => `<span class="article-tag">${escapeHTML(t)}</span>`).join('');
+  const bodyHtml = marked.parse(body || '');
+
+  const url = `https://georesolveafrica.com/news/${slug}.html`;
+  const imageAbs = `https://georesolveafrica.com/${image.replace(/^\/+/, '')}`;
+
+  // Article JSON-LD
+  const articleLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: meta.title || slug,
+    description: meta.excerpt || '',
+    image: imageAbs,
+    datePublished: meta.date ? new Date(meta.date).toISOString() : undefined,
+    dateModified: meta.date ? new Date(meta.date).toISOString() : undefined,
+    author: {
+      '@type': 'Organization',
+      name: meta.author || 'Georesolve Africa'
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Georesolve Africa',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://georesolveafrica.com/resources/logo/Georesolve%20Logo.PNG'
+      }
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': url
+    }
+  };
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${title} | Georesolve Africa</title>
+    <meta name="description" content="${excerpt}">
+    <link rel="canonical" href="${url}">
+    <meta property="og:title" content="${title}">
+    <meta property="og:description" content="${excerpt}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="${url}">
+    <meta property="og:image" content="${imageAbs}">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" type="image/png" href="../resources/favicon/Icon-Flavicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../footer-styles.css">
+    <script type="application/ld+json">
+${JSON.stringify(articleLd, null, 4)}
+    </script>
+    <style>
+        :root {
+            --primary-color: #345363;
+            --secondary-color: #9EDB9E;
+            --accent-color: #4DA34D;
+            --text-dark: #1a1a1a;
+            --text-light: #ffffff;
+            --background-light: #f8f9fa;
+            --border-color: #e9ecef;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+            padding-top: 80px;
+        }
+        a { color: var(--accent-color); }
+        .article-hero {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        .article-hero img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(52,83,99,0.15);
+        }
+        .article-header {
+            max-width: 800px;
+            margin: 2rem auto 1rem;
+            padding: 0 2rem;
+        }
+        .article-category-badge {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 0.35rem 0.9rem;
+            border-radius: 15px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        .article-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            color: var(--primary-color);
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        .article-meta {
+            display: flex;
+            gap: 1.5rem;
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+        .article-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .article-tag {
+            background: var(--background-light);
+            color: #666;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.72rem;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+        }
+        .article-body {
+            max-width: 800px;
+            margin: 0 auto 4rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 2px 10px rgba(52,83,99,0.08);
+        }
+        .article-body h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            margin: 2rem 0 1rem;
+        }
+        .article-body h3 {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin: 1.5rem 0 0.75rem;
+        }
+        .article-body p { margin-bottom: 1.25rem; color: #333; }
+        .article-body ul, .article-body ol { margin: 0 0 1.25rem 1.5rem; }
+        .article-body li { margin-bottom: 0.5rem; }
+        .article-body strong { color: var(--primary-color); }
+        .article-body code {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--background-light);
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.88em;
+        }
+        .article-body a { color: var(--accent-color); }
+        .article-body em { color: #666; }
+        .article-body hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 2rem 0;
+        }
+        .article-back {
+            display: inline-block;
+            margin: 0 2rem 1rem;
+            max-width: 800px;
+        }
+        .article-back a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        @media (max-width: 768px) {
+            .article-title { font-size: 1.8rem; }
+            .article-hero img { height: 220px; }
+            .article-body { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    ${rewritePathsForSubdir(headerHTML)}
+
+    <div class="article-back">
+        <a href="../news.html">&larr; Back to News &amp; Insights</a>
+    </div>
+
+    <div class="article-header">
+        <span class="article-category-badge">${escapeHTML(categoryLabel)}</span>
+        <h1 class="article-title">${title}</h1>
+        <div class="article-meta">
+            <span>${escapeHTML(dateStr)}</span>
+            <span>${author}</span>
+        </div>
+        <div class="article-tags">${tagsHtml}</div>
+    </div>
+
+    <div class="article-hero">
+        <img src="../${image.replace(/^\/+/, '')}" alt="${title}">
+    </div>
+
+    <article class="article-body">
+${bodyHtml}
+    </article>
+
+    ${rewritePathsForSubdir(footerHTML)}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
+    <script src="../js/header-component.js" defer></script>
+    <script src="../footer-component.js" defer></script>
+</body>
+</html>`;
+}
+
+/**
+ * Rewrite relative href/src URLs to prepend ../ for pages in a subdirectory
+ * (e.g. news/). Leaves absolute, protocol-relative, hash, and mailto: URLs
+ * untouched. Also leaves the navbar.css/footer-styles.css already handled
+ * via the <link> tags in the page head.
+ */
+function rewritePathsForSubdir(html) {
+  return html.replace(/(href|src)=("|')([^"']*)("|')/g, (match, attr, q, val, qEnd) => {
+    if (/^(https?:|\/\/|#|mailto:|tel:|data:)/i.test(val)) return match;
+    if (val.startsWith('/')) return match; // root-relative — fine on Netlify
+    if (val.startsWith('../')) return match;
+    // Special-case the resource/logo path used by the navbar brand image
+    return `${attr}=${q}../${val}${qEnd}`;
+  });
+}
+
+function categoryLabelFor(id) {
+  const found = NEWS_CATEGORIES.find(c => c.id === id);
+  return found ? found.label : id;
+}
+
+/**
+ * Rebuild dist/news.html: fill the NEWS_INDEX_PLACEHOLDER with article cards
+ * grouped by category, and READING_LIST_PLACEHOLDER with curated links.
+ */
+function buildNewsIndex(articles) {
+  const newsHtmlPath = path.join(DIST, 'news.html');
+  if (!fs.existsSync(newsHtmlPath)) {
+    log('WARNING: dist/news.html not found; skipping news index');
+    return;
+  }
+
+  let html = fs.readFileSync(newsHtmlPath, 'utf8');
+
+  // 1. Article index grouped by category
+  const groupsHtml = NEWS_CATEGORIES.map(cat => {
+    const catArticles = articles.filter(a => (a.meta.category || 'company') === cat.id);
+    if (catArticles.length === 0) return '';
+    const cards = catArticles.map(a => renderArticleCard(a)).join('\n');
+    return `                    <div class="news-group">
+                        <h3 class="news-group-title">${escapeHTML(cat.label)}</h3>
+                        <div class="news-grid">
+${cards}
+                        </div>
+                    </div>`;
+  }).filter(Boolean).join('\n');
+
+  html = html.replace(
+    /<!-- NEWS_INDEX_PLACEHOLDER -->[\s\S]*?<!-- \/NEWS_INDEX_PLACEHOLDER -->|<!-- NEWS_INDEX_PLACEHOLDER -->/,
+    groupsHtml || '<p class="wizard-no-result">No articles published yet. Check back soon.</p>'
+  );
+
+  // 2. Reading list sidebar
+  const readingListPath = path.join(NEWS_SRC_DIR, 'reading-list.json');
+  let readingListHtml = '';
+  if (fs.existsSync(readingListPath)) {
+    const links = JSON.parse(fs.readFileSync(readingListPath, 'utf8'));
+    readingListHtml = links.map(l => `                            <li>
+                                <a href="${escapeHTML(l.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(l.title)}</a>
+                                <span class="reading-list-source">${escapeHTML(l.source || '')}</span>
+                            </li>`).join('\n');
+  }
+  html = html.replace(
+    /<!-- READING_LIST_PLACEHOLDER -->/,
+    readingListHtml || '<li>No curated links yet.</li>'
+  );
+
+  fs.writeFileSync(newsHtmlPath, html, 'utf8');
+  log(`Built news index with ${articles.length} article(s)`);
+}
+
+/**
+ * Render a single article card for the news index.
+ */
+function renderArticleCard(article) {
+  const { meta, slug } = article;
+  const title = escapeHTML(meta.title || slug);
+  const excerpt = escapeHTML(meta.excerpt || '');
+  const image = meta.image || 'resources/hero-geoscience.jpeg';
+  const dateStr = escapeHTML(formatDate(meta.date));
+  const tags = Array.isArray(meta.tags) ? meta.tags.slice(0, 3).map(t => `<span class="tag">${escapeHTML(t)}</span>`).join('') : '';
+
+  return `                            <article class="article-card animate-on-scroll">
+                                <a href="news/${slug}.html" style="text-decoration:none;color:inherit">
+                                    <div class="article-image">
+                                        <img src="${escapeHTML(image)}" alt="${title}" loading="lazy">
+                                    </div>
+                                    <div class="article-content">
+                                        <h3 class="article-title">${title}</h3>
+                                        <div class="article-meta">
+                                            <span>${dateStr}</span>
+                                        </div>
+                                        <p class="article-excerpt">${excerpt}</p>
+                                        ${tags ? `<div class="article-tags">${tags}</div>` : ''}
+                                        <span class="read-more">Read more &rarr;</span>
+                                    </div>
+                                </a>
+                            </article>`;
+}
+
+// ---------------------------------------------------------------------------
 // JSON-LD INJECTION
 // ---------------------------------------------------------------------------
 
@@ -364,7 +934,8 @@ function generateSitemap() {
       fileName === 'methods.html' ||
       fileName === 'g-resolog.html' ||
       fileName === 'g-resconvt.html' ||
-      fileName === 'g-geopylanner.html'
+      fileName === 'g-geopylanner.html' ||
+      fileName === 'g-flightplanner.html'
     ) {
       priority = '0.9';
     }

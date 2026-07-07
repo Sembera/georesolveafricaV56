@@ -3,7 +3,7 @@
 
   const STORAGE_KEY = 'grs-leads';
   const FORM_NAME = 'tool-leads';
-  const VALID_TOOLS = ['g-resolog', 'g-resconvt', 'g-geopylanner'];
+  const VALID_TOOLS = ['g-resolog', 'g-resconvt', 'g-geopylanner', 'g-flightplanner'];
   const VALID_TRIGGERS = ['export', 'inline', 'contact'];
   const DEFAULT_STATE = { subscribed: false, dismissCount: 0, lastShown: 0 };
   const THANKS_TEXT = 'Thanks - you\'re on the list. We only email about tools and guides; unsubscribe anytime.';

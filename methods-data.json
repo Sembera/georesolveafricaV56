@@ -1,0 +1,219 @@
+{
+  "siteConditions": [
+    { "id": "urban-noise", "label": "Urban noise / traffic vibration", "description": "Cultural noise, traffic, machinery" },
+    { "id": "limited-access", "label": "Limited access / steep terrain", "description": "Steep slopes, dense vegetation, restricted space" },
+    { "id": "conductive-clay", "label": "Conductive clay soils", "description": "High conductivity, saline/clayey ground" },
+    { "id": "water-covered", "label": "Water-covered site", "description": "Wetland, river, lake, standing water" }
+  ],
+  "objectives": [
+    { "id": "bedrock", "label": "Bedrock depth & rippability", "description": "Map depth to competent bedrock for foundation design" },
+    { "id": "groundwater", "label": "Groundwater / aquifer mapping", "description": "Locate water-bearing zones, borehole siting" },
+    { "id": "cavities", "label": "Cavities & voids", "description": "Detect subsurface voids, sinkholes, karst" },
+    { "id": "utilities", "label": "Utilities & near-surface structures", "description": "Map buried pipes, cables, tanks, foundations" },
+    { "id": "minerals", "label": "Mineral exploration", "description": "Delineate ore bodies, structural controls, alteration" },
+    { "id": "dam", "label": "Dam foundation investigation", "description": "Characterise foundation conditions for dam design" },
+    { "id": "contamination", "label": "Contamination / plume mapping", "description": "Delineate contaminant plumes, leachate, saltwater intrusion" },
+    { "id": "stratigraphy", "label": "Stratigraphy / layer mapping", "description": "Map subsurface layer geometry and thickness" }
+  ],
+  "methods": [
+    {
+      "id": "seismic-refraction",
+      "name": "Seismic Refraction",
+      "category": "Seismic",
+      "depthRange_m": [3, 100],
+      "resolution": 4,
+      "relCost": 3,
+      "speed_km_per_day": 1.5,
+      "bestFor": ["Bedrock depth & rippability", "Dam foundation investigation", "Stratigraphic mapping"],
+      "limitations": [
+        "Cannot detect velocity inversions (a low-velocity layer masked beneath a faster layer is invisible)",
+        "Requires good ground coupling and a spread of geophones (50-200 m layout)",
+        "Cultural vibration (traffic, machinery) degrades first-arrival picks"
+      ],
+      "deliverables": [
+        "2D P-wave velocity profile",
+        "Depth-to-bedrock contour map",
+        "Rippability / excavatability assessment"
+      ],
+      "objectives": ["bedrock", "dam", "stratigraphy"],
+      "limitationTriggers": { "urban-noise": 3, "limited-access": 2, "conductive-clay": 0, "water-covered": 3 }
+    },
+    {
+      "id": "masw",
+      "name": "MASW (Multi-channel Analysis of Surface Waves)",
+      "category": "Seismic",
+      "depthRange_m": [1, 50],
+      "resolution": 4,
+      "relCost": 3,
+      "speed_km_per_day": 2,
+      "bestFor": ["Vs30 / site class (IBC/ASCE)", "Dam foundation investigation", "Liquefaction screening"],
+      "limitations": [
+        "Maximum reliable depth ~30-50 m with active-source MASW",
+        "Resolution drops sharply below 1/3 of maximum depth",
+        "Passive MASW extends depth but lowers near-surface resolution"
+      ],
+      "deliverables": [
+        "1D/2D shear-wave velocity (Vs) profile",
+        "Vs30 site classification per IBC/ASCE",
+        "Liquefaction susceptibility map"
+      ],
+      "objectives": ["dam", "stratigraphy", "bedrock"],
+      "limitationTriggers": { "urban-noise": 1, "limited-access": 1, "conductive-clay": 0, "water-covered": 2 }
+    },
+    {
+      "id": "ert-2d",
+      "name": "Electrical Resistivity Tomography (2D ERT)",
+      "category": "Electrical",
+      "depthRange_m": [1, 1000],
+      "resolution": 4,
+      "relCost": 3,
+      "speed_km_per_day": 1.2,
+      "bestFor": ["Groundwater mapping", "Contamination / leachate plumes", "Cavity detection in resistive rock"],
+      "limitations": [
+        "Requires good electrode-to-ground contact (difficult on dry gravel, hardpan, or paved surfaces)",
+        "Conductive clay overburden suppresses signal from deeper resistive targets",
+        "Deep investigations need long layouts (depth ~1/6 of array length)"
+      ],
+      "deliverables": [
+        "2D resistivity cross-section (inverted model)",
+        "Depth to water table / aquifer geometry",
+        "Contaminant plume delineation"
+      ],
+      "objectives": ["groundwater", "contamination", "cavities", "dam", "stratigraphy"],
+      "limitationTriggers": { "urban-noise": 0, "limited-access": 2, "conductive-clay": 1, "water-covered": 2 }
+    },
+    {
+      "id": "ves",
+      "name": "Vertical Electrical Sounding (VES)",
+      "category": "Electrical",
+      "depthRange_m": [5, 500],
+      "resolution": 3,
+      "relCost": 2,
+      "speed_km_per_day": 5,
+      "bestFor": ["Borehole siting (point depth)", "Groundwater exploration at limited-access sites", "Layer resistivity at a point"],
+      "limitations": [
+        "1D point measurement — no lateral continuity between soundings unless densely spaced",
+        "Layer equivalence: multiple layer models can fit the same curve",
+        "Conductive overburden limits depth of investigation"
+      ],
+      "deliverables": [
+        "1D layer resistivity model at each sounding",
+        "Recommended drilling depth for boreholes",
+        "Aquifer resistivity / yield correlation"
+      ],
+      "objectives": ["groundwater", "stratigraphy"],
+      "limitationTriggers": { "urban-noise": 0, "limited-access": 1, "conductive-clay": 1, "water-covered": 2 }
+    },
+    {
+      "id": "gpr",
+      "name": "Ground Penetrating Radar (GPR)",
+      "category": "Electromagnetic",
+      "depthRange_m": [0.1, 30],
+      "resolution": 5,
+      "relCost": 2,
+      "speed_km_per_day": 5,
+      "bestFor": ["Utility & pipe mapping", "Concrete/bridge deck inspection", "Shallow stratigraphy & archaeology"],
+      "limitations": [
+        "Signal is strongly attenuated in conductive (clayey, saline, waterlogged) soils — penetration may fall to <1 m",
+        "Maximum reliable depth typically 15-30 m in resistive ground; far less in clay",
+        "Antenna frequency trades depth for resolution (low freq = deep but coarse)"
+      ],
+      "deliverables": [
+        "High-resolution 2D/3D radar profile",
+        "Mapped utility/pipe positions & depths",
+        "Concrete cover and rebar mapping"
+      ],
+      "objectives": ["utilities", "cavities", "stratigraphy"],
+      "limitationTriggers": { "urban-noise": 1, "limited-access": 1, "conductive-clay": 5, "water-covered": 3 }
+    },
+    {
+      "id": "magnetics",
+      "name": "Magnetic Survey",
+      "category": "Potential Field",
+      "depthRange_m": [1, 300],
+      "resolution": 3,
+      "relCost": 2,
+      "speed_km_per_day": 8,
+      "bestFor": ["Mineral exploration (iron, massive sulphides)", "Structural / dyke mapping", "Buried metal & UXO detection"],
+      "limitations": [
+        "Strongly affected by cultural metal (fences, pipelines, reinforced concrete) in urban/industrial areas",
+        "Non-unique: many source bodies can produce the same anomaly",
+        "Depth estimation from magnetics alone is approximate without modelling"
+      ],
+      "deliverables": [
+        "Magnetic anomaly map (total field / residual)",
+        "Structural interpretation lineaments",
+        "Target anomalies for follow-up drilling"
+      ],
+      "objectives": ["minerals", "utilities"],
+      "limitationTriggers": { "urban-noise": 4, "limited-access": 1, "conductive-clay": 0, "water-covered": 0 }
+    },
+    {
+      "id": "gravity",
+      "name": "Gravity Survey",
+      "category": "Potential Field",
+      "depthRange_m": [10, 5000],
+      "resolution": 2,
+      "relCost": 3,
+      "speed_km_per_day": 3,
+      "bestFor": ["Basement / sedimentary basin geometry", "Cavity & void detection (microgravity)", "Ore-body delineation (dense ore)"],
+      "limitations": [
+        "Requires very precise station levelling and terrain corrections — slow to acquire and process",
+        "Small targets need dense station spacing and excellent elevation control",
+        "Near-surface density variations can mask deeper targets"
+      ],
+      "deliverables": [
+        "Bouguer / residual gravity anomaly map",
+        "2D/2.75D density models along profiles",
+        "Cavity probability map (microgravity)"
+      ],
+      "objectives": ["minerals", "cavities", "stratigraphy"],
+      "limitationTriggers": { "urban-noise": 2, "limited-access": 3, "conductive-clay": 0, "water-covered": 2 }
+    },
+    {
+      "id": "em-fdem",
+      "name": "Electromagnetic (FDEM)",
+      "category": "Electromagnetic",
+      "depthRange_m": [0.5, 50],
+      "resolution": 3,
+      "relCost": 2,
+      "speed_km_per_day": 10,
+      "bestFor": ["Groundwater / salinity mapping", "Contaminant / leachate plumes", "Shallow ore & conductivity mapping"],
+      "limitations": [
+        "Conductive overburden (clay/saline) limits depth of investigation for resistive targets below",
+        "Sensitive to cultural metal and power-line interference in urban/industrial areas",
+        "Frequency / coil spacing trades depth for resolution; deep targets (>50 m) need low-frequency TDEM instead"
+      ],
+      "deliverables": [
+        "Apparent conductivity / in-phase map",
+        "2D conductivity cross-section",
+        "Salinity / contaminant plume delineation"
+      ],
+      "objectives": ["groundwater", "contamination", "minerals"],
+      "limitationTriggers": { "urban-noise": 3, "limited-access": 1, "conductive-clay": 4, "water-covered": 1 }
+    },
+    {
+      "id": "geotechnical-drilling",
+      "name": "Geotechnical Drilling (ground truth)",
+      "category": "Invasive",
+      "role": "calibration",
+      "depthRange_m": [1, 200],
+      "resolution": 5,
+      "relCost": 5,
+      "speed_km_per_day": 0.3,
+      "bestFor": ["Ground-truth calibration for geophysics", "SPT & UDS sampling for design parameters", "Borehole lithology"],
+      "limitations": [
+        "Point data only — interpolation between boreholes is uncertain without geophysics",
+        "High cost per metre and slow mobilisation; access can be difficult on steep or soft ground",
+        "Holes must be backfilled / sealed; environmental permitting may apply"
+      ],
+      "deliverables": [
+        "Borehole logs (lithology, SPT, recovery, RQD)",
+        "Index & engineering properties from lab testing",
+        "Geotechnical design parameters (bearing capacity, settlement)"
+      ],
+      "objectives": ["bedrock", "groundwater", "dam", "contamination", "stratigraphy"],
+      "limitationTriggers": { "urban-noise": 0, "limited-access": 3, "conductive-clay": 0, "water-covered": 3 }
+    }
+  ]
+}

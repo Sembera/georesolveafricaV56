@@ -1,4 +1,4 @@
-// G-Resolog Pro v2 - IndexedDB Helper (ES Module)
+// G-Resolog - IndexedDB Helper (ES Module)
 // Promise-based wrapper around IndexedDB with no external dependencies.
 
 let db = null;

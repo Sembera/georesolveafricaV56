@@ -1,5 +1,5 @@
 // =============================================================================
-// G-Resolog Pro v2 - Main UI Controller (ES Module)
+// G-Resolog - Main UI Controller (ES Module)
 // =============================================================================
 
 import { Model } from './model.js?v=20260707-4';

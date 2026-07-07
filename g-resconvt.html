@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -26,7 +26,10 @@
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="footer-styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.9.0/proj4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mgrs@1.0.0/dist/mgrs.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
         * {
             margin: 0;
@@ -231,7 +234,7 @@
         }
 
         .file-upload-label::before {
-            content: '📁 ';
+            content: 'ðŸ“ ';
             font-size: 24px;
             margin-right: 10px;
         }
@@ -424,6 +427,138 @@
             padding: 15px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
+
+        .workspace-grid {
+            display: grid;
+            grid-template-columns: minmax(320px, 1fr) minmax(360px, 0.9fr);
+            gap: 20px;
+            align-items: start;
+        }
+
+        .map-panel {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 25px;
+        }
+
+        #resconvtMap {
+            height: 520px;
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid #e1e8ed;
+            overflow: hidden;
+        }
+
+        .map-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
+            margin-top: 12px;
+            font-size: 12px;
+            color: #555;
+        }
+
+        .details-box {
+            background: white;
+            border: 1px solid #dfe7ec;
+            border-radius: 8px;
+            padding: 14px;
+            margin-bottom: 20px;
+        }
+
+        .details-box summary {
+            cursor: pointer;
+            font-weight: 700;
+            color: #345363;
+        }
+
+        .details-box pre {
+            background: #f4f7f8;
+            border-radius: 6px;
+            overflow-x: auto;
+            padding: 12px;
+            margin-top: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+        }
+
+        .progress-wrap {
+            display: none;
+            margin-top: 16px;
+            background: #edf2f4;
+            border-radius: 999px;
+            overflow: hidden;
+            height: 14px;
+        }
+
+        .progress-wrap.active {
+            display: block;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #345363, #4DA34D);
+            transition: width 0.2s ease;
+        }
+
+        .preview-panel,
+        .history-panel {
+            display: none;
+            margin-top: 16px;
+            background: white;
+            border: 1px solid #e1e8ed;
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        .preview-panel.active,
+        .history-panel.active {
+            display: block;
+        }
+
+        .preview-table {
+            max-height: 220px;
+            overflow: auto;
+            margin-top: 10px;
+            border: 1px solid #e1e8ed;
+            border-radius: 6px;
+        }
+
+        .row-error td {
+            background: #fff0f0;
+            color: #8a1f11;
+        }
+
+        .copy-grid,
+        .export-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .compact-button {
+            padding: 9px 13px;
+            font-size: 12px;
+        }
+
+        .format-settings {
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 1100px) {
+            .workspace-grid {
+                grid-template-columns: 1fr;
+            }
+
+            #resconvtMap {
+                height: 420px;
+            }
+        }
     </style>
 </head>
 
@@ -434,9 +569,21 @@
         <div class="content">
             <div class="tab-container">
                 <button class="tab active" onclick="switchTab('single')">Single Point</button>
-                <button class="tab" onclick="switchTab('batch')">Batch / CSV Upload</button>
+                <button class="tab" onclick="switchTab('batch')">Batch / File Upload</button>
             </div>
 
+            <div class="map-panel">
+                <div class="section-title">Map Preview</div>
+                <div id="resconvtMap" aria-label="Coordinate conversion map"></div>
+                <div class="map-meta">
+                    <div id="mapStatus">Click the map to fill the single-point input.</div>
+                    <div id="permalinkStatus">Permalink updates after conversion.</div>
+                </div>
+                <div class="history-panel" id="historyPanel">
+                    <strong>Recent conversions</strong>
+                    <div id="historyList"></div>
+                </div>
+            </div>
             <!-- Single Point Tab -->
             <div id="single-tab" class="tab-content active">
                 <div class="input-section">
@@ -450,13 +597,14 @@
                                 <option value="dms">Degrees Minutes Seconds (DMS)</option>
                                 <option value="ddm">Degrees + Decimal Minutes</option>
                                 <option value="utm">UTM (Easting, Northing)</option>
+                                <option value="mgrs">MGRS Grid Reference</option>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label>Input CRS</label>
                             <select id="inputCRS">
-                                <optgroup label="🌐 Global Systems">
+                                <optgroup label="ðŸŒ Global Systems">
                                     <option value="EPSG:4326">WGS84 Geographic (EPSG:4326)</option>
                                     <option value="EPSG:32635">WGS84 / UTM 35N (EPSG:32635)</option>
                                     <option value="EPSG:32735">WGS84 / UTM 35S (EPSG:32735)</option>
@@ -469,40 +617,40 @@
                                     <option value="EPSG:32639">WGS84 / UTM 39N (EPSG:32639)</option>
                                     <option value="EPSG:32739">WGS84 / UTM 39S (EPSG:32739)</option>
                                 </optgroup>
-                                <optgroup label="🇺🇬 Uganda (Arc 1960)">
+                                <optgroup label="ðŸ‡ºðŸ‡¬ Uganda (Arc 1960)">
                                     <option value="EPSG:4209">Arc 1960 Geographic (EPSG:4209)</option>
                                     <option value="EPSG:21095">Arc 1960 / UTM 35N (EPSG:21095)</option>
                                     <option value="EPSG:21035">Arc 1960 / UTM 35S (EPSG:21035)</option>
                                     <option value="EPSG:21096">Arc 1960 / UTM 36N (EPSG:21096)</option>
                                     <option value="EPSG:21036">Arc 1960 / UTM 36S (EPSG:21036)</option>
                                 </optgroup>
-                                <optgroup label="🇷🇼 Rwanda (RGR 2000)">
+                                <optgroup label="ðŸ‡·ðŸ‡¼ Rwanda (RGR 2000)">
                                     <option value="EPSG:4759">Rwanda 2000 Geographic (EPSG:4759)</option>
                                     <option value="EPSG:32735">Rwanda 2000 / UTM 35S (EPSG:32735)</option>
                                     <option value="EPSG:32736">Rwanda 2000 / UTM 36S (EPSG:32736)</option>
                                 </optgroup>
-                                <optgroup label="🇧🇮 Burundi (Arc 1960)">
+                                <optgroup label="ðŸ‡§ðŸ‡® Burundi (Arc 1960)">
                                     <option value="EPSG:4209">Arc 1960 Geographic (EPSG:4209)</option>
                                     <option value="EPSG:21035">Arc 1960 / UTM 35S (EPSG:21035)</option>
                                     <option value="EPSG:21036">Arc 1960 / UTM 36S (EPSG:21036)</option>
                                 </optgroup>
-                                <optgroup label="🇹🇿 Tanzania (Arc 1960)">
+                                <optgroup label="ðŸ‡¹ðŸ‡¿ Tanzania (Arc 1960)">
                                     <option value="EPSG:4209">Arc 1960 Geographic (EPSG:4209)</option>
                                     <option value="EPSG:21035">Arc 1960 / UTM 35S (EPSG:21035)</option>
                                     <option value="EPSG:21036">Arc 1960 / UTM 36S (EPSG:21036)</option>
                                     <option value="EPSG:21037">Arc 1960 / UTM 37S (EPSG:21037)</option>
                                 </optgroup>
-                                <optgroup label="🇰🇪 Kenya">
+                                <optgroup label="ðŸ‡°ðŸ‡ª Kenya">
                                     <option value="EPSG:4210">Kenya 1960 Geographic (EPSG:4210)</option>
                                     <option value="EPSG:21097">Arc 1960 / UTM 37N (EPSG:21097)</option>
                                     <option value="EPSG:21037">Arc 1960 / UTM 37S (EPSG:21037)</option>
                                 </optgroup>
-                                <optgroup label="🇸🇴 Somalia (WGS84)">
+                                <optgroup label="ðŸ‡¸ðŸ‡´ Somalia (WGS84)">
                                     <option value="EPSG:4326">WGS84 Geographic (EPSG:4326)</option>
                                     <option value="EPSG:32638">WGS84 / UTM 38N (EPSG:32638)</option>
                                     <option value="EPSG:32639">WGS84 / UTM 39N (EPSG:32639)</option>
                                 </optgroup>
-                                <optgroup label="🇨🇩 DRC (WGS84)">
+                                <optgroup label="ðŸ‡¨ðŸ‡© DRC (WGS84)">
                                     <option value="EPSG:4326">WGS84 Geographic (EPSG:4326)</option>
                                     <option value="EPSG:32732">WGS84 / UTM 32S (EPSG:32732)</option>
                                     <option value="EPSG:32733">WGS84 / UTM 33S (EPSG:32733)</option>
@@ -510,7 +658,7 @@
                                     <option value="EPSG:32735">WGS84 / UTM 35S (EPSG:32735)</option>
                                     <option value="EPSG:32736">WGS84 / UTM 36S (EPSG:32736)</option>
                                 </optgroup>
-                                <optgroup label="🇨🇩 DRC Legacy (Belgian Congo 1950)">
+                                <optgroup label="ðŸ‡¨ðŸ‡© DRC Legacy (Belgian Congo 1950)">
                                     <option value="EPSG:4196">Belgian Congo 1950 Geographic (EPSG:4196)</option>
                                     <option value="EPSG:3347">Belgian Congo 1950 / UTM 34S (EPSG:3347)</option>
                                     <option value="EPSG:3348">Belgian Congo 1950 / UTM 35S (EPSG:3348)</option>
@@ -521,7 +669,7 @@
                         <div class="form-group">
                             <label>Output CRS</label>
                             <select id="outputCRS">
-                                <optgroup label="🌐 Global Systems">
+                                <optgroup label="ðŸŒ Global Systems">
                                     <option value="EPSG:4326" selected>WGS84 Geographic (EPSG:4326)</option>
                                     <option value="EPSG:32635">WGS84 / UTM 35N (EPSG:32635)</option>
                                     <option value="EPSG:32735">WGS84 / UTM 35S (EPSG:32735)</option>
@@ -534,40 +682,40 @@
                                     <option value="EPSG:32639">WGS84 / UTM 39N (EPSG:32639)</option>
                                     <option value="EPSG:32739">WGS84 / UTM 39S (EPSG:32739)</option>
                                 </optgroup>
-                                <optgroup label="🇺🇬 Uganda (Arc 1960)">
+                                <optgroup label="ðŸ‡ºðŸ‡¬ Uganda (Arc 1960)">
                                     <option value="EPSG:4209">Arc 1960 Geographic (EPSG:4209)</option>
                                     <option value="EPSG:21095">Arc 1960 / UTM 35N (EPSG:21095)</option>
                                     <option value="EPSG:21035">Arc 1960 / UTM 35S (EPSG:21035)</option>
                                     <option value="EPSG:21096">Arc 1960 / UTM 36N (EPSG:21096)</option>
                                     <option value="EPSG:21036">Arc 1960 / UTM 36S (EPSG:21036)</option>
                                 </optgroup>
-                                <optgroup label="🇷🇼 Rwanda (RGR 2000)">
+                                <optgroup label="ðŸ‡·ðŸ‡¼ Rwanda (RGR 2000)">
                                     <option value="EPSG:4759">Rwanda 2000 Geographic (EPSG:4759)</option>
                                     <option value="EPSG:32735">Rwanda 2000 / UTM 35S (EPSG:32735)</option>
                                     <option value="EPSG:32736">Rwanda 2000 / UTM 36S (EPSG:32736)</option>
                                 </optgroup>
-                                <optgroup label="🇧🇮 Burundi (Arc 1960)">
+                                <optgroup label="ðŸ‡§ðŸ‡® Burundi (Arc 1960)">
                                     <option value="EPSG:4209">Arc 1960 Geographic (EPSG:4209)</option>
                                     <option value="EPSG:21035">Arc 1960 / UTM 35S (EPSG:21035)</option>
                                     <option value="EPSG:21036">Arc 1960 / UTM 36S (EPSG:21036)</option>
                                 </optgroup>
-                                <optgroup label="🇹🇿 Tanzania (Arc 1960)">
+                                <optgroup label="ðŸ‡¹ðŸ‡¿ Tanzania (Arc 1960)">
                                     <option value="EPSG:4209">Arc 1960 Geographic (EPSG:4209)</option>
                                     <option value="EPSG:21035">Arc 1960 / UTM 35S (EPSG:21035)</option>
                                     <option value="EPSG:21036">Arc 1960 / UTM 36S (EPSG:21036)</option>
                                     <option value="EPSG:21037">Arc 1960 / UTM 37S (EPSG:21037)</option>
                                 </optgroup>
-                                <optgroup label="🇰🇪 Kenya">
+                                <optgroup label="ðŸ‡°ðŸ‡ª Kenya">
                                     <option value="EPSG:4210">Kenya 1960 Geographic (EPSG:4210)</option>
                                     <option value="EPSG:21097">Arc 1960 / UTM 37N (EPSG:21097)</option>
                                     <option value="EPSG:21037">Arc 1960 / UTM 37S (EPSG:21037)</option>
                                 </optgroup>
-                                <optgroup label="🇸🇴 Somalia (WGS84)">
+                                <optgroup label="ðŸ‡¸ðŸ‡´ Somalia (WGS84)">
                                     <option value="EPSG:4326">WGS84 Geographic (EPSG:4326)</option>
                                     <option value="EPSG:32638">WGS84 / UTM 38N (EPSG:32638)</option>
                                     <option value="EPSG:32639">WGS84 / UTM 39N (EPSG:32639)</option>
                                 </optgroup>
-                                <optgroup label="🇨🇩 DRC (WGS84)">
+                                <optgroup label="ðŸ‡¨ðŸ‡© DRC (WGS84)">
                                     <option value="EPSG:4326">WGS84 Geographic (EPSG:4326)</option>
                                     <option value="EPSG:32732">WGS84 / UTM 32S (EPSG:32732)</option>
                                     <option value="EPSG:32733">WGS84 / UTM 33S (EPSG:32733)</option>
@@ -575,7 +723,7 @@
                                     <option value="EPSG:32735">WGS84 / UTM 35S (EPSG:32735)</option>
                                     <option value="EPSG:32736">WGS84 / UTM 36S (EPSG:32736)</option>
                                 </optgroup>
-                                <optgroup label="🇨🇩 DRC Legacy (Belgian Congo 1950)">
+                                <optgroup label="ðŸ‡¨ðŸ‡© DRC Legacy (Belgian Congo 1950)">
                                     <option value="EPSG:4196">Belgian Congo 1950 Geographic (EPSG:4196)</option>
                                     <option value="EPSG:3347">Belgian Congo 1950 / UTM 34S (EPSG:3347)</option>
                                     <option value="EPSG:3348">Belgian Congo 1950 / UTM 35S (EPSG:3348)</option>
@@ -653,8 +801,35 @@
                         </div>
                     </div>
 
+
+                    <div id="inputFieldsMGRS" class="form-grid" style="display: none;">
+                        <div class="form-group">
+                            <label>MGRS</label>
+                            <input type="text" id="mgrsInput" placeholder="e.g., 36NXF759843">
+                        </div>
+                    </div>
+
+                    <div class="form-grid format-settings">
+                        <div class="form-group">
+                            <label>Decimal Places</label>
+                            <input type="number" id="decimalPlaces" value="6" min="0" max="10">
+                        </div>
+                        <div class="form-group">
+                            <label>Hemisphere Notation</label>
+                            <select id="hemisphereNotation">
+                                <option value="letters" selected>N/S and E/W</option>
+                                <option value="signed">Signed +/- values</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <details class="details-box" id="transformationDetails">
+                        <summary>Transformation details</summary>
+                        <pre id="proj4Details">Choose input and output systems to inspect the PROJ.4 definitions and accuracy notes.</pre>
+                    </details>
                     <div class="button-group">
                         <button class="btn-primary" onclick="convertSingle()">Convert</button>
+                        <button class="btn-secondary" onclick="swapCRS()">Swap CRS</button>
                         <button class="btn-secondary" onclick="clearSingleForm()">Clear</button>
                     </div>
                 </div>
@@ -666,16 +841,14 @@
                     <div class="section-title">Batch Processing</div>
 
                     <div class="info-box">
-                        <strong>CSV Format:</strong> Upload a CSV file with columns: Latitude,Longitude (or X,Y for
-                        projected systems).
-                        Optional: add a "Name" or "ID" column for reference.
+                        <strong>Accepted files:</strong> CSV, GeoJSON, KML, and GPX. Columns are detected automatically; use Name and Description fields when available for exports.
                     </div>
 
                     <div class="form-grid">
                         <div class="form-group">
                             <label>Input CRS</label>
                             <select id="batchInputCRS">
-                                <optgroup label="🌐 Global Systems">
+                                <optgroup label="ðŸŒ Global Systems">
                                     <option value="EPSG:4326">WGS84 Geographic (EPSG:4326)</option>
                                     <option value="EPSG:32635">WGS84 / UTM 35N (EPSG:32635)</option>
                                     <option value="EPSG:32735">WGS84 / UTM 35S (EPSG:32735)</option>
@@ -688,40 +861,40 @@
                                     <option value="EPSG:32639">WGS84 / UTM 39N (EPSG:32639)</option>
                                     <option value="EPSG:32739">WGS84 / UTM 39S (EPSG:32739)</option>
                                 </optgroup>
-                                <optgroup label="🇺🇬 Uganda (Arc 1960)">
+                                <optgroup label="ðŸ‡ºðŸ‡¬ Uganda (Arc 1960)">
                                     <option value="EPSG:4209">Arc 1960 Geographic (EPSG:4209)</option>
                                     <option value="EPSG:21095">Arc 1960 / UTM 35N (EPSG:21095)</option>
                                     <option value="EPSG:21035">Arc 1960 / UTM 35S (EPSG:21035)</option>
                                     <option value="EPSG:21096">Arc 1960 / UTM 36N (EPSG:21096)</option>
                                     <option value="EPSG:21036">Arc 1960 / UTM 36S (EPSG:21036)</option>
                                 </optgroup>
-                                <optgroup label="🇷🇼 Rwanda (RGR 2000)">
+                                <optgroup label="ðŸ‡·ðŸ‡¼ Rwanda (RGR 2000)">
                                     <option value="EPSG:4759">Rwanda 2000 Geographic (EPSG:4759)</option>
                                     <option value="EPSG:32735">Rwanda 2000 / UTM 35S (EPSG:32735)</option>
                                     <option value="EPSG:32736">Rwanda 2000 / UTM 36S (EPSG:32736)</option>
                                 </optgroup>
-                                <optgroup label="🇧🇮 Burundi (Arc 1960)">
+                                <optgroup label="ðŸ‡§ðŸ‡® Burundi (Arc 1960)">
                                     <option value="EPSG:4209">Arc 1960 Geographic (EPSG:4209)</option>
                                     <option value="EPSG:21035">Arc 1960 / UTM 35S (EPSG:21035)</option>
                                     <option value="EPSG:21036">Arc 1960 / UTM 36S (EPSG:21036)</option>
                                 </optgroup>
-                                <optgroup label="🇹🇿 Tanzania (Arc 1960)">
+                                <optgroup label="ðŸ‡¹ðŸ‡¿ Tanzania (Arc 1960)">
                                     <option value="EPSG:4209">Arc 1960 Geographic (EPSG:4209)</option>
                                     <option value="EPSG:21035">Arc 1960 / UTM 35S (EPSG:21035)</option>
                                     <option value="EPSG:21036">Arc 1960 / UTM 36S (EPSG:21036)</option>
                                     <option value="EPSG:21037">Arc 1960 / UTM 37S (EPSG:21037)</option>
                                 </optgroup>
-                                <optgroup label="🇰🇪 Kenya">
+                                <optgroup label="ðŸ‡°ðŸ‡ª Kenya">
                                     <option value="EPSG:4210">Kenya 1960 Geographic (EPSG:4210)</option>
                                     <option value="EPSG:21097">Arc 1960 / UTM 37N (EPSG:21097)</option>
                                     <option value="EPSG:21037">Arc 1960 / UTM 37S (EPSG:21037)</option>
                                 </optgroup>
-                                <optgroup label="🇸🇴 Somalia (WGS84)">
+                                <optgroup label="ðŸ‡¸ðŸ‡´ Somalia (WGS84)">
                                     <option value="EPSG:4326">WGS84 Geographic (EPSG:4326)</option>
                                     <option value="EPSG:32638">WGS84 / UTM 38N (EPSG:32638)</option>
                                     <option value="EPSG:32639">WGS84 / UTM 39N (EPSG:32639)</option>
                                 </optgroup>
-                                <optgroup label="🇨🇩 DRC (WGS84)">
+                                <optgroup label="ðŸ‡¨ðŸ‡© DRC (WGS84)">
                                     <option value="EPSG:4326">WGS84 Geographic (EPSG:4326)</option>
                                     <option value="EPSG:32732">WGS84 / UTM 32S (EPSG:32732)</option>
                                     <option value="EPSG:32733">WGS84 / UTM 33S (EPSG:32733)</option>
@@ -729,7 +902,7 @@
                                     <option value="EPSG:32735">WGS84 / UTM 35S (EPSG:32735)</option>
                                     <option value="EPSG:32736">WGS84 / UTM 36S (EPSG:32736)</option>
                                 </optgroup>
-                                <optgroup label="🇨🇩 DRC Legacy (Belgian Congo 1950)">
+                                <optgroup label="ðŸ‡¨ðŸ‡© DRC Legacy (Belgian Congo 1950)">
                                     <option value="EPSG:4196">Belgian Congo 1950 Geographic (EPSG:4196)</option>
                                     <option value="EPSG:3347">Belgian Congo 1950 / UTM 34S (EPSG:3347)</option>
                                     <option value="EPSG:3348">Belgian Congo 1950 / UTM 35S (EPSG:3348)</option>
@@ -740,7 +913,7 @@
                         <div class="form-group">
                             <label>Output CRS</label>
                             <select id="batchOutputCRS">
-                                <optgroup label="🌐 Global Systems">
+                                <optgroup label="ðŸŒ Global Systems">
                                     <option value="EPSG:4326" selected>WGS84 Geographic (EPSG:4326)</option>
                                     <option value="EPSG:32635">WGS84 / UTM 35N (EPSG:32635)</option>
                                     <option value="EPSG:32735">WGS84 / UTM 35S (EPSG:32735)</option>
@@ -753,40 +926,40 @@
                                     <option value="EPSG:32639">WGS84 / UTM 39N (EPSG:32639)</option>
                                     <option value="EPSG:32739">WGS84 / UTM 39S (EPSG:32739)</option>
                                 </optgroup>
-                                <optgroup label="🇺🇬 Uganda (Arc 1960)">
+                                <optgroup label="ðŸ‡ºðŸ‡¬ Uganda (Arc 1960)">
                                     <option value="EPSG:4209">Arc 1960 Geographic (EPSG:4209)</option>
                                     <option value="EPSG:21095">Arc 1960 / UTM 35N (EPSG:21095)</option>
                                     <option value="EPSG:21035">Arc 1960 / UTM 35S (EPSG:21035)</option>
                                     <option value="EPSG:21096">Arc 1960 / UTM 36N (EPSG:21096)</option>
                                     <option value="EPSG:21036">Arc 1960 / UTM 36S (EPSG:21036)</option>
                                 </optgroup>
-                                <optgroup label="🇷🇼 Rwanda (RGR 2000)">
+                                <optgroup label="ðŸ‡·ðŸ‡¼ Rwanda (RGR 2000)">
                                     <option value="EPSG:4759">Rwanda 2000 Geographic (EPSG:4759)</option>
                                     <option value="EPSG:32735">Rwanda 2000 / UTM 35S (EPSG:32735)</option>
                                     <option value="EPSG:32736">Rwanda 2000 / UTM 36S (EPSG:32736)</option>
                                 </optgroup>
-                                <optgroup label="🇧🇮 Burundi (Arc 1960)">
+                                <optgroup label="ðŸ‡§ðŸ‡® Burundi (Arc 1960)">
                                     <option value="EPSG:4209">Arc 1960 Geographic (EPSG:4209)</option>
                                     <option value="EPSG:21035">Arc 1960 / UTM 35S (EPSG:21035)</option>
                                     <option value="EPSG:21036">Arc 1960 / UTM 36S (EPSG:21036)</option>
                                 </optgroup>
-                                <optgroup label="🇹🇿 Tanzania (Arc 1960)">
+                                <optgroup label="ðŸ‡¹ðŸ‡¿ Tanzania (Arc 1960)">
                                     <option value="EPSG:4209">Arc 1960 Geographic (EPSG:4209)</option>
                                     <option value="EPSG:21035">Arc 1960 / UTM 35S (EPSG:21035)</option>
                                     <option value="EPSG:21036">Arc 1960 / UTM 36S (EPSG:21036)</option>
                                     <option value="EPSG:21037">Arc 1960 / UTM 37S (EPSG:21037)</option>
                                 </optgroup>
-                                <optgroup label="🇰🇪 Kenya">
+                                <optgroup label="ðŸ‡°ðŸ‡ª Kenya">
                                     <option value="EPSG:4210">Kenya 1960 Geographic (EPSG:4210)</option>
                                     <option value="EPSG:21097">Arc 1960 / UTM 37N (EPSG:21097)</option>
                                     <option value="EPSG:21037">Arc 1960 / UTM 37S (EPSG:21037)</option>
                                 </optgroup>
-                                <optgroup label="🇸🇴 Somalia (WGS84)">
+                                <optgroup label="ðŸ‡¸ðŸ‡´ Somalia (WGS84)">
                                     <option value="EPSG:4326">WGS84 Geographic (EPSG:4326)</option>
                                     <option value="EPSG:32638">WGS84 / UTM 38N (EPSG:32638)</option>
                                     <option value="EPSG:32639">WGS84 / UTM 39N (EPSG:32639)</option>
                                 </optgroup>
-                                <optgroup label="🇨🇩 DRC (WGS84)">
+                                <optgroup label="ðŸ‡¨ðŸ‡© DRC (WGS84)">
                                     <option value="EPSG:4326">WGS84 Geographic (EPSG:4326)</option>
                                     <option value="EPSG:32732">WGS84 / UTM 32S (EPSG:32732)</option>
                                     <option value="EPSG:32733">WGS84 / UTM 33S (EPSG:32733)</option>
@@ -794,7 +967,7 @@
                                     <option value="EPSG:32735">WGS84 / UTM 35S (EPSG:32735)</option>
                                     <option value="EPSG:32736">WGS84 / UTM 36S (EPSG:32736)</option>
                                 </optgroup>
-                                <optgroup label="🇨🇩 DRC Legacy (Belgian Congo 1950)">
+                                <optgroup label="ðŸ‡¨ðŸ‡© DRC Legacy (Belgian Congo 1950)">
                                     <option value="EPSG:4196">Belgian Congo 1950 Geographic (EPSG:4196)</option>
                                     <option value="EPSG:3347">Belgian Congo 1950 / UTM 34S (EPSG:3347)</option>
                                     <option value="EPSG:3348">Belgian Congo 1950 / UTM 35S (EPSG:3348)</option>
@@ -804,9 +977,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Upload CSV File</label>
+                        <label>Upload CSV, GeoJSON, KML, or GPX File</label>
                         <div class="file-upload">
-                            <input type="file" id="csvFile" accept=".csv" onchange="handleFileUpload(event)">
+                            <input type="file" id="csvFile" accept=".csv,.geojson,.json,.kml,.gpx" onchange="handleFileUpload(event)">
                             <div class="file-upload-label">
                                 Drop CSV file here or click to browse
                             </div>
@@ -819,6 +992,16 @@
                             placeholder="Example:&#10;0.3476,32.5825&#10;-1.9441,30.0619&#10;-3.3731,29.9189"></textarea>
                     </div>
 
+
+                    <div class="progress-wrap" id="batchProgressWrap">
+                        <div class="progress-bar" id="batchProgressBar"></div>
+                    </div>
+
+                    <div class="preview-panel" id="importPreviewPanel">
+                        <strong id="importPreviewTitle">Preview</strong>
+                        <div id="columnMappingSummary" style="margin-top: 8px; font-size: 13px; color: #555;"></div>
+                        <div class="preview-table" id="importPreviewTable"></div>
+                    </div>
                     <div class="button-group">
                         <button class="btn-primary" onclick="convertBatch()">Convert All</button>
                         <button class="btn-secondary" onclick="clearBatchForm()">Clear</button>
@@ -842,9 +1025,19 @@
                         </table>
                     </div>
 
-                    <div class="button-group">
-                        <button class="btn-success" onclick="downloadCSV()">Download CSV</button>
-                        <button class="btn-secondary" onclick="copyToClipboard()">Copy to Clipboard</button>
+                    <div class="button-group export-grid">
+                        <button class="btn-success compact-button" onclick="downloadCSV()">CSV</button>
+                        <button class="btn-success compact-button" onclick="downloadGeoJSON()">GeoJSON</button>
+                        <button class="btn-success compact-button" onclick="downloadKML()">KML</button>
+                        <button class="btn-success compact-button" onclick="downloadGPX()">GPX</button>
+                        <button class="btn-success compact-button" onclick="downloadDXF()">DXF</button>
+                    </div>
+                    <div class="copy-grid">
+                        <button class="btn-secondary compact-button" onclick="copyFormat('dd')">Copy DD</button>
+                        <button class="btn-secondary compact-button" onclick="copyFormat('dms')">Copy DMS</button>
+                        <button class="btn-secondary compact-button" onclick="copyFormat('ddm')">Copy DDM</button>
+                        <button class="btn-secondary compact-button" onclick="copyFormat('mgrs')">Copy MGRS</button>
+                        <button class="btn-secondary compact-button" onclick="copyToClipboard()">Copy Table</button>
                     </div>
                 </div>
             </div>
@@ -1112,7 +1305,7 @@
             const latDir = lat >= 0 ? 'N' : 'S';
             const lonDir = lon >= 0 ? 'E' : 'W';
 
-            return `${Math.abs(latDMS.deg)}°${latDMS.min}'${latDMS.sec}"${latDir}, ${Math.abs(lonDMS.deg)}°${lonDMS.min}'${lonDMS.sec}"${lonDir}`;
+            return `${Math.abs(latDMS.deg)}Â°${latDMS.min}'${latDMS.sec}"${latDir}, ${Math.abs(lonDMS.deg)}Â°${lonDMS.min}'${lonDMS.sec}"${lonDir}`;
         }
 
         // Format as DDM string
@@ -1122,7 +1315,7 @@
             const latDir = lat >= 0 ? 'N' : 'S';
             const lonDir = lon >= 0 ? 'E' : 'W';
 
-            return `${Math.abs(latDDM.deg)}°${latDDM.decMin}'${latDir}, ${Math.abs(lonDDM.deg)}°${lonDDM.decMin}'${lonDir}`;
+            return `${Math.abs(latDDM.deg)}Â°${latDDM.decMin}'${latDir}, ${Math.abs(lonDDM.deg)}Â°${lonDDM.decMin}'${lonDir}`;
         }
 
         // Handle CSV file upload
@@ -1376,7 +1569,7 @@
             const container = document.getElementById('alertContainer');
             const alert = document.createElement('div');
             alert.className = `alert alert-${type}`;
-            alert.innerHTML = `<strong>${type === 'error' ? '⚠️ Error:' : type === 'warning' ? '⚠️ Warning:' : '✓ Success:'}</strong> ${message}`;
+            alert.innerHTML = `<strong>${type === 'error' ? 'âš ï¸ Error:' : type === 'warning' ? 'âš ï¸ Warning:' : 'âœ“ Success:'}</strong> ${message}`;
             container.appendChild(alert);
 
             if (type === 'success') {
@@ -1426,7 +1619,21 @@
     <script src="js/header-component.js" defer></script>
     <script src="footer-component.js" defer></script>
 
+    <script type="module" src="js/resconvt/app.js"></script>
     <script type="module" src="main.js"></script>
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+

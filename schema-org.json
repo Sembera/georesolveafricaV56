@@ -5,8 +5,8 @@
   "alternateName": "GeoResolve",
   "url": "https://georesolveafrica.com",
   "logo": "https://georesolveafrica.com/resources/logo/georesolve-logo.svg.svg",
-  "image": "https://georesolveafrica.com/resources/about.png",
-  "description": "Premier geoscience consulting firm providing expert geophysical, geotechnical, and hydrogeology services across Uganda, Rwanda, Burundi, and East Africa.",
+  "image": "https://georesolveafrica.com/resources/about.jpeg",
+  "description": "Premier geoscience consulting firm providing geophysical surveys, geotechnical investigations, mineral exploration, drilling, GIS, and drone survey services across Uganda, Rwanda, Burundi, and East Africa.",
   "slogan": "Data Driven, Research Based",
   "telephone": "+256771999614",
   "email": "info@georesolveafrica.com",
@@ -25,7 +25,13 @@
   "openingHoursSpecification": [
     {
       "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
       "opens": "08:00",
       "closes": "18:00"
     },
@@ -61,14 +67,11 @@
   "serviceType": [
     "Geophysical Surveys",
     "Geotechnical Engineering",
-    "Hydrogeology",
+    "Mineral Exploration Services",
+    "Exploration Geophysics",
+    "Groundwater Exploration Surveys",
     "Drilling Services",
     "Geospatial Services",
-    "Topographic Surveys",
-    "Cadastral Surveys"
-  ],
-  "sameAs": [
-    "https://www.linkedin.com/company/georesolve-africa",
-    "https://twitter.com/georesolveafrica"
+    "Drone Surveys"
   ]
 }

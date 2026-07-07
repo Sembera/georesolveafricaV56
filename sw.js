@@ -2,7 +2,7 @@
 // Provides offline support by caching the application shell and CDN libraries.
 
 // bump CACHE_NAME on every release
-const CACHE_NAME = 'gresolog-2026-07-07-3';
+const CACHE_NAME = 'gresolog-2026-07-07-4';
 const APP_SHELL = [
     '/g-resolog.html',
     '/js/resolog/db.js',
@@ -15,7 +15,7 @@ const APP_SHELL = [
 
 const CDN_LIBS = [
     'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js',
     'https://unpkg.com/svg2pdf.js@2.2.3/dist/svg2pdf.umd.min.js',
     'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap',
 ];
