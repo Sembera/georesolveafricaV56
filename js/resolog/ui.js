@@ -231,6 +231,22 @@ let _currentView = 'projects';
 let _openModal = null;
 let _saveTimer = null;
 
+function leadCapture(trigger) {
+  try {
+    return globalThis.GeoresolveLeadCapture?.create({ tool: 'g-resolog', trigger });
+  } catch (e) {
+    return null;
+  }
+}
+
+function showLeadAfterExport() {
+  try { leadCapture('export')?.showAfterExport(); } catch (e) { /* non-critical */ }
+}
+
+function renderLeadInline() {
+  try { leadCapture('inline')?.renderInlineCard('gresolog-lead-inline'); } catch (e) { /* non-critical */ }
+}
+
 export const UI = {
 
   // ===========================================================================
@@ -243,6 +259,7 @@ export const UI = {
       document.head.appendChild(s);
     }
     this._ensureDOM();
+    renderLeadInline();
     try { await Model.init(); } catch (e) { console.error('Model init failed:', e); }
     const savedDark = localStorage.getItem('gresolog_darkMode');
     if (savedDark === 'true') { Model.darkMode = true; document.body.classList.add('dark'); StripLog.setDarkMode(true); }
@@ -260,6 +277,7 @@ export const UI = {
     if (!$('#toolbar')) root.appendChild(h('div', { id: 'toolbar', className: 'toolbar' }));
     if (!$('#save-indicator')) root.appendChild(h('div', { id: 'save-indicator', className: 'save-indicator' }, 'Saved'));
     if (!$('#main-content')) root.appendChild(h('div', { id: 'main-content' }));
+    if (!$('#gresolog-lead-inline')) root.appendChild(h('div', { id: 'gresolog-lead-inline' }));
   },
 
   // ===========================================================================
@@ -379,6 +397,7 @@ export const UI = {
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob); const a = h('a', { href: url, download: filename });
     document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+    showLeadAfterExport();
   },
 
   async _handleImportProject(e) {
@@ -1261,6 +1280,7 @@ export const UI = {
     try {
       await Exports.exportPDF(Model.currentHole, Model.currentIntervals, Model.currentFieldTests, Model.currentSamples, Model.currentWaterStrikes, Model.currentCasing, Model.currentProject);
       this.showSaveIndicator('PDF ready');
+      showLeadAfterExport();
     } catch (e) { console.error(e); this.showSaveIndicator('PDF failed'); }
   },
 
@@ -1277,6 +1297,7 @@ export const UI = {
       }
       await Exports.exportExcel(Model.currentProject, holes, allIntervals, allFieldTests, allSamples, allWaterStrikes);
       this.showSaveIndicator('Excel ready');
+      showLeadAfterExport();
     } catch (e) { console.error(e); this.showSaveIndicator('Excel failed'); }
   },
 
@@ -1293,6 +1314,7 @@ export const UI = {
       }
       Exports.exportCSV(Model.currentProject, holes, allIntervals, allFieldTests, allSamples, allWaterStrikes);
       this.showSaveIndicator('CSV ready');
+      showLeadAfterExport();
     } catch (e) { console.error(e); this.showSaveIndicator('CSV failed'); }
   },
 

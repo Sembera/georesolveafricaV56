@@ -2,14 +2,9 @@
 // Provides offline support by caching the application shell and CDN libraries.
 
 // bump CACHE_NAME on every release
-const CACHE_NAME = 'gresolog-2026-07-07-2';
+const CACHE_NAME = 'gresolog-2026-07-07-3';
 const APP_SHELL = [
     '/g-resolog.html',
-    '/css/navbar.css',
-    '/css/style.css',
-    '/footer-styles.css',
-    '/js/header-component.js',
-    '/footer-component.js',
     '/js/resolog/db.js',
     '/js/resolog/model.js',
     '/js/resolog/ui.js',

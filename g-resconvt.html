@@ -849,9 +849,23 @@
                 </div>
             </div>
         </div>
+        <div id="g-resconvt-lead-inline"></div>
     </div>
 
+    <script src="js/lead-capture.js"></script>
     <script>
+        const gResconvtLeadCapture = window.GeoresolveLeadCapture?.create({ tool: 'g-resconvt', trigger: 'export' });
+
+        function showGResconvtLeadAfterExport() {
+            try { gResconvtLeadCapture?.showAfterExport(); } catch (error) { /* non-critical */ }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            try {
+                window.GeoresolveLeadCapture?.create({ tool: 'g-resconvt', trigger: 'inline' }).renderInlineCard('g-resconvt-lead-inline');
+            } catch (error) { /* non-critical */ }
+        });
+
         // Initialize proj4 with all required CRS definitions
         function initializeProjections() {
             // Arc 1960 (Clarke 1880 RGS)
@@ -1333,6 +1347,7 @@
             a.download = `converted_coordinates_${Date.now()}.csv`;
             a.click();
             window.URL.revokeObjectURL(url);
+            showGResconvtLeadAfterExport();
         }
 
         // Copy to clipboard

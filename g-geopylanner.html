@@ -791,9 +791,23 @@
                 </div>
             </div>
         </div>
+        <div id="g-geopylanner-lead-inline"></div>
     </div>
 
+    <script src="js/lead-capture.js"></script>
     <script>
+        const gGeopylannerLeadCapture = window.GeoresolveLeadCapture?.create({ tool: 'g-geopylanner', trigger: 'export' });
+
+        function showGGeopylannerLeadAfterExport() {
+            try { gGeopylannerLeadCapture?.showAfterExport(); } catch (error) { /* non-critical */ }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            try {
+                window.GeoresolveLeadCapture?.create({ tool: 'g-geopylanner', trigger: 'inline' }).renderInlineCard('g-geopylanner-lead-inline');
+            } catch (error) { /* non-critical */ }
+        });
+
         // Global variables
         let currentModule = 'masw';
         let maswData = [];
@@ -1682,6 +1696,7 @@
             a.download = filename;
             a.click();
             URL.revokeObjectURL(url);
+            showGGeopylannerLeadAfterExport();
         }
     </script>
     <!-- Footer & Clients injected by footer-component.js -->
