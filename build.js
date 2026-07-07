@@ -58,6 +58,91 @@ const TOOL_PAGES = {
 // Featured project IDs for index.html carousel
 const FEATURED_PROJECT_IDS = [1, 4, 6, 14, 11];
 
+// Breadcrumb trail definitions for every page.
+// Each entry is a list of { name, url } segments (excluding the final current
+// page, which is appended automatically from the file being processed).
+const BREADCRUMBS = {
+  'index.html': [],
+  'methods.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }],
+  'applications.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }],
+  'projects.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }],
+  'resources.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }],
+  'news.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }],
+  'contact.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }],
+  'g-resolog.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }, { name: 'Tools', url: 'https://georesolveafrica.com/resources.html' }],
+  'g-resconvt.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }, { name: 'Tools', url: 'https://georesolveafrica.com/resources.html' }],
+  'g-geopylanner.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }, { name: 'Tools', url: 'https://georesolveafrica.com/resources.html' }],
+  'g-flightplanner.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }, { name: 'Tools', url: 'https://georesolveafrica.com/resources.html' }],
+  'drone-magnetic-survey-uganda.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }, { name: 'Methods', url: 'https://georesolveafrica.com/methods.html' }],
+  'ground-magnetic-survey-uganda.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }, { name: 'Methods', url: 'https://georesolveafrica.com/methods.html' }],
+  'insar-sar-services-uganda.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }, { name: 'Methods', url: 'https://georesolveafrica.com/methods.html' }],
+  'seismic-refraction-uganda.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }, { name: 'Methods', url: 'https://georesolveafrica.com/methods.html' }],
+  'ert-electrical-resistivity-tomography-uganda.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }, { name: 'Methods', url: 'https://georesolveafrica.com/methods.html' }],
+  'downhole-seismic-survey-uganda.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }, { name: 'Methods', url: 'https://georesolveafrica.com/methods.html' }]
+};
+
+// Page title labels for the final (current) breadcrumb segment.
+const BREADCRUMB_CURRENT_LABEL = {
+  'index.html': 'Home',
+  'methods.html': 'Methods',
+  'applications.html': 'Applications',
+  'projects.html': 'Projects',
+  'resources.html': 'Resources',
+  'news.html': 'News & Insights',
+  'contact.html': 'Contact',
+  'g-resolog.html': 'G-Resolog',
+  'g-resconvt.html': 'G-Resconvt',
+  'g-geopylanner.html': 'G-Geopylanner',
+  'g-flightplanner.html': 'G-FlightPlanner',
+  'drone-magnetic-survey-uganda.html': 'Drone Magnetic Survey Uganda',
+  'ground-magnetic-survey-uganda.html': 'Ground Magnetic Survey Uganda',
+  'insar-sar-services-uganda.html': 'SAR & InSAR Services Uganda',
+  'seismic-refraction-uganda.html': 'Seismic Refraction Survey Uganda',
+  'ert-electrical-resistivity-tomography-uganda.html': 'ERT Survey Uganda',
+  'downhole-seismic-survey-uganda.html': 'Downhole & Crosshole Seismic Survey Uganda'
+};
+
+/**
+ * Build a BreadcrumbList JSON-LD object for a given HTML file.
+ */
+function buildBreadcrumbList(fileName) {
+  const trail = BREADCRUMBS[fileName] || [{ name: 'Home', url: 'https://georesolveafrica.com/' }];
+  const currentLabel = BREADCRUMB_CURRENT_LABEL[fileName] || fileName;
+  const currentUrl = fileName === 'index.html'
+    ? 'https://georesolveafrica.com/'
+    : `https://georesolveafrica.com/${fileName}`;
+
+  const itemListElement = [
+    ...trail.map((seg, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: seg.name,
+      item: seg.url
+    })),
+    {
+      '@type': 'ListItem',
+      position: trail.length + 1,
+      name: currentLabel,
+      item: currentUrl
+    }
+  ];
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement
+  };
+}
+
+/**
+ * Inject a BreadcrumbList JSON-LD script tag before </head>.
+ */
+function injectBreadcrumbJSONLD(html, fileName) {
+  const bc = buildBreadcrumbList(fileName);
+  const scriptTag = `\n    <script type="application/ld+json">\n    ${JSON.stringify(bc, null, 2)}\n    </script>`;
+  return html.replace('</head>', `${scriptTag}\n</head>`);
+}
+
 // ---------------------------------------------------------------------------
 // MAIN
 // ---------------------------------------------------------------------------
@@ -234,6 +319,13 @@ function processHTML(filePath, headerHTML, footerHTML, projects) {
   // --- Render method comparison table (methods.html) ---
   if (fileName === 'methods.html') {
     html = renderMethodComparison(html);
+  }
+
+  // --- Inject BreadcrumbList JSON-LD (every page except news articles,
+  //   which already get a richer breadcrumb in renderArticlePage) ---
+  const relativePath = path.relative(DIST, filePath).replace(/\\/g, '/');
+  if (!relativePath.startsWith('news/')) {
+    html = injectBreadcrumbJSONLD(html, fileName);
   }
 
   fs.writeFileSync(filePath, html, 'utf8');
@@ -598,6 +690,17 @@ function renderArticlePage(article, headerHTML, footerHTML) {
     }
   };
 
+  // BreadcrumbList JSON-LD (Home > News & Insights > Article)
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://georesolveafrica.com/' },
+      { '@type': 'ListItem', position: 2, name: 'News & Insights', item: 'https://georesolveafrica.com/news.html' },
+      { '@type': 'ListItem', position: 3, name: meta.title || slug, item: url }
+    ]
+  };
+
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -620,6 +723,9 @@ function renderArticlePage(article, headerHTML, footerHTML) {
     <link rel="stylesheet" href="../footer-styles.css">
     <script type="application/ld+json">
 ${JSON.stringify(articleLd, null, 4)}
+    </script>
+    <script type="application/ld+json">
+${JSON.stringify(breadcrumbLd, null, 4)}
     </script>
     <style>
         :root {
@@ -929,19 +1035,31 @@ function generateSitemap() {
     const lastmod = stats.mtime.toISOString().split('T')[0];
 
     let priority = '0.8';
+    let changefreq = 'monthly';
     if (fileName === 'index.html') {
       priority = '1.0';
+      changefreq = 'weekly';
     } else if (
       fileName === 'methods.html' ||
+      fileName === 'applications.html' ||
       fileName === 'g-resolog.html' ||
       fileName === 'g-resconvt.html' ||
       fileName === 'g-geopylanner.html' ||
       fileName === 'g-flightplanner.html'
     ) {
       priority = '0.9';
+      changefreq = 'monthly';
+    } else if (
+      fileName === 'projects.html' ||
+      fileName === 'news.html'
+    ) {
+      changefreq = 'weekly';
+    } else if (relativePath.startsWith('news/')) {
+      priority = '0.6';
+      changefreq = 'monthly';
     }
 
-    urls.push({ loc: relativePath, lastmod, priority });
+    urls.push({ loc: relativePath, lastmod, priority, changefreq });
   }
 
   // Sort: index first, then alphabetical
@@ -955,6 +1073,7 @@ function generateSitemap() {
     `  <url>
     <loc>https://georesolveafrica.com/${u.loc === 'index.html' ? '' : u.loc}</loc>
     <lastmod>${u.lastmod}</lastmod>
+    <changefreq>${u.changefreq}</changefreq>
     <priority>${u.priority}</priority>
   </url>`
   ).join('\n');

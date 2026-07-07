@@ -1033,6 +1033,34 @@ body.animation-ready .animate-on-scroll:not(.animate-in) {
     font-size: 0.9rem;
 }
 
+.project-methods {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 0.25rem;
+}
+
+.method-link {
+    display: inline-block;
+    padding: 0.4rem 0.9rem;
+    background: var(--background-light);
+    border: 1px solid var(--border-color);
+    border-left: 3px solid var(--accent-color);
+    border-radius: 50px;
+    color: var(--primary-color);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition-medium);
+}
+
+.method-link:hover {
+    background: var(--accent-color);
+    color: #fff;
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
 /* --- Methods Page Styles --- */
 .method-tabs {
     background: white;

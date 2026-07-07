@@ -146,8 +146,8 @@ Colors and theme are defined in CSS variables:
 
 ### Logo and Branding
 
-- Logo: `resources/logo/georesolve-logo.svg.svg`
-- Favicon: `resources/favicon/favicon-32x32.png.png`
+- Logo: `resources/logo/georesolve-logo.svg`
+- Favicon: `resources/favicon/favicon-32x32.png`
 - Update in all HTML files if changing
 
 ## 🔧 Features Breakdown
