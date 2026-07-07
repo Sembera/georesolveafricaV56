@@ -34,24 +34,15 @@ function injectHeader() {
                 <li><a href="applications.html" class="nav-link">Applications</a></li>
                 <li><a href="projects.html" class="nav-link">Projects</a></li>
                 <li class="has-dropdown">
-                    <a href="resources.html#free-tools" class="nav-link">Free Tools <span class="dropdown-arrow">&#9662;</span></a>
+                    <a href="g-resolog.html" class="nav-link">Free Tools <span class="dropdown-arrow">&#9662;</span></a>
                     <ul class="dropdown-menu">
                         <li><a href="g-resolog.html">G-Resolog - Borehole Logger</a></li>
                         <li><a href="g-resconvt.html">G-Resconvt - Coordinate Converter</a></li>
                         <li><a href="g-geopylanner.html">G-Geopylanner - Geophysics Survey Planner</a></li>
                         <li><a href="g-flightplanner.html">G-FlightPlanner - Drone Mapping Planner</a></li>
-                        <li class="mobile-only"><a href="resources.html#free-tools" style="font-weight: 600; color: var(--accent-color);">View All Free Tools &rarr;</a></li>
                     </ul>
                 </li>
-                <li class="has-dropdown">
-                    <a href="resources.html" class="nav-link">Resources <span class="dropdown-arrow">&#9662;</span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="resources.html#technical-articles">Technical Articles</a></li>
-                        <li><a href="news.html">News & Insights</a></li>
-                        <li class="mobile-only"><a href="resources.html" style="font-weight: 600; color: var(--accent-color);">View Resources Hub &rarr;</a></li>
-                    </ul>
-                </li>
-                <li><a href="news.html" class="nav-link">News</a></li>
+                <!-- Resources & News tabs archived for improvement — files retained for later reactivation -->
                 <li><a href="contact.html" class="nav-link">Contact</a></li>
             </ul>
             <div class="mobile-menu-toggle">
@@ -77,7 +68,7 @@ function setupNavigation() {
 
         if (href === currentPage || (currentPage === '' && href === 'index.html')) {
             link.classList.add('active');
-        } else if (isFreeToolPage && href === 'resources.html#free-tools') {
+        } else if (isFreeToolPage && href === 'g-resolog.html') {
             link.classList.add('active');
         }
     });

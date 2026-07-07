@@ -372,10 +372,11 @@ function renderMethodComparison(html) {
     `$1\n${checkboxes}\n${toggleBtn}\n            $2`
   );
 
-  // 3. Embed method data for the wizard
+  // 3. Embed method data for the wizard (replace any existing content in the
+  //    #methods-data block so methods-data.json remains the single source of truth)
   const dataEmbed = `<script type="application/json" id="methods-data">\n${JSON.stringify(data)}\n    </script>`;
   html = html.replace(
-    /<script type="application\/json" id="methods-data">\s*\{\s*\}\s*<\/script>/,
+    /<script type="application\/json" id="methods-data">[\s\S]*?<\/script>/,
     dataEmbed
   );
 

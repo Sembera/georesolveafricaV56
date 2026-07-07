@@ -158,7 +158,7 @@
         "country": "Rwanda",
         "year": "2026",
         "description": "Integrated mineral exploration programme combining onshore ground magnetics, deep Electrical Resistivity Tomography (ERT) and Induced Polarisation (IP) surveys for pegmatite-hosted cassiterite, coltan and cobalt mineralisation in the Rweru Sector. Multi-method approach to delineate subsurface pegmatite bodies and define drill targets.",
-        "image": "resources/projects/2026/rweru-pegmatite-ert-2026.webp",
+        "image": "resources/projects/2026/gasabo-pegmatite-ert-2026.webp",
         "coordinates": [
             -1.65,
             29.85
@@ -183,7 +183,7 @@
         "country": "Rwanda",
         "year": "2026",
         "description": "Deep Electrical Resistivity Tomography (ERT) survey for pegmatite-hosted mineral exploration in the Gasabo area of Rwanda. High-resolution subsurface resistivity imaging to delineate pegmatite body geometry, depth extent, and lateral continuity for drill-hole targeting.",
-        "image": "resources/projects/2026/gasabo-pegmatite-ert-2026.webp",
+        "image": "resources/projects/2026/rweru-pegmatite-ert-2026.webp",
         "coordinates": [
             -1.87,
             30.12
@@ -272,31 +272,6 @@
             "Shear-wave velocity profiling for seismic site classification",
             "Foundation design parameters provided for structural engineering",
             "Critical healthcare infrastructure assessment delivered"
-        ]
-    },
-    {
-        "id": 17,
-        "title": "Geophysical Investigation for the Feasibility Study for Proposed Rukarara, Kavili, Mwogo Irrigation Development Project",
-        "sector": "infrastructure",
-        "status": "completed",
-        "location": "Rukarara, Kavili, Mwogo",
-        "country": "Rwanda",
-        "year": "2025",
-        "description": "Seismic Refraction Tomography and Multichannel Analysis of Surface Waves (MASW) surveys for the feasibility study of three proposed irrigation dam and water infrastructure development sites. Subsurface characterisation to support engineering design and foundation recommendations for major agricultural infrastructure.",
-        "image": "resources/projects/2026/rukarara-kavili-mwogo-irrigation-seismic-2025.webp",
-        "coordinates": [
-            -2.4,
-            29.4
-        ],
-        "duration": "November 2025",
-        "client": "ZV Consulting Ltd, Rwanda",
-        "scope": "Seismic Refraction Tomography and MASW surveys for irrigation dam feasibility study",
-        "activities": "Seismic Refraction Tomography, MASW, Site Characterisation",
-        "results": [
-            "Completed Seismic Refraction Tomography surveys across all three irrigation sites",
-            "MASW surveys for shear-wave velocity profiling and site classification",
-            "Foundation characterisation for dam and irrigation infrastructure",
-            "Engineering design parameters delivered for feasibility study"
         ]
     },
     {

@@ -313,6 +313,60 @@ function escapeHtml(str) {
 }
 
 /**
+ * Render the comparison table rows + show/hide checkboxes client-side when
+ * the build step has not already done so (i.e. dev mode). Mirrors the markup
+ * produced by build.js so dev and production look identical.
+ */
+function renderComparisonTable(data) {
+  const tbody = document.getElementById('comparison-tbody');
+  if (tbody && tbody.querySelector('tr.method-row') === null) {
+    const rows = data.methods.map(m => {
+      const deliverables = m.deliverables
+        .map(d => `<span style="display:inline-block;background:var(--background-light);border-radius:6px;padding:2px 6px;margin:1px;font-size:0.78rem">${escapeHtml(d)}</span>`)
+        .join('');
+      return `<tr class="method-row" data-method-id="${escapeHtml(m.id)}">
+                        <td class="method-name">${escapeHtml(m.name)}</td>
+                        <td>${formatDepthRange(m.depthRange_m)}</td>
+                        <td>${dotRating(m.resolution)}</td>
+                        <td>${dotRating(m.relCost, true)}</td>
+                        <td>${m.speed_km_per_day} km/day</td>
+                        <td>${m.bestFor.map(escapeHtml).join(', ')}</td>
+                        <td>${deliverables}</td>
+                        <td style="font-size:0.85rem;color:#555">${m.limitations.map(escapeHtml).join(' ')}</td>
+                    </tr>`;
+    }).join('\n');
+    tbody.innerHTML = rows;
+  }
+
+  const controls = document.getElementById('comparison-controls');
+  if (controls && controls.querySelector('.method-checkbox') === null) {
+    const checkboxes = data.methods.map(m => {
+      return `                <div class="method-selector">
+                    <input type="checkbox" id="cb-${escapeHtml(m.id)}" value="${escapeHtml(m.id)}" class="method-checkbox" checked>
+                    <label for="cb-${escapeHtml(m.id)}">${escapeHtml(m.name)}</label>
+                </div>`;
+    }).join('\n');
+    const toggleBtn = `                <button class="toggle-all-btn" type="button">Deselect All</button>`;
+    controls.innerHTML = `${checkboxes}\n${toggleBtn}`;
+  }
+}
+
+function formatDepthRange(range) {
+  if (!Array.isArray(range) || range.length < 2) return '\u2014';
+  const [min, max] = range;
+  return `${min}-${max} m`;
+}
+
+function dotRating(value) {
+  const v = Math.max(1, Math.min(5, value));
+  let dots = '';
+  for (let i = 0; i < 5; i++) {
+    dots += `<span class="dot${i < v ? '' : ' empty'}"></span>`;
+  }
+  return `<span class="dot-rating">${dots}</span>`;
+}
+
+/**
  * Initialise the wizard.
  */
 function init() {
@@ -321,6 +375,7 @@ function init() {
 
   renderObjectives(data);
   renderConditions(data);
+  renderComparisonTable(data);
   initDepthSlider();
 
   const runBtn = document.getElementById(RUN_BUTTON_ID);
