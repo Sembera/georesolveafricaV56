@@ -19,6 +19,10 @@ const projectsData = [
         "client": "Ministry of Water and Environment, Uganda",
         "scope": "Seismic Refraction Tomography, MASW, and Site Seismic Intensity Analysis for irrigation infrastructure design",
         "activities": "Seismic Refraction Tomography, MASW, Site Seismic Intensity Analysis",
+        "methods": [
+            { "name": "Seismic Refraction Survey Uganda", "url": "seismic-refraction-uganda.html" },
+            { "name": "MASW Survey Uganda", "url": "masw-survey-uganda.html" }
+        ],
         "results": [
             "Seismic Refraction Tomography completed for irrigation scheme area",
             "MASW surveys for dynamic soil properties and site classification",
@@ -44,6 +48,9 @@ const projectsData = [
         "client": "De Heus Uganda Limited",
         "scope": "Downhole Seismic survey for industrial plant site characterisation and foundation design",
         "activities": "Downhole Seismic Survey, Dynamic Soil Properties, Seismic Site Classification",
+        "methods": [
+            { "name": "Downhole Seismic Survey Uganda", "url": "downhole-seismic-survey-uganda.html" }
+        ],
         "results": [
             "Downhole seismic survey completed for feeds mill plant site",
             "In-situ P-wave and S-wave velocity profiling for dynamic properties",
@@ -69,6 +76,9 @@ const projectsData = [
         "client": "CHC Ltd, Uganda",
         "scope": "Seismic Refraction Tomography for irrigation scheme feasibility and design",
         "activities": "Seismic Refraction Tomography, Bedrock Profiling, Rippability Assessment",
+        "methods": [
+            { "name": "Seismic Refraction Survey Uganda", "url": "seismic-refraction-uganda.html" }
+        ],
         "results": [
             "Seismic Refraction Tomography surveys completed at Matanda irrigation site",
             "Subsurface velocity profiling for bedrock and overburden characterisation",
@@ -94,6 +104,9 @@ const projectsData = [
         "client": "Strucon Ltd, Uganda",
         "scope": "HRSRT, rebound hammer, and reinforcement locator surveys for concrete pillar integrity assessment",
         "activities": "HRSRT, Rebound Hammer Testing, Reinforcement Detection, Structural Assessment",
+        "methods": [
+            { "name": "Seismic Refraction Survey Uganda", "url": "seismic-refraction-uganda.html" }
+        ],
         "results": [
             "High-resolution seismic refraction tomography for pillar foundation imaging",
             "Rebound hammer testing for concrete strength assessment",
@@ -119,6 +132,9 @@ const projectsData = [
         "client": "Teclab / Anchor Engineering, Uganda",
         "scope": "ERT survey for bridge foundation characterisation and feasibility assessment",
         "activities": "ERT Survey, Bridge Foundation Assessment, Subsurface Imaging",
+        "methods": [
+            { "name": "ERT Survey Uganda", "url": "ert-electrical-resistivity-tomography-uganda.html" }
+        ],
         "results": [
             "ERT survey completed for proposed Nakiwogo bridge alignment",
             "Subsurface resistivity profiling for foundation condition assessment",
@@ -144,6 +160,10 @@ const projectsData = [
         "client": "Confidential mining client, DRC",
         "scope": "Gold detector data analysis, geological mapping, geochemical sampling, SAR sensing for regional exploration targeting",
         "activities": "Gold Detection, Geological Mapping, Geochemical Sampling, SAR Remote Sensing",
+        "methods": [
+            { "name": "SAR & InSAR Services Uganda", "url": "insar-sar-services-uganda.html" },
+            { "name": "Mineral Exploration", "url": "methods.html#mining" }
+        ],
         "results": [
             "Regional alluvial gold exploration program completed across Ituri",
             "Geological mapping and geochemical sampling for target delineation",
@@ -169,6 +189,10 @@ const projectsData = [
         "client": "Confidential mining client, Rwanda",
         "scope": "Onshore ground magnetics, deep ERT, and IP surveys for pegmatite-hosted Sn-Ta-Co exploration",
         "activities": "Ground Magnetics, Deep ERT, Induced Polarisation, Pegmatite Targeting",
+        "methods": [
+            { "name": "Ground Magnetic Survey Uganda", "url": "ground-magnetic-survey-uganda.html" },
+            { "name": "ERT Survey Uganda", "url": "ert-electrical-resistivity-tomography-uganda.html" }
+        ],
         "results": [
             "Integrated multi-method geophysical survey for pegmatite exploration",
             "Onshore magnetics for structural mapping and target delineation",
@@ -194,6 +218,9 @@ const projectsData = [
         "client": "Confidential mining client, Rwanda",
         "scope": "Deep ERT survey for pegmatite body delineation and drill target definition",
         "activities": "Deep ERT Survey, Pegmatite Delineation, Drill Targeting",
+        "methods": [
+            { "name": "ERT Survey Uganda", "url": "ert-electrical-resistivity-tomography-uganda.html" }
+        ],
         "results": [
             "Deep ERT survey completed for pegmatite body imaging",
             "Subsurface resistivity characterisation across the exploration area",
@@ -219,6 +246,10 @@ const projectsData = [
         "client": "Alpha Lab, Uganda",
         "scope": "Seismic Refraction Tomography and MASW surveys for SGR corridor subsurface characterisation",
         "activities": "Seismic Refraction Tomography, MASW, Railway Corridor Profiling",
+        "methods": [
+            { "name": "Seismic Refraction Survey Uganda", "url": "seismic-refraction-uganda.html" },
+            { "name": "MASW Survey Uganda", "url": "masw-survey-uganda.html" }
+        ],
         "results": [
             "Comprehensive seismic surveys along SGR alignment in Eastern Uganda",
             "Seismic Refraction Tomography for earthwork design and bedrock profiling",
@@ -244,6 +275,10 @@ const projectsData = [
         "client": "Artelia / Aecom",
         "scope": "Geotechnical Investigation: Drilling, In-situ Tests, Laboratory Testing",
         "activities": "Drilling, In-situ Testing, Laboratory Analysis, Slope Stability Analysis",
+        "methods": [
+            { "name": "Drilling Services", "url": "methods.html#drilling" },
+            { "name": "Geotechnical Engineering", "url": "methods.html#geotechnical" }
+        ],
         "results": [
             "Comprehensive drilling program completed",
             "In-situ testing for soil and rock characterization",
@@ -269,6 +304,9 @@ const projectsData = [
         "client": "Fidus Engineering Ltd, Rwanda",
         "scope": "MASW surveys for site classification and foundation design of hospital extension",
         "activities": "MASW Survey, Seismic Site Classification, Foundation Assessment",
+        "methods": [
+            { "name": "MASW Survey Uganda", "url": "masw-survey-uganda.html" }
+        ],
         "results": [
             "MASW surveys completed for hospital extension site",
             "Shear-wave velocity profiling for seismic site classification",
@@ -294,6 +332,10 @@ const projectsData = [
         "client": "ZV Consulting Ltd - Rwanda",
         "scope": "Geophysics (Seismic Refraction 1200m, MASW 1200m), Data correlation with geotechnical data",
         "activities": "Seismic Refraction, MASW, Geotechnical Correlation",
+        "methods": [
+            { "name": "Seismic Refraction Survey Uganda", "url": "seismic-refraction-uganda.html" },
+            { "name": "MASW Survey Uganda", "url": "masw-survey-uganda.html" }
+        ],
         "results": [
             "1200m of Seismic Refraction surveys completed",
             "1200m of MASW surveys for site characterization",
@@ -319,6 +361,10 @@ const projectsData = [
         "client": "ATC Uganda, CEDAT - Uganda",
         "scope": "Geophysics (ERT), mapping and data correlation with drilling data",
         "activities": "ERT Surveys, Geological Mapping, Drilling Data Correlation",
+        "methods": [
+            { "name": "ERT Survey Uganda", "url": "ert-electrical-resistivity-tomography-uganda.html" },
+            { "name": "Drilling Services", "url": "methods.html#drilling" }
+        ],
         "results": [
             "Complete geohazard assessment for tower foundation",
             "ERT surveys revealing subsurface conditions",
@@ -344,6 +390,9 @@ const projectsData = [
         "client": "Queensland And Leeds Consulting Engineers / Ministry of Energy and Mineral Development - Uganda",
         "scope": "Geophysics Services: 540m of Seismic Refraction for Vp Site characterization and correlation",
         "activities": "Seismic Refraction, Site Characterization, Vp Analysis",
+        "methods": [
+            { "name": "Seismic Refraction Survey Uganda", "url": "seismic-refraction-uganda.html" }
+        ],
         "results": [
             "540m of Seismic Refraction surveys completed",
             "P-wave velocity characterization for nuclear facility",
@@ -369,6 +418,9 @@ const projectsData = [
         "client": "Fichtner GmbH & Co. KG, and Tectoni Africa Ltd",
         "scope": "5.5 Sq.km Geological Mapping of entire project area and 1.5km Geophysics: Seismic Refraction for Vp characterization",
         "activities": "Geological Mapping, Seismic Refraction, Site Characterization",
+        "methods": [
+            { "name": "Seismic Refraction Survey Uganda", "url": "seismic-refraction-uganda.html" }
+        ],
         "results": [
             "5.5 km² geological mapping completed",
             "1.5km of Seismic Refraction surveys",
@@ -394,6 +446,9 @@ const projectsData = [
         "client": "SGAPI Srl / RSV Engineering Group Ltd",
         "scope": "Geophysics Services: 840m of Seismic Refraction for Vp Site characterization and correlation",
         "activities": "Seismic Refraction, Flood Risk Assessment, Site Characterization",
+        "methods": [
+            { "name": "Seismic Refraction Survey Uganda", "url": "seismic-refraction-uganda.html" }
+        ],
         "results": [
             "840m of Seismic Refraction completed",
             "Foundation characterization for flood management structures",
@@ -419,6 +474,10 @@ const projectsData = [
         "client": "Anzana Electric Group",
         "scope": "Ground and Aerial Survey, Topographical Surveys, Geotechnical Investigations",
         "activities": "Topographic Surveys, Aerial Surveys, Geotechnical Investigation",
+        "methods": [
+            { "name": "Geospatial & Surveys", "url": "methods.html#geospatial" },
+            { "name": "Geotechnical Engineering", "url": "methods.html#geotechnical" }
+        ],
         "results": [
             "Complete topographical survey using ground and aerial methods",
             "Site characterization for hybrid energy project",
@@ -444,6 +503,10 @@ const projectsData = [
         "client": "Virunga Power / Songa Energy",
         "scope": "Geotechnical Investigation: Drilling, In-situ Tests, Test Pits, In-situ Vane Shear, Laboratory Testing",
         "activities": "Drilling, In-situ Testing, Test Pits, Vane Shear, Laboratory Analysis",
+        "methods": [
+            { "name": "Drilling Services", "url": "methods.html#drilling" },
+            { "name": "Geotechnical Engineering", "url": "methods.html#geotechnical" }
+        ],
         "results": [
             "Complete drilling and in-situ testing program",
             "Test pits for material characterization",
@@ -469,6 +532,9 @@ const projectsData = [
         "client": "KKCA / Phaze Construction Ltd / GMATLAB LTD",
         "scope": "1.2km of 2D ERT surveying",
         "activities": "2D ERT Surveys, Quarry Site Assessment",
+        "methods": [
+            { "name": "ERT Survey Uganda", "url": "ert-electrical-resistivity-tomography-uganda.html" }
+        ],
         "results": [
             "1.2km of 2D ERT surveys completed",
             "Subsurface characterization for quarry development",
@@ -494,6 +560,9 @@ const projectsData = [
         "client": "GMATLAB LTD",
         "scope": "800m of 2D ERT Surveying",
         "activities": "2D ERT Surveys, Power Plant Site Assessment",
+        "methods": [
+            { "name": "ERT Survey Uganda", "url": "ert-electrical-resistivity-tomography-uganda.html" }
+        ],
         "results": [
             "800m of 2D ERT surveys completed",
             "Site characterization for thermal power plant",
@@ -519,6 +588,10 @@ const projectsData = [
         "client": "Mpanga Renewable Energies Limited / KK Advisors",
         "scope": "Geotechnical investigation, Geological Mapping, Slope Stability Analysis",
         "activities": "Geotechnical Investigation, Geological Mapping, Slope Analysis",
+        "methods": [
+            { "name": "Geotechnical Engineering", "url": "methods.html#geotechnical" },
+            { "name": "Geophysical Surveys", "url": "methods.html#geophysics" }
+        ],
         "results": [
             "Comprehensive geotechnical investigation completed",
             "Detailed geological mapping of project area",
@@ -544,6 +617,10 @@ const projectsData = [
         "client": "Rwimi II Energy Project Limited",
         "scope": "Geotechnical investigation, Geological Mapping, Slope Stability Analysis",
         "activities": "Geotechnical Investigation, Geological Mapping, Slope Analysis",
+        "methods": [
+            { "name": "Geotechnical Engineering", "url": "methods.html#geotechnical" },
+            { "name": "Geophysical Surveys", "url": "methods.html#geophysics" }
+        ],
         "results": [
             "Complete geotechnical characterization",
             "Geological mapping for hydropower site",
@@ -569,6 +646,9 @@ const projectsData = [
         "client": "GMATLab / RazelBec",
         "scope": "2D Resistivity Surveys along water pipelines, data management, processing and reporting",
         "activities": "2D ERT Surveys, Pipeline Route Assessment, Data Processing",
+        "methods": [
+            { "name": "ERT Survey Uganda", "url": "ert-electrical-resistivity-tomography-uganda.html" }
+        ],
         "results": [
             "10.3km of 2D resistivity surveys completed",
             "Pipeline route optimization",
@@ -594,6 +674,9 @@ const projectsData = [
         "client": "GMATLab / MBW Consulting Ltd",
         "scope": "720m of 2D ERT Surveying",
         "activities": "2D ERT Surveys, Tourism Infrastructure Assessment",
+        "methods": [
+            { "name": "ERT Survey Uganda", "url": "ert-electrical-resistivity-tomography-uganda.html" }
+        ],
         "results": [
             "720m of 2D ERT surveys completed",
             "Site characterization for swimming pool construction",
@@ -619,6 +702,9 @@ const projectsData = [
         "client": "GMATLab / Samta Mines & Minerals (Uganda) Ltd",
         "scope": "Diamond Core Drilling of 2000m of boreholes in HQ and NQ sizes",
         "activities": "Diamond Core Drilling, Resource Exploration, Sample Analysis",
+        "methods": [
+            { "name": "Drilling Services", "url": "methods.html#drilling" }
+        ],
         "results": [
             "2000m of diamond core drilling completed",
             "HQ and NQ size core samples obtained",

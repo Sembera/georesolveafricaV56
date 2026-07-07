@@ -25,7 +25,7 @@ function injectClients() {
                 <div class="client-card"><img src="resources/Clients/zv-consulting.png" alt="ZV Consulting Ltd" class="client-logo" loading="lazy"></div>
                 <div class="client-card"><img src="resources/Clients/atc-uganda.png" alt="ATC Uganda" class="client-logo" loading="lazy"></div>
                 <div class="client-card"><img src="resources/Clients/ministry-energy-uganda.png" alt="Ministry of Energy" class="client-logo" loading="lazy"></div>
-                <div class="client-card"><img src="resources/Clients/fichtner.png.png" alt="Fichtner GmbH" class="client-logo" loading="lazy"></div>
+                <div class="client-card"><img src="resources/Clients/fichtner.png" alt="Fichtner GmbH" class="client-logo" loading="lazy"></div>
                 <div class="client-card"><img src="resources/Clients/Artelia.png" alt="Artelia" class="client-logo" loading="lazy"></div>
                 <div class="client-card"><img src="resources/Clients/Aecom.png" alt="Aecom" class="client-logo" loading="lazy"></div>
                 <div class="client-card"><img src="resources/Clients/Songa.png" alt="Songa Energy" class="client-logo" loading="lazy"></div>

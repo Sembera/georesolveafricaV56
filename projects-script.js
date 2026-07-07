@@ -220,6 +220,13 @@ function openProjectModal(projectId) {
                 <h4>Activities</h4>
                 <p>${project.activities}</p>
             </div>
+            ${project.methods && project.methods.length ? `
+            <div class="detail-item" style="grid-column: 1 / -1;">
+                <h4>Methods Used</h4>
+                <div class="project-methods">
+                    ${project.methods.map(m => `<a class="method-link" href="${m.url}">${m.name}</a>`).join('')}
+                </div>
+            </div>` : ''}
             <div class="detail-item" style="grid-column: 1 / -1;">
                 <h4>Key Results & Deliverables</h4>
                 <ul style="list-style: none; margin-top: 0.5rem;">

@@ -1,51 +1,165 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.georesolveafrica.com/</loc>
-    <lastmod>2025-12-01</lastmod>
+    <loc>https://georesolveafrica.com/</loc>
+    <lastmod>2026-07-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.georesolveafrica.com/methods.html</loc>
-    <lastmod>2025-12-01</lastmod>
+    <loc>https://georesolveafrica.com/methods.html</loc>
+    <lastmod>2026-07-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.georesolveafrica.com/applications.html</loc>
-    <lastmod>2025-12-01</lastmod>
+    <loc>https://georesolveafrica.com/drone-magnetic-survey-uganda.html</loc>
+    <lastmod>2026-07-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.georesolveafrica.com/projects.html</loc>
-    <lastmod>2025-12-01</lastmod>
+    <loc>https://georesolveafrica.com/ground-magnetic-survey-uganda.html</loc>
+    <lastmod>2026-07-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/insar-sar-services-uganda.html</loc>
+    <lastmod>2026-07-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/seismic-refraction-uganda.html</loc>
+    <lastmod>2026-07-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/ert-electrical-resistivity-tomography-uganda.html</loc>
+    <lastmod>2026-07-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/downhole-seismic-survey-uganda.html</loc>
+    <lastmod>2026-07-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/crosshole-seismic-survey-uganda.html</loc>
+    <lastmod>2026-07-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/masw-survey-uganda.html</loc>
+    <lastmod>2026-07-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/ground-penetrating-radar-uganda.html</loc>
+    <lastmod>2026-07-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/applications.html</loc>
+    <lastmod>2026-07-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/projects.html</loc>
+    <lastmod>2026-07-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.georesolveafrica.com/resources.html</loc>
-    <lastmod>2025-12-01</lastmod>
+    <loc>https://georesolveafrica.com/resources.html</loc>
+    <lastmod>2026-07-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.georesolveafrica.com/news.html</loc>
-    <lastmod>2025-12-01</lastmod>
+    <loc>https://georesolveafrica.com/news.html</loc>
+    <lastmod>2026-07-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.georesolveafrica.com/contact.html</loc>
-    <lastmod>2025-12-01</lastmod>
+    <loc>https://georesolveafrica.com/contact.html</loc>
+    <lastmod>2026-07-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.georesolveafrica.com/g-flightplanner.html</loc>
-    <lastmod>2025-12-01</lastmod>
+    <loc>https://georesolveafrica.com/g-resolog.html</loc>
+    <lastmod>2026-07-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/g-resconvt.html</loc>
+    <lastmod>2026-07-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/g-geopylanner.html</loc>
+    <lastmod>2026-07-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/g-flightplanner.html</loc>
+    <lastmod>2026-07-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/news/mwogo-rukarara-dam-geophysics.html</loc>
+    <lastmod>2026-07-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/news/arua-dam-mapping-seismic.html</loc>
+    <lastmod>2026-07-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/news/ert-vs-seismic-refraction-dam-foundation.html</loc>
+    <lastmod>2026-07-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/news/geotechnical-site-investigation-cost-uganda-2026.html</loc>
+    <lastmod>2026-07-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/news/uganda-rwenzori-reforestation.html</loc>
+    <lastmod>2026-07-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/news/tanzania-geopark.html</loc>
+    <lastmod>2026-07-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/news/kenya-direct-air-capture.html</loc>
+    <lastmod>2026-07-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>
