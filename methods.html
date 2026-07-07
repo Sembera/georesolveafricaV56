@@ -4,18 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Geoscience Methods | GeoResolve - Geophysical, Geotechnical, GIS Services Uganda, Rwanda, Burundi</title>
+    <title>Geoscience Methods | GeoResolve - Geophysical, Geotechnical, Mineral Exploration, GIS Services Uganda, Rwanda, Burundi</title>
     <meta name="description"
-        content="Expert geoscience methods: Seismic Refraction, ERT surveys, MASW, geotechnical investigation, drilling, drone surveys, GIS analysis, topographic & cadastral surveys across Uganda, Rwanda, Burundi & East Africa.">
+        content="Expert geoscience methods: Seismic Refraction, ERT surveys, MASW, geotechnical investigation, mineral exploration, drilling, drone surveys, GIS analysis, topographic & cadastral surveys across Uganda, Rwanda, Burundi & East Africa.">
     <meta name="keywords"
-        content="seismic refraction Uganda, ERT surveys East Africa, MASW surveys Rwanda, geotechnical investigation Burundi, diamond drilling Uganda, drone surveys East Africa, GIS data acquisition Uganda, topographic surveys Rwanda, cadastral surveys Burundi, hydrogeology studies, slope stability analysis, geophysical methods East Africa">
+        content="seismic refraction Uganda, ERT surveys East Africa, MASW surveys Rwanda, geotechnical investigation Burundi, mineral exploration Uganda, diamond drilling Uganda, drone surveys East Africa, GIS data acquisition Uganda, topographic surveys Rwanda, cadastral surveys Burundi, slope stability analysis, geophysical methods East Africa">
 
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Geoscience Methods | Georesolve Africa">
     <meta property="og:description"
         content="Comprehensive geoscience methods for infrastructure, mining, and water projects in East Africa.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://georesolve.africa/methods.html">
+    <meta property="og:url" content="https://georesolveafrica.com/methods.html">
+    <link rel="canonical" href="https://georesolveafrica.com/methods.html">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="resources/favicon/Icon-Flavicon.png">
@@ -271,6 +272,285 @@
         .application-description {
             color: #666;
             line-height: 1.6;
+        }
+
+        /* Method Selector Wizard */
+        .method-wizard-section {
+            padding: 4rem 0 2rem;
+            background: linear-gradient(180deg, var(--background-light) 0%, #ffffff 100%);
+        }
+
+        .wizard-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow-medium);
+            padding: 2.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .wizard-step {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.75rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .wizard-step:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .wizard-step-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .wizard-step-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .wizard-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .wizard-option {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            padding: 0.85rem 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            background: white;
+            font-size: 0.92rem;
+            line-height: 1.35;
+        }
+
+        .wizard-option:hover {
+            border-color: var(--accent-color);
+            background: #f4fbf4;
+        }
+
+        .wizard-option input {
+            margin-top: 0.2rem;
+            accent-color: var(--accent-color);
+            flex-shrink: 0;
+        }
+
+        .wizard-option input[type="radio"] {
+            width: 18px;
+            height: 18px;
+        }
+
+        .wizard-option:has(input:checked) {
+            border-color: var(--accent-color);
+            background: #ebf7eb;
+            box-shadow: 0 2px 8px rgba(77, 163, 77, 0.18);
+        }
+
+        .wizard-depth-wrap {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        .wizard-depth-slider {
+            flex: 1;
+            min-width: 250px;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 8px;
+            border-radius: 4px;
+            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+            outline: none;
+        }
+
+        .wizard-depth-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            border: 3px solid white;
+            box-shadow: var(--shadow-light);
+            cursor: pointer;
+        }
+
+        .wizard-depth-slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            border: 3px solid white;
+            box-shadow: var(--shadow-light);
+            cursor: pointer;
+        }
+
+        .wizard-depth-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            min-width: 90px;
+            text-align: right;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .wizard-run {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.9rem 2rem;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            margin-top: 1.5rem;
+        }
+
+        .wizard-run:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .wizard-run:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Wizard output card */
+        .wizard-output {
+            display: none;
+            margin-top: 2rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f4fbf4, #ffffff);
+            border: 1px solid var(--secondary-color);
+            border-radius: 20px;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .wizard-output.is-visible {
+            display: block;
+        }
+
+        .wizard-output-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .wizard-output-methods {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .wizard-output-rationale {
+            color: #444;
+            line-height: 1.7;
+            margin-bottom: 1.25rem;
+        }
+
+        .wizard-output-scope {
+            background: rgba(77, 163, 77, 0.08);
+            border-left: 3px solid var(--accent-color);
+            padding: 0.85rem 1.1rem;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            color: #333;
+        }
+
+        .wizard-output-scope strong {
+            color: var(--primary-color);
+        }
+
+        .wizard-output-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1.75rem;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition-fast);
+        }
+
+        .wizard-output-cta:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .wizard-reset {
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 0.85rem;
+            text-decoration: underline;
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+
+        .wizard-reset:hover {
+            color: var(--primary-color);
+        }
+
+        .wizard-no-result {
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Dot rating */
+        .dot-rating {
+            display: inline-flex;
+            gap: 2px;
+            align-items: center;
+        }
+
+        .dot-rating .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            display: inline-block;
+        }
+
+        .dot-rating .dot.empty {
+            background: var(--border-color);
         }
 
         /* Comparison Tool */
@@ -540,8 +820,8 @@
     <div class="method-tabs">
         <div class="tabs-container">
             <button class="method-tab active" data-tab="geophysics">Geophysics</button>
+            <button class="method-tab" data-tab="mining">Mining & Exploration</button>
             <button class="method-tab" data-tab="geotechnical">Geotechnical</button>
-            <button class="method-tab" data-tab="hydrogeology">Hydrogeology</button>
             <button class="method-tab" data-tab="drilling">Drilling</button>
             <button class="method-tab" data-tab="geospatial">Geospatial & Surveys</button>
         </div>
@@ -562,6 +842,7 @@
                     <ul class="method-features">
                         <li>Seismic refraction and reflection surveys</li>
                         <li>Electrical resistivity tomography (ERT)</li>
+                        <li>Groundwater exploration & borehole siting (ERT, VES)</li>
                         <li>Ground-penetrating radar (GPR)</li>
                         <li>Magnetic and gravity surveys</li>
                         <li>Electromagnetic induction methods</li>
@@ -610,31 +891,38 @@
         </div>
     </section>
 
-    <!-- Hydrogeology Content -->
-    <section id="hydrogeology" class="method-content">
+    <!-- Mining & Exploration Content -->
+    <section id="mining" class="method-content">
         <div class="container">
             <div class="method-grid animate-on-scroll">
                 <div class="method-text">
-                    <h2>Hydrogeology</h2>
-                    <p>Groundwater resource assessment and management services to ensure sustainable water supply for
-                        communities, agriculture, and industrial development across East Africa.</p>
-                    <p>Our hydrogeological expertise combines geological understanding with advanced testing methods to
-                        optimize groundwater development and protection.</p>
+                    <h2>Mining & Exploration Services</h2>
+                    <p>Full-spectrum mineral exploration services from grassroots target generation through to resource definition drilling. We deploy ground and drone-based geophysics, systematic geological mapping, and structured drill programs to advance exploration projects across Uganda, Rwanda, Burundi, and DRC.</p>
+                    <p>Our team brings practical experience on active exploration licenses and brownfield sites throughout the East African region, delivering technical data packages that support licensing applications, JORC-compliant reporting, and investment decisions.</p>
+
+                    <p style="margin-bottom: 0.75rem; font-weight: 600; color: var(--primary-color);">Recent Exploration Case Studies:</p>
+                    <ul class="method-features">
+                        <li>DRC: Alluvial gold exploration and reserves estimation in Ituri — Gold detector data, geological mapping, geochemical sampling, SAR sensing (2026)</li>
+                        <li>Rwanda — Rweru Sector: Integrated ground magnetics, deep ERT, and Induced Polarisation (IP) surveys for pegmatite-hosted cassiterite, coltan, and cobalt delineation (2026)</li>
+                        <li>Rwanda — Gasabo: Deep Electrical Resistivity Tomography (ERT) survey for pegmatite body imaging and drill-target generation (2026)</li>
+                    </ul>
 
                     <ul class="method-features">
-                        <li>Aquifer characterization and mapping</li>
-                        <li>Well design and installation</li>
-                        <li>Pump testing and analysis</li>
-                        <li>Groundwater quality assessment</li>
-                        <li>Recharge and flow modeling</li>
-                        <li>Water resource management planning</li>
+                        <li>Exploration geophysics: ground magnetics, induced polarization (IP), electromagnetics (EM), and gravity surveys</li>
+                        <li>Drone magnetic surveys for rapid regional coverage and structural interpretation</li>
+                        <li>Geological mapping and prospecting at regional to prospect scales</li>
+                        <li>Pitting and trenching programs with systematic sampling and geological logging</li>
+                        <li>RC chip and diamond core logging using G-Resolog digital borehole system</li>
+                        <li>Sampling protocols and QAQC per industry standards (standards, blanks, duplicates)</li>
+                        <li>GIS compilation, target generation, and drill-target prioritization</li>
+                        <li>Technical support for exploration license applications in Uganda, Rwanda, Burundi, and DRC</li>
                     </ul>
                 </div>
                 <div class="method-visual">
-                    <img src="resources/Methods/Hydrogeology.jpeg" alt="Hydrogeology field work">
+                    <img src="resources/Methods/Mining-Exploration-Pegmatite.jpeg" alt="Mineral exploration fieldwork">
                     <div class="method-overlay">
-                        <h3>Water Resource Expertise</h3>
-                        <p>Comprehensive groundwater assessment and sustainable water management solutions</p>
+                        <h3>Exploration Expertise</h3>
+                        <p>Ground and drone geophysics, mapping, drilling, and target generation across East Africa</p>
                     </div>
                 </div>
             </div>
@@ -829,120 +1117,339 @@
         </div>
     </section>
 
-    <!-- Comparison Tool -->
+    <!-- Method Selector Wizard -->
+    <section class="method-wizard-section" id="method-wizard">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">Find the Right Method</h2>
+                <p class="section-subtitle">Answer four questions and we will rank the geoscience methods best suited to
+                    your objective, depth, site conditions, and priorities.</p>
+            </div>
+
+            <div class="wizard-card animate-on-scroll" id="wizard-card">
+                <!-- Step 1: Objective -->
+                <div class="wizard-step">
+                    <div class="wizard-step-title">
+                        <span class="wizard-step-num">1</span>
+                        What are you investigating?
+                    </div>
+                    <div class="wizard-options" id="wizard-objectives">
+                        <!-- Populated by method-selector.js -->
+                    </div>
+                </div>
+
+                <!-- Step 2: Target depth -->
+                <div class="wizard-step">
+                    <div class="wizard-step-title">
+                        <span class="wizard-step-num">2</span>
+                        Target depth of investigation?
+                    </div>
+                    <div class="wizard-depth-wrap">
+                        <input type="range" min="0" max="200" value="30" step="5"
+                            class="wizard-depth-slider" id="wizard-depth" aria-label="Target depth in metres">
+                        <span class="wizard-depth-value" id="wizard-depth-value">30 m</span>
+                    </div>
+                </div>
+
+                <!-- Step 3: Site conditions -->
+                <div class="wizard-step">
+                    <div class="wizard-step-title">
+                        <span class="wizard-step-num">3</span>
+                        Site access &amp; conditions?
+                    </div>
+                    <div class="wizard-options" id="wizard-conditions">
+                        <!-- Populated by method-selector.js -->
+                    </div>
+                </div>
+
+                <!-- Step 4: Priority -->
+                <div class="wizard-step">
+                    <div class="wizard-step-title">
+                        <span class="wizard-step-num">4</span>
+                        Budget priority?
+                    </div>
+                    <div class="wizard-options" id="wizard-priority">
+                        <label class="wizard-option">
+                            <input type="radio" name="wizard-priority" value="cost" checked>
+                            <span>Minimise cost</span>
+                        </label>
+                        <label class="wizard-option">
+                            <input type="radio" name="wizard-priority" value="resolution">
+                            <span>Maximise resolution</span>
+                        </label>
+                        <label class="wizard-option">
+                            <input type="radio" name="wizard-priority" value="speed">
+                            <span>Maximise speed</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button class="wizard-run" id="wizard-run" type="button">Recommend methods</button>
+
+                <div class="wizard-output" id="wizard-output" aria-live="polite">
+                    <!-- Result card rendered by method-selector.js -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Table -->
     <section class="comparison-section">
         <div class="container">
             <div class="section-header animate-on-scroll">
-                <h2 class="section-title">Method Comparison Tool</h2>
-                <p class="section-subtitle">Compare different geoscience methods to select the most appropriate approach
-                    for your project</p>
+                <h2 class="section-title">Method Comparison Table</h2>
+                <p class="section-subtitle">Honest, side-by-side comparison of depth range, resolution, cost, speed,
+                    deliverables, and limitations for every method we deploy.</p>
             </div>
 
-            <div class="comparison-controls animate-on-scroll">
-                <div class="method-selector">
-                    <input type="checkbox" id="seismic" value="seismic" class="method-checkbox" checked>
-                    <label for="seismic">Seismic Surveys</label>
-                </div>
-                <div class="method-selector">
-                    <input type="checkbox" id="electrical" value="electrical" class="method-checkbox" checked>
-                    <label for="electrical">Electrical Methods</label>
-                </div>
-                <div class="method-selector">
-                    <input type="checkbox" id="gpr" value="gpr" class="method-checkbox" checked>
-                    <label for="gpr">Ground Penetrating Radar</label>
-                </div>
-                <div class="method-selector">
-                    <input type="checkbox" id="magnetic" value="magnetic" class="method-checkbox" checked>
-                    <label for="magnetic">Magnetic Surveys</label>
-                </div>
-                <button class="toggle-all-btn" id="toggleAllMethods">Select All</button>
+            <div class="comparison-controls animate-on-scroll" id="comparison-controls">
+                <!-- Method show/hide checkboxes populated by build.js -->
             </div>
 
             <div class="comparison-table-container animate-on-scroll">
-                <table class="comparison-table">
+                <table class="comparison-table" id="comparison-table">
                     <thead>
                         <tr>
                             <th>Method</th>
-                            <th>Depth Range</th>
+                            <th>Depth range (m)</th>
                             <th>Resolution</th>
-                            <th>Cost Effectiveness</th>
-                            <th>Best For</th>
+                            <th>Cost</th>
+                            <th>Speed</th>
+                            <th>Best for</th>
+                            <th>Deliverables</th>
+                            <th>Honest limitations</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr class="method-row" data-method="seismic">
-                            <td class="method-name">Seismic Refraction</td>
-                            <td>5-100m</td>
-                            <td>
-                                <div class="effectiveness-bar">
-                                    <div class="effectiveness-fill" style="width: 85%"></div>
-                                </div>
-                                <span class="effectiveness-label">85%</span>
-                            </td>
-                            <td>
-                                <div class="effectiveness-bar">
-                                    <div class="effectiveness-fill" style="width: 70%"></div>
-                                </div>
-                                <span class="effectiveness-label">70%</span>
-                            </td>
-                            <td>Bedrock mapping, foundation investigation</td>
-                        </tr>
-                        <tr class="method-row" data-method="electrical">
-                            <td class="method-name">Electrical Resistivity</td>
-                            <td>1-1000m</td>
-                            <td>
-                                <div class="effectiveness-bar">
-                                    <div class="effectiveness-fill" style="width: 75%"></div>
-                                </div>
-                                <span class="effectiveness-label">75%</span>
-                            </td>
-                            <td>
-                                <div class="effectiveness-bar">
-                                    <div class="effectiveness-fill" style="width: 85%"></div>
-                                </div>
-                                <span class="effectiveness-label">85%</span>
-                            </td>
-                            <td>Groundwater exploration, contamination mapping</td>
-                        </tr>
-                        <tr class="method-row" data-method="gpr">
-                            <td class="method-name">Ground Penetrating Radar</td>
-                            <td>0.1-30m</td>
-                            <td>
-                                <div class="effectiveness-bar">
-                                    <div class="effectiveness-fill" style="width: 95%"></div>
-                                </div>
-                                <span class="effectiveness-label">95%</span>
-                            </td>
-                            <td>
-                                <div class="effectiveness-bar">
-                                    <div class="effectiveness-fill" style="width: 60%"></div>
-                                </div>
-                                <span class="effectiveness-label">60%</span>
-                            </td>
-                            <td>Shallow utilities, archaeological surveys</td>
-                        </tr>
-                        <tr class="method-row" data-method="magnetic">
-                            <td class="method-name">Magnetic Survey</td>
-                            <td>1-100m</td>
-                            <td>
-                                <div class="effectiveness-bar">
-                                    <div class="effectiveness-fill" style="width: 60%"></div>
-                                </div>
-                                <span class="effectiveness-label">60%</span>
-                            </td>
-                            <td>
-                                <div class="effectiveness-bar">
-                                    <div class="effectiveness-fill" style="width: 90%"></div>
-                                </div>
-                                <span class="effectiveness-label">90%</span>
-                            </td>
-                            <td>Mineral exploration, fault detection</td>
-                        </tr>
+                    <tbody id="comparison-tbody">
+                        <!-- Rows rendered by build.js from methods-data.json -->
                     </tbody>
                 </table>
             </div>
         </div>
     </section>
+
+    <!-- Method data embedded for the wizard (authoritative copy; build.js leaves this in place) -->
+    <script type="application/json" id="methods-data">
+    {
+      "siteConditions": [
+        { "id": "urban-noise", "label": "Urban noise / traffic vibration", "description": "Cultural noise, traffic, machinery" },
+        { "id": "limited-access", "label": "Limited access / steep terrain", "description": "Steep slopes, dense vegetation, restricted space" },
+        { "id": "conductive-clay", "label": "Conductive clay soils", "description": "High conductivity, saline/clayey ground" },
+        { "id": "water-covered", "label": "Water-covered site", "description": "Wetland, river, lake, standing water" }
+      ],
+      "objectives": [
+        { "id": "bedrock", "label": "Bedrock depth & rippability", "description": "Map depth to competent bedrock for foundation design" },
+        { "id": "groundwater", "label": "Groundwater / aquifer mapping", "description": "Locate water-bearing zones, borehole siting" },
+        { "id": "cavities", "label": "Cavities & voids", "description": "Detect subsurface voids, sinkholes, karst" },
+        { "id": "utilities", "label": "Utilities & near-surface structures", "description": "Map buried pipes, cables, tanks, foundations" },
+        { "id": "minerals", "label": "Mineral exploration", "description": "Delineate ore bodies, structural controls, alteration" },
+        { "id": "dam", "label": "Dam foundation investigation", "description": "Characterise foundation conditions for dam design" },
+        { "id": "contamination", "label": "Contamination / plume mapping", "description": "Delineate contaminant plumes, leachate, saltwater intrusion" },
+        { "id": "stratigraphy", "label": "Stratigraphy / layer mapping", "description": "Map subsurface layer geometry and thickness" }
+      ],
+      "methods": [
+        {
+          "id": "seismic-refraction",
+          "name": "Seismic Refraction",
+          "category": "Seismic",
+          "depthRange_m": [3, 100],
+          "resolution": 4,
+          "relCost": 3,
+          "speed_km_per_day": 1.5,
+          "bestFor": ["Bedrock depth & rippability", "Dam foundation investigation", "Stratigraphic mapping"],
+          "limitations": [
+            "Cannot detect velocity inversions (a low-velocity layer masked beneath a faster layer is invisible)",
+            "Requires good ground coupling and a spread of geophones (50-200 m layout)",
+            "Cultural vibration (traffic, machinery) degrades first-arrival picks"
+          ],
+          "deliverables": [
+            "2D P-wave velocity profile",
+            "Depth-to-bedrock contour map",
+            "Rippability / excavatability assessment"
+          ],
+          "objectives": ["bedrock", "dam", "stratigraphy"],
+          "limitationTriggers": { "urban-noise": 3, "limited-access": 2, "conductive-clay": 0, "water-covered": 3 }
+        },
+        {
+          "id": "masw",
+          "name": "MASW (Multi-channel Analysis of Surface Waves)",
+          "category": "Seismic",
+          "depthRange_m": [1, 50],
+          "resolution": 4,
+          "relCost": 3,
+          "speed_km_per_day": 2,
+          "bestFor": ["Vs30 / site class (IBC/ASCE)", "Dam foundation investigation", "Liquefaction screening"],
+          "limitations": [
+            "Maximum reliable depth ~30-50 m with active-source MASW",
+            "Resolution drops sharply below 1/3 of maximum depth",
+            "Passive MASW extends depth but lowers near-surface resolution"
+          ],
+          "deliverables": [
+            "1D/2D shear-wave velocity (Vs) profile",
+            "Vs30 site classification per IBC/ASCE",
+            "Liquefaction susceptibility map"
+          ],
+          "objectives": ["dam", "stratigraphy", "bedrock"],
+          "limitationTriggers": { "urban-noise": 1, "limited-access": 1, "conductive-clay": 0, "water-covered": 2 }
+        },
+        {
+          "id": "ert-2d",
+          "name": "Electrical Resistivity Tomography (2D ERT)",
+          "category": "Electrical",
+          "depthRange_m": [1, 1000],
+          "resolution": 4,
+          "relCost": 3,
+          "speed_km_per_day": 1.2,
+          "bestFor": ["Groundwater mapping", "Contamination / leachate plumes", "Cavity detection in resistive rock"],
+          "limitations": [
+            "Requires good electrode-to-ground contact (difficult on dry gravel, hardpan, or paved surfaces)",
+            "Conductive clay overburden suppresses signal from deeper resistive targets",
+            "Deep investigations need long layouts (depth ~1/6 of array length)"
+          ],
+          "deliverables": [
+            "2D resistivity cross-section (inverted model)",
+            "Depth to water table / aquifer geometry",
+            "Contaminant plume delineation"
+          ],
+          "objectives": ["groundwater", "contamination", "cavities", "dam", "stratigraphy"],
+          "limitationTriggers": { "urban-noise": 0, "limited-access": 2, "conductive-clay": 1, "water-covered": 2 }
+        },
+        {
+          "id": "ves",
+          "name": "Vertical Electrical Sounding (VES)",
+          "category": "Electrical",
+          "depthRange_m": [5, 500],
+          "resolution": 3,
+          "relCost": 2,
+          "speed_km_per_day": 5,
+          "bestFor": ["Borehole siting (point depth)", "Groundwater exploration at limited-access sites", "Layer resistivity at a point"],
+          "limitations": [
+            "1D point measurement \u2014 no lateral continuity between soundings unless densely spaced",
+            "Layer equivalence: multiple layer models can fit the same curve",
+            "Conductive overburden limits depth of investigation"
+          ],
+          "deliverables": [
+            "1D layer resistivity model at each sounding",
+            "Recommended drilling depth for boreholes",
+            "Aquifer resistivity / yield correlation"
+          ],
+          "objectives": ["groundwater", "stratigraphy"],
+          "limitationTriggers": { "urban-noise": 0, "limited-access": 1, "conductive-clay": 1, "water-covered": 2 }
+        },
+        {
+          "id": "gpr",
+          "name": "Ground Penetrating Radar (GPR)",
+          "category": "Electromagnetic",
+          "depthRange_m": [0.1, 30],
+          "resolution": 5,
+          "relCost": 2,
+          "speed_km_per_day": 5,
+          "bestFor": ["Utility & pipe mapping", "Concrete/bridge deck inspection", "Shallow stratigraphy & archaeology"],
+          "limitations": [
+            "Signal is strongly attenuated in conductive (clayey, saline, waterlogged) soils \u2014 penetration may fall to <1 m",
+            "Maximum reliable depth typically 15-30 m in resistive ground; far less in clay",
+            "Antenna frequency trades depth for resolution (low freq = deep but coarse)"
+          ],
+          "deliverables": [
+            "High-resolution 2D/3D radar profile",
+            "Mapped utility/pipe positions & depths",
+            "Concrete cover and rebar mapping"
+          ],
+          "objectives": ["utilities", "cavities", "stratigraphy"],
+          "limitationTriggers": { "urban-noise": 1, "limited-access": 1, "conductive-clay": 5, "water-covered": 3 }
+        },
+        {
+          "id": "magnetics",
+          "name": "Magnetic Survey",
+          "category": "Potential Field",
+          "depthRange_m": [1, 300],
+          "resolution": 3,
+          "relCost": 2,
+          "speed_km_per_day": 8,
+          "bestFor": ["Mineral exploration (iron, massive sulphides)", "Structural / dyke mapping", "Buried metal & UXO detection"],
+          "limitations": [
+            "Strongly affected by cultural metal (fences, pipelines, reinforced concrete) in urban/industrial areas",
+            "Non-unique: many source bodies can produce the same anomaly",
+            "Depth estimation from magnetics alone is approximate without modelling"
+          ],
+          "deliverables": [
+            "Magnetic anomaly map (total field / residual)",
+            "Structural interpretation lineaments",
+            "Target anomalies for follow-up drilling"
+          ],
+          "objectives": ["minerals", "utilities"],
+          "limitationTriggers": { "urban-noise": 4, "limited-access": 1, "conductive-clay": 0, "water-covered": 0 }
+        },
+        {
+          "id": "gravity",
+          "name": "Gravity Survey",
+          "category": "Potential Field",
+          "depthRange_m": [10, 5000],
+          "resolution": 2,
+          "relCost": 3,
+          "speed_km_per_day": 3,
+          "bestFor": ["Basement / sedimentary basin geometry", "Cavity & void detection (microgravity)", "Ore-body delineation (dense ore)"],
+          "limitations": [
+            "Requires very precise station levelling and terrain corrections \u2014 slow to acquire and process",
+            "Small targets need dense station spacing and excellent elevation control",
+            "Near-surface density variations can mask deeper targets"
+          ],
+          "deliverables": [
+            "Bouguer / residual gravity anomaly map",
+            "2D/2.75D density models along profiles",
+            "Cavity probability map (microgravity)"
+          ],
+          "objectives": ["minerals", "cavities", "stratigraphy"],
+          "limitationTriggers": { "urban-noise": 2, "limited-access": 3, "conductive-clay": 0, "water-covered": 2 }
+        },
+        {
+          "id": "em-fdem",
+          "name": "Electromagnetic (FDEM)",
+          "category": "Electromagnetic",
+          "depthRange_m": [0.5, 50],
+          "resolution": 3,
+          "relCost": 2,
+          "speed_km_per_day": 10,
+          "bestFor": ["Groundwater / salinity mapping", "Contaminant / leachate plumes", "Shallow ore & conductivity mapping"],
+          "limitations": [
+            "Conductive overburden (clay/saline) limits depth of investigation for resistive targets below",
+            "Sensitive to cultural metal and power-line interference in urban/industrial areas",
+            "Frequency / coil spacing trades depth for resolution; deep targets (>50 m) need low-frequency TDEM instead"
+          ],
+          "deliverables": [
+            "Apparent conductivity / in-phase map",
+            "2D conductivity cross-section",
+            "Salinity / contaminant plume delineation"
+          ],
+          "objectives": ["groundwater", "contamination", "minerals"],
+          "limitationTriggers": { "urban-noise": 3, "limited-access": 1, "conductive-clay": 4, "water-covered": 1 }
+        },
+        {
+          "id": "geotechnical-drilling",
+          "name": "Geotechnical Drilling (ground truth)",
+          "category": "Invasive",
+          "role": "calibration",
+          "depthRange_m": [1, 200],
+          "resolution": 5,
+          "relCost": 5,
+          "speed_km_per_day": 0.3,
+          "bestFor": ["Ground-truth calibration for geophysics", "SPT & UDS sampling for design parameters", "Borehole lithology"],
+          "limitations": [
+            "Point data only \u2014 interpolation between boreholes is uncertain without geophysics",
+            "High cost per metre and slow mobilisation; access can be difficult on steep or soft ground",
+            "Holes must be backfilled / sealed; environmental permitting may apply"
+          ],
+          "deliverables": [
+            "Borehole logs (lithology, SPT, recovery, RQD)",
+            "Index & engineering properties from lab testing",
+            "Geotechnical design parameters (bearing capacity, settlement)"
+          ],
+          "objectives": ["bedrock", "groundwater", "dam", "contamination", "stratigraphy"],
+          "limitationTriggers": { "urban-noise": 0, "limited-access": 3, "conductive-clay": 0, "water-covered": 3 }
+        }
+      ]
+    }
+    </script>
 
     <!-- Equipment Showcase -->
     <section class="equipment-section">
@@ -1012,6 +1519,7 @@
     <script src="footer-component.js" defer></script>
 
     <script type="module" src="main.js"></script>
+    <script type="module" src="js/method-selector.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -1050,40 +1558,36 @@
             const hash = window.location.hash.substring(1);
             if (hash) {
                 const targetTab = document.querySelector(`.method-tab[data-tab="${hash}"]`);
-                if (targetTab) targetTab.click();
+                if (targetTab && !targetTab.classList.contains('active')) {
+                    targetTab.click();
+                }
             }
 
-            // Method Comparison Tool Logic
-            const checkboxes = document.querySelectorAll('.method-checkbox');
-            const toggleAllBtn = document.getElementById('toggleAllMethods');
-            const methodRows = document.querySelectorAll('.method-row');
+            // Method show/hide checkboxes (delegated — controls are injected by build.js)
+            const controlsRoot = document.getElementById('comparison-controls');
+            const tbody = document.getElementById('comparison-tbody');
 
-            function updateTable() {
-                checkboxes.forEach(cb => {
-                    const method = cb.value;
-                    const rows = document.querySelectorAll(`.method-row[data-method="${method}"]`);
-                    rows.forEach(row => {
-                        if (cb.checked) {
-                            row.classList.remove('hidden');
-                        } else {
-                            row.classList.add('hidden');
-                        }
-                    });
+            function updateTableVisibility() {
+                const checked = new Set(
+                    Array.from(controlsRoot.querySelectorAll('.method-checkbox:checked')).map(cb => cb.value)
+                );
+                tbody.querySelectorAll('.method-row').forEach(row => {
+                    row.classList.toggle('hidden', !checked.has(row.dataset.methodId));
                 });
             }
 
-            checkboxes.forEach(cb => {
-                cb.addEventListener('change', updateTable);
+            controlsRoot.addEventListener('change', updateTableVisibility);
+
+            // Toggle all button (delegated)
+            controlsRoot.addEventListener('click', (e) => {
+                if (e.target.classList.contains('toggle-all-btn')) {
+                    const boxes = controlsRoot.querySelectorAll('.method-checkbox');
+                    const allChecked = Array.from(boxes).every(cb => cb.checked);
+                    boxes.forEach(cb => cb.checked = !allChecked);
+                    e.target.textContent = allChecked ? 'Select All' : 'Deselect All';
+                    updateTableVisibility();
+                }
             });
-
-            if (toggleAllBtn) {
-                toggleAllBtn.addEventListener('click', () => {
-                    const allChecked = Array.from(checkboxes).every(cb => cb.checked);
-                    checkboxes.forEach(cb => cb.checked = !allChecked);
-                    toggleAllBtn.textContent = allChecked ? 'Select All' : 'Deselect All';
-                    updateTable();
-                });
-            }
         });
     </script>
 </body>

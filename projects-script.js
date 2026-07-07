@@ -2,7 +2,10 @@
 
 // Initialize projects page
 document.addEventListener('DOMContentLoaded', function() {
-    renderProjects(projectsData);
+    const grid = document.getElementById('projects-grid');
+    if (grid && !grid.querySelector('.project-card')) {
+        renderProjects(projectsData);
+    }
     setupProjectFilters();
     setupProjectModal();
     initializeAnimations();

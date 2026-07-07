@@ -16,10 +16,44 @@
     <meta property="og:description"
         content="Get in touch with East Africa&#39;s leading geoscience consulting firm for your project needs.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://georesolve.africa/contact.html">
+    <meta property="og:url" content="https://georesolveafrica.com/contact.html">
+    <meta property="og:image" content="https://georesolveafrica.com/resources/hero-geoscience.jpeg">
+    <link rel="canonical" href="https://georesolveafrica.com/contact.html">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Contact Georesolve Africa | Expert Geoscience Consulting">
+    <meta name="twitter:description"
+        content="Get in touch with East Africa&#39;s leading geoscience consulting firm for your project needs.">
+    <meta name="twitter:image" content="https://georesolveafrica.com/resources/hero-geoscience.jpeg">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="resources/favicon/Icon-Flavicon.png">
+
+    <!-- Structured Data / Schema.org -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      "name": "Contact Georesolve Africa",
+      "url": "https://georesolveafrica.com/contact.html",
+      "description": "Contact Georesolve Africa for expert geoscience consulting services across East Africa.",
+      "mainEntity": {
+        "@type": "ProfessionalService",
+        "name": "GeoResolve Africa",
+        "telephone": "+256771999614",
+        "email": "info@georesolveafrica.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "HMK Building, Gayaza Road, Kasangati",
+          "addressLocality": "Kasangati",
+          "addressRegion": "Central Region",
+          "addressCountry": "UG"
+        },
+        "areaServed": ["Uganda", "Rwanda", "Burundi", "DRC", "South Sudan"]
+      }
+    }
+    </script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
@@ -28,9 +62,11 @@
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="footer-styles.css">
 
     <!-- Core Libraries -->
-    <!-- Core Libraries (Deferred) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
 
     <style>
         :root {
@@ -61,6 +97,8 @@
             color: var(--text-dark);
             background-color: var(--background-light);
             padding-top: 80px;
+            padding-bottom: 15vw;
+            /* Extra clearance for sticky header + footer */
         }
 
         a {
@@ -414,6 +452,33 @@
             font-weight: 600;
         }
 
+        /* CTA / Explore More */
+        .cta-section {
+            background: var(--background-light);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
         /* Animations */
         .animate-on-scroll {
             opacity: 0;
@@ -526,8 +591,7 @@
                             <div class="contact-text">
                                 <h4>Email</h4>
                                 <p>
-                                    <a href="mailto:info@georesolveafrica.com">info@georesolveafrica.com</a><br>
-                                    <a href="mailto:projects@georesolveafrica.com">projects@georesolveafrica.com</a>
+                                    <a href="mailto:info@georesolveafrica.com">info@georesolveafrica.com</a>
                                 </p>
                             </div>
                         </div>
@@ -596,6 +660,14 @@
                             <div class="error-message"></div>
                         </div>
 
+                        <div class="form-group">
+                            <label class="form-label" style="display: flex; align-items: flex-start; gap: 0.5rem; text-transform: none; letter-spacing: 0;">
+                                <input type="checkbox" name="newsletter" value="yes" style="margin-top: 0.25rem;">
+                                <span>Email me occasional technical guides and tool updates</span>
+                            </label>
+                            <p class="form-note" style="margin-top: 0.5rem; text-align: left;">No spam - tools and geoscience guides only. Unsubscribe anytime.</p>
+                        </div>
+
                         <button type="submit" class="btn btn-primary btn-full">Send Inquiry</button>
                     </form>
                 </div>
@@ -631,7 +703,7 @@
                                 <select id="project-type" name="project-type" class="form-select" required="">
                                     <option value="geophysical">Geophysical Survey</option>
                                     <option value="geotechnical">Geotechnical Investigation</option>
-                                    <option value="hydrogeology">Hydrogeology Study</option>
+                                    <option value="mining">Mining & Exploration</option>
                                     <option value="drilling">Drilling Services</option>
                                 </select>
                             </div>
@@ -752,7 +824,7 @@
 
                     <!-- Submit Button -->
                     <div class="form-actions">
-                        <button type="submit" class="btn-submit">
+                        <button type="submit" class="btn btn-primary">
                             <span class="btn-text">Submit Estimate Request</span>
                             <span class="btn-icon">→</span>
                         </button>
@@ -772,66 +844,14 @@
         </div>
     </section>
 
-    <!-- ADD THESE STYLES TO YOUR <style> SECTION -->
+    <!-- Estimator-specific styles -->
     <style>
-        /* Additional styles for the updated estimator form */
-        .form-input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            transition: var(--transition-fast);
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(52, 83, 99, 0.1);
-        }
-
         .form-actions {
             margin-top: 2rem;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 1rem;
-        }
-
-        .btn-submit {
-            background: var(--primary-color);
-            color: var(--text-light);
-            border: none;
-            padding: 1rem 3rem;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: var(--transition-medium);
-            box-shadow: var(--shadow-medium);
-        }
-
-        .btn-submit:hover {
-            background: var(--accent-color);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-heavy);
-        }
-
-        .btn-submit:active {
-            transform: translateY(0);
-        }
-
-        .btn-icon {
-            font-size: 1.3rem;
-            transition: var(--transition-fast);
-        }
-
-        .btn-submit:hover .btn-icon {
-            transform: translateX(5px);
         }
 
         .form-note {
@@ -922,7 +942,7 @@
                 grid-template-columns: 1fr;
             }
 
-            .btn-submit {
+            .form-actions .btn {
                 width: 100%;
                 justify-content: center;
             }
@@ -933,9 +953,52 @@
 
         // Initialize contact page
         document.addEventListener('DOMContentLoaded', function () {
+            prefillFromQuery();
             setupProjectEstimator();
             initializeAnimations();
         });
+
+        // Prefill inquiry form from ?service=&method= query params (Method Selector CTA)
+        function prefillFromQuery() {
+            const params = new URLSearchParams(window.location.search);
+            const service = params.get('service');
+            const method = params.get('method');
+            if (!service && !method) return;
+
+            const form = document.querySelector('.inquiry-form');
+            if (!form) return;
+
+            // Service → inquiry type mapping
+            const inquirySelect = form.querySelector('#inquiry-type');
+            if (inquirySelect) {
+                const map = {
+                    'geophysics': 'project-consultation',
+                    'geotechnical': 'project-consultation',
+                    'mining': 'project-consultation',
+                    'drilling': 'project-consultation',
+                    'geospatial': 'project-consultation',
+                    'technical-services': 'technical-services'
+                };
+                const mapped = service ? (map[service] || 'project-consultation') : 'project-consultation';
+                inquirySelect.value = mapped;
+                inquirySelect.dispatchEvent(new Event('change'));
+            }
+
+            // Method note → message field
+            const message = form.querySelector('#message');
+            if (message && method) {
+                const methodLabel = method.replace(/\+/g, ' + ').replace(/-/g, ' ');
+                const note = `I would like a proposal for a ${methodLabel} survey. Please advise on methodology, line-kilometres, timeline, and cost for our site.`;
+                message.value = note;
+                message.dispatchEvent(new Event('input'));
+            }
+
+            // Scroll to the form
+            const formSection = form.closest('section');
+            if (formSection) {
+                setTimeout(() => formSection.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300);
+            }
+        }
 
         // Setup project estimator
         function setupProjectEstimator() {
@@ -979,7 +1042,7 @@
             const baseCosts = {
                 'geophysical': 8000,
                 'geotechnical': 5000,
-                'hydrogeology': 6000,
+                'mining': 15000,
                 'drilling': 12000
             };
 
@@ -1014,7 +1077,7 @@
             e.preventDefault();
 
             const form = e.target;
-            const submitButton = form.querySelector('.btn-submit');
+            const submitButton = form.querySelector('.form-actions .btn');
             const originalButtonText = submitButton.innerHTML;
 
             // Disable button and show loading state
@@ -1043,7 +1106,7 @@
                     // Fallback: Use mailto (this will open email client)
                     // Note: This is less reliable but works without backend
                     const emailBody = formatEmailBody(formData);
-                    window.location.href = `mailto:<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d1b8bfb7be91b6b4bea3b4a2bebda7b4b0b7a3b8b2b0ffb2bebc">[email&#160;protected]</a>?subject=Project Estimate Request&body=${encodeURIComponent(emailBody)}`;
+                    window.location.href = `mailto:info@georesolveafrica.com?subject=Project Estimate Request&body=${encodeURIComponent(emailBody)}`;
 
                     // Show success message after a short delay
                     setTimeout(() => {
@@ -1052,7 +1115,7 @@
                 }
             } catch (error) {
                 console.error('Form submission error:', error);
-                alert('There was an error submitting your request. Please try again or contact us directly at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="543d3a323b1433313b2631273b3822313532263d37357a373b39">[email&#160;protected]</a>');
+                alert('There was an error submitting your request. Please try again or contact us directly at info@georesolveafrica.com');
 
                 // Re-enable button
                 submitButton.disabled = false;
@@ -1200,27 +1263,21 @@ This request was submitted via the Georesolve Africa website.
                 }
             });
         });
-    });
     </script>
 
     <!-- Back to Home Navigation -->
-    <section class="section" style="background-color: var(--background-light); padding: 4rem 0; text-align: center;">
+    <section class="cta-section">
         <div class="container animate-on-scroll">
-            <h2
-                style="font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--primary-color); margin-bottom: 1rem;">
-                Explore More</h2>
-            <p style="color: #666; max-width: 600px; margin: 0 auto 2rem;">Not ready to reach out yet? Browse our latest
-                projects or learn more about our services.</p>
-            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                <a href="index.html" class="btn btn-secondary"
-                    style="border-color: var(--primary-color); color: var(--primary-color);">Back to Home</a>
+            <h2>Explore More</h2>
+            <p>Not ready to reach out yet? Browse our latest projects or learn more about our services.</p>
+            <div class="cta-actions">
+                <a href="index.html" class="btn btn-secondary">Back to Home</a>
                 <a href="projects.html" class="btn btn-primary">View Projects</a>
             </div>
         </div>
     </section>
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
+    <!-- Footer & Clients injected by footer-component.js -->
 
     <!-- Local Components -->
     <script src="js/header-component.js" defer></script>

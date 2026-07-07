@@ -43,12 +43,21 @@ temp/
 # Netlify
 .netlify/
 
+# Scraped website files
+Contact _ Georesolve Africa_files/
+
 # Vite
 .vite/
 
 # Contentful export files
-contentful-export-*.json
+contentful-export
+# internal strategy docs - do not publish
+WEBSITE-IMPROVEMENT-PLAN.md
+Updates/
+IMPROVEMENT-PLAN.md
+docs/archive/WEBSITE-IMPROVEMENT-PLAN.md
 
-# Local development
-localhost-*.key
-localhost-*.crt
+# Local assistant/tooling state
+.trae/
+.agents/
+.codex/
