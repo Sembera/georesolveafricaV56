@@ -91,6 +91,44 @@
     width: 100%;
 }
 
+/* Language switcher (EN | FR toggle) */
+.lang-switch {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-left: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.lang-switch .lang-link {
+    color: var(--text-dark);
+    text-decoration: none;
+    padding: 0.25rem 0.4rem;
+    border-radius: 6px;
+    transition: var(--transition-fast);
+}
+
+.lang-switch .lang-link:hover {
+    color: var(--accent-color);
+}
+
+.lang-switch .lang-link.lang-active {
+    color: var(--accent-color);
+    background: var(--background-light);
+}
+
+.lang-switch .lang-sep {
+    color: var(--border-color);
+}
+
+@media (max-width: 768px) {
+    .lang-switch {
+        margin-left: 0;
+        padding: 0.5rem 1.25rem;
+    }
+}
+
 /* Dropdown Menu Styles */
 .has-dropdown {
     position: relative;

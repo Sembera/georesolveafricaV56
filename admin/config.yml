@@ -1,0 +1,66 @@
+# Decap CMS configuration — Georesolve Africa
+# WP12-C: staff content admin at /admin
+#
+# Activation (one-time, in the Netlify dashboard):
+#   1. Site settings → Identity → Enable Identity.
+#   2. Identity → Services → Git Gateway → Enable Git Gateway.
+#   3. Identity → External providers → enable GitHub (staff log in with GitHub).
+#   4. Identity → Invite staff emails.
+# Every save commits to `main` and Netlify rebuilds the site.
+
+backend:
+  name: git-gateway
+  branch: main
+
+# Simple mode: each save commits directly to `main` (every save auto-commits → rebuild → live).
+publish_mode: simple
+
+# Media (images) uploaded in the editor are stored here and served from /resources.
+media_folder: "resources"
+public_folder: "/resources"
+
+site_url: https://georesolveafrica.com
+display_url: https://georesolveafrica.com
+
+# Slug pattern for new news files.
+slug:
+  encoding: "unicode"
+  clean_accents: false
+  sanitize_replacement: "-"
+
+collections:
+  - name: "news"
+    label: "News & Insights"
+    label_singular: "News article"
+    folder: "news"
+    create: true
+    # Drafts (draft: true) stay in the repo but are flagged; build.js treats the
+    # whole News section as archived (NEWS_PUBLISH = false), so even published news
+    # files are not rendered to the live site until that flag is flipped.
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: date, label: Date, widget: datetime, format: "YYYY-MM-DD", required: false }
+      - name: category
+        label: Category
+        widget: select
+        options:
+          - { label: "Project update", value: "project-update" }
+          - { label: "Technical insight", value: "technical-insight" }
+          - { label: "Company", value: "company" }
+        default: "company"
+      - { name: excerpt, label: Excerpt, widget: text }
+      - { name: author, label: Author, widget: string, default: "Georesolve Africa" }
+      - { name: image, label: Hero image, widget: image, required: false }
+      - name: tags
+        label: Tags
+        widget: list
+        required: false
+      - { name: draft, label: Draft, widget: boolean, default: false, required: false }
+      - { name: body, label: Body, widget: markdown }
+
+# NOTE: Projects and Testimonials are intentionally NOT managed here yet.
+# projects.json uses an irregular nested schema (methods/results/coordinates)
+# and is duplicated in projects-data.js; adding a `projects` collection now would
+# drop nested fields on save. Consolidate projects into a single Decap-friendly
+# source first, then add a collection here. The News collection above is the
+# dormant pipeline staff can resume publishing through the CMS.

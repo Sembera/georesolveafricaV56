@@ -2,7 +2,6 @@
   'use strict';
 
   const STORAGE_KEY = 'grs-leads';
-  const FORM_NAME = 'tool-leads';
   const VALID_TOOLS = ['g-resolog', 'g-resconvt', 'g-geopylanner', 'g-flightplanner'];
   const VALID_TRIGGERS = ['export', 'inline', 'contact'];
   const DEFAULT_STATE = { subscribed: false, dismissCount: 0, lastShown: 0 };
@@ -328,20 +327,22 @@
     }
     if (status) status.textContent = '';
 
-    const payload = new URLSearchParams();
-    payload.set('form-name', FORM_NAME);
-    payload.set('bot-field', '');
-    payload.set('email', email);
-    payload.set('tool', this.config.tool);
-    payload.set('trigger', opts.trigger || this.config.trigger);
-    payload.set('page-url', global.location ? global.location.href : '');
-    payload.set('timestamp', new Date().toISOString());
+    // WP12-B: forward signup to the Brevo function (proxied at /api/subscribe).
+    // The function adds the contact to the Brevo list; the site never sees the
+    // API key. Netlify Forms (tool-leads) is no longer used for the mailing list.
+    const payload = {
+      email: email,
+      tool: this.config.tool,
+      trigger: opts.trigger || this.config.trigger,
+      pageUrl: global.location ? global.location.href : '',
+      timestamp: new Date().toISOString()
+    };
 
     try {
-      const response = await fetch('/', {
+      const response = await fetch('/api/subscribe', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: payload.toString()
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
       });
       if (!response.ok) throw new Error('Lead form submission failed');
       writeState({ subscribed: true });
