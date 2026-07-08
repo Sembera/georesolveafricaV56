@@ -1,14 +1,107 @@
 const fs = require('fs');
 const path = require('path');
 const marked = require('marked');
+const sharp = require('sharp');
 
 const DIST = 'dist';
 const SRC = '.';
 
+// --- WebP dimension cache (adds width/height + upgrades imgs in dist) ---
+const WEBP_SET = new Set();   // relative-to-root posix paths of every .webp
+const WEBP_DIMS = new Map();  // relative path -> { width, height }
+
+function stripUp(src) {
+  let s = src;
+  while (s.startsWith('../')) s = s.slice(3);
+  return s.replace(/\\/g, '/');
+}
+
+// Upgrade a single image reference to its .webp sibling when one exists.
+// The hero is forced to the dedicated 1200px variant.
+function toWebpSrc(src) {
+  if (!src) return src;
+  const hero = src.match(/^(.*\/)?(hero-geoscience)(?:\.jpeg|\.jpg|\.png|\.webp)?$/i);
+  if (hero) return (hero[1] || '') + 'hero-geoscience-1200.webp';
+  if (!/\.(jpeg|jpg|png)$/i.test(src)) return src;
+  const webp = src.replace(/\.(jpeg|jpg|png)$/i, '.webp');
+  return WEBP_SET.has(stripUp(webp)) ? webp : src;
+}
+
+function dimsForSrc(src) {
+  return WEBP_DIMS.get(stripUp(src)) || null;
+}
+
+async function preloadWebp() {
+  async function walk(dir) {
+    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+      const p = path.join(dir, e.name);
+      if (e.isDirectory()) {
+        await walk(p);
+      } else if (e.name.toLowerCase().endsWith('.webp')) {
+        const rel = path.relative(SRC, p).replace(/\\/g, '/');
+        WEBP_SET.add(rel);
+        try {
+          const m = await sharp(p).metadata();
+          WEBP_DIMS.set(rel, { width: m.width, height: m.height });
+        } catch (err) {
+          WEBP_DIMS.set(rel, null);
+        }
+      }
+    }
+  }
+  await walk(path.join(SRC, 'resources'));
+}
+
+// Add width/height + decoding="async" to an <img> and normalise loading:
+// the FIRST visible image of a page is eager, everything below the fold lazy.
+function finalizeImg(tag, isFirst) {
+  tag = tag.replace(/(src\s*=\s*)(["'])(.*?)\2/gi,
+    (mm, pre, q, val) => pre + q + toWebpSrc(val) + q);
+
+  const sm = tag.match(/src\s*=\s*["']([^"']*)["']/i);
+  const src = sm ? sm[1] : '';
+  if (src) {
+    const d = dimsForSrc(toWebpSrc(src));
+    if (d) {
+      if (!/\bwidth\s*=/.test(tag)) {
+        tag = tag.replace(/<img\b/i, `<img width="${d.width}" height="${d.height}"`);
+      }
+      if (!/\bdecoding\s*=/.test(tag)) {
+        tag = tag.replace(/<img\b/i, `<img decoding="async"`);
+      }
+    }
+  }
+
+  if (isFirst) {
+    tag = tag.replace(/\s+loading\s*=\s*["']lazy["']/i, '');
+  } else if (!/\bloading\s*=/.test(tag)) {
+    tag = tag.replace(/<img\b/i, `<img loading="lazy"`);
+  }
+  return tag;
+}
+
+// Post-process every built HTML file so all <img> tags are dimensioned and
+// correctly lazy-loaded. Covers statically authored imgs and those rendered
+// from data (project grid, featured carousel, news cards/articles).
+function ensureImgAttributes() {
+  const htmlFiles = findFiles(DIST, '.html');
+  for (const filePath of htmlFiles) {
+    const html = fs.readFileSync(filePath, 'utf8');
+    let idx = 0;
+    const out = html.replace(/<img\b[^>]*>/gi, (tag) => {
+      const first = idx === 0;
+      idx++;
+      return finalizeImg(tag, first);
+    });
+    if (out !== html) fs.writeFileSync(filePath, out, 'utf8');
+  }
+  log(`ensureImgAttributes: processed ${htmlFiles.length} HTML file(s)`);
+}
+
 // Directories / files to exclude from copy
 const EXCLUDES = new Set([
   'dist', 'node_modules', '.git', '.claude', '.agents', '.codex', '.trae', 'partials',
-  'build.js', 'package-lock.json', 'quick-footer-inject.html',
+  'build.js', 'package-lock.json', 'quick-footer-inject.html', 'tools',
   'vite.config.js', '.env.template', '.gitignore',
   'IMPROVEMENT-PLAN.md', 'WEBSITE-IMPROVEMENT-PLAN.md',
   'Updates', 'docs', 'README.md'
@@ -147,8 +240,9 @@ function injectBreadcrumbJSONLD(html, fileName) {
 // MAIN
 // ---------------------------------------------------------------------------
 
-function main() {
+async function main() {
   log('Starting build...');
+  await preloadWebp();
 
   // 1. Clean and recreate dist/
   cleanDist();
@@ -174,6 +268,7 @@ function main() {
   for (const filePath of htmlFiles) {
     processHTML(filePath, headerHTML, footerHTML, projects);
   }
+  ensureImgAttributes();
 
   // 8. Generate sitemap.xml
   generateSitemap();

@@ -22,20 +22,20 @@ function injectClients() {
             </div>
     
             <div class="clients-grid animate-scroll">
-                <div class="client-card"><img src="resources/Clients/zv-consulting.png" alt="ZV Consulting Ltd" class="client-logo" loading="lazy"></div>
-                <div class="client-card"><img src="resources/Clients/atc-uganda.png" alt="ATC Uganda" class="client-logo" loading="lazy"></div>
-                <div class="client-card"><img src="resources/Clients/ministry-energy-uganda.png" alt="Ministry of Energy" class="client-logo" loading="lazy"></div>
-                <div class="client-card"><img src="resources/Clients/fichtner.png" alt="Fichtner GmbH" class="client-logo" loading="lazy"></div>
-                <div class="client-card"><img src="resources/Clients/Artelia.png" alt="Artelia" class="client-logo" loading="lazy"></div>
-                <div class="client-card"><img src="resources/Clients/Aecom.png" alt="Aecom" class="client-logo" loading="lazy"></div>
-                <div class="client-card"><img src="resources/Clients/Songa.png" alt="Songa Energy" class="client-logo" loading="lazy"></div>
-                <div class="client-card"><img src="resources/Clients/virunga-power.png" alt="Virunga Power" class="client-logo" loading="lazy"></div>
-                <div class="client-card"><img src="resources/Clients/anzana-electric.png" alt="Anzana Electric Group" class="client-logo" loading="lazy"></div>
-                <div class="client-card"><img src="resources/Clients/MBW.png" alt="MBW Consulting" class="client-logo" loading="lazy"></div>
-                <div class="client-card"><img src="resources/Clients/razel-bec.png" alt="Razel-Bec" class="client-logo" loading="lazy"></div>
-                <div class="client-card"><img src="resources/Clients/Tectoni.png" alt="Tectoni Africa" class="client-logo" loading="lazy"></div>
-                <div class="client-card"><img src="resources/Clients/RSV.png" alt="RSV Engineering" class="client-logo" loading="lazy"></div>
-                <div class="client-card"><img src="resources/Clients/paraa.png" alt="Paraa Safari Lodge" class="client-logo" loading="lazy"></div>
+                <div class="client-card"><img src="resources/Clients/zv-consulting.webp" alt="ZV Consulting Ltd" class="client-logo" loading="lazy"></div>
+                <div class="client-card"><img src="resources/Clients/atc-uganda.webp" alt="ATC Uganda" class="client-logo" loading="lazy"></div>
+                <div class="client-card"><img src="resources/Clients/ministry-energy-uganda.webp" alt="Ministry of Energy" class="client-logo" loading="lazy"></div>
+                <div class="client-card"><img src="resources/Clients/fichtner.webp" alt="Fichtner GmbH" class="client-logo" loading="lazy"></div>
+                <div class="client-card"><img src="resources/Clients/Artelia.webp" alt="Artelia" class="client-logo" loading="lazy"></div>
+                <div class="client-card"><img src="resources/Clients/Aecom.webp" alt="Aecom" class="client-logo" loading="lazy"></div>
+                <div class="client-card"><img src="resources/Clients/Songa.webp" alt="Songa Energy" class="client-logo" loading="lazy"></div>
+                <div class="client-card"><img src="resources/Clients/virunga-power.webp" alt="Virunga Power" class="client-logo" loading="lazy"></div>
+                <div class="client-card"><img src="resources/Clients/anzana-electric.webp" alt="Anzana Electric Group" class="client-logo" loading="lazy"></div>
+                <div class="client-card"><img src="resources/Clients/MBW.webp" alt="MBW Consulting" class="client-logo" loading="lazy"></div>
+                <div class="client-card"><img src="resources/Clients/razel-bec.webp" alt="Razel-Bec" class="client-logo" loading="lazy"></div>
+                <div class="client-card"><img src="resources/Clients/Tectoni.webp" alt="Tectoni Africa" class="client-logo" loading="lazy"></div>
+                <div class="client-card"><img src="resources/Clients/RSV.webp" alt="RSV Engineering" class="client-logo" loading="lazy"></div>
+                <div class="client-card"><img src="resources/Clients/paraa.webp" alt="Paraa Safari Lodge" class="client-logo" loading="lazy"></div>
             </div>
         </div>
     </section>

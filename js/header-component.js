@@ -15,7 +15,7 @@ function injectHeader() {
     <nav class="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">
-                <img src="resources/logo/Georesolve Logo.PNG" alt="GeoResolve Logo">
+                <img src="resources/logo/Georesolve Logo.webp" alt="GeoResolve Logo">
                 <span class="logo-tagline">Data Driven, Research Based</span>
             </a>
             <ul class="nav-links">

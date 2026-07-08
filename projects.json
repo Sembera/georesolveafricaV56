@@ -264,7 +264,7 @@
         "country": "Burundi",
         "year": "2025",
         "description": "Comprehensive geotechnical investigation including drilling, in-situ tests, and laboratory testing for slope stability assessment. Critical infrastructure safety evaluation project.",
-        "image": "resources/projects/phjimu-slope.jpeg",
+        "image": "resources/projects/phjimu-slope.webp",
         "coordinates": [
             -3.3731,
             29.9189
@@ -321,7 +321,7 @@
         "country": "Rwanda",
         "year": "2025",
         "description": "Comprehensive geophysical investigation using Seismic Refraction (1200m) and MASW (1200m) methods for three proposed dam sites. Data correlation with geotechnical parameters for optimal dam design and foundation characterization.",
-        "image": "resources/projects/rwanda-dams.jpeg",
+        "image": "resources/projects/rwanda-dams.webp",
         "coordinates": [
             -1.9403,
             29.8739
@@ -350,7 +350,7 @@
         "country": "Uganda",
         "year": "2025",
         "description": "Geohazard assessment for the Kisinja ATC Tower using Electrical Resistivity Tomography (ERT), geological mapping, and comprehensive data correlation with drilling data. Critical infrastructure safety evaluation.",
-        "image": "resources/projects/kisinja.jpeg",
+        "image": "resources/projects/kisinja.webp",
         "coordinates": [
             0.3476,
             32.5825
@@ -379,7 +379,7 @@
         "country": "Uganda",
         "year": "2025",
         "description": "Specialized geophysical investigation for nuclear facility using 540m of Seismic Refraction for Vp (P-wave velocity) site characterization and correlation with geotechnical parameters. Critical infrastructure project.",
-        "image": "resources/projects/cnst-soroti.jpeg",
+        "image": "resources/projects/cnst-soroti.webp",
         "coordinates": [
             1.7157,
             33.6111
@@ -407,7 +407,7 @@
         "country": "Uganda",
         "year": "2025",
         "description": "Comprehensive geological mapping of 5.5 km² project area combined with 1.5km of Seismic Refraction surveys for Vp site characterization. Integrated geoscience approach for major water infrastructure project.",
-        "image": "resources/projects/arua-dam.jpeg",
+        "image": "resources/projects/arua-dam.webp",
         "coordinates": [
             3.0197,
             30.9108
@@ -435,7 +435,7 @@
         "country": "Uganda",
         "year": "2025",
         "description": "840m of Seismic Refraction surveys for Vp site characterization supporting flood management infrastructure in Kasese district. Critical environmental and disaster risk reduction project.",
-        "image": "resources/projects/nyamwamba-flood.jpeg",
+        "image": "resources/projects/nyamwamba-flood.webp",
         "coordinates": [
             0.1833,
             30.0833
@@ -463,7 +463,7 @@
         "country": "Burundi",
         "year": "2025",
         "description": "Integrated ground and aerial survey of project area for innovative 1MW Hydro-Solar Hybrid energy project. Comprehensive topographical and geotechnical assessment for renewable energy infrastructure.",
-        "image": "resources/projects/mutambu-hybrid.jpeg",
+        "image": "resources/projects/mutambu-hybrid.webp",
         "coordinates": [
             -3.3731,
             29.9189
@@ -492,7 +492,7 @@
         "country": "Burundi",
         "year": "2024",
         "description": "Comprehensive geotechnical investigation including drilling, in-situ tests, test pits, in-situ vane shear testing, and extensive laboratory testing for construction material assessment.",
-        "image": "resources/projects/upper-mule.jpeg",
+        "image": "resources/projects/upper-mule.webp",
         "coordinates": [
             -3.3731,
             29.9189
@@ -521,7 +521,7 @@
         "country": "Uganda",
         "year": "2024",
         "description": "1.2km of 2D Electrical Resistivity Tomography surveying for proposed quarry site characterization. Subsurface investigation for mining and construction material extraction.",
-        "image": "resources/projects/zirobwe-quarry.jpeg",
+        "image": "resources/projects/zirobwe-quarry.webp",
         "coordinates": [
             0.3,
             32.5
@@ -549,7 +549,7 @@
         "country": "Uganda",
         "year": "2024",
         "description": "800m of 2D Electrical Resistivity Tomography surveying for proposed thermal power plant at Gayaza landfill site. Innovative waste-to-energy project assessment.",
-        "image": "resources/projects/gayaza-power.jpeg",
+        "image": "resources/projects/gayaza-power.webp",
         "coordinates": [
             0.41,
             32.62
@@ -577,7 +577,7 @@
         "country": "Uganda",
         "year": "2023",
         "description": "Comprehensive investigation combining geotechnical drilling, geological mapping, and slope stability analysis for major hydropower development project.",
-        "image": "resources/projects/mpanga-hydro.jpeg",
+        "image": "resources/projects/mpanga-hydro.webp",
         "coordinates": [
             0.0236,
             30.0588
@@ -606,7 +606,7 @@
         "country": "Uganda",
         "year": "2023",
         "description": "Integrated geotechnical investigation, geological mapping, and slope stability analysis for renewable energy infrastructure development.",
-        "image": "resources/projects/rwimi-hydro.jpeg",
+        "image": "resources/projects/rwimi-hydro.webp",
         "coordinates": [
             0,
             30
@@ -635,7 +635,7 @@
         "country": "Uganda",
         "year": "2023",
         "description": "Extensive 10.3km of 2D Resistivity Surveys along water pipeline routes including comprehensive data management, processing, and reporting for major water supply infrastructure.",
-        "image": "resources/projects/isingiro-water.jpeg",
+        "image": "resources/projects/isingiro-water.webp",
         "coordinates": [
             -0.8167,
             30.8
@@ -663,7 +663,7 @@
         "country": "Uganda",
         "year": "2022",
         "description": "720m of 2D ERT surveying for tourism infrastructure development at iconic Paraa Safari Lodge in Murchison Falls National Park.",
-        "image": "resources/projects/paraa-lodge.jpeg",
+        "image": "resources/projects/paraa-lodge.webp",
         "coordinates": [
             2.18,
             31.5167
@@ -691,7 +691,7 @@
         "country": "Uganda",
         "year": "2022",
         "description": "2000m of diamond core drilling in HQ and NQ sizes for mineral exploration. Advanced drilling techniques for resource characterization.",
-        "image": "resources/projects/zombo-drilling.jpeg",
+        "image": "resources/projects/zombo-drilling.webp",
         "coordinates": [
             2.5,
             30.9167
