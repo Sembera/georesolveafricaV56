@@ -17,6 +17,11 @@ Georesolve Africa is a geoscience consultancy (founded in Uganda) providing expe
 - [MASW Survey Uganda](https://georesolveafrica.com/masw-survey-uganda.html) - Multichannel Analysis of Surface Waves for shear-wave velocity (Vs) profiling, Vs30 seismic site classification, and dynamic soil property characterisation for dams, railways, bridges, and buildings.
 - [Ground Penetrating Radar Uganda](https://georesolveafrica.com/ground-penetrating-radar-uganda.html) - Non-destructive GPR imaging of shallow subsurface utilities, pavements, voids, and buried features for utility mapping, pavement assessment, and concrete scanning.
 
+## Country Geophysics Surveys
+- [Geophysical Surveys in Burundi](https://georesolveafrica.com/geophysical-surveys-burundi.html) - Geophysical and geotechnical surveys in Burundi: Mutambu hydro-solar, greenstone-belt mineralisation, and dam foundation investigations.
+- [Geophysical Surveys in DRC (East)](https://georesolveafrica.com/geophysical-surveys-drc.html) - Geophysical surveys in Goma, Bukavu and Ituri: alluvial gold, Kivu Rift tectonics, and pegmatite exploration in eastern DRC.
+- [Geophysical Surveys in Rwanda](https://georesolveafrica.com/geophysical-surveys-rwanda.html) - Geophysical surveys in Rwanda: Rweru and Mwogo dam foundations, King Faisal Hospital MASW, and pegmatite imaging.
+
 ## Free Tools
 - [G-Resolog](https://georesolveafrica.com/g-resolog.html) - Professional borehole core logger for geotechnical and soil investigation with pattern-based lithology classification, SPT testing, and PDF/Excel export.
 - [G-Resconvt](https://georesolveafrica.com/g-resconvt.html) - Professional coordinate converter for East Africa supporting 45+ CRS systems across 8 countries with batch CSV processing.

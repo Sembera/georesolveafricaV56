@@ -535,6 +535,9 @@ function processHTML(filePath, headerHTML, footerHTML, headerFrHTML, footerFrHTM
   // --- Language switcher (replaces <!-- LANG_SWITCH --> in the header partial) ---
   html = injectLangSwitch(html, relativePath);
 
+  // --- Inject Organization JSON-LD (same @id on every page) ---
+  html = injectOrganizationJSONLD(html);
+
   // --- Render projects grid (projects.html, English only) ---
   if (!isFr && fileName === 'projects.html') {
     html = renderProjectsGrid(html, projects);
@@ -1256,6 +1259,57 @@ function injectJSONLD(html, fileName) {
 }
 
 // ---------------------------------------------------------------------------
+// ORGANIZATION JSON-LD INJECTION (same @id on every page)
+// ---------------------------------------------------------------------------
+
+// Single canonical @id reused on every page so all schema blocks and external
+// consumers can reference the same Organization entity.
+const ORG_ID = 'https://georesolveafrica.com/#organization';
+
+// Social / external profiles. Intentionally empty until real, verified
+// profiles exist — DO NOT invent URLs. Populate sameAs when GeoResolve Africa
+// launches official LinkedIn / YouTube / other channels.
+const ORG_SAME_AS = [];
+
+function buildOrganizationJSONLD() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': ORG_ID,
+    name: 'GeoResolve Africa',
+    alternateName: 'GeoResolve',
+    url: 'https://georesolveafrica.com',
+    logo: 'https://georesolveafrica.com/resources/logo/georesolve-logo.svg',
+    image: 'https://georesolveafrica.com/resources/about.jpeg',
+    description: 'Geoscience consulting firm providing geophysical, geotechnical and mineral exploration services across Uganda, Rwanda, Burundi and East Africa.',
+    foundingDate: '2019',
+    sameAs: ORG_SAME_AS,
+    telephone: '+256771999614',
+    email: 'info@georesolveafrica.com',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'HMK Building, Gayaza Road, Kasangati',
+      addressLocality: 'Kasangati',
+      addressRegion: 'Central Region',
+      addressCountry: 'UG'
+    },
+    areaServed: ['Uganda', 'Rwanda', 'Burundi', 'DRC', 'South Sudan'],
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: '+256771999614',
+      email: 'info@georesolveafrica.com',
+      contactType: 'sales',
+      areaServed: ['Uganda', 'Rwanda', 'Burundi', 'DRC', 'South Sudan']
+    }
+  };
+}
+
+function injectOrganizationJSONLD(html) {
+  const scriptTag = `\n    <script type="application/ld+json">\n    ${JSON.stringify(buildOrganizationJSONLD(), null, 2)}\n    </script>`;
+  return html.replace('</head>', `${scriptTag}\n</head>`);
+}
+
+// ---------------------------------------------------------------------------
 // SITEMAP GENERATION
 // ---------------------------------------------------------------------------
 
@@ -1337,6 +1391,35 @@ function generateSitemap() {
     <priority>${u.priority}</priority>${xhtml}
   </url>`;
   }).join('\n');
+
+  // --- Build assertion: every published HTML page (root + /fr/, excluding
+  //     admin/ and 404s) must be present. Fail the build if the sitemap is
+  //     missing pages so a broken generator can never ship a partial sitemap. ---
+  const SITEMAP_MIN_URLS = 28;
+  if (urls.length < SITEMAP_MIN_URLS) {
+    throw new Error(
+      `SITEMAP ASSERTION FAILED: expected >= ${SITEMAP_MIN_URLS} URLs, got ${urls.length}. ` +
+      `Every published HTML page (root + /fr/, excluding admin/ and 404s) must be listed.`
+    );
+  }
+
+  // --- hreflang reciprocity assertion: every alternate target emitted in the
+  //     sitemap must itself be a listed <loc>. This catches one-way / dangling
+  //     hreflang links (e.g. a page referencing a translation that isn't in the
+  //     sitemap). en/x-default resolve to English; fr to the French counterpart. ---
+  const locSet = new Set(urls.map(u => absUrl(u.rel)));
+  for (const u of urls) {
+    const counterpart = TRANSLATION_MAP[u.rel];
+    if (!counterpart) continue; // untranslated pages self-reference (always valid)
+    const enLoc = absUrl(u.rel.startsWith('fr/') ? counterpart : u.rel);
+    const frLoc = absUrl(u.rel.startsWith('fr/') ? u.rel : counterpart);
+    if (!locSet.has(enLoc)) {
+      throw new Error(`HREFLANG ASSERTION FAILED: ${u.rel} en/x-default alternate ${enLoc} is not present in the sitemap.`);
+    }
+    if (!locSet.has(frLoc)) {
+      throw new Error(`HREFLANG ASSERTION FAILED: ${u.rel} fr alternate ${frLoc} is not present in the sitemap.`);
+    }
+  }
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
