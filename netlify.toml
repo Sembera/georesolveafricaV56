@@ -1,10 +1,63 @@
 [build]
   publish = "dist"
   command = "npm run build"
+  functions = "netlify/functions"
+
+# ----------------------------------------------------------------------------
+# WP12-B: Mailing list -> Brevo
+# lead-capture.js and the contact form POST signups to /api/subscribe, which
+# proxies to netlify/functions/subscribe.js and adds the contact to a Brevo list.
+# Required build environment variables (Netlify dashboard -> Site settings ->
+# Environment variables): BREVO_API_KEY, BREVO_LIST_ID.
+# ----------------------------------------------------------------------------
+[[redirects]]
+  from = "/api/subscribe"
+  to = "/.netlify/functions/subscribe"
+  status = 200
+  force = true
+
+# ----------------------------------------------------------------------------
+# WP12-C: Decap CMS staff admin (/admin)
+# Backend is Netlify Git Gateway. To activate: enable Identity, then Git Gateway,
+# in the Netlify dashboard, and turn on GitHub as an Identity external login
+# provider so staff sign in with their GitHub accounts. Every save commits to
+# `main` and triggers a rebuild. No extra redirect needed - admin/ is published
+# as a static asset.
+# ----------------------------------------------------------------------------
 
 [[redirects]]
   from = "https://www.georesolveafrica.com/*"
   to = "https://georesolveafrica.com/:splat"
+  status = 301
+  force = true
+
+# ----------------------------------------------------------------------------
+# WP12-A: Archive redirects for the retired News & Resources hubs.
+# The markdown pipeline in /news and the build.js news code stay dormant; the
+# hub pages were deleted from the repo root and their URLs now resolve home.
+# ----------------------------------------------------------------------------
+[[redirects]]
+  from = "/news.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/resources.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/news/*"
+  to = "/"
+  status = 301
+  force = true
+
+# Legacy QHSE page was renamed to quality-hse.html — keep old links working.
+[[redirects]]
+  from = "/qhse.html"
+  to = "/quality-hse.html"
   status = 301
   force = true
 

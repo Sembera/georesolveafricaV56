@@ -100,6 +100,7 @@ function injectFooter() {
                     <div class="footer-bottom-links">
                         <a href="contact.html">Privacy Policy</a>
                         <a href="contact.html">Terms of Service</a>
+                        <a href="quality-hse.html">QHSE</a>
                         <a href="contact.html">Contact</a>
                     </div>
                     <p class="footer-location">Serving Uganda, Rwanda, Burundi, DRC, South Sudan & East Africa</p>

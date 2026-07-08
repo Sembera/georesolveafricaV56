@@ -73,5 +73,13 @@
     "Drilling Services",
     "Geospatial Services",
     "Drone Surveys"
+  ],
+  "knowsAbout": [
+    "Geophysical Surveys",
+    "Geotechnical Engineering",
+    "Mineral Exploration",
+    "Drilling Services",
+    "Quality Assurance",
+    "HSE Management"
   ]
 }

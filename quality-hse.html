@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quality, Health, Safety & Environment | Georesolve Africa</title>
+    <meta name="description"
+        content="How Georesolve Africa assures field data quality, keeps crews safe, and limits environmental impact on geoscience projects across East Africa — our QHSE approach.">
+    <meta name="keywords"
+        content="QHSE, quality assurance, data quality control, field safety, environmental management, geoscience safety, East Africa">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Quality, Health, Safety & Environment | Georesolve Africa">
+    <meta property="og:description"
+        content="How Georesolve Africa assures field data quality, protects crews, and limits environmental impact on every geoscience project.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://georesolveafrica.com/quality-hse.html">
+    <meta property="og:image" content="https://georesolveafrica.com/resources/hero-geoscience.jpeg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://georesolveafrica.com/quality-hse.html">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="resources/favicon/Icon-Flavicon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="footer-styles.css">
+
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #345363;
+            --secondary-color: #9EDB9E;
+            --accent-color: #4DA34D;
+            --text-dark: #1a1a1a;
+            --text-light: #ffffff;
+            --background-light: #f8f9fa;
+            --border-color: #e9ecef;
+            --shadow-light: 0 2px 10px rgba(52, 83, 99, 0.1);
+            --shadow-medium: 0 8px 30px rgba(52, 83, 99, 0.15);
+            --transition-fast: 0.2s ease;
+            --transition-medium: 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+            padding-top: 80px;
+        }
+
+        a { color: var(--primary-color); text-decoration: none; transition: var(--transition-fast); }
+        a:hover { color: var(--accent-color); }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: var(--text-light);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.92;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        /* Intro */
+        .qhse-intro { padding: 5rem 0 2rem; background: white; }
+        .qhse-intro p { max-width: 820px; margin: 0 auto; font-size: 1.1rem; color: #444; text-align: center; line-height: 1.8; }
+
+        /* Pillars */
+        .qhse-section { padding: 3.5rem 0; }
+        .qhse-section.alt { background: white; }
+
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+
+        .pillar-card {
+            background: var(--background-light);
+            border-radius: 18px;
+            padding: 2rem;
+            box-shadow: var(--shadow-light);
+            border-top: 4px solid var(--accent-color);
+            transition: var(--transition-medium);
+        }
+        .pillar-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-medium); }
+
+        .pillar-icon {
+            width: 56px; height: 56px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 1.25rem; font-size: 1.6rem; color: white;
+        }
+
+        .pillar-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+        }
+        .pillar-card p { color: #555; font-size: 0.96rem; line-height: 1.65; }
+
+        /* Content blocks */
+        .qhse-block { max-width: 880px; margin: 0 auto; }
+        .qhse-block h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent-color);
+        }
+        .qhse-block h3 { font-size: 1.2rem; color: var(--primary-color); margin: 1.75rem 0 0.6rem; }
+        .qhse-block p { color: #444; margin-bottom: 1rem; line-height: 1.75; }
+        .qhse-block ul { margin: 0 0 1.25rem 1.4rem; }
+        .qhse-block li { margin-bottom: 0.6rem; color: #444; line-height: 1.6; }
+        .qhse-block strong { color: var(--primary-color); }
+
+        .todo-note {
+            background: #fff8e6;
+            border: 1px solid #f0d98a;
+            border-left: 4px solid #e0a800;
+            border-radius: 10px;
+            padding: 1rem 1.25rem;
+            margin: 1.25rem 0 1.5rem;
+            color: #6b5300;
+            font-size: 0.95rem;
+        }
+
+        /* Commitments list */
+        .commit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .commit-item {
+            display: flex; gap: 1rem; align-items: flex-start;
+            background: var(--background-light);
+            border-radius: 14px;
+            padding: 1.5rem;
+        }
+        .commit-item .check {
+            flex: 0 0 auto;
+            width: 30px; height: 30px; border-radius: 50%;
+            background: var(--accent-color); color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 0.95rem;
+        }
+        .commit-item p { margin: 0; color: #444; font-size: 0.96rem; line-height: 1.6; }
+
+        /* CTA */
+        .cta-section { background: var(--background-light); padding: 4rem 0; text-align: center; }
+        .cta-section h2 { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--primary-color); margin-bottom: 1rem; }
+        .cta-section p { color: #666; max-width: 600px; margin: 0 auto 2rem; }
+        .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 1rem 2rem; border-radius: 50px; text-decoration: none;
+            font-weight: 600; transition: var(--transition-medium);
+            border: 2px solid transparent; cursor: pointer; font-size: 1rem;
+        }
+        .btn-primary { background: var(--accent-color); color: var(--text-light); }
+        .btn-primary:hover { background: var(--secondary-color); color: var(--primary-color); transform: translateY(-2px); box-shadow: var(--shadow-medium); }
+
+        /* Animations */
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
+        .animate-on-scroll.animate-in { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            .page-title { font-size: 2rem; }
+            .qhse-block h2 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <!-- Header injected by js/header-component.js -->
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Quality, Health, Safety &amp; Environment</h1>
+            <p class="page-subtitle">The foundation of every geoscience project we deliver — from the first survey
+                line to the final borehole log.</p>
+        </div>
+    </section>
+
+    <!-- Intro -->
+    <section class="qhse-intro">
+        <div class="container">
+            <p class="animate-on-scroll">Georesolve Africa works in demanding field environments — active dam sites,
+                remote exploration blocks, urban boreholes and cross-border infrastructure corridors. Our QHSE
+                approach exists so the science we deliver never comes at the cost of our people, host communities,
+                or the environments we work in. It is built into how we plan, how we mobilise, and how we report.</p>
+        </div>
+    </section>
+
+    <!-- Pillars -->
+    <section class="qhse-section alt">
+        <div class="container">
+            <div class="section-header animate-on-scroll" style="text-align:center;margin-bottom:1rem;">
+                <h2 class="section-title" style="font-family:'Playfair Display',serif;font-size:2rem;color:var(--primary-color);">Four commitments, one standard</h2>
+            </div>
+            <div class="pillars-grid">
+                <div class="pillar-card animate-on-scroll">
+                    <div class="pillar-icon">&#10003;</div>
+                    <h3>Quality</h3>
+                    <p>Calibrated equipment, documented procedures and independent review keep every dataset
+                        defensible and every deliverable fit for engineering decisions.</p>
+                </div>
+                <div class="pillar-card animate-on-scroll">
+                    <div class="pillar-icon">&#9881;</div>
+                    <h3>Health &amp; Safety</h3>
+                    <p>Risk assessments, toolbox talks and a stop-work culture protect our crews and the client
+                        teams working alongside them in the field.</p>
+                </div>
+                <div class="pillar-card animate-on-scroll">
+                    <div class="pillar-icon">&#127757;</div>
+                    <h3>Environment</h3>
+                    <p>Low-impact, non-invasive surveying first, responsible waste handling and respect for
+                        protected and community land guide how we mobilise and demobilise.</p>
+                </div>
+                <div class="pillar-card animate-on-scroll">
+                    <div class="pillar-icon">&#128221;</div>
+                    <h3>Compliance</h3>
+                    <p>We work to national regulations, client HSE specifications and recognised international
+                        standards, with traceable records for every project.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quality Assurance -->
+    <section class="qhse-section">
+        <div class="container qhse-block animate-on-scroll">
+            <h2>Quality Assurance</h2>
+            <p>Our data is only as good as the chain of custody behind it. Georesolve applies a field data quality
+                control (QC) workflow across the full project lifecycle so that the numbers we hand to designers can
+                be trusted and defended:</p>
+            <ul>
+                <li><strong>Calibration checks before mobilisation.</strong> Every geophysical instrument, drilling
+                    rig sensor and survey GNSS unit is checked and calibrated against schedule before it leaves the
+                    depot, and field-checked again on arrival at site.</li>
+                <li><strong>Daily QC review of field records.</strong> Each day's survey data and borehole
+                    observations are reviewed while the crew is still on site, so gaps, spikes or setup errors are
+                    caught and re-collected before demobilisation.</li>
+                <li><strong>Logged-by / checked-by sign-off.</strong> Every borehole log and every survey record
+                    carries a logged-by and a checked-by sign-off, so responsibility for the data is explicit and
+                    traceable from field sheet to final report.</li>
+                <li><strong>Standards we follow.</strong> Our investigations are aligned with recognised methods and
+                    reporting standards, including BS 5930 (site investigations), ISO 14688 / ISO 14689 (geotechnical
+                    and geogical descriptions), ASTM test methods, and ISRM suggested methods for rock testing and
+                    characterisation.</li>
+                <li><strong>Instrument calibration schedule.</strong> Calibration intervals are logged per asset, and
+                    out-of-tolerance equipment is withdrawn from service until it is verified.</li>
+                <li><strong>Independent review before reporting.</strong> Interpretations, models and conclusions are
+                    peer-reviewed by a second geoscientist before issue; raw data and processing steps are archived
+                    so any result can be reconstructed and audited.</li>
+            </ul>
+            <p>Where a project specification calls for a particular standard or code, we adopt it and record
+                conformance — our procedures are aligned with the recognised references above rather than assumed to
+                meet them by default.</p>
+        </div>
+    </section>
+
+    <!-- Health & Safety -->
+    <section class="qhse-section alt">
+        <div class="container qhse-block animate-on-scroll">
+            <h2>Health &amp; Safety</h2>
+            <p>Field geoscience carries real hazards — traffic, drilling, steep terrain, water and remote access.
+                We manage them proactively, before anyone steps on site:</p>
+            <ul>
+                <li><strong>Pre-mobilisation risk assessments.</strong> A site-specific risk assessment and method
+                    statement are completed and signed off before crews mobilise, covering access, terrain, plant
+                    and local hazards.</li>
+                <li><strong>Daily toolbox talks.</strong> Every shift opens with a short briefing on the day's tasks,
+                    hazards and controls, so the whole crew starts aligned.</li>
+                <li><strong>PPE requirements.</strong> Personal protective equipment is issued and enforced per task
+                    and per client site rules — head, eye, ear, foot, hi-vis and task-specific protection as needed.</li>
+                <li><strong>Journey management for remote sites.</strong> Travel to and from remote or cross-border
+                    locations follows a journey management plan with agreed routes, check-in times and communication
+                    arrangements.</li>
+                <li><strong>Community liaison before entering survey areas.</strong> Before surveying land, we engage
+                    local leaders and landowners, explain the work, and agree access and timing to avoid conflict and
+                    disruption.</li>
+                <li><strong>Incident reporting.</strong> Every incident and near-miss is reported, recorded and
+                    reviewed, and the lesson is fed back into our procedures. Anyone can stop an unsafe task without
+                    blame.</li>
+            </ul>
+            <p>Our goal is a record of zero harm — to our people, to contractors, and to the public near our
+                worksites.</p>
+        </div>
+    </section>
+
+    <!-- Environment -->
+    <section class="qhse-section">
+        <div class="container qhse-block animate-on-scroll">
+            <h2>Environmental Responsibility</h2>
+            <p>Non-invasive geophysics is inherently low-impact, and we keep it that way by choosing the lightest
+                method that answers the question:</p>
+            <ul>
+                <li><strong>Minimal-impact, non-invasive methods first.</strong> Seismic, electrical, magnetic, GPR
+                    and InSAR methods characterise the subsurface without excavation wherever the investigation
+                    allows.</li>
+                <li><strong>Full site reinstatement after trenching or drilling.</strong> Where pitting, trenching or
+                    drilling is required, the site is made safe and reinstated on demobilisation — backfill,
+                    compaction and clearing of all temporary works.</li>
+                <li><strong>Waste management.</strong> Drilling fluids, fuels, lubricants and samples are handled and
+                    stored to prevent soil or water contamination, and removed for proper disposal.</li>
+                <li><strong>Respect for cultural and protected sites.</strong> We identify and avoid protected areas,
+                    watercourses, cultural heritage sites and community land, and obtain the right permissions before
+                    any ground disturbance.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Compliance & certifications -->
+    <section class="qhse-section alt">
+        <div class="container qhse-block animate-on-scroll">
+            <h2>Compliance &amp; Continuous Improvement</h2>
+            <p>We align to national occupational-health, safety and environmental regulations in every country we
+                operate, and to client-specific HSE management plans on each project. Our internal procedures are
+                written to be consistent with widely used management-system standards, and we keep the documentation
+                that evidences how we work.</p>
+
+            <!-- TODO: owner to confirm certifications/memberships -->
+            <div class="todo-note">
+                <strong>Note:</strong> This section intentionally describes our procedures rather than asserting
+                certifications. Confirmed accreditations, ISO registrations or professional memberships should be
+                added here by the owner before publication.
+            </div>
+
+            <p>QHSE is reviewed after every project: near-misses, lessons learned and client feedback feed back into
+                our procedures so the next campaign is safer and sharper than the last. We would rather tell you
+                honestly what we do and do not hold than imply a certification we cannot show.</p>
+        </div>
+    </section>
+
+    <!-- Commitments summary -->
+    <section class="qhse-section">
+        <div class="container">
+            <div class="section-header animate-on-scroll" style="text-align:center;margin-bottom:0.5rem;">
+                <h2 class="section-title" style="font-family:'Playfair Display',serif;font-size:2rem;color:var(--primary-color);">What you can expect</h2>
+            </div>
+            <div class="commit-grid">
+                <div class="commit-item animate-on-scroll"><span class="check">&#10003;</span><p>A documented HSE plan and risk assessment for your site before we start.</p></div>
+                <div class="commit-item animate-on-scroll"><span class="check">&#10003;</span><p>Crews trained, equipped and supervised to work safely in the field.</p></div>
+                <div class="commit-item animate-on-scroll"><span class="check">&#10003;</span><p>Data you can trust, reviewed and traceable to source.</p></div>
+                <div class="commit-item animate-on-scroll"><span class="check">&#10003;</span><p>Transparent reporting of incidents and a plan to close them out.</p></div>
+                <div class="commit-item animate-on-scroll"><span class="check">&#10003;</span><p>Respect for communities, landowners and the environment.</p></div>
+                <div class="commit-item animate-on-scroll"><span class="check">&#10003;</span><p>A single accountable point of contact for QHSE on every project.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container animate-on-scroll">
+            <h2>Working with us</h2>
+            <p>Planning a survey, drilling or investigation programme? Ask us for the HSE plan and quality approach up
+                front — it is part of how we work, not an afterthought.</p>
+            <div class="cta-actions">
+                <a href="contact.html" class="btn btn-primary">Talk to our team</a>
+                <a href="methods.html" class="btn btn-primary">Explore our methods</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('animate-in');
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+            document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+        });
+    </script>
+
+    <!-- Footer & Clients injected by footer-component.js -->
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
+    <script src="js/header-component.js" defer></script>
+    <script src="footer-component.js" defer></script>
+    <script type="module" src="main.js"></script>
+</body>
+
+</html>

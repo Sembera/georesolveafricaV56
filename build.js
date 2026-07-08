@@ -6,6 +6,11 @@ const sharp = require('sharp');
 const DIST = 'dist';
 const SRC = '.';
 
+// WP12: News & Resources hubs archived. The Markdown pipeline (news/*.md) and
+// the news build functions below stay in the repo dormant; flip this to true to
+// resume publishing from news/*.md (no other code change required).
+const NEWS_PUBLISH = false;
+
 // --- WebP dimension cache (adds width/height + upgrades imgs in dist) ---
 const WEBP_SET = new Set();   // relative-to-root posix paths of every .webp
 const WEBP_DIMS = new Map();  // relative path -> { width, height }
@@ -104,7 +109,8 @@ const EXCLUDES = new Set([
   'build.js', 'package-lock.json', 'quick-footer-inject.html', 'tools',
   'vite.config.js', '.env.template', '.gitignore',
   'IMPROVEMENT-PLAN.md', 'WEBSITE-IMPROVEMENT-PLAN.md',
-  'Updates', 'docs', 'README.md'
+  'Updates', 'docs', 'README.md',
+  'news.html', 'resources.html', 'news'   // WP12: archive News & Resources hubs (sources retained, not published)
 ]);
 
 const DIST_PRIVATE_PATHS = new Set([
@@ -148,6 +154,25 @@ const TOOL_PAGES = {
   }
 };
 
+// English <-> French translation pairs (dist-relative paths). Used for the
+// hreflang alternate links, the language switcher, and sitemap xhtml:link.
+const TRANSLATION_MAP = {
+  'index.html': 'fr/index.html',
+  'fr/index.html': 'index.html',
+  'methods.html': 'fr/methods.html',
+  'fr/methods.html': 'methods.html',
+  'applications.html': 'fr/applications.html',
+  'fr/applications.html': 'applications.html',
+  'contact.html': 'fr/contact.html',
+  'fr/contact.html': 'contact.html',
+  'geophysical-surveys-burundi.html': 'fr/geophysique-burundi.html',
+  'fr/geophysique-burundi.html': 'geophysical-surveys-burundi.html',
+  'geophysical-surveys-drc.html': 'fr/geophysique-rdc-est.html',
+  'fr/geophysique-rdc-est.html': 'geophysical-surveys-drc.html',
+  'geophysical-surveys-rwanda.html': 'fr/geophysique-rwanda.html',
+  'fr/geophysique-rwanda.html': 'geophysical-surveys-rwanda.html'
+};
+
 // Featured project IDs for index.html carousel
 const FEATURED_PROJECT_IDS = [1, 4, 6, 14, 11];
 
@@ -159,13 +184,12 @@ const BREADCRUMBS = {
   'methods.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }],
   'applications.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }],
   'projects.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }],
-  'resources.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }],
-  'news.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }],
   'contact.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }],
-  'g-resolog.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }, { name: 'Tools', url: 'https://georesolveafrica.com/resources.html' }],
-  'g-resconvt.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }, { name: 'Tools', url: 'https://georesolveafrica.com/resources.html' }],
-  'g-geopylanner.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }, { name: 'Tools', url: 'https://georesolveafrica.com/resources.html' }],
-  'g-flightplanner.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }, { name: 'Tools', url: 'https://georesolveafrica.com/resources.html' }],
+  'quality-hse.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }],
+  'g-resolog.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }],
+  'g-resconvt.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }],
+  'g-geopylanner.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }],
+  'g-flightplanner.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }],
   'drone-magnetic-survey-uganda.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }, { name: 'Methods', url: 'https://georesolveafrica.com/methods.html' }],
   'ground-magnetic-survey-uganda.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }, { name: 'Methods', url: 'https://georesolveafrica.com/methods.html' }],
   'insar-sar-services-uganda.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }, { name: 'Methods', url: 'https://georesolveafrica.com/methods.html' }],
@@ -180,9 +204,8 @@ const BREADCRUMB_CURRENT_LABEL = {
   'methods.html': 'Methods',
   'applications.html': 'Applications',
   'projects.html': 'Projects',
-  'resources.html': 'Resources',
-  'news.html': 'News & Insights',
   'contact.html': 'Contact',
+  'quality-hse.html': 'QHSE',
   'g-resolog.html': 'G-Resolog',
   'g-resconvt.html': 'G-Resconvt',
   'g-geopylanner.html': 'G-Geopylanner',
@@ -195,15 +218,39 @@ const BREADCRUMB_CURRENT_LABEL = {
   'downhole-seismic-survey-uganda.html': 'Downhole & Crosshole Seismic Survey Uganda'
 };
 
+// French breadcrumb trails (dist-relative paths, e.g. 'fr/index.html').
+const BREADCRUMBS_FR = {
+  'fr/index.html': [],
+  'fr/methods.html': [{ name: 'Accueil', url: 'https://georesolveafrica.com/fr/' }],
+  'fr/applications.html': [{ name: 'Accueil', url: 'https://georesolveafrica.com/fr/' }],
+  'fr/contact.html': [{ name: 'Accueil', url: 'https://georesolveafrica.com/fr/' }],
+  'fr/geophysique-burundi.html': [{ name: 'Accueil', url: 'https://georesolveafrica.com/fr/' }],
+  'fr/geophysique-rdc-est.html': [{ name: 'Accueil', url: 'https://georesolveafrica.com/fr/' }],
+  'fr/geophysique-rwanda.html': [{ name: 'Accueil', url: 'https://georesolveafrica.com/fr/' }]
+};
+
+const BREADCRUMB_CURRENT_LABEL_FR = {
+  'fr/index.html': 'Accueil',
+  'fr/methods.html': 'Méthodes',
+  'fr/applications.html': 'Applications',
+  'fr/contact.html': 'Contact',
+  'fr/geophysique-burundi.html': 'Géophysique au Burundi',
+  'fr/geophysique-rdc-est.html': 'Géophysique à l’est de la RDC',
+  'fr/geophysique-rwanda.html': 'Géophysique au Rwanda'
+};
+
 /**
- * Build a BreadcrumbList JSON-LD object for a given HTML file.
+ * Build a BreadcrumbList JSON-LD object for a given dist-relative HTML path.
  */
-function buildBreadcrumbList(fileName) {
-  const trail = BREADCRUMBS[fileName] || [{ name: 'Home', url: 'https://georesolveafrica.com/' }];
-  const currentLabel = BREADCRUMB_CURRENT_LABEL[fileName] || fileName;
-  const currentUrl = fileName === 'index.html'
+function buildBreadcrumbList(distRel) {
+  const isFr = distRel.startsWith('fr/');
+  const trail = (isFr ? BREADCRUMBS_FR : BREADCRUMBS)[distRel] || [{ name: 'Home', url: 'https://georesolveafrica.com/' }];
+  const currentLabel = (isFr ? BREADCRUMB_CURRENT_LABEL_FR : BREADCRUMB_CURRENT_LABEL)[distRel] || distRel;
+  const currentUrl = distRel === 'index.html'
     ? 'https://georesolveafrica.com/'
-    : `https://georesolveafrica.com/${fileName}`;
+    : (distRel === 'fr/index.html'
+        ? 'https://georesolveafrica.com/fr/'
+        : `https://georesolveafrica.com/${distRel}`);
 
   const itemListElement = [
     ...trail.map((seg, i) => ({
@@ -230,10 +277,70 @@ function buildBreadcrumbList(fileName) {
 /**
  * Inject a BreadcrumbList JSON-LD script tag before </head>.
  */
-function injectBreadcrumbJSONLD(html, fileName) {
-  const bc = buildBreadcrumbList(fileName);
+function injectBreadcrumbJSONLD(html, distRel) {
+  const bc = buildBreadcrumbList(distRel);
   const scriptTag = `\n    <script type="application/ld+json">\n    ${JSON.stringify(bc, null, 2)}\n    </script>`;
   return html.replace('</head>', `${scriptTag}\n</head>`);
+}
+
+// ---------------------------------------------------------------------------
+// i18n HELPERS (language switcher + hreflang)
+// ---------------------------------------------------------------------------
+
+// Domain-relative URL for a dist-relative path (handles home pages).
+function pageUrl(rel) {
+  if (rel === 'index.html') return '/';
+  if (rel === 'fr/index.html') return '/fr/';
+  return '/' + rel;
+}
+
+// Absolute URL for a dist-relative path (handles home pages).
+function absUrl(rel) {
+  if (rel === 'index.html') return 'https://georesolveafrica.com/';
+  if (rel === 'fr/index.html') return 'https://georesolveafrica.com/fr/';
+  return 'https://georesolveafrica.com/' + rel;
+}
+
+// Replace the <!-- LANG_SWITCH --> marker (present in both header partials)
+// with an EN | FR toggle that links to the translated counterpart, or to the
+// language home page when no direct translation exists.
+function injectLangSwitch(html, distRel) {
+  const isFr = distRel.startsWith('fr/');
+  const counterpart = TRANSLATION_MAP[distRel] || null;
+  const enHref = isFr ? (counterpart ? pageUrl(counterpart) : '/') : pageUrl(distRel);
+  const frHref = isFr ? pageUrl(distRel) : (counterpart ? pageUrl(counterpart) : '/fr/');
+  const enActive = isFr ? '' : ' lang-active';
+  const frActive = isFr ? ' lang-active' : '';
+  const switcher =
+    `<div class="lang-switch">` +
+    `<a href="${enHref}" hreflang="en" class="lang-link${enActive}">EN</a>` +
+    `<span class="lang-sep">|</span>` +
+    `<a href="${frHref}" hreflang="fr" class="lang-link${frActive}">FR</a>` +
+    `</div>`;
+  return html.replace(/<!--\s*LANG_SWITCH\s*-->/, switcher);
+}
+
+// Inject <link rel="alternate" hreflang> tags for every page.
+// Pages with a translation get en + fr + x-default(=en). Pages without a
+// translation self-reference en + x-default.
+function injectHreflang(html, distRel) {
+  const isFr = distRel.startsWith('fr/');
+  const selfUrl = absUrl(distRel);
+  const counterpart = TRANSLATION_MAP[distRel] || null;
+  let block;
+  if (counterpart) {
+    const enUrl = isFr ? absUrl(counterpart) : selfUrl;
+    const frUrl = isFr ? selfUrl : absUrl(counterpart);
+    block =
+      `<link rel="alternate" hreflang="en" href="${enUrl}">\n    ` +
+      `<link rel="alternate" hreflang="fr" href="${frUrl}">\n    ` +
+      `<link rel="alternate" hreflang="x-default" href="${enUrl}">\n    `;
+  } else {
+    block =
+      `<link rel="alternate" hreflang="en" href="${selfUrl}">\n    ` +
+      `<link rel="alternate" hreflang="x-default" href="${selfUrl}">\n    `;
+  }
+  return html.replace('</head>', `${block}</head>`);
 }
 
 // ---------------------------------------------------------------------------
@@ -250,23 +357,35 @@ async function main() {
   // 2. Copy all source files to dist/
   copyDir(SRC, DIST);
 
-  // 3. Read partials
+  // 2b. WP12: guarantee archived News & Resources hubs never ship, even if a
+  // prior dist wasn't fully cleared. Sources stay in the repo (dormant).
+  // Also clears any stale qhse.html (renamed to quality-hse.html) and the
+  // legacy .stale-news-quarantine/ holding old article pages.
+  for (const p of ['news.html', 'resources.html', 'news', 'NEWS-HOWTO.md', 'qhse.html', '.stale-news-quarantine']) {
+    const dp = path.join(DIST, p);
+    if (fs.existsSync(dp)) fs.rmSync(dp, { recursive: true, force: true });
+  }
+
+  // 3. Read partials (English + French)
   const headerHTML = fs.readFileSync('partials/header.html', 'utf8').trim();
   const footerHTML = fs.readFileSync('partials/footer.html', 'utf8').trim();
+  const headerFrHTML = fs.readFileSync('partials/header-fr.html', 'utf8').trim();
+  const footerFrHTML = fs.readFileSync('partials/footer-fr.html', 'utf8').trim();
 
   // 4. Read projects data
   const projects = JSON.parse(fs.readFileSync('projects.json', 'utf8'));
 
-  // 5. Build news article pages (before HTML pass so they get header/footer)
-  const newsArticles = buildNewsArticles(headerHTML, footerHTML);
-
-  // 6. Build news.html index (fill placeholders)
-  buildNewsIndex(newsArticles);
+  // 5+6. Build news article pages + index (archived by default — WP12)
+  let newsArticles = [];
+  if (NEWS_PUBLISH) {
+    newsArticles = buildNewsArticles(headerHTML, footerHTML);
+    buildNewsIndex(newsArticles);
+  }
 
   // 7. Process each HTML file in dist/
   const htmlFiles = findFiles(DIST, '.html');
   for (const filePath of htmlFiles) {
-    processHTML(filePath, headerHTML, footerHTML, projects);
+    processHTML(filePath, headerHTML, footerHTML, headerFrHTML, footerFrHTML, projects);
   }
   ensureImgAttributes();
 
@@ -371,14 +490,23 @@ function assertDistSafe() {
 // HTML PROCESSING
 // ---------------------------------------------------------------------------
 
-function processHTML(filePath, headerHTML, footerHTML, projects) {
+function processHTML(filePath, headerHTML, footerHTML, headerFrHTML, footerFrHTML, projects) {
   let html = fs.readFileSync(filePath, 'utf8');
   const fileName = path.basename(filePath);
+  const relativePath = path.relative(DIST, filePath).replace(/\\/g, '/');
+  const isFr = relativePath.startsWith('fr/');
+
+  // WP12-C: Decap CMS admin pages are served as-is (do not inject header/footer,
+  // hreflang, or breadcrumb JSON-LD into the CMS UI).
+  if (relativePath.startsWith('admin/')) return;
+
+  const header = isFr ? headerFrHTML : headerHTML;
+  const footer = isFr ? footerFrHTML : footerHTML;
 
   // --- Inject header ---
   html = html.replace(
     /<!--\s*Header injected by js\/header-component\.js\s*-->/,
-    headerHTML
+    header
   );
 
   // --- Inject footer ---
@@ -386,23 +514,26 @@ function processHTML(filePath, headerHTML, footerHTML, projects) {
     // Pattern A: "Footer & Clients" combined marker (most pages)
     html = html.replace(
       /<!--\s*Footer\s*&?\s*Clients injected by footer-component\.js\s*-->/,
-      footerHTML
+      footer
     );
 
     // Pattern B: Separate "Clients Section" + "Footer" markers (index.html)
     html = html.replace(
       /<!--\s*Clients Section injected by footer-component\.js\s*-->\s*<!--\s*Footer injected by footer-component\.js\s*-->/,
-      footerHTML
+      footer
     );
   }
 
-  // --- Render projects grid (projects.html) ---
-  if (fileName === 'projects.html') {
+  // --- Language switcher (replaces <!-- LANG_SWITCH --> in the header partial) ---
+  html = injectLangSwitch(html, relativePath);
+
+  // --- Render projects grid (projects.html, English only) ---
+  if (!isFr && fileName === 'projects.html') {
     html = renderProjectsGrid(html, projects);
   }
 
-  // --- Render featured projects carousel (index.html) ---
-  if (fileName === 'index.html') {
+  // --- Render featured projects carousel (index.html, English only) ---
+  if (!isFr && fileName === 'index.html') {
     html = renderFeaturedCarousel(html, projects);
   }
 
@@ -411,16 +542,18 @@ function processHTML(filePath, headerHTML, footerHTML, projects) {
     html = injectJSONLD(html, fileName);
   }
 
-  // --- Render method comparison table (methods.html) ---
-  if (fileName === 'methods.html') {
+  // --- Render method comparison table (methods.html, English only) ---
+  if (!isFr && fileName === 'methods.html') {
     html = renderMethodComparison(html);
   }
 
+  // --- Inject hreflang alternate links (every page) ---
+  html = injectHreflang(html, relativePath);
+
   // --- Inject BreadcrumbList JSON-LD (every page except news articles,
   //   which already get a richer breadcrumb in renderArticlePage) ---
-  const relativePath = path.relative(DIST, filePath).replace(/\\/g, '/');
   if (!relativePath.startsWith('news/')) {
-    html = injectBreadcrumbJSONLD(html, fileName);
+    html = injectBreadcrumbJSONLD(html, relativePath);
   }
 
   fs.writeFileSync(filePath, html, 'utf8');
@@ -791,7 +924,7 @@ function renderArticlePage(article, headerHTML, footerHTML) {
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://georesolveafrica.com/' },
-      { '@type': 'ListItem', position: 2, name: 'News & Insights', item: 'https://georesolveafrica.com/news.html' },
+      { '@type': 'ListItem', position: 2, name: 'News & Insights', item: 'https://georesolveafrica.com/' },
       { '@type': 'ListItem', position: 3, name: meta.title || slug, item: url }
     ]
   };
@@ -952,7 +1085,7 @@ ${JSON.stringify(breadcrumbLd, null, 4)}
     ${rewritePathsForSubdir(headerHTML)}
 
     <div class="article-back">
-        <a href="../news.html">&larr; Back to News &amp; Insights</a>
+        <a href="../index.html">&larr; Back to Home</a>
     </div>
 
     <div class="article-header">
@@ -1122,17 +1255,28 @@ function generateSitemap() {
   const htmlFiles = findFiles(DIST, '.html');
   const urls = [];
 
+  // WP12-A: only emit /news/ URLs when article pages were actually generated
+  // by the (dormant) news pipeline; otherwise the archived hub stays out of
+  // the sitemap entirely.
+  const newsUrlsAllowed = fs.existsSync(NEWS_DIST_DIR) && findFiles(NEWS_DIST_DIR, '.html').length > 0;
+
   for (const filePath of htmlFiles) {
     const fileName = path.basename(filePath);
     if (SITEMAP_EXCLUDES.has(fileName)) continue;
     const relativePath = path.relative(DIST, filePath).replace(/\\/g, '/');
+    // WP12-A: skip any stray /news/ article URLs unless the pipeline built them.
+    if (relativePath.startsWith('news/') && !newsUrlsAllowed) continue;
+    if (relativePath.startsWith('admin/')) continue; // WP12-C: never list CMS admin
     const stats = fs.statSync(filePath);
     const lastmod = stats.mtime.toISOString().split('T')[0];
 
     let priority = '0.8';
     let changefreq = 'monthly';
-    if (fileName === 'index.html') {
+    if (relativePath === 'index.html') {
       priority = '1.0';
+      changefreq = 'weekly';
+    } else if (relativePath === 'fr/index.html') {
+      priority = '0.9';
       changefreq = 'weekly';
     } else if (
       fileName === 'methods.html' ||
@@ -1144,37 +1288,51 @@ function generateSitemap() {
     ) {
       priority = '0.9';
       changefreq = 'monthly';
-    } else if (
-      fileName === 'projects.html' ||
-      fileName === 'news.html'
-    ) {
+    } else if (fileName === 'projects.html') {
       changefreq = 'weekly';
+    } else if (fileName === 'quality-hse.html') {
+      priority = '0.6';
+      changefreq = 'monthly';
     } else if (relativePath.startsWith('news/')) {
       priority = '0.6';
       changefreq = 'monthly';
+    } else if (relativePath.startsWith('fr/')) {
+      priority = '0.7';
+      changefreq = 'monthly';
     }
 
-    urls.push({ loc: relativePath, lastmod, priority, changefreq });
+    urls.push({ rel: relativePath, lastmod, priority, changefreq });
   }
 
   // Sort: index first, then alphabetical
   urls.sort((a, b) => {
-    if (a.loc === 'index.html') return -1;
-    if (b.loc === 'index.html') return 1;
-    return a.loc.localeCompare(b.loc);
+    if (a.rel === 'index.html') return -1;
+    if (b.rel === 'index.html') return 1;
+    return a.rel.localeCompare(b.rel);
   });
 
-  const xmlEntries = urls.map(u =>
-    `  <url>
-    <loc>https://georesolveafrica.com/${u.loc === 'index.html' ? '' : u.loc}</loc>
+  const xmlEntries = urls.map(u => {
+    const loc = absUrl(u.rel);
+    let xhtml = '';
+    if (TRANSLATION_MAP[u.rel]) {
+      const enLoc = absUrl(u.rel.startsWith('fr/') ? TRANSLATION_MAP[u.rel] : u.rel);
+      const frLoc = absUrl(u.rel.startsWith('fr/') ? u.rel : TRANSLATION_MAP[u.rel]);
+      xhtml =
+        `\n    <xhtml:link rel="alternate" hreflang="en" href="${enLoc}"/>` +
+        `\n    <xhtml:link rel="alternate" hreflang="fr" href="${frLoc}"/>` +
+        `\n    <xhtml:link rel="alternate" hreflang="x-default" href="${enLoc}"/>`;
+    }
+    return `  <url>
+    <loc>${loc}</loc>
     <lastmod>${u.lastmod}</lastmod>
     <changefreq>${u.changefreq}</changefreq>
-    <priority>${u.priority}</priority>
-  </url>`
-  ).join('\n');
+    <priority>${u.priority}</priority>${xhtml}
+  </url>`;
+  }).join('\n');
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${xmlEntries}
 </urlset>
 `;

@@ -13,8 +13,7 @@ export default defineConfig({
         methods: 'methods.html',
         applications: 'applications.html',
         projects: 'projects.html',
-        resources: 'resources.html',
-        news: 'news.html',
+        quality-hse: 'quality-hse.html',
         contact: 'contact.html'
       }
     }

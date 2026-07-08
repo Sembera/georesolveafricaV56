@@ -26,7 +26,22 @@ Georesolve Africa is a geoscience consultancy (founded in Uganda) providing expe
 ## Key Projects
 - [Projects Portfolio](https://georesolveafrica.com/projects.html) - 15+ completed and ongoing geoscience projects across Uganda, Rwanda, and Burundi in infrastructure, energy, water, mining, and environmental sectors.
 
+## Quality, Health, Safety & Environment
+- [QHSE](https://georesolveafrica.com/quality-hse.html) - How Georesolve assures field data quality (calibration, daily QC, logged-by/checked-by sign-off, independent review, BS 5930 / ISO 14688-14689 / ASTM / ISRM-aligned methods), keeps field crews safe (risk assessments, toolbox talks, PPE, journey management, community liaison, incident reporting), and limits environmental impact (non-invasive methods first, site reinstatement, waste management, respect for protected sites).
+
 ## Contact
 - Phone: +256771999614
 - Email: info@georesolveafrica.com
 - [Contact Page](https://georesolveafrica.com/contact.html)
+
+## Français
+
+GeoResolve publie ses pages clés en français pour le Burundi, le Rwanda, l'est de la RDC et l'Afrique de l'Est francophone. Le français est la langue des recherches géoscientifiques dans ces marchés.
+
+- [Accueil (FR)](https://georesolveafrica.com/fr/) — Présentation des services géoscientifiques (géophysique, géotechnique, mines, forage, SIG) en Afrique de l'Est
+- [Méthodes (FR)](https://georesolveafrica.com/fr/methods.html) — Méthodes géophysiques, géotechniques, d'exploration et de levés (sismique, ERT, MASW, magnétique, forage, GIS, drone)
+- [Applications (FR)](https://georesolveafrica.com/fr/applications.html) — Applications par secteur : barrages, hydrowélectricité, infrastructures, mines, eau, énergie, environnement
+- [Contact (FR)](https://georesolveafrica.com/fr/contact.html) — Formulaire de contact et coordonnées (WhatsApp, email, téléphone) en français
+- [Géophysique au Burundi (FR)](https://georesolveafrica.com/fr/geophysique-burundi.html) — Études géophysiques et géotechniques au Burundi (Mutambu hydro-solaire, ceinture de roches vertes, barrages)
+- [Géophysique à l'est de la RDC (FR)](https://georesolveafrica.com/fr/geophysique-rdc-est.html) — Levés géophysiques à Goma, Bukavu et Ituri (or alluvionnaire, rift du Kivu, pegmatites)
+- [Géophysique au Rwanda (FR)](https://georesolveafrica.com/fr/geophysique-rwanda.html) — Études géophysiques au Rwanda (barrages Rweru et Mwogo, MASW Hôpital King Faisal, pegmatites)
