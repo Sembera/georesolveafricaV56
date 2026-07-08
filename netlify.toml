@@ -18,11 +18,12 @@
 
 # ----------------------------------------------------------------------------
 # WP12-C: Decap CMS staff admin (/admin)
-# Backend is Netlify Git Gateway. To activate: enable Identity, then Git Gateway,
-# in the Netlify dashboard, and turn on GitHub as an Identity external login
-# provider so staff sign in with their GitHub accounts. Every save commits to
-# `main` and triggers a rebuild. No extra redirect needed - admin/ is published
-# as a static asset.
+# Backend is GitHub (config in admin/config.yml): repo Sembera/georesolveafricaV56,
+# branch revamp-2026 for now — switch `branch` to `main` at go-live.
+# Staff log in with GitHub via Netlify's GitHub auth (no Netlify Identity needed).
+# Every save commits to the configured branch and triggers a rebuild.
+# admin/ is published as a static asset; it is excluded from sitemap.xml and
+# Disallowed in robots.txt.
 # ----------------------------------------------------------------------------
 
 [[redirects]]

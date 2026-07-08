@@ -48,19 +48,21 @@ exports.handler = async function (event, context) {
   }
 
   const apiKey = process.env.BREVO_API_KEY;
-  const listId = parseInt(process.env.BREVO_LIST_ID || '', 10);
-  if (!apiKey || !listId) {
-    console.error('Brevo env missing: need BREVO_API_KEY and BREVO_LIST_ID');
+  const listId = Number(process.env.BREVO_LIST_ID);
+  if (!apiKey || !Number.isFinite(listId)) {
+    console.error('Brevo env missing: need BREVO_API_KEY and a numeric BREVO_LIST_ID');
     return {
       statusCode: 500,
       body: JSON.stringify({ ok: false, error: 'config_missing' })
     };
   }
 
+  // WP12-B: source attribution pushed to Brevo contact attributes.
+  // SOURCE_TOOL / SOURCE_TRIGGER / SOURCE_PAGE (created in the Brevo list).
   const attributes = {};
-  if (data.tool) attributes.TOOL = String(data.tool).slice(0, 60);
-  if (data.trigger) attributes.SOURCE = String(data.trigger).slice(0, 60);
-  if (data.pageUrl) attributes.PAGE_URL = String(data.pageUrl).slice(0, 250);
+  if (data.tool) attributes.SOURCE_TOOL = String(data.tool).slice(0, 60);
+  if (data.trigger) attributes.SOURCE_TRIGGER = String(data.trigger).slice(0, 60);
+  if (data.page) attributes.SOURCE_PAGE = String(data.page).slice(0, 250);
 
   const payload = {
     email: email,

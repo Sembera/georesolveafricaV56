@@ -1,42 +1,87 @@
 # Decap CMS configuration — Georesolve Africa
 # WP12-C: staff content admin at /admin
 #
-# Activation (one-time, in the Netlify dashboard):
-#   1. Site settings → Identity → Enable Identity.
-#   2. Identity → Services → Git Gateway → Enable Git Gateway.
-#   3. Identity → External providers → enable GitHub (staff log in with GitHub).
-#   4. Identity → Invite staff emails.
-# Every save commits to `main` and Netlify rebuilds the site.
+# Backend: GitHub. Staff log in with their GitHub account via Netlify's GitHub
+# auth (the site is hosted on Netlify, so no separate OAuth app is required).
+# repo/branch target the pre-launch working branch; switch `branch` to `main`
+# at go-live. Every save commits to the configured branch and Netlify rebuilds.
+#
+# Staff onboarding: see docs/CMS-GUIDE.md
 
 backend:
-  name: git-gateway
-  branch: main
+  name: github
+  repo: Sembera/georesolveafricaV56
+  branch: revamp-2026
 
-# Simple mode: each save commits directly to `main` (every save auto-commits → rebuild → live).
 publish_mode: simple
 
-# Media (images) uploaded in the editor are stored here and served from /resources.
-media_folder: "resources"
-public_folder: "/resources"
+# Media uploaded in the editor is stored in resources/uploads and served from
+# /resources/uploads. Keep uploads reasonable (aim for < 1 MB, web-optimised
+# .webp/.jpg); very large files slow the build.
+media_folder: "resources/uploads"
+public_folder: "/resources/uploads"
 
 site_url: https://georesolveafrica.com
 display_url: https://georesolveafrica.com
 
-# Slug pattern for new news files.
 slug:
   encoding: "unicode"
   clean_accents: false
   sanitize_replacement: "-"
 
 collections:
+  # (a) Projects — edits projects.json. Decap cannot edit a root-level JSON
+  # array, so projects.json is wrapped as { projects: [...] } (see build.js).
+  # Every field the site uses is listed so a save never drops data.
+  - name: "projects"
+    label: "Projects"
+    label_singular: "Project"
+    files:
+      - name: "projects"
+        label: "Projects data"
+        file: "projects.json"
+        fields:
+          - name: "projects"
+            label: "Projects"
+            widget: "list"
+            summary: "{{title}}"
+            fields:
+              - { name: "id", label: "ID", widget: "number" }
+              - { name: "title", label: "Title", widget: "string" }
+              - { name: "sector", label: "Sector", widget: "string" }
+              - { name: "status", label: "Status", widget: "string" }
+              - { name: "location", label: "Location", widget: "string" }
+              - { name: "country", label: "Country", widget: "string" }
+              - { name: "year", label: "Year", widget: "string" }
+              - { name: "description", label: "Description", widget: "text" }
+              - { name: "image", label: "Image", widget: "image", required: false }
+              - { name: "duration", label: "Duration", widget: "string" }
+              - { name: "client", label: "Client", widget: "string" }
+              - { name: "scope", label: "Scope", widget: "text" }
+              - { name: "activities", label: "Activities", widget: "text" }
+              - name: "methods"
+                label: "Methods"
+                widget: "list"
+                field:
+                  - { name: "name", label: "Method name", widget: "string" }
+                  - { name: "url", label: "Method URL", widget: "string" }
+              - name: "results"
+                label: "Results"
+                widget: "list"
+                required: false
+              - name: "coordinates"
+                label: "Coordinates [lat, lng]"
+                widget: "list"
+                required: false
+
+  # (b) News — folder collection on news/*.md. Publishing an article (creating a
+  # file, or setting draft: false) revives the dormant News section; build.js
+  # publishes any real article automatically.
   - name: "news"
     label: "News & Insights"
     label_singular: "News article"
     folder: "news"
     create: true
-    # Drafts (draft: true) stay in the repo but are flagged; build.js treats the
-    # whole News section as archived (NEWS_PUBLISH = false), so even published news
-    # files are not rendered to the live site until that flag is flipped.
     fields:
       - { name: title, label: Title, widget: string }
       - { name: date, label: Date, widget: datetime, format: "YYYY-MM-DD", required: false }
@@ -58,9 +103,22 @@ collections:
       - { name: draft, label: Draft, widget: boolean, default: false, required: false }
       - { name: body, label: Body, widget: markdown }
 
-# NOTE: Projects and Testimonials are intentionally NOT managed here yet.
-# projects.json uses an irregular nested schema (methods/results/coordinates)
-# and is duplicated in projects-data.js; adding a `projects` collection now would
-# drop nested fields on save. Consolidate projects into a single Decap-friendly
-# source first, then add a collection here. The News collection above is the
-# dormant pipeline staff can resume publishing through the CMS.
+  # (c) Testimonials — edits testimonials.json, wrapped as { testimonials: [...] }.
+  - name: "testimonials"
+    label: "Testimonials"
+    label_singular: "Testimonial"
+    files:
+      - name: "testimonials"
+        label: "Testimonials data"
+        file: "testimonials.json"
+        identifier_field: "name"
+        fields:
+          - name: "testimonials"
+            label: "Testimonials"
+            widget: "list"
+            summary: "{{name}} — {{organization}}"
+            fields:
+              - { name: "name", label: "Name", widget: "string" }
+              - { name: "organization", label: "Organization", widget: "string" }
+              - { name: "quote", label: "Quote", widget: "text" }
+              - { name: "project", label: "Project", widget: "string" }

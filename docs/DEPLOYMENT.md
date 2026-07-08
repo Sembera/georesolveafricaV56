@@ -288,6 +288,36 @@ Netlify automatically detects the push and redeploys.
 
 ---
 
+## 8. WP12-B — Brevo Mailing List (Lead Capture)
+
+The lead-capture widget on the homepage and tool pages forwards signups to a
+Netlify Function (`netlify/functions/subscribe.js`), which adds the contact to a
+Brevo list. The Brevo API key is **never** exposed to the browser. If the function
+is missing or errors, the widget falls back to the `tool-leads` Netlify Form so no
+lead is ever lost.
+
+### Required Netlify environment variables
+
+In the Netlify dashboard: **Site settings → Environment variables → Add a variable**.
+
+| Key | Value | Notes |
+|-----|-------|-------|
+| `BREVO_API_KEY` | Your Brevo v3 API key | Brevo → SMTP & API → API keys. Keep secret. |
+| `BREVO_LIST_ID` | Numeric ID of the mailing list | Brevo → Contacts → Lists → (list) → ID. Must be a number. |
+
+Trigger a new deploy after adding/changing these for them to take effect.
+
+### Brevo list setup (owner, manual)
+
+1. In Brevo, create (or pick) the mailing list that `BREVO_LIST_ID` points to.
+2. Add three contact **attributes** (Contacts → Configuration → Attributes → Add an
+   attribute): `SOURCE_TOOL`, `SOURCE_TRIGGER`, `SOURCE_PAGE` (text). The function
+   writes the signup source into these.
+3. **Enable double opt-in** on the list (Contacts → Lists → list → Edit → Double
+   opt-in) so subscribers confirm by email. This is an owner task — not done by code.
+
+---
+
 ## Important URLs
 
 After deployment:

@@ -6,10 +6,11 @@ const sharp = require('sharp');
 const DIST = 'dist';
 const SRC = '.';
 
-// WP12: News & Resources hubs archived. The Markdown pipeline (news/*.md) and
-// the news build functions below stay in the repo dormant; flip this to true to
-// resume publishing from news/*.md (no other code change required).
-const NEWS_PUBLISH = false;
+// WP12-C: News & Resources hubs. The Markdown pipeline (news/*.md) and the news
+// build functions below stay dormant until an article exists. When any real
+// article (.md other than _template.md) is present in news/, the build publishes
+// it automatically — so staff can revive News via the CMS without a flag flip.
+// The sitemap only lists /news/ URLs once articles are actually built.
 
 // --- WebP dimension cache (adds width/height + upgrades imgs in dist) ---
 const WEBP_SET = new Set();   // relative-to-root posix paths of every .webp
@@ -373,11 +374,18 @@ async function main() {
   const footerFrHTML = fs.readFileSync('partials/footer-fr.html', 'utf8').trim();
 
   // 4. Read projects data
-  const projects = JSON.parse(fs.readFileSync('projects.json', 'utf8'));
+  // WP12-C: projects.json is Decap-editable and wrapped as { projects: [...] }.
+  // Tolerate a bare top-level array for backward compatibility.
+  const projectsRaw = JSON.parse(fs.readFileSync('projects.json', 'utf8'));
+  const projects = Array.isArray(projectsRaw) ? projectsRaw : (projectsRaw.projects || []);
 
-  // 5+6. Build news article pages + index (archived by default — WP12)
+  // 5+6. Build news article pages + index.
+  // WP12-C: dormant by default, but publish automatically when a real article
+  // exists in news/ so the CMS can revive the News section without a flag flip.
   let newsArticles = [];
-  if (NEWS_PUBLISH) {
+  const newsMdExists = fs.existsSync(NEWS_SRC_DIR) &&
+    fs.readdirSync(NEWS_SRC_DIR).some(f => f.endsWith('.md') && f !== '_template.md');
+  if (newsMdExists) {
     newsArticles = buildNewsArticles(headerHTML, footerHTML);
     buildNewsIndex(newsArticles);
   }

@@ -309,6 +309,31 @@
     container.appendChild(built.card);
   };
 
+  // WP12-B: Netlify Forms backup. If the Brevo function is missing or errors,
+  // POST the signup to the `tool-leads` Netlify Form so the lead is never lost.
+  // Returns true when the backup accepted the lead, false on any failure.
+  async function postToNetlifyForms(payload) {
+    try {
+      const fd = new URLSearchParams();
+      fd.set('form-name', 'tool-leads');
+      fd.set('bot-field', '');
+      fd.set('email', payload.email);
+      fd.set('tool', payload.tool);
+      fd.set('trigger', payload.trigger);
+      fd.set('page-url', payload.page);
+      fd.set('timestamp', payload.timestamp);
+      const url = global.location ? global.location.pathname : '/';
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: fd.toString()
+      });
+      return res.ok || res.redirected || res.status === 200;
+    } catch (e) {
+      return false;
+    }
+  }
+
   LeadCapture.prototype.submit = async function (options) {
     const opts = options || {};
     const email = String(opts.email || '').trim();
@@ -327,31 +352,44 @@
     }
     if (status) status.textContent = '';
 
-    // WP12-B: forward signup to the Brevo function (proxied at /api/subscribe).
-    // The function adds the contact to the Brevo list; the site never sees the
-    // API key. Netlify Forms (tool-leads) is no longer used for the mailing list.
+    // WP12-B: forward signup to the Brevo function (API key stays server-side at
+    // /.netlify/functions/subscribe). If the function is absent or fails, the
+    // Netlify Forms backup captures the lead so nothing is ever lost.
     const payload = {
       email: email,
       tool: this.config.tool,
       trigger: opts.trigger || this.config.trigger,
-      pageUrl: global.location ? global.location.href : '',
+      page: global.location ? global.location.href : '',
       timestamp: new Date().toISOString()
     };
 
+    const finishSuccess = function () {
+      writeState({ subscribed: true });
+      if (opts.card) setConfirmation(opts.card);
+    };
+
     try {
-      const response = await fetch('/api/subscribe', {
+      const response = await fetch('/.netlify/functions/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
-      if (!response.ok) throw new Error('Lead form submission failed');
-      writeState({ subscribed: true });
-      if (opts.card) setConfirmation(opts.card);
+      if (response.ok) {
+        finishSuccess();
+        return;
+      }
+      throw new Error('subscribe function returned ' + response.status);
     } catch (err) {
-      if (status) status.textContent = 'Could not join just now - please try again.';
-      if (button) {
-        button.disabled = false;
-        button.textContent = 'Join the list';
+      // Primary path failed — try the Netlify Forms backup before giving up.
+      const fellBack = await postToNetlifyForms(payload);
+      if (fellBack) {
+        finishSuccess();
+      } else if (status) {
+        status.textContent = 'Could not join just now - please try again.';
+        if (button) {
+          button.disabled = false;
+          button.textContent = 'Join the list';
+        }
       }
     }
   };

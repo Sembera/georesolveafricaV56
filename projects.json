@@ -1,713 +1,823 @@
-[
-    {
-        "id": 21,
-        "title": "Geophysical Surveys for the Tororo–Amagoro Irrigation Scheme",
-        "sector": "infrastructure",
-        "status": "completed",
-        "location": "Tororo, Busia",
-        "country": "Uganda",
-        "year": "2026",
-        "description": "Comprehensive geophysical investigation combining Seismic Refraction Tomography, Multichannel Analysis of Surface Waves (MASW), and Site Seismic Intensity Analysis for the Tororo–Amagoro irrigation development project. Subsurface characterisation to support design of irrigation canals, intake structures and water distribution infrastructure for the Ministry of Water and Environment.",
-        "image": "resources/projects/2026/tororo-amagoro-irrigation-seismic-2026.webp",
-        "coordinates": [
-            0.7,
-            34
-        ],
-        "duration": "June 2026",
-        "client": "Ministry of Water and Environment, Uganda",
-        "scope": "Seismic Refraction Tomography, MASW, and Site Seismic Intensity Analysis for irrigation infrastructure design",
-        "activities": "Seismic Refraction Tomography, MASW, Site Seismic Intensity Analysis",
-        "methods": [
-            { "name": "Seismic Refraction Survey Uganda", "url": "seismic-refraction-uganda.html" },
-            { "name": "MASW Survey Uganda", "url": "masw-survey-uganda.html" }
-        ],
-        "results": [
-            "Seismic Refraction Tomography completed for irrigation scheme area",
-            "MASW surveys for dynamic soil properties and site classification",
-            "Site Seismic Intensity Analysis for infrastructure resilience assessment",
-            "Foundation and design parameters delivered for irrigation development"
-        ]
-    },
-    {
-        "id": 26,
-        "title": "Geophysical Survey for Pre-feasibility Engineering Studies and Assessment for the Proposed Kampala Livestock Feeds Mill Plant",
-        "sector": "infrastructure",
-        "status": "completed",
-        "location": "Luweero",
-        "country": "Uganda",
-        "year": "2026",
-        "description": "Downhole Seismic survey for the pre-feasibility engineering studies and site assessment for the proposed Kampala Livestock Feeds Mill plant in Luweero District. In-situ borehole seismic velocity profiling for dynamic soil property determination, seismic site classification, and foundation design for large-scale industrial processing infrastructure.",
-        "image": "resources/projects/2026/kampala-feeds-mill-downhole-seismic-2026.webp",
-        "coordinates": [
-            0.84,
-            32.5
-        ],
-        "duration": "June 2026",
-        "client": "De Heus Uganda Limited",
-        "scope": "Downhole Seismic survey for industrial plant site characterisation and foundation design",
-        "activities": "Downhole Seismic Survey, Dynamic Soil Properties, Seismic Site Classification",
-        "methods": [
-            { "name": "Downhole Seismic Survey Uganda", "url": "downhole-seismic-survey-uganda.html" }
-        ],
-        "results": [
-            "Downhole seismic survey completed for feeds mill plant site",
-            "In-situ P-wave and S-wave velocity profiling for dynamic properties",
-            "Seismic site classification per international building code standards",
-            "Foundation design parameters delivered for industrial infrastructure"
-        ]
-    },
-    {
-        "id": 22,
-        "title": "Geophysical Surveys for Matanda Irrigation Scheme",
-        "sector": "infrastructure",
-        "status": "completed",
-        "location": "Matanda, Kanungu",
-        "country": "Uganda",
-        "year": "2026",
-        "description": "Seismic Refraction Tomography survey for the feasibility assessment and engineering design of the proposed Matanda Irrigation Scheme in Kanungu District. Subsurface velocity profiling to characterise overburden thickness, bedrock depth, and rippability for canal alignment and intake structure foundation design.",
-        "image": "resources/projects/2026/matanda-irrigation-seismic-2026.webp",
-        "coordinates": [
-            -0.9,
-            29.7
-        ],
-        "duration": "May 2026",
-        "client": "CHC Ltd, Uganda",
-        "scope": "Seismic Refraction Tomography for irrigation scheme feasibility and design",
-        "activities": "Seismic Refraction Tomography, Bedrock Profiling, Rippability Assessment",
-        "methods": [
-            { "name": "Seismic Refraction Survey Uganda", "url": "seismic-refraction-uganda.html" }
-        ],
-        "results": [
-            "Seismic Refraction Tomography surveys completed at Matanda irrigation site",
-            "Subsurface velocity profiling for bedrock and overburden characterisation",
-            "Rippability assessment and canal alignment recommendations",
-            "Foundation design inputs for intake structures delivered"
-        ]
-    },
-    {
-        "id": 24,
-        "title": "Geophysical Surveys for Technical Assessment of Existing Firewall Pillar Foundations at Nalubale Hydropower Station",
-        "sector": "infrastructure",
-        "status": "completed",
-        "location": "Jinja",
-        "country": "Uganda",
-        "year": "2026",
-        "description": "High-Resolution Seismic Refraction Tomography (HRSRT) combined with Rebound Hammer testing and Reinforcement Locator surveys for technical integrity assessment of existing firewall pillar foundations at the Nalubale (Owen Falls) Hydropower Station. Non-destructive investigation of ageing concrete infrastructure for Uganda's flagship power generation asset.",
-        "image": "resources/projects/2026/nalubale-hydropower-hrsrt-2026.webp",
-        "coordinates": [
-            0.4364,
-            33.185
-        ],
-        "duration": "May 2026",
-        "client": "Strucon Ltd, Uganda",
-        "scope": "HRSRT, rebound hammer, and reinforcement locator surveys for concrete pillar integrity assessment",
-        "activities": "HRSRT, Rebound Hammer Testing, Reinforcement Detection, Structural Assessment",
-        "methods": [
-            { "name": "Seismic Refraction Survey Uganda", "url": "seismic-refraction-uganda.html" }
-        ],
-        "results": [
-            "High-resolution seismic refraction tomography for pillar foundation imaging",
-            "Rebound hammer testing for concrete strength assessment",
-            "Reinforcement locator survey for steel reinforcement mapping",
-            "Technical integrity assessment report and remediation recommendations"
-        ]
-    },
-    {
-        "id": 25,
-        "title": "Geophysical Surveys for the Feasibility Study of the Nakiwogo Bridge Construction Project",
-        "sector": "infrastructure",
-        "status": "completed",
-        "location": "Kampala",
-        "country": "Uganda",
-        "year": "2026",
-        "description": "Electrical Resistivity Tomography (ERT) survey for the feasibility study of the proposed Nakiwogo Bridge construction project in Kampala. Subsurface resistivity imaging to characterise foundation conditions, identify potential weak zones, and inform abutment and pier foundation design for critical transport infrastructure.",
-        "image": "resources/projects/2026/nakiwogo-bridge-ert-2026.webp",
-        "coordinates": [
-            0.25,
-            32.55
-        ],
-        "duration": "May 2026",
-        "client": "Teclab / Anchor Engineering, Uganda",
-        "scope": "ERT survey for bridge foundation characterisation and feasibility assessment",
-        "activities": "ERT Survey, Bridge Foundation Assessment, Subsurface Imaging",
-        "methods": [
-            { "name": "ERT Survey Uganda", "url": "ert-electrical-resistivity-tomography-uganda.html" }
-        ],
-        "results": [
-            "ERT survey completed for proposed Nakiwogo bridge alignment",
-            "Subsurface resistivity profiling for foundation condition assessment",
-            "Identification of competent strata and potential weak zones",
-            "Foundation design parameters for abutment and pier engineering"
-        ]
-    },
-    {
-        "id": 16,
-        "title": "Alluvial Gold Exploration and Reserves Estimation in Ituri",
-        "sector": "mining",
-        "status": "completed",
-        "location": "Katanga, Ituri",
-        "country": "DRC",
-        "year": "2026",
-        "description": "Reconnaissance alluvial gold exploration and preliminary reserves estimation program in the Ituri region, Democratic Republic of Congo. Integrated Gold Detector data analysis, geological mapping, and geochemical sampling supported by satellite SAR remote sensing for regional target delineation and resource potential assessment.",
-        "image": "resources/projects/2026/alluvial-gold-exploration-ituri-2026.webp",
-        "coordinates": [
-            1.7,
-            29.8
-        ],
-        "duration": "April 2026",
-        "client": "Confidential mining client, DRC",
-        "scope": "Gold detector data analysis, geological mapping, geochemical sampling, SAR sensing for regional exploration targeting",
-        "activities": "Gold Detection, Geological Mapping, Geochemical Sampling, SAR Remote Sensing",
-        "methods": [
-            { "name": "SAR & InSAR Services Uganda", "url": "insar-sar-services-uganda.html" },
-            { "name": "Mineral Exploration", "url": "methods.html#mining" }
-        ],
-        "results": [
-            "Regional alluvial gold exploration program completed across Ituri",
-            "Geological mapping and geochemical sampling for target delineation",
-            "SAR remote sensing analysis for regional structural interpretation",
-            "Preliminary reserves estimation framework delivered"
-        ]
-    },
-    {
-        "id": 19,
-        "title": "Integrated Geophysical Survey for Pegmatite Exploration in Rweru Sector — Cassiterite, Coltan and Cobalt Assessment",
-        "sector": "mining",
-        "status": "completed",
-        "location": "Rweru Sector",
-        "country": "Rwanda",
-        "year": "2026",
-        "description": "Integrated mineral exploration programme combining onshore ground magnetics, deep Electrical Resistivity Tomography (ERT) and Induced Polarisation (IP) surveys for pegmatite-hosted cassiterite, coltan and cobalt mineralisation in the Rweru Sector. Multi-method approach to delineate subsurface pegmatite bodies and define drill targets.",
-        "image": "resources/projects/2026/gasabo-pegmatite-ert-2026.webp",
-        "coordinates": [
-            -1.65,
-            29.85
-        ],
-        "duration": "March 2026",
-        "client": "Confidential mining client, Rwanda",
-        "scope": "Onshore ground magnetics, deep ERT, and IP surveys for pegmatite-hosted Sn-Ta-Co exploration",
-        "activities": "Ground Magnetics, Deep ERT, Induced Polarisation, Pegmatite Targeting",
-        "methods": [
-            { "name": "Ground Magnetic Survey Uganda", "url": "ground-magnetic-survey-uganda.html" },
-            { "name": "ERT Survey Uganda", "url": "ert-electrical-resistivity-tomography-uganda.html" }
-        ],
-        "results": [
-            "Integrated multi-method geophysical survey for pegmatite exploration",
-            "Onshore magnetics for structural mapping and target delineation",
-            "Deep ERT and IP surveys for subsurface pegmatite body characterisation",
-            "Drill target recommendations for cassiterite, coltan and cobalt"
-        ]
-    },
-    {
-        "id": 20,
-        "title": "Geophysical Surveys for Pegmatite Mineral Exploration in Gasabo",
-        "sector": "mining",
-        "status": "completed",
-        "location": "Gasabo",
-        "country": "Rwanda",
-        "year": "2026",
-        "description": "Deep Electrical Resistivity Tomography (ERT) survey for pegmatite-hosted mineral exploration in the Gasabo area of Rwanda. High-resolution subsurface resistivity imaging to delineate pegmatite body geometry, depth extent, and lateral continuity for drill-hole targeting.",
-        "image": "resources/projects/2026/rweru-pegmatite-ert-2026.webp",
-        "coordinates": [
-            -1.87,
-            30.12
-        ],
-        "duration": "March 2026",
-        "client": "Confidential mining client, Rwanda",
-        "scope": "Deep ERT survey for pegmatite body delineation and drill target definition",
-        "activities": "Deep ERT Survey, Pegmatite Delineation, Drill Targeting",
-        "methods": [
-            { "name": "ERT Survey Uganda", "url": "ert-electrical-resistivity-tomography-uganda.html" }
-        ],
-        "results": [
-            "Deep ERT survey completed for pegmatite body imaging",
-            "Subsurface resistivity characterisation across the exploration area",
-            "Pegmatite body geometry and depth extent mapped",
-            "Drill-hole target recommendations delivered"
-        ]
-    },
-    {
-        "id": 23,
-        "title": "Geophysical Surveys along the Standard Gauge Railway Corridor, Eastern Uganda",
-        "sector": "infrastructure",
-        "status": "completed",
-        "location": "Eastern Uganda",
-        "country": "Uganda",
-        "year": "2026",
-        "description": "Seismic Refraction Tomography and Multichannel Analysis of Surface Waves (MASW) surveys along sections of the Standard Gauge Railway corridor in Eastern Uganda. Subsurface profiling for earthwork design, cut-and-fill optimisation, and foundation characterisation for this nationally strategic transport infrastructure project.",
-        "image": "resources/projects/2026/sgr-seismic-2026.webp",
-        "coordinates": [
-            1,
-            33.5
-        ],
-        "duration": "March 2026",
-        "client": "Alpha Lab, Uganda",
-        "scope": "Seismic Refraction Tomography and MASW surveys for SGR corridor subsurface characterisation",
-        "activities": "Seismic Refraction Tomography, MASW, Railway Corridor Profiling",
-        "methods": [
-            { "name": "Seismic Refraction Survey Uganda", "url": "seismic-refraction-uganda.html" },
-            { "name": "MASW Survey Uganda", "url": "masw-survey-uganda.html" }
-        ],
-        "results": [
-            "Comprehensive seismic surveys along SGR alignment in Eastern Uganda",
-            "Seismic Refraction Tomography for earthwork design and bedrock profiling",
-            "MASW surveys for dynamic soil characterisation and site classification",
-            "Subsurface parameters delivered for cut-and-fill optimisation"
-        ]
-    },
-    {
-        "id": 7,
-        "title": "Geotechnical Investigation for PHJIMU Slope Stability Studies",
-        "sector": "infrastructure",
-        "status": "completed",
-        "location": "Burundi",
-        "country": "Burundi",
-        "year": "2025",
-        "description": "Comprehensive geotechnical investigation including drilling, in-situ tests, and laboratory testing for slope stability assessment. Critical infrastructure safety evaluation project.",
-        "image": "resources/projects/phjimu-slope.webp",
-        "coordinates": [
-            -3.3731,
-            29.9189
-        ],
-        "duration": "Dec 2024 – Feb 2025",
-        "client": "Artelia / Aecom",
-        "scope": "Geotechnical Investigation: Drilling, In-situ Tests, Laboratory Testing",
-        "activities": "Drilling, In-situ Testing, Laboratory Analysis, Slope Stability Analysis",
-        "methods": [
-            { "name": "Drilling Services", "url": "methods.html#drilling" },
-            { "name": "Geotechnical Engineering", "url": "methods.html#geotechnical" }
-        ],
-        "results": [
-            "Comprehensive drilling program completed",
-            "In-situ testing for soil and rock characterization",
-            "Laboratory testing of geotechnical samples",
-            "Slope stability analysis and recommendations"
-        ]
-    },
-    {
-        "id": 18,
-        "title": "Geophysical Investigation for the Extension of the King Faisal Hospital Extension Project",
-        "sector": "infrastructure",
-        "status": "completed",
-        "location": "Kigali",
-        "country": "Rwanda",
-        "year": "2025",
-        "description": "Multichannel Analysis of Surface Waves (MASW) survey for the proposed extension of King Faisal Hospital in Kigali. Subsurface stiffness profiling and seismic site classification to inform foundation design and structural engineering for critical healthcare infrastructure expansion.",
-        "image": "resources/projects/2026/king-faisal-hospital-masw-2025.webp",
-        "coordinates": [
-            -1.9441,
-            30.0619
-        ],
-        "duration": "December 2025",
-        "client": "Fidus Engineering Ltd, Rwanda",
-        "scope": "MASW surveys for site classification and foundation design of hospital extension",
-        "activities": "MASW Survey, Seismic Site Classification, Foundation Assessment",
-        "methods": [
-            { "name": "MASW Survey Uganda", "url": "masw-survey-uganda.html" }
-        ],
-        "results": [
-            "MASW surveys completed for hospital extension site",
-            "Shear-wave velocity profiling for seismic site classification",
-            "Foundation design parameters provided for structural engineering",
-            "Critical healthcare infrastructure assessment delivered"
-        ]
-    },
-    {
-        "id": 1,
-        "title": "Integrated Geophysical and Geotechnical Investigation for Mwogo, Rukarara, and Kavili Dam Sites",
-        "sector": "infrastructure",
-        "status": "ongoing",
-        "location": "Rwanda",
-        "country": "Rwanda",
-        "year": "2025",
-        "description": "Comprehensive geophysical investigation using Seismic Refraction (1200m) and MASW (1200m) methods for three proposed dam sites. Data correlation with geotechnical parameters for optimal dam design and foundation characterization.",
-        "image": "resources/projects/rwanda-dams.webp",
-        "coordinates": [
-            -1.9403,
-            29.8739
-        ],
-        "duration": "Oct – Nov 2025",
-        "client": "ZV Consulting Ltd - Rwanda",
-        "scope": "Geophysics (Seismic Refraction 1200m, MASW 1200m), Data correlation with geotechnical data",
-        "activities": "Seismic Refraction, MASW, Geotechnical Correlation",
-        "methods": [
-            { "name": "Seismic Refraction Survey Uganda", "url": "seismic-refraction-uganda.html" },
-            { "name": "MASW Survey Uganda", "url": "masw-survey-uganda.html" }
-        ],
-        "results": [
-            "1200m of Seismic Refraction surveys completed",
-            "1200m of MASW surveys for site characterization",
-            "Comprehensive data correlation with geotechnical parameters",
-            "Foundation design recommendations for three dam sites"
-        ]
-    },
-    {
-        "id": 2,
-        "title": "Geotechnical Investigation for Kisinja ATC Tower Geohazard Assessment",
-        "sector": "infrastructure",
-        "status": "completed",
-        "location": "Uganda",
-        "country": "Uganda",
-        "year": "2025",
-        "description": "Geohazard assessment for the Kisinja ATC Tower using Electrical Resistivity Tomography (ERT), geological mapping, and comprehensive data correlation with drilling data. Critical infrastructure safety evaluation.",
-        "image": "resources/projects/kisinja.webp",
-        "coordinates": [
-            0.3476,
-            32.5825
-        ],
-        "duration": "Oct 2025",
-        "client": "ATC Uganda, CEDAT - Uganda",
-        "scope": "Geophysics (ERT), mapping and data correlation with drilling data",
-        "activities": "ERT Surveys, Geological Mapping, Drilling Data Correlation",
-        "methods": [
-            { "name": "ERT Survey Uganda", "url": "ert-electrical-resistivity-tomography-uganda.html" },
-            { "name": "Drilling Services", "url": "methods.html#drilling" }
-        ],
-        "results": [
-            "Complete geohazard assessment for tower foundation",
-            "ERT surveys revealing subsurface conditions",
-            "Geological mapping of site area",
-            "Safety recommendations for ATC tower construction"
-        ]
-    },
-    {
-        "id": 3,
-        "title": "Geotechnical Investigation for Centre for Nuclear Science Technology, Soroti",
-        "sector": "infrastructure",
-        "status": "completed",
-        "location": "Uganda",
-        "country": "Uganda",
-        "year": "2025",
-        "description": "Specialized geophysical investigation for nuclear facility using 540m of Seismic Refraction for Vp (P-wave velocity) site characterization and correlation with geotechnical parameters. Critical infrastructure project.",
-        "image": "resources/projects/cnst-soroti.webp",
-        "coordinates": [
-            1.7157,
-            33.6111
-        ],
-        "duration": "Aug – Sept 2025",
-        "client": "Queensland And Leeds Consulting Engineers / Ministry of Energy and Mineral Development - Uganda",
-        "scope": "Geophysics Services: 540m of Seismic Refraction for Vp Site characterization and correlation",
-        "activities": "Seismic Refraction, Site Characterization, Vp Analysis",
-        "methods": [
-            { "name": "Seismic Refraction Survey Uganda", "url": "seismic-refraction-uganda.html" }
-        ],
-        "results": [
-            "540m of Seismic Refraction surveys completed",
-            "P-wave velocity characterization for nuclear facility",
-            "Comprehensive site assessment for critical infrastructure",
-            "Foundation design parameters delivered"
-        ]
-    },
-    {
-        "id": 4,
-        "title": "Geological and Geotechnical Investigations for Arua Water Dam",
-        "sector": "water",
-        "status": "completed",
-        "location": "Uganda",
-        "country": "Uganda",
-        "year": "2025",
-        "description": "Comprehensive geological mapping of 5.5 km² project area combined with 1.5km of Seismic Refraction surveys for Vp site characterization. Integrated geoscience approach for major water infrastructure project.",
-        "image": "resources/projects/arua-dam.webp",
-        "coordinates": [
-            3.0197,
-            30.9108
-        ],
-        "duration": "Jun – Aug 2025",
-        "client": "Fichtner GmbH & Co. KG, and Tectoni Africa Ltd",
-        "scope": "5.5 Sq.km Geological Mapping of entire project area and 1.5km Geophysics: Seismic Refraction for Vp characterization",
-        "activities": "Geological Mapping, Seismic Refraction, Site Characterization",
-        "methods": [
-            { "name": "Seismic Refraction Survey Uganda", "url": "seismic-refraction-uganda.html" }
-        ],
-        "results": [
-            "5.5 km² geological mapping completed",
-            "1.5km of Seismic Refraction surveys",
-            "Comprehensive site characterization for dam construction",
-            "Integrated geological and geophysical data analysis"
-        ]
-    },
-    {
-        "id": 5,
-        "title": "Geophysical Survey for Nyamwamba Flood Management Studies",
-        "sector": "environmental",
-        "status": "completed",
-        "location": "Uganda",
-        "country": "Uganda",
-        "year": "2025",
-        "description": "840m of Seismic Refraction surveys for Vp site characterization supporting flood management infrastructure in Kasese district. Critical environmental and disaster risk reduction project.",
-        "image": "resources/projects/nyamwamba-flood.webp",
-        "coordinates": [
-            0.1833,
-            30.0833
-        ],
-        "duration": "Apr – May 2025",
-        "client": "SGAPI Srl / RSV Engineering Group Ltd",
-        "scope": "Geophysics Services: 840m of Seismic Refraction for Vp Site characterization and correlation",
-        "activities": "Seismic Refraction, Flood Risk Assessment, Site Characterization",
-        "methods": [
-            { "name": "Seismic Refraction Survey Uganda", "url": "seismic-refraction-uganda.html" }
-        ],
-        "results": [
-            "840m of Seismic Refraction completed",
-            "Foundation characterization for flood management structures",
-            "Site assessment for disaster risk reduction",
-            "Technical recommendations for infrastructure design"
-        ]
-    },
-    {
-        "id": 6,
-        "title": "Topographical Surveys and Geotechnical Investigations for 1MW Mutambu Hydro-Solar Hybrid Project",
-        "sector": "energy",
-        "status": "completed",
-        "location": "Burundi",
-        "country": "Burundi",
-        "year": "2025",
-        "description": "Integrated ground and aerial survey of project area for innovative 1MW Hydro-Solar Hybrid energy project. Comprehensive topographical and geotechnical assessment for renewable energy infrastructure.",
-        "image": "resources/projects/mutambu-hybrid.webp",
-        "coordinates": [
-            -3.3731,
-            29.9189
-        ],
-        "duration": "2024-2025",
-        "client": "Anzana Electric Group",
-        "scope": "Ground and Aerial Survey, Topographical Surveys, Geotechnical Investigations",
-        "activities": "Topographic Surveys, Aerial Surveys, Geotechnical Investigation",
-        "methods": [
-            { "name": "Geospatial & Surveys", "url": "methods.html#geospatial" },
-            { "name": "Geotechnical Engineering", "url": "methods.html#geotechnical" }
-        ],
-        "results": [
-            "Complete topographical survey using ground and aerial methods",
-            "Site characterization for hybrid energy project",
-            "Geotechnical investigation for infrastructure foundation",
-            "Technical data for renewable energy development"
-        ]
-    },
-    {
-        "id": 8,
-        "title": "Additional Geotechnical Investigation for Upper Mule037 Project and Construction Material",
-        "sector": "infrastructure",
-        "status": "completed",
-        "location": "Burundi",
-        "country": "Burundi",
-        "year": "2024",
-        "description": "Comprehensive geotechnical investigation including drilling, in-situ tests, test pits, in-situ vane shear testing, and extensive laboratory testing for construction material assessment.",
-        "image": "resources/projects/upper-mule.webp",
-        "coordinates": [
-            -3.3731,
-            29.9189
-        ],
-        "duration": "Dec 2023 – Mar 2024",
-        "client": "Virunga Power / Songa Energy",
-        "scope": "Geotechnical Investigation: Drilling, In-situ Tests, Test Pits, In-situ Vane Shear, Laboratory Testing",
-        "activities": "Drilling, In-situ Testing, Test Pits, Vane Shear, Laboratory Analysis",
-        "methods": [
-            { "name": "Drilling Services", "url": "methods.html#drilling" },
-            { "name": "Geotechnical Engineering", "url": "methods.html#geotechnical" }
-        ],
-        "results": [
-            "Complete drilling and in-situ testing program",
-            "Test pits for material characterization",
-            "In-situ vane shear testing for soil strength",
-            "Comprehensive laboratory testing of construction materials"
-        ]
-    },
-    {
-        "id": 9,
-        "title": "2D Electrical Resistivity Survey for Zirobwe Quarry Site",
-        "sector": "mining",
-        "status": "completed",
-        "location": "Uganda",
-        "country": "Uganda",
-        "year": "2024",
-        "description": "1.2km of 2D Electrical Resistivity Tomography surveying for proposed quarry site characterization. Subsurface investigation for mining and construction material extraction.",
-        "image": "resources/projects/zirobwe-quarry.webp",
-        "coordinates": [
-            0.3,
-            32.5
-        ],
-        "duration": "Aug 2024",
-        "client": "KKCA / Phaze Construction Ltd / GMATLAB LTD",
-        "scope": "1.2km of 2D ERT surveying",
-        "activities": "2D ERT Surveys, Quarry Site Assessment",
-        "methods": [
-            { "name": "ERT Survey Uganda", "url": "ert-electrical-resistivity-tomography-uganda.html" }
-        ],
-        "results": [
-            "1.2km of 2D ERT surveys completed",
-            "Subsurface characterization for quarry development",
-            "Material quality assessment",
-            "Optimal extraction zone identification"
-        ]
-    },
-    {
-        "id": 10,
-        "title": "2D Electrical Resistivity Survey for Gayaza Landfill Thermal Power Plant",
-        "sector": "energy",
-        "status": "completed",
-        "location": "Uganda",
-        "country": "Uganda",
-        "year": "2024",
-        "description": "800m of 2D Electrical Resistivity Tomography surveying for proposed thermal power plant at Gayaza landfill site. Innovative waste-to-energy project assessment.",
-        "image": "resources/projects/gayaza-power.webp",
-        "coordinates": [
-            0.41,
-            32.62
-        ],
-        "duration": "May 2024",
-        "client": "GMATLAB LTD",
-        "scope": "800m of 2D ERT Surveying",
-        "activities": "2D ERT Surveys, Power Plant Site Assessment",
-        "methods": [
-            { "name": "ERT Survey Uganda", "url": "ert-electrical-resistivity-tomography-uganda.html" }
-        ],
-        "results": [
-            "800m of 2D ERT surveys completed",
-            "Site characterization for thermal power plant",
-            "Foundation assessment for energy infrastructure",
-            "Environmental and geological baseline established"
-        ]
-    },
-    {
-        "id": 11,
-        "title": "Geological, Geomorphological and Geotechnical Investigation for Mpanga II Hydro Power Project",
-        "sector": "energy",
-        "status": "completed",
-        "location": "Uganda",
-        "country": "Uganda",
-        "year": "2023",
-        "description": "Comprehensive investigation combining geotechnical drilling, geological mapping, and slope stability analysis for major hydropower development project.",
-        "image": "resources/projects/mpanga-hydro.webp",
-        "coordinates": [
-            0.0236,
-            30.0588
-        ],
-        "duration": "Dec 2023",
-        "client": "Mpanga Renewable Energies Limited / KK Advisors",
-        "scope": "Geotechnical investigation, Geological Mapping, Slope Stability Analysis",
-        "activities": "Geotechnical Investigation, Geological Mapping, Slope Analysis",
-        "methods": [
-            { "name": "Geotechnical Engineering", "url": "methods.html#geotechnical" },
-            { "name": "Geophysical Surveys", "url": "methods.html#geophysics" }
-        ],
-        "results": [
-            "Comprehensive geotechnical investigation completed",
-            "Detailed geological mapping of project area",
-            "Slope stability analysis for infrastructure safety",
-            "Design recommendations for hydropower facility"
-        ]
-    },
-    {
-        "id": 12,
-        "title": "Geological, Geomorphological and Geotechnical Investigation for Rwimi II Hydro Power Project",
-        "sector": "energy",
-        "status": "completed",
-        "location": "Uganda",
-        "country": "Uganda",
-        "year": "2023",
-        "description": "Integrated geotechnical investigation, geological mapping, and slope stability analysis for renewable energy infrastructure development.",
-        "image": "resources/projects/rwimi-hydro.webp",
-        "coordinates": [
-            0,
-            30
-        ],
-        "duration": "Dec 2022 - Feb 2023",
-        "client": "Rwimi II Energy Project Limited",
-        "scope": "Geotechnical investigation, Geological Mapping, Slope Stability Analysis",
-        "activities": "Geotechnical Investigation, Geological Mapping, Slope Analysis",
-        "methods": [
-            { "name": "Geotechnical Engineering", "url": "methods.html#geotechnical" },
-            { "name": "Geophysical Surveys", "url": "methods.html#geophysics" }
-        ],
-        "results": [
-            "Complete geotechnical characterization",
-            "Geological mapping for hydropower site",
-            "Slope stability assessment",
-            "Engineering design parameters provided"
-        ]
-    },
-    {
-        "id": 14,
-        "title": "10.3km 2D Electrical Resistivity Survey for Isingiro Water Supply Project",
-        "sector": "water",
-        "status": "completed",
-        "location": "Uganda",
-        "country": "Uganda",
-        "year": "2023",
-        "description": "Extensive 10.3km of 2D Resistivity Surveys along water pipeline routes including comprehensive data management, processing, and reporting for major water supply infrastructure.",
-        "image": "resources/projects/isingiro-water.webp",
-        "coordinates": [
-            -0.8167,
-            30.8
-        ],
-        "duration": "Oct 2022 – Jan 2023",
-        "client": "GMATLab / RazelBec",
-        "scope": "2D Resistivity Surveys along water pipelines, data management, processing and reporting",
-        "activities": "2D ERT Surveys, Pipeline Route Assessment, Data Processing",
-        "methods": [
-            { "name": "ERT Survey Uganda", "url": "ert-electrical-resistivity-tomography-uganda.html" }
-        ],
-        "results": [
-            "10.3km of 2D resistivity surveys completed",
-            "Pipeline route optimization",
-            "Comprehensive data management and processing",
-            "Detailed technical reporting for water supply project"
-        ]
-    },
-    {
-        "id": 13,
-        "title": "2D Electrical Resistivity Survey for Paraa Safari Lodge Swimming Pool and Ferry Landing Site",
-        "sector": "infrastructure",
-        "status": "completed",
-        "location": "Uganda",
-        "country": "Uganda",
-        "year": "2022",
-        "description": "720m of 2D ERT surveying for tourism infrastructure development at iconic Paraa Safari Lodge in Murchison Falls National Park.",
-        "image": "resources/projects/paraa-lodge.webp",
-        "coordinates": [
-            2.18,
-            31.5167
-        ],
-        "duration": "Oct 2022",
-        "client": "GMATLab / MBW Consulting Ltd",
-        "scope": "720m of 2D ERT Surveying",
-        "activities": "2D ERT Surveys, Tourism Infrastructure Assessment",
-        "methods": [
-            { "name": "ERT Survey Uganda", "url": "ert-electrical-resistivity-tomography-uganda.html" }
-        ],
-        "results": [
-            "720m of 2D ERT surveys completed",
-            "Site characterization for swimming pool construction",
-            "Ferry landing site foundation assessment",
-            "Environmental considerations for national park location"
-        ]
-    },
-    {
-        "id": 15,
-        "title": "Diamond Core Drilling in Zombo District – Phase II",
-        "sector": "mining",
-        "status": "completed",
-        "location": "Uganda",
-        "country": "Uganda",
-        "year": "2022",
-        "description": "2000m of diamond core drilling in HQ and NQ sizes for mineral exploration. Advanced drilling techniques for resource characterization.",
-        "image": "resources/projects/zombo-drilling.webp",
-        "coordinates": [
-            2.5,
-            30.9167
-        ],
-        "duration": "September 2022 to October 2022",
-        "client": "GMATLab / Samta Mines & Minerals (Uganda) Ltd",
-        "scope": "Diamond Core Drilling of 2000m of boreholes in HQ and NQ sizes",
-        "activities": "Diamond Core Drilling, Resource Exploration, Sample Analysis",
-        "methods": [
-            { "name": "Drilling Services", "url": "methods.html#drilling" }
-        ],
-        "results": [
-            "2000m of diamond core drilling completed",
-            "HQ and NQ size core samples obtained",
-            "Mineral resource characterization",
-            "Geological logging and core analysis"
-        ]
-    }
-]
+{
+    "projects": [
+        {
+            "id": 21,
+            "title": "Geophysical Surveys for the Tororo–Amagoro Irrigation Scheme",
+            "sector": "infrastructure",
+            "status": "completed",
+            "location": "Tororo, Busia",
+            "country": "Uganda",
+            "year": "2026",
+            "description": "Comprehensive geophysical investigation combining Seismic Refraction Tomography, Multichannel Analysis of Surface Waves (MASW), and Site Seismic Intensity Analysis for the Tororo–Amagoro irrigation development project. Subsurface characterisation to support design of irrigation canals, intake structures and water distribution infrastructure for the Ministry of Water and Environment.",
+            "image": "resources/projects/2026/tororo-amagoro-irrigation-seismic-2026.webp",
+            "coordinates": [
+                0.7,
+                34
+            ],
+            "duration": "June 2026",
+            "client": "Ministry of Water and Environment, Uganda",
+            "scope": "Seismic Refraction Tomography, MASW, and Site Seismic Intensity Analysis for irrigation infrastructure design",
+            "activities": "Seismic Refraction Tomography, MASW, Site Seismic Intensity Analysis",
+            "methods": [
+                {
+                    "name": "Seismic Refraction Survey Uganda",
+                    "url": "seismic-refraction-uganda.html"
+                },
+                {
+                    "name": "MASW Survey Uganda",
+                    "url": "masw-survey-uganda.html"
+                }
+            ],
+            "results": [
+                "Seismic Refraction Tomography completed for irrigation scheme area",
+                "MASW surveys for dynamic soil properties and site classification",
+                "Site Seismic Intensity Analysis for infrastructure resilience assessment",
+                "Foundation and design parameters delivered for irrigation development"
+            ]
+        },
+        {
+            "id": 26,
+            "title": "Geophysical Survey for Pre-feasibility Engineering Studies and Assessment for the Proposed Kampala Livestock Feeds Mill Plant",
+            "sector": "infrastructure",
+            "status": "completed",
+            "location": "Luweero",
+            "country": "Uganda",
+            "year": "2026",
+            "description": "Downhole Seismic survey for the pre-feasibility engineering studies and site assessment for the proposed Kampala Livestock Feeds Mill plant in Luweero District. In-situ borehole seismic velocity profiling for dynamic soil property determination, seismic site classification, and foundation design for large-scale industrial processing infrastructure.",
+            "image": "resources/projects/2026/kampala-feeds-mill-downhole-seismic-2026.webp",
+            "coordinates": [
+                0.84,
+                32.5
+            ],
+            "duration": "June 2026",
+            "client": "De Heus Uganda Limited",
+            "scope": "Downhole Seismic survey for industrial plant site characterisation and foundation design",
+            "activities": "Downhole Seismic Survey, Dynamic Soil Properties, Seismic Site Classification",
+            "methods": [
+                {
+                    "name": "Downhole Seismic Survey Uganda",
+                    "url": "downhole-seismic-survey-uganda.html"
+                }
+            ],
+            "results": [
+                "Downhole seismic survey completed for feeds mill plant site",
+                "In-situ P-wave and S-wave velocity profiling for dynamic properties",
+                "Seismic site classification per international building code standards",
+                "Foundation design parameters delivered for industrial infrastructure"
+            ]
+        },
+        {
+            "id": 22,
+            "title": "Geophysical Surveys for Matanda Irrigation Scheme",
+            "sector": "infrastructure",
+            "status": "completed",
+            "location": "Matanda, Kanungu",
+            "country": "Uganda",
+            "year": "2026",
+            "description": "Seismic Refraction Tomography survey for the feasibility assessment and engineering design of the proposed Matanda Irrigation Scheme in Kanungu District. Subsurface velocity profiling to characterise overburden thickness, bedrock depth, and rippability for canal alignment and intake structure foundation design.",
+            "image": "resources/projects/2026/matanda-irrigation-seismic-2026.webp",
+            "coordinates": [
+                -0.9,
+                29.7
+            ],
+            "duration": "May 2026",
+            "client": "CHC Ltd, Uganda",
+            "scope": "Seismic Refraction Tomography for irrigation scheme feasibility and design",
+            "activities": "Seismic Refraction Tomography, Bedrock Profiling, Rippability Assessment",
+            "methods": [
+                {
+                    "name": "Seismic Refraction Survey Uganda",
+                    "url": "seismic-refraction-uganda.html"
+                }
+            ],
+            "results": [
+                "Seismic Refraction Tomography surveys completed at Matanda irrigation site",
+                "Subsurface velocity profiling for bedrock and overburden characterisation",
+                "Rippability assessment and canal alignment recommendations",
+                "Foundation design inputs for intake structures delivered"
+            ]
+        },
+        {
+            "id": 24,
+            "title": "Geophysical Surveys for Technical Assessment of Existing Firewall Pillar Foundations at Nalubale Hydropower Station",
+            "sector": "infrastructure",
+            "status": "completed",
+            "location": "Jinja",
+            "country": "Uganda",
+            "year": "2026",
+            "description": "High-Resolution Seismic Refraction Tomography (HRSRT) combined with Rebound Hammer testing and Reinforcement Locator surveys for technical integrity assessment of existing firewall pillar foundations at the Nalubale (Owen Falls) Hydropower Station. Non-destructive investigation of ageing concrete infrastructure for Uganda's flagship power generation asset.",
+            "image": "resources/projects/2026/nalubale-hydropower-hrsrt-2026.webp",
+            "coordinates": [
+                0.4364,
+                33.185
+            ],
+            "duration": "May 2026",
+            "client": "Strucon Ltd, Uganda",
+            "scope": "HRSRT, rebound hammer, and reinforcement locator surveys for concrete pillar integrity assessment",
+            "activities": "HRSRT, Rebound Hammer Testing, Reinforcement Detection, Structural Assessment",
+            "methods": [
+                {
+                    "name": "Seismic Refraction Survey Uganda",
+                    "url": "seismic-refraction-uganda.html"
+                }
+            ],
+            "results": [
+                "High-resolution seismic refraction tomography for pillar foundation imaging",
+                "Rebound hammer testing for concrete strength assessment",
+                "Reinforcement locator survey for steel reinforcement mapping",
+                "Technical integrity assessment report and remediation recommendations"
+            ]
+        },
+        {
+            "id": 25,
+            "title": "Geophysical Surveys for the Feasibility Study of the Nakiwogo Bridge Construction Project",
+            "sector": "infrastructure",
+            "status": "completed",
+            "location": "Kampala",
+            "country": "Uganda",
+            "year": "2026",
+            "description": "Electrical Resistivity Tomography (ERT) survey for the feasibility study of the proposed Nakiwogo Bridge construction project in Kampala. Subsurface resistivity imaging to characterise foundation conditions, identify potential weak zones, and inform abutment and pier foundation design for critical transport infrastructure.",
+            "image": "resources/projects/2026/nakiwogo-bridge-ert-2026.webp",
+            "coordinates": [
+                0.25,
+                32.55
+            ],
+            "duration": "May 2026",
+            "client": "Teclab / Anchor Engineering, Uganda",
+            "scope": "ERT survey for bridge foundation characterisation and feasibility assessment",
+            "activities": "ERT Survey, Bridge Foundation Assessment, Subsurface Imaging",
+            "methods": [
+                {
+                    "name": "ERT Survey Uganda",
+                    "url": "ert-electrical-resistivity-tomography-uganda.html"
+                }
+            ],
+            "results": [
+                "ERT survey completed for proposed Nakiwogo bridge alignment",
+                "Subsurface resistivity profiling for foundation condition assessment",
+                "Identification of competent strata and potential weak zones",
+                "Foundation design parameters for abutment and pier engineering"
+            ]
+        },
+        {
+            "id": 16,
+            "title": "Alluvial Gold Exploration and Reserves Estimation in Ituri",
+            "sector": "mining",
+            "status": "completed",
+            "location": "Katanga, Ituri",
+            "country": "DRC",
+            "year": "2026",
+            "description": "Reconnaissance alluvial gold exploration and preliminary reserves estimation program in the Ituri region, Democratic Republic of Congo. Integrated Gold Detector data analysis, geological mapping, and geochemical sampling supported by satellite SAR remote sensing for regional target delineation and resource potential assessment.",
+            "image": "resources/projects/2026/alluvial-gold-exploration-ituri-2026.webp",
+            "coordinates": [
+                1.7,
+                29.8
+            ],
+            "duration": "April 2026",
+            "client": "Confidential mining client, DRC",
+            "scope": "Gold detector data analysis, geological mapping, geochemical sampling, SAR sensing for regional exploration targeting",
+            "activities": "Gold Detection, Geological Mapping, Geochemical Sampling, SAR Remote Sensing",
+            "methods": [
+                {
+                    "name": "SAR & InSAR Services Uganda",
+                    "url": "insar-sar-services-uganda.html"
+                },
+                {
+                    "name": "Mineral Exploration",
+                    "url": "methods.html#mining"
+                }
+            ],
+            "results": [
+                "Regional alluvial gold exploration program completed across Ituri",
+                "Geological mapping and geochemical sampling for target delineation",
+                "SAR remote sensing analysis for regional structural interpretation",
+                "Preliminary reserves estimation framework delivered"
+            ]
+        },
+        {
+            "id": 19,
+            "title": "Integrated Geophysical Survey for Pegmatite Exploration in Rweru Sector — Cassiterite, Coltan and Cobalt Assessment",
+            "sector": "mining",
+            "status": "completed",
+            "location": "Rweru Sector",
+            "country": "Rwanda",
+            "year": "2026",
+            "description": "Integrated mineral exploration programme combining onshore ground magnetics, deep Electrical Resistivity Tomography (ERT) and Induced Polarisation (IP) surveys for pegmatite-hosted cassiterite, coltan and cobalt mineralisation in the Rweru Sector. Multi-method approach to delineate subsurface pegmatite bodies and define drill targets.",
+            "image": "resources/projects/2026/gasabo-pegmatite-ert-2026.webp",
+            "coordinates": [
+                -1.65,
+                29.85
+            ],
+            "duration": "March 2026",
+            "client": "Confidential mining client, Rwanda",
+            "scope": "Onshore ground magnetics, deep ERT, and IP surveys for pegmatite-hosted Sn-Ta-Co exploration",
+            "activities": "Ground Magnetics, Deep ERT, Induced Polarisation, Pegmatite Targeting",
+            "methods": [
+                {
+                    "name": "Ground Magnetic Survey Uganda",
+                    "url": "ground-magnetic-survey-uganda.html"
+                },
+                {
+                    "name": "ERT Survey Uganda",
+                    "url": "ert-electrical-resistivity-tomography-uganda.html"
+                }
+            ],
+            "results": [
+                "Integrated multi-method geophysical survey for pegmatite exploration",
+                "Onshore magnetics for structural mapping and target delineation",
+                "Deep ERT and IP surveys for subsurface pegmatite body characterisation",
+                "Drill target recommendations for cassiterite, coltan and cobalt"
+            ]
+        },
+        {
+            "id": 20,
+            "title": "Geophysical Surveys for Pegmatite Mineral Exploration in Gasabo",
+            "sector": "mining",
+            "status": "completed",
+            "location": "Gasabo",
+            "country": "Rwanda",
+            "year": "2026",
+            "description": "Deep Electrical Resistivity Tomography (ERT) survey for pegmatite-hosted mineral exploration in the Gasabo area of Rwanda. High-resolution subsurface resistivity imaging to delineate pegmatite body geometry, depth extent, and lateral continuity for drill-hole targeting.",
+            "image": "resources/projects/2026/rweru-pegmatite-ert-2026.webp",
+            "coordinates": [
+                -1.87,
+                30.12
+            ],
+            "duration": "March 2026",
+            "client": "Confidential mining client, Rwanda",
+            "scope": "Deep ERT survey for pegmatite body delineation and drill target definition",
+            "activities": "Deep ERT Survey, Pegmatite Delineation, Drill Targeting",
+            "methods": [
+                {
+                    "name": "ERT Survey Uganda",
+                    "url": "ert-electrical-resistivity-tomography-uganda.html"
+                }
+            ],
+            "results": [
+                "Deep ERT survey completed for pegmatite body imaging",
+                "Subsurface resistivity characterisation across the exploration area",
+                "Pegmatite body geometry and depth extent mapped",
+                "Drill-hole target recommendations delivered"
+            ]
+        },
+        {
+            "id": 23,
+            "title": "Geophysical Surveys along the Standard Gauge Railway Corridor, Eastern Uganda",
+            "sector": "infrastructure",
+            "status": "completed",
+            "location": "Eastern Uganda",
+            "country": "Uganda",
+            "year": "2026",
+            "description": "Seismic Refraction Tomography and Multichannel Analysis of Surface Waves (MASW) surveys along sections of the Standard Gauge Railway corridor in Eastern Uganda. Subsurface profiling for earthwork design, cut-and-fill optimisation, and foundation characterisation for this nationally strategic transport infrastructure project.",
+            "image": "resources/projects/2026/sgr-seismic-2026.webp",
+            "coordinates": [
+                1,
+                33.5
+            ],
+            "duration": "March 2026",
+            "client": "Alpha Lab, Uganda",
+            "scope": "Seismic Refraction Tomography and MASW surveys for SGR corridor subsurface characterisation",
+            "activities": "Seismic Refraction Tomography, MASW, Railway Corridor Profiling",
+            "methods": [
+                {
+                    "name": "Seismic Refraction Survey Uganda",
+                    "url": "seismic-refraction-uganda.html"
+                },
+                {
+                    "name": "MASW Survey Uganda",
+                    "url": "masw-survey-uganda.html"
+                }
+            ],
+            "results": [
+                "Comprehensive seismic surveys along SGR alignment in Eastern Uganda",
+                "Seismic Refraction Tomography for earthwork design and bedrock profiling",
+                "MASW surveys for dynamic soil characterisation and site classification",
+                "Subsurface parameters delivered for cut-and-fill optimisation"
+            ]
+        },
+        {
+            "id": 7,
+            "title": "Geotechnical Investigation for PHJIMU Slope Stability Studies",
+            "sector": "infrastructure",
+            "status": "completed",
+            "location": "Burundi",
+            "country": "Burundi",
+            "year": "2025",
+            "description": "Comprehensive geotechnical investigation including drilling, in-situ tests, and laboratory testing for slope stability assessment. Critical infrastructure safety evaluation project.",
+            "image": "resources/projects/phjimu-slope.webp",
+            "coordinates": [
+                -3.3731,
+                29.9189
+            ],
+            "duration": "Dec 2024 – Feb 2025",
+            "client": "Artelia / Aecom",
+            "scope": "Geotechnical Investigation: Drilling, In-situ Tests, Laboratory Testing",
+            "activities": "Drilling, In-situ Testing, Laboratory Analysis, Slope Stability Analysis",
+            "methods": [
+                {
+                    "name": "Drilling Services",
+                    "url": "methods.html#drilling"
+                },
+                {
+                    "name": "Geotechnical Engineering",
+                    "url": "methods.html#geotechnical"
+                }
+            ],
+            "results": [
+                "Comprehensive drilling program completed",
+                "In-situ testing for soil and rock characterization",
+                "Laboratory testing of geotechnical samples",
+                "Slope stability analysis and recommendations"
+            ]
+        },
+        {
+            "id": 18,
+            "title": "Geophysical Investigation for the Extension of the King Faisal Hospital Extension Project",
+            "sector": "infrastructure",
+            "status": "completed",
+            "location": "Kigali",
+            "country": "Rwanda",
+            "year": "2025",
+            "description": "Multichannel Analysis of Surface Waves (MASW) survey for the proposed extension of King Faisal Hospital in Kigali. Subsurface stiffness profiling and seismic site classification to inform foundation design and structural engineering for critical healthcare infrastructure expansion.",
+            "image": "resources/projects/2026/king-faisal-hospital-masw-2025.webp",
+            "coordinates": [
+                -1.9441,
+                30.0619
+            ],
+            "duration": "December 2025",
+            "client": "Fidus Engineering Ltd, Rwanda",
+            "scope": "MASW surveys for site classification and foundation design of hospital extension",
+            "activities": "MASW Survey, Seismic Site Classification, Foundation Assessment",
+            "methods": [
+                {
+                    "name": "MASW Survey Uganda",
+                    "url": "masw-survey-uganda.html"
+                }
+            ],
+            "results": [
+                "MASW surveys completed for hospital extension site",
+                "Shear-wave velocity profiling for seismic site classification",
+                "Foundation design parameters provided for structural engineering",
+                "Critical healthcare infrastructure assessment delivered"
+            ]
+        },
+        {
+            "id": 1,
+            "title": "Integrated Geophysical and Geotechnical Investigation for Mwogo, Rukarara, and Kavili Dam Sites",
+            "sector": "infrastructure",
+            "status": "ongoing",
+            "location": "Rwanda",
+            "country": "Rwanda",
+            "year": "2025",
+            "description": "Comprehensive geophysical investigation using Seismic Refraction (1200m) and MASW (1200m) methods for three proposed dam sites. Data correlation with geotechnical parameters for optimal dam design and foundation characterization.",
+            "image": "resources/projects/rwanda-dams.webp",
+            "coordinates": [
+                -1.9403,
+                29.8739
+            ],
+            "duration": "Oct – Nov 2025",
+            "client": "ZV Consulting Ltd - Rwanda",
+            "scope": "Geophysics (Seismic Refraction 1200m, MASW 1200m), Data correlation with geotechnical data",
+            "activities": "Seismic Refraction, MASW, Geotechnical Correlation",
+            "methods": [
+                {
+                    "name": "Seismic Refraction Survey Uganda",
+                    "url": "seismic-refraction-uganda.html"
+                },
+                {
+                    "name": "MASW Survey Uganda",
+                    "url": "masw-survey-uganda.html"
+                }
+            ],
+            "results": [
+                "1200m of Seismic Refraction surveys completed",
+                "1200m of MASW surveys for site characterization",
+                "Comprehensive data correlation with geotechnical parameters",
+                "Foundation design recommendations for three dam sites"
+            ]
+        },
+        {
+            "id": 2,
+            "title": "Geotechnical Investigation for Kisinja ATC Tower Geohazard Assessment",
+            "sector": "infrastructure",
+            "status": "completed",
+            "location": "Uganda",
+            "country": "Uganda",
+            "year": "2025",
+            "description": "Geohazard assessment for the Kisinja ATC Tower using Electrical Resistivity Tomography (ERT), geological mapping, and comprehensive data correlation with drilling data. Critical infrastructure safety evaluation.",
+            "image": "resources/projects/kisinja.webp",
+            "coordinates": [
+                0.3476,
+                32.5825
+            ],
+            "duration": "Oct 2025",
+            "client": "ATC Uganda, CEDAT - Uganda",
+            "scope": "Geophysics (ERT), mapping and data correlation with drilling data",
+            "activities": "ERT Surveys, Geological Mapping, Drilling Data Correlation",
+            "methods": [
+                {
+                    "name": "ERT Survey Uganda",
+                    "url": "ert-electrical-resistivity-tomography-uganda.html"
+                },
+                {
+                    "name": "Drilling Services",
+                    "url": "methods.html#drilling"
+                }
+            ],
+            "results": [
+                "Complete geohazard assessment for tower foundation",
+                "ERT surveys revealing subsurface conditions",
+                "Geological mapping of site area",
+                "Safety recommendations for ATC tower construction"
+            ]
+        },
+        {
+            "id": 3,
+            "title": "Geotechnical Investigation for Centre for Nuclear Science Technology, Soroti",
+            "sector": "infrastructure",
+            "status": "completed",
+            "location": "Uganda",
+            "country": "Uganda",
+            "year": "2025",
+            "description": "Specialized geophysical investigation for nuclear facility using 540m of Seismic Refraction for Vp (P-wave velocity) site characterization and correlation with geotechnical parameters. Critical infrastructure project.",
+            "image": "resources/projects/cnst-soroti.webp",
+            "coordinates": [
+                1.7157,
+                33.6111
+            ],
+            "duration": "Aug – Sept 2025",
+            "client": "Queensland And Leeds Consulting Engineers / Ministry of Energy and Mineral Development - Uganda",
+            "scope": "Geophysics Services: 540m of Seismic Refraction for Vp Site characterization and correlation",
+            "activities": "Seismic Refraction, Site Characterization, Vp Analysis",
+            "methods": [
+                {
+                    "name": "Seismic Refraction Survey Uganda",
+                    "url": "seismic-refraction-uganda.html"
+                }
+            ],
+            "results": [
+                "540m of Seismic Refraction surveys completed",
+                "P-wave velocity characterization for nuclear facility",
+                "Comprehensive site assessment for critical infrastructure",
+                "Foundation design parameters delivered"
+            ]
+        },
+        {
+            "id": 4,
+            "title": "Geological and Geotechnical Investigations for Arua Water Dam",
+            "sector": "water",
+            "status": "completed",
+            "location": "Uganda",
+            "country": "Uganda",
+            "year": "2025",
+            "description": "Comprehensive geological mapping of 5.5 km² project area combined with 1.5km of Seismic Refraction surveys for Vp site characterization. Integrated geoscience approach for major water infrastructure project.",
+            "image": "resources/projects/arua-dam.webp",
+            "coordinates": [
+                3.0197,
+                30.9108
+            ],
+            "duration": "Jun – Aug 2025",
+            "client": "Fichtner GmbH & Co. KG, and Tectoni Africa Ltd",
+            "scope": "5.5 Sq.km Geological Mapping of entire project area and 1.5km Geophysics: Seismic Refraction for Vp characterization",
+            "activities": "Geological Mapping, Seismic Refraction, Site Characterization",
+            "methods": [
+                {
+                    "name": "Seismic Refraction Survey Uganda",
+                    "url": "seismic-refraction-uganda.html"
+                }
+            ],
+            "results": [
+                "5.5 km² geological mapping completed",
+                "1.5km of Seismic Refraction surveys",
+                "Comprehensive site characterization for dam construction",
+                "Integrated geological and geophysical data analysis"
+            ]
+        },
+        {
+            "id": 5,
+            "title": "Geophysical Survey for Nyamwamba Flood Management Studies",
+            "sector": "environmental",
+            "status": "completed",
+            "location": "Uganda",
+            "country": "Uganda",
+            "year": "2025",
+            "description": "840m of Seismic Refraction surveys for Vp site characterization supporting flood management infrastructure in Kasese district. Critical environmental and disaster risk reduction project.",
+            "image": "resources/projects/nyamwamba-flood.webp",
+            "coordinates": [
+                0.1833,
+                30.0833
+            ],
+            "duration": "Apr – May 2025",
+            "client": "SGAPI Srl / RSV Engineering Group Ltd",
+            "scope": "Geophysics Services: 840m of Seismic Refraction for Vp Site characterization and correlation",
+            "activities": "Seismic Refraction, Flood Risk Assessment, Site Characterization",
+            "methods": [
+                {
+                    "name": "Seismic Refraction Survey Uganda",
+                    "url": "seismic-refraction-uganda.html"
+                }
+            ],
+            "results": [
+                "840m of Seismic Refraction completed",
+                "Foundation characterization for flood management structures",
+                "Site assessment for disaster risk reduction",
+                "Technical recommendations for infrastructure design"
+            ]
+        },
+        {
+            "id": 6,
+            "title": "Topographical Surveys and Geotechnical Investigations for 1MW Mutambu Hydro-Solar Hybrid Project",
+            "sector": "energy",
+            "status": "completed",
+            "location": "Burundi",
+            "country": "Burundi",
+            "year": "2025",
+            "description": "Integrated ground and aerial survey of project area for innovative 1MW Hydro-Solar Hybrid energy project. Comprehensive topographical and geotechnical assessment for renewable energy infrastructure.",
+            "image": "resources/projects/mutambu-hybrid.webp",
+            "coordinates": [
+                -3.3731,
+                29.9189
+            ],
+            "duration": "2024-2025",
+            "client": "Anzana Electric Group",
+            "scope": "Ground and Aerial Survey, Topographical Surveys, Geotechnical Investigations",
+            "activities": "Topographic Surveys, Aerial Surveys, Geotechnical Investigation",
+            "methods": [
+                {
+                    "name": "Geospatial & Surveys",
+                    "url": "methods.html#geospatial"
+                },
+                {
+                    "name": "Geotechnical Engineering",
+                    "url": "methods.html#geotechnical"
+                }
+            ],
+            "results": [
+                "Complete topographical survey using ground and aerial methods",
+                "Site characterization for hybrid energy project",
+                "Geotechnical investigation for infrastructure foundation",
+                "Technical data for renewable energy development"
+            ]
+        },
+        {
+            "id": 8,
+            "title": "Additional Geotechnical Investigation for Upper Mule037 Project and Construction Material",
+            "sector": "infrastructure",
+            "status": "completed",
+            "location": "Burundi",
+            "country": "Burundi",
+            "year": "2024",
+            "description": "Comprehensive geotechnical investigation including drilling, in-situ tests, test pits, in-situ vane shear testing, and extensive laboratory testing for construction material assessment.",
+            "image": "resources/projects/upper-mule.webp",
+            "coordinates": [
+                -3.3731,
+                29.9189
+            ],
+            "duration": "Dec 2023 – Mar 2024",
+            "client": "Virunga Power / Songa Energy",
+            "scope": "Geotechnical Investigation: Drilling, In-situ Tests, Test Pits, In-situ Vane Shear, Laboratory Testing",
+            "activities": "Drilling, In-situ Testing, Test Pits, Vane Shear, Laboratory Analysis",
+            "methods": [
+                {
+                    "name": "Drilling Services",
+                    "url": "methods.html#drilling"
+                },
+                {
+                    "name": "Geotechnical Engineering",
+                    "url": "methods.html#geotechnical"
+                }
+            ],
+            "results": [
+                "Complete drilling and in-situ testing program",
+                "Test pits for material characterization",
+                "In-situ vane shear testing for soil strength",
+                "Comprehensive laboratory testing of construction materials"
+            ]
+        },
+        {
+            "id": 9,
+            "title": "2D Electrical Resistivity Survey for Zirobwe Quarry Site",
+            "sector": "mining",
+            "status": "completed",
+            "location": "Uganda",
+            "country": "Uganda",
+            "year": "2024",
+            "description": "1.2km of 2D Electrical Resistivity Tomography surveying for proposed quarry site characterization. Subsurface investigation for mining and construction material extraction.",
+            "image": "resources/projects/zirobwe-quarry.webp",
+            "coordinates": [
+                0.3,
+                32.5
+            ],
+            "duration": "Aug 2024",
+            "client": "KKCA / Phaze Construction Ltd / GMATLAB LTD",
+            "scope": "1.2km of 2D ERT surveying",
+            "activities": "2D ERT Surveys, Quarry Site Assessment",
+            "methods": [
+                {
+                    "name": "ERT Survey Uganda",
+                    "url": "ert-electrical-resistivity-tomography-uganda.html"
+                }
+            ],
+            "results": [
+                "1.2km of 2D ERT surveys completed",
+                "Subsurface characterization for quarry development",
+                "Material quality assessment",
+                "Optimal extraction zone identification"
+            ]
+        },
+        {
+            "id": 10,
+            "title": "2D Electrical Resistivity Survey for Gayaza Landfill Thermal Power Plant",
+            "sector": "energy",
+            "status": "completed",
+            "location": "Uganda",
+            "country": "Uganda",
+            "year": "2024",
+            "description": "800m of 2D Electrical Resistivity Tomography surveying for proposed thermal power plant at Gayaza landfill site. Innovative waste-to-energy project assessment.",
+            "image": "resources/projects/gayaza-power.webp",
+            "coordinates": [
+                0.41,
+                32.62
+            ],
+            "duration": "May 2024",
+            "client": "GMATLAB LTD",
+            "scope": "800m of 2D ERT Surveying",
+            "activities": "2D ERT Surveys, Power Plant Site Assessment",
+            "methods": [
+                {
+                    "name": "ERT Survey Uganda",
+                    "url": "ert-electrical-resistivity-tomography-uganda.html"
+                }
+            ],
+            "results": [
+                "800m of 2D ERT surveys completed",
+                "Site characterization for thermal power plant",
+                "Foundation assessment for energy infrastructure",
+                "Environmental and geological baseline established"
+            ]
+        },
+        {
+            "id": 11,
+            "title": "Geological, Geomorphological and Geotechnical Investigation for Mpanga II Hydro Power Project",
+            "sector": "energy",
+            "status": "completed",
+            "location": "Uganda",
+            "country": "Uganda",
+            "year": "2023",
+            "description": "Comprehensive investigation combining geotechnical drilling, geological mapping, and slope stability analysis for major hydropower development project.",
+            "image": "resources/projects/mpanga-hydro.webp",
+            "coordinates": [
+                0.0236,
+                30.0588
+            ],
+            "duration": "Dec 2023",
+            "client": "Mpanga Renewable Energies Limited / KK Advisors",
+            "scope": "Geotechnical investigation, Geological Mapping, Slope Stability Analysis",
+            "activities": "Geotechnical Investigation, Geological Mapping, Slope Analysis",
+            "methods": [
+                {
+                    "name": "Geotechnical Engineering",
+                    "url": "methods.html#geotechnical"
+                },
+                {
+                    "name": "Geophysical Surveys",
+                    "url": "methods.html#geophysics"
+                }
+            ],
+            "results": [
+                "Comprehensive geotechnical investigation completed",
+                "Detailed geological mapping of project area",
+                "Slope stability analysis for infrastructure safety",
+                "Design recommendations for hydropower facility"
+            ]
+        },
+        {
+            "id": 12,
+            "title": "Geological, Geomorphological and Geotechnical Investigation for Rwimi II Hydro Power Project",
+            "sector": "energy",
+            "status": "completed",
+            "location": "Uganda",
+            "country": "Uganda",
+            "year": "2023",
+            "description": "Integrated geotechnical investigation, geological mapping, and slope stability analysis for renewable energy infrastructure development.",
+            "image": "resources/projects/rwimi-hydro.webp",
+            "coordinates": [
+                0,
+                30
+            ],
+            "duration": "Dec 2022 - Feb 2023",
+            "client": "Rwimi II Energy Project Limited",
+            "scope": "Geotechnical investigation, Geological Mapping, Slope Stability Analysis",
+            "activities": "Geotechnical Investigation, Geological Mapping, Slope Analysis",
+            "methods": [
+                {
+                    "name": "Geotechnical Engineering",
+                    "url": "methods.html#geotechnical"
+                },
+                {
+                    "name": "Geophysical Surveys",
+                    "url": "methods.html#geophysics"
+                }
+            ],
+            "results": [
+                "Complete geotechnical characterization",
+                "Geological mapping for hydropower site",
+                "Slope stability assessment",
+                "Engineering design parameters provided"
+            ]
+        },
+        {
+            "id": 14,
+            "title": "10.3km 2D Electrical Resistivity Survey for Isingiro Water Supply Project",
+            "sector": "water",
+            "status": "completed",
+            "location": "Uganda",
+            "country": "Uganda",
+            "year": "2023",
+            "description": "Extensive 10.3km of 2D Resistivity Surveys along water pipeline routes including comprehensive data management, processing, and reporting for major water supply infrastructure.",
+            "image": "resources/projects/isingiro-water.webp",
+            "coordinates": [
+                -0.8167,
+                30.8
+            ],
+            "duration": "Oct 2022 – Jan 2023",
+            "client": "GMATLab / RazelBec",
+            "scope": "2D Resistivity Surveys along water pipelines, data management, processing and reporting",
+            "activities": "2D ERT Surveys, Pipeline Route Assessment, Data Processing",
+            "methods": [
+                {
+                    "name": "ERT Survey Uganda",
+                    "url": "ert-electrical-resistivity-tomography-uganda.html"
+                }
+            ],
+            "results": [
+                "10.3km of 2D resistivity surveys completed",
+                "Pipeline route optimization",
+                "Comprehensive data management and processing",
+                "Detailed technical reporting for water supply project"
+            ]
+        },
+        {
+            "id": 13,
+            "title": "2D Electrical Resistivity Survey for Paraa Safari Lodge Swimming Pool and Ferry Landing Site",
+            "sector": "infrastructure",
+            "status": "completed",
+            "location": "Uganda",
+            "country": "Uganda",
+            "year": "2022",
+            "description": "720m of 2D ERT surveying for tourism infrastructure development at iconic Paraa Safari Lodge in Murchison Falls National Park.",
+            "image": "resources/projects/paraa-lodge.webp",
+            "coordinates": [
+                2.18,
+                31.5167
+            ],
+            "duration": "Oct 2022",
+            "client": "GMATLab / MBW Consulting Ltd",
+            "scope": "720m of 2D ERT Surveying",
+            "activities": "2D ERT Surveys, Tourism Infrastructure Assessment",
+            "methods": [
+                {
+                    "name": "ERT Survey Uganda",
+                    "url": "ert-electrical-resistivity-tomography-uganda.html"
+                }
+            ],
+            "results": [
+                "720m of 2D ERT surveys completed",
+                "Site characterization for swimming pool construction",
+                "Ferry landing site foundation assessment",
+                "Environmental considerations for national park location"
+            ]
+        },
+        {
+            "id": 15,
+            "title": "Diamond Core Drilling in Zombo District – Phase II",
+            "sector": "mining",
+            "status": "completed",
+            "location": "Uganda",
+            "country": "Uganda",
+            "year": "2022",
+            "description": "2000m of diamond core drilling in HQ and NQ sizes for mineral exploration. Advanced drilling techniques for resource characterization.",
+            "image": "resources/projects/zombo-drilling.webp",
+            "coordinates": [
+                2.5,
+                30.9167
+            ],
+            "duration": "September 2022 to October 2022",
+            "client": "GMATLab / Samta Mines & Minerals (Uganda) Ltd",
+            "scope": "Diamond Core Drilling of 2000m of boreholes in HQ and NQ sizes",
+            "activities": "Diamond Core Drilling, Resource Exploration, Sample Analysis",
+            "methods": [
+                {
+                    "name": "Drilling Services",
+                    "url": "methods.html#drilling"
+                }
+            ],
+            "results": [
+                "2000m of diamond core drilling completed",
+                "HQ and NQ size core samples obtained",
+                "Mineral resource characterization",
+                "Geological logging and core analysis"
+            ]
+        }
+    ]
+}
