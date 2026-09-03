@@ -106,7 +106,7 @@ function ensureImgAttributes() {
 
 // Directories / files to exclude from copy
 const EXCLUDES = new Set([
-  'dist', 'node_modules', '.git', '.claude', '.agents', '.codex', '.trae', 'partials',
+  'dist', 'node_modules', '.git', '.claude', '.agents', '.codex', '.trae', 'partials', 'Newsletters',
   'build.js', 'package-lock.json', 'quick-footer-inject.html', 'tools',
   'vite.config.js', '.env.template', '.gitignore',
   'IMPROVEMENT-PLAN.md', 'WEBSITE-IMPROVEMENT-PLAN.md',
@@ -196,7 +196,8 @@ const BREADCRUMBS = {
   'insar-sar-services-uganda.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }, { name: 'Methods', url: 'https://georesolveafrica.com/methods.html' }],
   'seismic-refraction-uganda.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }, { name: 'Methods', url: 'https://georesolveafrica.com/methods.html' }],
   'ert-electrical-resistivity-tomography-uganda.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }, { name: 'Methods', url: 'https://georesolveafrica.com/methods.html' }],
-  'downhole-seismic-survey-uganda.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }, { name: 'Methods', url: 'https://georesolveafrica.com/methods.html' }]
+  'downhole-seismic-survey-uganda.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }, { name: 'Methods', url: 'https://georesolveafrica.com/methods.html' }],
+  'geounlocked-august-2026.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }]
 };
 
 // Page title labels for the final (current) breadcrumb segment.
@@ -216,7 +217,8 @@ const BREADCRUMB_CURRENT_LABEL = {
   'insar-sar-services-uganda.html': 'SAR & InSAR Services Uganda',
   'seismic-refraction-uganda.html': 'Seismic Refraction Survey Uganda',
   'ert-electrical-resistivity-tomography-uganda.html': 'ERT Survey Uganda',
-  'downhole-seismic-survey-uganda.html': 'Downhole & Crosshole Seismic Survey Uganda'
+  'downhole-seismic-survey-uganda.html': 'Downhole & Crosshole Seismic Survey Uganda',
+  'geounlocked-august-2026.html': 'GeoUnlocked August 2026'
 };
 
 // French breadcrumb trails (dist-relative paths, e.g. 'fr/index.html').
