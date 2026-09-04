@@ -61,3 +61,6 @@ docs/archive/WEBSITE-IMPROVEMENT-PLAN.md
 .trae/
 .agents/
 .codex/
+
+# Newsletter production working files (raw images, PDFs, QA renders)
+/Newsletters/

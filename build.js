@@ -130,7 +130,7 @@ const TEXT_EXTENSIONS = new Set([
 ]);
 
 // HTML files that should NOT appear in sitemap
-const SITEMAP_EXCLUDES = new Set([]);
+const SITEMAP_EXCLUDES = new Set(['geounlocked-august-2026-v2.html']);
 
 // Pages that should NOT get footer injection (already hardcoded)
 const PAGES_WITH_HARDCODED_FOOTER = new Set([]);
