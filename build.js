@@ -110,6 +110,8 @@ const EXCLUDES = new Set([
   'build.js', 'package-lock.json', 'quick-footer-inject.html', 'tools',
   'vite.config.js', '.env.template', '.gitignore',
   'IMPROVEMENT-PLAN.md', 'WEBSITE-IMPROVEMENT-PLAN.md',
+  'geounlocked-august-2026-v2.html',
+  'kween-coverage.webp', 'kween-products-trimmed.webp',
   'Updates', 'docs', 'README.md',
   'news.html', 'resources.html', 'news'   // WP12: archive News & Resources hubs (sources retained, not published)
 ]);
@@ -117,6 +119,9 @@ const EXCLUDES = new Set([
 const DIST_PRIVATE_PATHS = new Set([
   'IMPROVEMENT-PLAN.md',
   'WEBSITE-IMPROVEMENT-PLAN.md',
+  'geounlocked-august-2026-v2.html',
+  'kween-coverage.webp',
+  'kween-products-trimmed.webp',
   'Updates',
   'docs',
   'README.md',
