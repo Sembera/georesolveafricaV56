@@ -1,165 +1,220 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://georesolveafrica.com/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <lastmod>2026-07-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://georesolveafrica.com/methods.html</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://georesolveafrica.com/drone-magnetic-survey-uganda.html</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://georesolveafrica.com/ground-magnetic-survey-uganda.html</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://georesolveafrica.com/insar-sar-services-uganda.html</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://georesolveafrica.com/seismic-refraction-uganda.html</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://georesolveafrica.com/ert-electrical-resistivity-tomography-uganda.html</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://georesolveafrica.com/downhole-seismic-survey-uganda.html</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://georesolveafrica.com/crosshole-seismic-survey-uganda.html</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://georesolveafrica.com/masw-survey-uganda.html</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://georesolveafrica.com/ground-penetrating-radar-uganda.html</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georesolveafrica.com/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://georesolveafrica.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georesolveafrica.com/"/>
   </url>
   <url>
     <loc>https://georesolveafrica.com/applications.html</loc>
-    <lastmod>2026-07-07</lastmod>
+    <lastmod>2026-07-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://georesolveafrica.com/projects.html</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://georesolveafrica.com/resources.html</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://georesolveafrica.com/news.html</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georesolveafrica.com/applications.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://georesolveafrica.com/fr/applications.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georesolveafrica.com/applications.html"/>
   </url>
   <url>
     <loc>https://georesolveafrica.com/contact.html</loc>
-    <lastmod>2026-07-07</lastmod>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georesolveafrica.com/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://georesolveafrica.com/fr/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georesolveafrica.com/contact.html"/>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/crosshole-seismic-survey-uganda.html</loc>
+    <lastmod>2026-07-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://georesolveafrica.com/g-resolog.html</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://georesolveafrica.com/downhole-seismic-survey-uganda.html</loc>
+    <lastmod>2026-07-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://georesolveafrica.com/g-resconvt.html</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://georesolveafrica.com/drone-magnetic-survey-uganda.html</loc>
+    <lastmod>2026-07-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://georesolveafrica.com/g-geopylanner.html</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://georesolveafrica.com/ert-electrical-resistivity-tomography-uganda.html</loc>
+    <lastmod>2026-07-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/fr/applications.html</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georesolveafrica.com/applications.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://georesolveafrica.com/fr/applications.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georesolveafrica.com/applications.html"/>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/fr/contact.html</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georesolveafrica.com/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://georesolveafrica.com/fr/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georesolveafrica.com/contact.html"/>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/fr/geophysique-burundi.html</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georesolveafrica.com/geophysical-surveys-burundi.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://georesolveafrica.com/fr/geophysique-burundi.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georesolveafrica.com/geophysical-surveys-burundi.html"/>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/fr/geophysique-rdc-est.html</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georesolveafrica.com/geophysical-surveys-drc.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://georesolveafrica.com/fr/geophysique-rdc-est.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georesolveafrica.com/geophysical-surveys-drc.html"/>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/fr/geophysique-rwanda.html</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georesolveafrica.com/geophysical-surveys-rwanda.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://georesolveafrica.com/fr/geophysique-rwanda.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georesolveafrica.com/geophysical-surveys-rwanda.html"/>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/fr/</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georesolveafrica.com/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://georesolveafrica.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georesolveafrica.com/"/>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/fr/methods.html</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georesolveafrica.com/methods.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://georesolveafrica.com/fr/methods.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georesolveafrica.com/methods.html"/>
   </url>
   <url>
     <loc>https://georesolveafrica.com/g-flightplanner.html</loc>
-    <lastmod>2026-07-07</lastmod>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/g-geopylanner.html</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/g-resconvt.html</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/g-resolog.html</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/geophysical-surveys-burundi.html</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georesolveafrica.com/geophysical-surveys-burundi.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://georesolveafrica.com/fr/geophysique-burundi.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georesolveafrica.com/geophysical-surveys-burundi.html"/>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/geophysical-surveys-drc.html</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georesolveafrica.com/geophysical-surveys-drc.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://georesolveafrica.com/fr/geophysique-rdc-est.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georesolveafrica.com/geophysical-surveys-drc.html"/>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/geophysical-surveys-rwanda.html</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georesolveafrica.com/geophysical-surveys-rwanda.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://georesolveafrica.com/fr/geophysique-rwanda.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georesolveafrica.com/geophysical-surveys-rwanda.html"/>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/ground-magnetic-survey-uganda.html</loc>
+    <lastmod>2026-07-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://georesolveafrica.com/news/mwogo-rukarara-dam-geophysics.html</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://georesolveafrica.com/ground-penetrating-radar-uganda.html</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/insar-sar-services-uganda.html</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/masw-survey-uganda.html</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/methods.html</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://georesolveafrica.com/methods.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://georesolveafrica.com/fr/methods.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://georesolveafrica.com/methods.html"/>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/projects.html</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://georesolveafrica.com/quality-hse.html</loc>
+    <lastmod>2026-07-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://georesolveafrica.com/news/arua-dam-mapping-seismic.html</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://georesolveafrica.com/seismic-refraction-uganda.html</loc>
+    <lastmod>2026-07-08</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://georesolveafrica.com/news/ert-vs-seismic-refraction-dam-foundation.html</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://georesolveafrica.com/news/geotechnical-site-investigation-cost-uganda-2026.html</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://georesolveafrica.com/news/uganda-rwenzori-reforestation.html</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://georesolveafrica.com/news/tanzania-geopark.html</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://georesolveafrica.com/news/kenya-direct-air-capture.html</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
 </urlset>

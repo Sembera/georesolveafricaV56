@@ -1072,6 +1072,30 @@
             }
         }
 
+        // WP12-B: if the visitor opted into the mailing list on the contact form,
+        // forward the signup to Brevo via the /api/subscribe function (fire-and-forget).
+        function forwardNewsletterOptIn(formData) {
+            try {
+                const optIn = formData.get('newsletter');
+                const email = (formData.get('customer-email') || formData.get('email') || '').toString().trim();
+                const at = email.indexOf('@');
+                const dot = email.lastIndexOf('.');
+                const looksLikeEmail = at > 0 && dot > at && dot < email.length - 1;
+                if (optIn === 'yes' && looksLikeEmail) {
+                    fetch('/api/subscribe', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            email: email,
+                            tool: 'contact',
+                            trigger: 'contact',
+                            pageUrl: window.location.href
+                        })
+                    }).catch(function () {});
+                }
+            } catch (err) { /* never block the contact confirmation */ }
+        }
+
         // Handle form submission
         async function handleFormSubmit(e) {
             e.preventDefault();
@@ -1099,6 +1123,7 @@
 
                     if (response.ok) {
                         showSuccessMessage();
+                        forwardNewsletterOptIn(formData);
                     } else {
                         throw new Error('Form submission failed');
                     }
@@ -1111,6 +1136,7 @@
                     // Show success message after a short delay
                     setTimeout(() => {
                         showSuccessMessage();
+                        forwardNewsletterOptIn(formData);
                     }, 1000);
                 }
             } catch (error) {
