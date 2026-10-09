@@ -98,6 +98,7 @@ function injectFooter() {
                 <div class="footer-bottom-content">
                     <p>&copy; 2026 GeoResolve. All rights reserved.</p>
                     <div class="footer-bottom-links">
+                        <a href="index.html#newsletters">GeoUnlocked Newsletters</a>
                         <a href="contact.html">Privacy Policy</a>
                         <a href="contact.html">Terms of Service</a>
                         <a href="quality-hse.html">QHSE</a>
