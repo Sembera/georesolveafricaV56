@@ -1,5 +1,5 @@
 // =============================================================================
-// G-Resolog — Geological Description Builder
+// G-Log — Geological Description Builder
 // ES module providing dropdown pickers for borehole logging descriptions
 // according to BS 5930 / ISO 14688-14689 / AS 1726 standards.
 // =============================================================================

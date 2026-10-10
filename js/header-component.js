@@ -34,12 +34,14 @@ function injectHeader() {
                 <li><a href="applications.html" class="nav-link">Applications</a></li>
                 <li><a href="projects.html" class="nav-link">Projects</a></li>
                 <li class="has-dropdown">
-                    <a href="g-resolog.html" class="nav-link">Free Tools <span class="dropdown-arrow">&#9662;</span></a>
+                    <a href="free-tools.html" class="nav-link">Free Tools <span class="dropdown-arrow">&#9662;</span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="g-resolog.html">G-Resolog - Borehole Logger</a></li>
-                        <li><a href="g-resconvt.html">G-Resconvt - Coordinate Converter</a></li>
-                        <li><a href="g-geopylanner.html">G-Geopylanner - Geophysics Survey Planner</a></li>
-                        <li><a href="g-flightplanner.html">G-FlightPlanner - Drone Mapping Planner</a></li>
+                    <li><a href="g-resolog.html">G-Log - Borehole Logger</a></li>
+                    <li><a href="g-structural.html">G-Structural - Stereonet, Rose &amp; RMR</a></li>
+                    <li><a href="g-lugeon.html">G-Lugeon - Water Pressure Test</a></li>
+                    <li><a href="g-geopylanner.html">G-PhysicsPlanner - Geophysics Survey Planner</a></li>
+                    <li><a href="g-flightplanner.html">G-FlightPlanner - Drone Mapping Planner</a></li>
+                    <li><a href="g-resconvt.html">G-Resconvt - Coordinate Converter</a></li>
                     </ul>
                 </li>
                 <!-- Resources & News tabs archived for improvement — files retained for later reactivation -->
@@ -60,7 +62,7 @@ function injectHeader() {
 function setupNavigation() {
     const navLinks = document.querySelectorAll('.nav-link');
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    const toolPages = ['g-resolog.html', 'g-resconvt.html', 'g-geopylanner.html', 'g-flightplanner.html'];
+    const toolPages = ['g-resolog.html', 'g-resconvt.html', 'g-geopylanner.html', 'g-flightplanner.html', 'g-structural.html', 'g-lugeon.html', 'free-tools.html'];
     const isFreeToolPage = toolPages.some(page => currentPage === page);
 
     navLinks.forEach(link => {
@@ -68,7 +70,7 @@ function setupNavigation() {
 
         if (href === currentPage || (currentPage === '' && href === 'index.html')) {
             link.classList.add('active');
-        } else if (isFreeToolPage && href === 'g-resolog.html') {
+        } else if (isFreeToolPage && href === 'free-tools.html') {
             link.classList.add('active');
         }
     });

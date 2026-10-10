@@ -5,7 +5,7 @@ import {
   registerProjections, detectUtmCrs, latlngsToUtm, utmToLatlngs, inverseToLonLat,
   polygonAreaUtm, polygonPerimeterUtm, boundingBoxUtm, minimumBoundingRectangle,
   utmZoneLabel, isGeographic, parseCoordinateBlock, coordsToLatlngs, fmt
-} from './geometry.js';
+} from './geometry.js?v=20261010-layout5';
 
 const TILES = {
   osm: {
@@ -57,6 +57,9 @@ export class MapWorkspace {
 
     this._initGeoman();
     this._initMapClickDraw();
+    this.map.on('pm:drawstart', e=>{this.drawMode=e.shape==='Line'?'line':'polygon';this._drawWorking=e.workingLayer;this._liveVerts=[];e.workingLayer.on('pm:vertexadded',()=>{this._liveVerts=this._extractLatlngs(e.workingLayer);this._showLength(this._liveVerts);});});
+    this.map.on('pm:drawend',()=>{this._drawWorking=null;this._liveVerts=[];this.drawMode='none';});
+    this.map.on('mousemove',e=>{if(this.drawMode==='line'){const v=this._drawWorking?this._extractLatlngs(this._drawWorking):this._tempVerts;this._showLength([...v,[e.latlng.lat,e.latlng.lng]]);}});
     // invalidate size after layout settles
     setTimeout(() => this.map.invalidateSize(), 200);
   }
@@ -95,7 +98,9 @@ export class MapWorkspace {
     this._tempLayer = null;
   }
 
+  _showLength(verts){let metres=0;for(let i=1;i<verts.length;i++)metres+=this.map.distance(verts[i-1],verts[i]);const el=document.getElementById('gp-live-length');if(el)el.textContent='Line length: '+metres.toFixed(1)+' m';}
   startDraw(mode) {
+    this.cancelDraw();
     this.drawMode = mode;
     this._tempVerts = [];
     if (this._tempLayer) { this.map.removeLayer(this._tempLayer); this._tempLayer = null; }
@@ -129,6 +134,7 @@ export class MapWorkspace {
   _onManualVertex(e) {
     const ll = [e.latlng.lat, e.latlng.lng];
     this._tempVerts.push(ll);
+    this._showLength(this._tempVerts);
     if (this._tempLayer) this.map.removeLayer(this._tempLayer);
     if (this.drawMode === 'polygon' && this._tempVerts.length >= 2) {
       this._tempLayer = L.polygon(this._tempVerts, { color: '#4DA34D', dashArray: '4 4' }).addTo(this.map);
@@ -158,6 +164,7 @@ export class MapWorkspace {
     }
     try { this.map.pm.disableDraw(); } catch (err) { /* ignore */ }
     layer.remove();
+    this.drawMode="none";
   }
 
   _extractLatlngs(layer) {
@@ -192,6 +199,8 @@ export class MapWorkspace {
     const polyline = L.polyline(latlngs, { color: '#345363', weight: 3 }).addTo(this.linesLayer);
     L.marker(latlngs[0], { title: `${name} start` }).addTo(this.markersLayer).bindTooltip(`${name} start`);
     L.marker(latlngs[latlngs.length - 1], { title: `${name} end` }).addTo(this.markersLayer).bindTooltip(`${name} end`);
+    this._showLength(latlngs);
+    let metres=0;for(let i=1;i<latlngs.length;i++)metres+=this.map.distance(latlngs[i-1],latlngs[i]);polyline.bindTooltip(name+' · '+metres.toFixed(1)+' m');
     this.surveyLines.push({ name, latlngs: latlngs.slice(), layer: polyline });
     this.utmCrs = this.utmCrs || detectUtmCrs(latlngs);
     this._fitIfBoth();
@@ -400,6 +409,7 @@ export class MapWorkspace {
     if (state.crs) rows.push(`<div class="gp-stat-row"><span>UTM CRS</span><strong>${utmZoneLabel(state.crs)}</strong></div>`);
     if (state.surveyLines.length) {
       rows.push(`<div class="gp-stat-row"><span>Survey lines</span><strong>${state.surveyLines.length}</strong></div>`);
+      for(const ln of state.surveyLines){let metres=0;for(let i=1;i<ln.latlngs.length;i++)metres+=this.map.distance(ln.latlngs[i-1],ln.latlngs[i]);rows.push(`<div class="gp-stat-row"><span>${ln.name} length</span><strong>${metres.toFixed(1)} m</strong></div>`);}
     }
     el.innerHTML = rows.join('');
   }

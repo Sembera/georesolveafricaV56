@@ -1,8 +1,9 @@
-// G-Resolog - Export Module (ES Module)
+import { logPurpose } from './templates.js?v=20261010-6';
+// G-Log - Export Module (ES Module)
 // Handles PDF (vector), Excel, CSV, and Print output.
 // CDN deps: svg2pdf.js, jsPDF, SheetJS — loaded dynamically.
 
-import { StripLog } from './striplog.js?v=20260707-4';
+import { StripLog } from './striplog.js?v=20261010-6';
 
 // ─── Private Helpers ──────────────────────────────────────────
 
@@ -48,6 +49,47 @@ function _safeStr(val) {
 function _numOrEmpty(val) {
   if (val == null || val === '') return '';
   return val;
+}
+
+// Expand SVG pattern fills into explicit clipped vector tiles for PDF export.
+// svg2pdf's pattern unit conversion can otherwise shrink geological symbols.
+function expandReportPatterns(svg) {
+  const ns='http://www.w3.org/2000/svg';
+  const defs=svg.querySelector('defs');
+  const patterns=new Map([...svg.querySelectorAll('pattern')].map(p=>[p.id,p]));
+  // Source swatch clips must be available outside the pattern definition.
+  [...svg.querySelectorAll('pattern clipPath')].forEach(clip=>defs.appendChild(clip));
+  let index=0;
+  [...svg.querySelectorAll('rect[fill]')].forEach(rect=>{
+    const match=/^url\(#([^)]*)\)$/.exec(rect.getAttribute('fill'));
+    const pattern=match && patterns.get(match[1]);
+    if(!pattern) return;
+    const x=Number(rect.getAttribute('x') || 0),y=Number(rect.getAttribute('y') || 0);
+    const w=Number(rect.getAttribute('width')),h=Number(rect.getAttribute('height'));
+    const tileW=Number(pattern.getAttribute('width')),tileH=Number(pattern.getAttribute('height'));
+    const clip=document.createElementNS(ns,'clipPath'); const clipId='pdf-pattern-area-'+index++;
+    clip.id=clipId; clip.setAttribute('clipPathUnits','userSpaceOnUse');
+    const bounds=document.createElementNS(ns,'rect');
+    Object.entries({x,y,width:w,height:h}).forEach(([k,v])=>bounds.setAttribute(k,v));clip.appendChild(bounds);defs.appendChild(clip);
+    const wrapper=document.createElementNS(ns,'g');
+    const background=rect.cloneNode(false);background.setAttribute('fill','white');wrapper.appendChild(background);
+    const artwork=document.createElementNS(ns,'g');artwork.setAttribute('clip-path','url(#'+clipId+')');
+    for(let ty=Math.floor(y/tileH)*tileH;ty<y+h;ty+=tileH) {
+      for(let tx=Math.floor(x/tileW)*tileW;tx<x+w;tx+=tileW) {
+        const tile=document.createElementNS(ns,'g');tile.setAttribute('transform','translate('+tx+' '+ty+')');
+        // Retain the native tile bounds rather than bleeding source vectors over a seam.
+        const tileClip=document.createElementNS(ns,'clipPath');const tileId='pdf-pattern-tile-'+index++;
+        tileClip.id=tileId;tileClip.setAttribute('clipPathUnits','userSpaceOnUse');
+        const tileRect=document.createElementNS(ns,'rect');tileRect.setAttribute('width',tileW);tileRect.setAttribute('height',tileH);tileClip.appendChild(tileRect);defs.appendChild(tileClip);
+        const content=document.createElementNS(ns,'g');content.setAttribute('clip-path','url(#'+tileId+')');
+        [...pattern.children].filter(el=>el.tagName.toLowerCase()!=='defs').forEach(el=>content.appendChild(el.cloneNode(true)));
+        tile.appendChild(content);artwork.appendChild(tile);
+      }
+    }
+    wrapper.appendChild(artwork);
+    const border=rect.cloneNode(false);border.setAttribute('fill','none');wrapper.appendChild(border);
+    rect.replaceWith(wrapper);
+  });
 }
 
 // ─── SVG Header Builder ───────────────────────────────────────
@@ -131,7 +173,7 @@ function _makeSVGFooter(pageW, footerH) {
   y += 4;
 
   // App branding
-  html += `<text x="${marginX}" y="${y}" font-family="Arial, sans-serif" font-size="${fontSize}" fill="#555">G-Resolog — Georesolve Africa</text>`;
+  html += `<text x="${marginX}" y="${y}" font-family="Arial, sans-serif" font-size="${fontSize}" fill="#555">G-Log — Georesolve Africa</text>`;
   html += `<text x="${pageW - marginX}" y="${y}" font-family="Arial, sans-serif" font-size="${fontSize}" fill="#555" text-anchor="end">Generated: ${_fmtDate()}</text>`;
   y += 6;
 
@@ -197,179 +239,39 @@ export const Exports = {
    * @param {Object} options     - { scale, a4, landscape, includeHeader, includeFooter }
    */
   async exportPDF(hole, intervals, fieldTests, samples, waterStrikes, casing, project, options = {}) {
-    try {
-      const opts = {
-        scale: 100,
-        a4: true,
-        landscape: true,
-        includeHeader: true,
-        includeFooter: true,
-        ...options
-      };
-
-      // Show a loading indicator if available
-      const loadingEl = document.getElementById('save-indicator');
-      if (loadingEl) {
-        loadingEl.textContent = 'Generating PDF\u2026';
-        loadingEl.style.display = 'block';
-      }
-
-      // Load CDN libraries
-      await _ensurePDFLibs();
-
-      const { jspdf } = window;
-      // eslint-disable-next-line no-undef
-      const svg2pdf = typeof window.svg2pdf === 'function' ? window.svg2pdf : window.svg2pdf?.svg2pdf;
-
-      // Page dimensions in mm
-      const pageW = opts.landscape ? 297 : 210;
-      const pageH = opts.landscape ? 210 : 297;
-
-      // Fixed header / footer heights (mm)
-      const headerHeight = opts.includeHeader ? 30 : 0;
-      const footerHeight = opts.includeFooter ? 15 : 0;
-
-      // Usable log area
-      const usableH = pageH - headerHeight - footerHeight;
-
-      // Scale: mm per metre of depth
-      const mmPerM = opts.scale / 100;
-      // How much depth fits per page
-      const depthPerPage = usableH / mmPerM;
-
-      // Determine total depth
-      let totalDepth = hole.depth || 0;
-      if (!totalDepth && intervals.length > 0) {
-        totalDepth = Math.max(...intervals.map(i => i.baseDepth != null ? i.baseDepth : (i.topDepth != null ? i.topDepth : 0)));
-      }
-      if (totalDepth <= 0) {
-        totalDepth = 10; // fallback
-      }
-
-      // Split into pages
-      const pages = [];
-      let currentTop = 0;
-      while (currentTop < totalDepth) {
-        const pageBottom = Math.min(currentTop + depthPerPage, totalDepth);
-
-        // Filter intervals that overlap this page's depth range
-        const pageIntervals = intervals.filter(iv => {
-          const t = iv.topDepth != null ? iv.topDepth : 0;
-          const b = iv.baseDepth != null ? iv.baseDepth : t;
-          return t < pageBottom && b > currentTop;
-        }).map(iv => {
-          // Clone and clamp to page range
-          const t = Math.max(iv.topDepth != null ? iv.topDepth : 0, currentTop);
-          const b = Math.min(iv.baseDepth != null ? iv.baseDepth : t, pageBottom);
-          return { ...iv, topDepth: t, baseDepth: b };
-        });
-
-        // Filter field tests for this page
-        const pageFieldTests = fieldTests.filter(ft => {
-          const d = ft.depth != null ? ft.depth : 0;
-          return d >= currentTop && d < pageBottom;
-        });
-
-        // Filter samples for this page
-        const pageSamples = samples.filter(s => {
-          const st = s.topDepth != null ? s.topDepth : 0;
-          const sb = s.baseDepth != null ? s.baseDepth : st;
-          return st < pageBottom && sb > currentTop;
-        });
-
-        // Filter water strikes for this page
-        const pageWaterStrikes = waterStrikes.filter(ws => {
-          const d = ws.depth != null ? ws.depth : 0;
-          return d >= currentTop && d < pageBottom;
-        });
-
-        // Filter casing for this page
-        const pageCasing = casing.filter(c => {
-          const ct = c.topDepth != null ? c.topDepth : 0;
-          const cb = c.baseDepth != null ? c.baseDepth : ct;
-          return ct < pageBottom && cb > currentTop;
-        });
-
-        pages.push({
-          topDepth: currentTop,
-          bottomDepth: pageBottom,
-          intervals: pageIntervals,
-          fieldTests: pageFieldTests,
-          samples: pageSamples,
-          waterStrikes: pageWaterStrikes,
-          casing: pageCasing
-        });
-
-        currentTop = pageBottom;
-      }
-
-      const totalPages = pages.length;
-
-      // Create jsPDF document
-      const doc = new jspdf.jsPDF({
-        orientation: opts.landscape ? 'landscape' : 'portrait',
-        unit: 'mm',
-        format: 'a4'
-      });
-
-      for (let i = 0; i < totalPages; i++) {
-        const page = pages[i];
-
-        if (i > 0) {
-          doc.addPage();
-        }
-
-        // Build the SVG for this page
-        let svgContent = '';
-
-        // Header
-        if (opts.includeHeader) {
-          svgContent += _makeSVGHeader(hole, project, i + 1, totalPages, pageW, headerHeight);
-        }
-
-        // Log body — use StripLog to render SVG for this page's depth range
-        const logSVG = await _renderLogSVGForPage(
-          page, hole, project, pageW, usableH, headerHeight, mmPerM
-        );
-        svgContent += logSVG;
-
-        // Footer on last page
-        if (opts.includeFooter && i === totalPages - 1) {
-          svgContent += _makeSVGFooter(pageW, footerHeight);
-        }
-
-        // Wrap in full SVG and parse it into an element for svg2pdf.
-        const fullSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="${pageW}mm" height="${pageH}mm" viewBox="0 0 ${pageW} ${pageH}">${svgContent}</svg>`;
-        const svgDoc = new DOMParser().parseFromString(fullSVG, 'image/svg+xml');
-        const svgElement = svgDoc.documentElement;
-
-        // Convert SVG to PDF via svg2pdf
-        await svg2pdf(svgElement, doc, {
-          x: 0,
-          y: 0,
-          width: pageW,
-          height: pageH
-        });
-      }
-
-      // Save
-      const dateStr = _fmtDate();
-      const holeName = (hole.name || 'BH').replace(/[^a-zA-Z0-9_-]/g, '_');
-      const projName = (project.name || 'Project').replace(/[^a-zA-Z0-9_-]/g, '_');
-      doc.save(`${holeName}_${projName}_Log_${dateStr}.pdf`);
-
-      if (loadingEl) {
-        loadingEl.style.display = 'none';
-      }
-    } catch (err) {
-      console.error('exportPDF error:', err);
-      const loadingEl = document.getElementById('save-indicator');
-      if (loadingEl) {
-        loadingEl.textContent = 'PDF generation failed';
-        loadingEl.style.display = 'block';
-        setTimeout(() => { loadingEl.style.display = 'none'; }, 3000);
-      }
+    await _ensurePDFLibs();
+    const totalDepth = Number(hole.depth) || Math.max(0, ...intervals.map(iv => Number(iv.baseDepth) || 0));
+    if (!(totalDepth > 0)) throw new Error('Enter a total depth or at least one valid interval before exporting.');
+    const landscape = options.landscape === true;
+    const pageW = landscape ? 297 : 210, pageH = landscape ? 210 : 297;
+    const doc = new window.jspdf.jsPDF({ orientation: landscape ? 'landscape' : 'portrait', unit: 'mm', format: 'a4' });
+    const mmPerM = StripLog.mmPerUnit;
+    const width = StripLog.render(hole, [], [], [], [], [], project).querySelector('svg').viewBox.baseVal.width;
+    const factor = Math.min(1, (pageW - 20) / width);
+    const depthPerPage = Math.floor(((pageH - 30) / factor - 71) / mmPerM);
+    if(depthPerPage < 1) throw new Error('This report has too many columns to fit the page. Hide optional columns.');
+    const pages = Math.ceil(totalDepth / depthPerPage);
+    function clip(items,top,bottom) {
+      return items.filter(iv => iv.baseDepth > top && iv.topDepth < bottom).map(iv => ({...iv,topDepth:Math.max(top,iv.topDepth),baseDepth:Math.min(bottom,iv.baseDepth)}));
     }
+    for(let page=0;page<pages;page++) {
+      if(page) doc.addPage();
+      const top = page * depthPerPage, bottom = Math.min(totalDepth,top+depthPerPage);
+      const wrapper = StripLog.render(hole, clip(intervals,top,bottom),
+        fieldTests.filter(ft=>ft.depth>=top && (ft.depth<bottom || page===pages-1 && ft.depth===bottom)),
+        clip(samples,top,bottom), waterStrikes.filter(ws=>ws.depth>=top && (ws.depth<bottom || page===pages-1 && ws.depth===bottom)),
+        clip(casing,top,bottom), project, {topDepth:top,bottomDepth:bottom});
+      const svg = wrapper.querySelector('svg');
+      expandReportPatterns(svg);
+      svg.querySelectorAll('text').forEach(text => { text.textContent = text.textContent.replace(/[\u2010-\u2015]/g,'-'); });
+      wrapper.style.position='fixed'; wrapper.style.left='-10000px'; document.body.appendChild(wrapper);
+      try { await doc.svg(svg,{x:10,y:10,width:width*factor,height:svg.viewBox.baseVal.height*factor}); } finally { wrapper.remove(); }
+      doc.setFontSize(8); doc.setTextColor(70);
+      doc.text('G-Log | Scale 1:'+Math.round(StripLog.scale/factor)+' | Depth '+top+'-'+bottom+' m',10,pageH-10);
+      doc.text('Page '+(page+1)+' of '+pages,pageW-10,pageH-10,{align:'right'});
+    }
+    const filename = [hole.name || 'BH',project.name || 'Project','Log',_fmtDate()].join('_').replace(/[^a-zA-Z0-9_-]/g,'_');
+    doc.save(filename+'.pdf');
   },
 
   // ─── Excel Export ───────────────────────────────────────────
@@ -394,7 +296,7 @@ export const Exports = {
       // --- Sheet 1: Holes ---
       const holesData = [
         ['Name', 'Type', 'Easting', 'Northing', 'RL', 'Depth (m)', 'Method',
-          'Diameter (mm)', 'Inclination', 'Azimuth', 'Start Date', 'Logged By', 'Checked By']
+          'Diameter (mm)', 'Inclination', 'Azimuth', 'Start Date', 'Logged By', 'Checked By', 'Log Purpose']
       ];
       for (const h of (holes || [])) {
         holesData.push([
@@ -410,7 +312,8 @@ export const Exports = {
           _numOrEmpty(h.azimuth),
           _safeStr(h.startDate),
           _safeStr(h.loggedBy),
-          _safeStr(h.checkedBy)
+          _safeStr(h.checkedBy),
+          logPurpose(h)
         ]);
       }
       _addSheet(wb, XLSX, holesData, 'Holes');
@@ -522,7 +425,7 @@ export const Exports = {
       }
 
       // Holes
-      let csv = 'Name,Type,Easting,Northing,RL,Depth (m),Method,Diameter (mm),Inclination,Azimuth,Start Date,Logged By,Checked By\r\n';
+      let csv = 'Name,Type,Easting,Northing,RL,Depth (m),Method,Diameter (mm),Inclination,Azimuth,Start Date,Logged By,Checked By,Log Purpose\r\n';
       for (const h of (holes || [])) {
         csv += [
           _escapeCSV(h.name),
@@ -537,7 +440,8 @@ export const Exports = {
           _numOrEmpty(h.azimuth),
           _escapeCSV(h.startDate),
           _escapeCSV(h.loggedBy),
-          _escapeCSV(h.checkedBy)
+          _escapeCSV(h.checkedBy),
+          _escapeCSV(logPurpose(h))
         ].join(',') + '\r\n';
       }
       downloadCSV(`${projNameBase}_Holes.csv`, csv);

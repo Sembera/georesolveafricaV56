@@ -1,17 +1,20 @@
+import { LITHOLOGY_ASSETS } from './lithology-assets.js?v=20261010-6';
+import { LOG_TEMPLATES, logPurpose } from './templates.js?v=20261010-6';
 // =============================================================================
-// G-Resolog - Main UI Controller (ES Module)
+// G-Log - Main UI Controller (ES Module)
 // =============================================================================
 
-import { Model } from './model.js?v=20260707-4';
-import { StripLog } from './striplog.js?v=20260707-4';
-import { Exports } from './exports.js?v=20260707-6';
-import { DescBuilder } from './description-builder.js?v=20260707-4';
+import { exampleProject } from './example.js?v=20261010-6';
+import { Model } from './model.js?v=20261010-6';
+import { StripLog } from './striplog.js?v=20261010-6';
+import { Exports } from './exports.js?v=20261010-6';
+import { DescBuilder } from './description-builder.js?v=20261010-6';
 
 // ─── Embedded Stylesheet ─────────────────────────────────────────────────────
 
 const STYLES = `
 .gresolog-app{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f5f6f8;color:#1a1a2e;min-height:100vh;display:flex;flex-direction:column}
-.gresolog-app *{box-sizing:border-box}
+.example-banner{margin:12px;padding:16px;background:#e9f3ed;border:1px solid #bdd8c5;border-radius:8px;color:#234334}.example-banner p{font-size:13px;line-height:1.6;max-width:900px;margin:8px 0 12px}.gresolog-app *{box-sizing:border-box}
 body.dark .gresolog-app{background:#1a1a2e;color:#e0e0e0}
 .toolbar{display:flex;align-items:center;gap:6px;padding:8px 12px;background:#fff;border-bottom:1px solid #ddd;position:sticky;top:0;z-index:100;flex-wrap:wrap;box-shadow:0 1px 3px rgba(0,0,0,.08)}
 body.dark .toolbar{background:#16213e;border-color:#333;box-shadow:0 1px 3px rgba(0,0,0,.3)}
@@ -126,14 +129,14 @@ body.dark .interval-card-body{border-color:#333}
 .interval-card-body.collapsed{display:none}
 .interval-card.overlap{border-left:3px solid #d9534f}
 .interval-card.gap{border-left:3px solid #f0ad4e}
-.pattern-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-top:4px}
+.pattern-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:6px}
 .pattern-swatch{padding:6px 4px;border:1px solid #ddd;border-radius:4px;cursor:pointer;font-size:10px;text-align:center;background:#fff;color:#1a1a2e;transition:all .15s}
 body.dark .pattern-swatch{background:#1e2d4a;color:#e0e0e0;border-color:#444}
 .pattern-swatch:hover{background:#f0f4f8}
 body.dark .pattern-swatch:hover{background:#243354}
 .pattern-swatch.selected{border-color:#345363;background:rgba(52,83,99,.1);color:#345363;font-weight:600}
 body.dark .pattern-swatch.selected{background:rgba(158,219,158,.1);color:#9EDB9E;border-color:#9EDB9E}
-.pattern-swatch-preview{width:100%;height:18px;margin-bottom:2px;border-radius:2px}
+.pattern-swatch-preview{display:block;width:100%;height:38px;margin-bottom:5px;border:1px solid #d8dde0;background:white;object-fit:cover}.pattern-group-title{grid-column:1/-1;font-size:11px;font-weight:600;padding-top:10px}.pattern-source{display:block;font-size:9px;color:#68747c;margin-top:3px}.pattern-swatch{font-family:inherit}.pattern-swatch:focus-visible{outline:2px solid #345363;outline-offset:2px}
 .desc-builder{background:#fafafa;border:1px solid #ddd;border-radius:4px;padding:10px;margin-top:8px}
 body.dark .desc-builder{background:#1e2d4a;border-color:#444}
 .desc-builder-soil,.desc-builder-rock{display:flex;flex-direction:column;gap:8px}
@@ -170,7 +173,7 @@ body.dark .modal-footer{border-color:#333}
 body.dark .empty-state h2{color:#9EDB9E}
 .empty-state p{color:#555;font-size:14px;max-width:400px;line-height:1.5}
 body.dark .empty-state p{color:#aaa}
-.striplog-container{padding:8px;display:flex;justify-content:center}
+.striplog-container{padding:24px;display:flex;justify-content:center;align-items:flex-start}.striplog-container svg{background:white;box-shadow:0 3px 18px rgba(20,40,50,.15);flex-shrink:0;border:14px solid white}
 .striplog-toolbar{display:flex;align-items:center;gap:8px;padding:8px 12px;background:#fff;border-bottom:1px solid #ddd;flex-wrap:wrap}
 body.dark .striplog-toolbar{background:#16213e;border-color:#333}
 .striplog-toolbar .btn{font-size:11px;padding:4px 8px}
@@ -197,6 +200,7 @@ function h(tag, attrs, children) {
       else if (k === 'innerHTML') el.innerHTML = v;
       else if (k === 'style' && typeof v === 'object') Object.assign(el.style, v);
       else if (k.startsWith('on')) el.addEventListener(k.slice(2), v);
+      else if (['selected', 'disabled', 'checked', 'required'].includes(k)) { if (v) el.setAttribute(k, ''); }
       else el.setAttribute(k, v);
     }
   }
@@ -217,8 +221,7 @@ function debounce(k, fn, ms) { if (_timers[k]) clearTimeout(_timers[k]); _timers
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
-const PATTERNS = ['topsoil','clay','silt','sand','gravel','laterite','fill','peat','sandstone','siltstone','mudstone','shale','limestone','granite','gneiss','schist','quartzite','basalt','weathered_rock','core_loss'];
-const PATTERN_COLORS = {topsoil:'#f5f0e0',clay:'#faf8f0',silt:'#fdfbf7',sand:'#fffef8',gravel:'#fefefb',laterite:'#e8c8a0',fill:'#f5f2ea',peat:'#e8d8b8',sandstone:'#fef9e0',siltstone:'#f8f4ec',mudstone:'#d8d0c4',shale:'#e0dcd4',limestone:'#f8f4e8',granite:'#faf5f0',gneiss:'#f8f4f0',schist:'#f6f2ec',quartzite:'#fefefa',basalt:'#585858',weathered_rock:'#e8dcc8',core_loss:'#fff'};
+const PATTERNS = Object.keys(LITHOLOGY_ASSETS);
 const HOLE_TYPE_BADGE = {soil:'soil',core:'core',rc:'rc',testpit:'testpit'};
 const SAMPLE_TYPE_LABELS = {S:'Small Disturbed',U:'Undisturbed',D:'Disturbed',B:'Bulk',W:'Water'};
 const FT_LABELS = {SPT:'SPT N',PP:'Pocket Pen.',SV:'Shear Vane',PL:'Point Load',DCP:'DCP',Other:'Other'};
@@ -269,7 +272,20 @@ export const UI = {
     this.setupKeyboardShortcuts();
     this.setupAutoSave();
     if (Model.projects.length > 0) { await this.showProjectManager(); }
-    else { this._showCreateProjectModal(); }
+    else { await this.openExample(); }
+  },
+
+  async openExample(purpose = 'geotechnical') {
+    try {
+      let project = Model.projects.find(p => p.defaults?.example && (p.defaults.examplePurpose || 'geotechnical') === purpose);
+      if (!project) project = await Model.importProjectJSON(exampleProject(purpose));
+      await Model.selectProject(project.id);
+      await this.showLoggingView();
+    } catch (error) {
+      console.error('Example could not be opened:', error);
+      await this.showProjectManager();
+      alert('The example could not be loaded. Please check that browser storage is available.');
+    }
   },
 
   _ensureDOM() {
@@ -289,12 +305,20 @@ export const UI = {
     const mc = $('#main-content'); clr(mc);
     mc.appendChild(h('div', { id: 'project-manager', className: 'project-manager' }));
     await this.renderProjectManager();
+    this.renderToolbar();
   },
 
   async showLoggingView() {
     if (!Model.currentProject) return;
     _currentView = 'logging';
     const mc = $('#main-content'); clr(mc);
+    if (Model.currentProject.defaults?.example) {
+      mc.appendChild(h('section', { className: 'example-banner', 'aria-label': 'Example project' }, [
+        h('strong', {}, 'Example data — see your finished log before you start'),
+        h('p', {}, 'Choose an example layout below to explore a finished report. All observations are synthetic. Start a clean project for your own records; changing the report layout does not change your measurements.'),
+        h('button', { className: 'btn btn-primary', onclick: () => this._showCreateProjectModal() }, 'Start my project')
+      ]));
+    }
     const ws = h('div', { id: 'logging-workspace', className: 'logging-workspace' });
     const left = h('div', { id: 'left-panel', className: 'left-panel' });
     left.appendChild(h('div', { id: 'hole-tabs', className: 'hole-tabs' }));
@@ -306,8 +330,8 @@ export const UI = {
     this.renderToolbar();
     const scrollEl = $('#left-scroll');
     ['hole-form-section','intervals-section','fieldtests-section','samples-section','water-section','casing-section'].forEach(id => scrollEl.appendChild(h('div', { id })));
-    this._renderStriplogToolbar();
     await this._loadHoleView();
+    this._renderStriplogToolbar();
   },
 
   async _loadHoleView() {
@@ -319,7 +343,7 @@ export const UI = {
     if (!Model.currentHole) { try { await Model.selectHole(holes[0].id); } catch (e) { return; } }
     await this.renderHoleTabs(); await this.renderHoleForm(); await this.renderIntervals();
     await this.renderFieldTests(); await this.renderSamples(); await this.renderWaterStrikes(); await this.renderCasing();
-    this.renderToolbar(); this.refreshStripLog();
+    this.renderToolbar(); this.refreshStripLog(); this._renderStriplogToolbar();
   },
 
   async _getProjectHoles() {
@@ -341,11 +365,11 @@ export const UI = {
   async _quickAddHole() {
     this._showModal('Add Borehole', `
       <div class="form-group"><label class="form-label">Borehole Name *</label><input class="form-input" id="mh-name" value="BH-01" required></div>
-      <div class="form-group mt-8"><label class="form-label">Type</label><select class="form-select" id="mh-type"><option value="soil" selected>Soil Borehole</option><option value="core">Core Borehole</option><option value="rc">RC Borehole</option><option value="testpit">Test Pit</option></select></div>
+      <div class="form-group mt-8"><label class="form-label" for="mh-purpose">Log purpose</label><select class="form-select" id="mh-purpose">${Object.entries(LOG_TEMPLATES).map(([key,t])=>`<option value="${key}">${t.label}</option>`).join('')}</select></div><div class="form-group mt-8"><label class="form-label">Drilling / sampling type</label><select class="form-select" id="mh-type"><option value="soil" selected>Soil Borehole</option><option value="core">Core Borehole</option><option value="rc">RC Borehole</option><option value="testpit">Test Pit</option></select></div>
     `, async () => {
       const name = $('#mh-name')?.value.trim(); if (!name) return alert('Borehole name is required');
       const type = $('#mh-type')?.value || 'soil';
-      try { await Model.createHole({ projectId: Model.currentProject.id, name, type }); await this._loadHoleView(); }
+      try { const hole=await Model.createHole({ projectId: Model.currentProject.id, name, type, purpose:$('#mh-purpose').value }); await Model.selectHole(hole.id); await this._loadHoleView(); this._renderStriplogToolbar(); }
       catch (e) { console.error(e); }
     });
   },
@@ -362,9 +386,9 @@ export const UI = {
     const newBtn = h('button', { className: 'btn btn-primary', onclick: () => this._showCreateProjectModal() }, 'New Project');
     const impLbl = h('label', { className: 'btn btn-secondary', style: { cursor: 'pointer' } }, 'Import JSON');
     const impInp = h('input', { type: 'file', accept: '.json', style: { display: 'none' }, onchange: (e) => this._handleImportProject(e) });
-    impLbl.appendChild(impInp); acts.appendChild(newBtn); acts.appendChild(impLbl); hdr.appendChild(acts); pm.appendChild(hdr);
+    impLbl.appendChild(impInp); acts.appendChild(newBtn); acts.appendChild(h('button', { className: 'btn btn-secondary', onclick: () => this.openExample() }, 'Open example')); acts.appendChild(impLbl); hdr.appendChild(acts); pm.appendChild(hdr);
     if (Model.projects.length === 0) {
-      pm.appendChild(h('div', { className: 'empty-state' }, [h('h2', {}, 'Welcome to G-Resolog'), h('p', {}, 'Create your first project to start logging boreholes.'), h('button', { className: 'btn btn-primary mt-8', onclick: () => this._showCreateProjectModal() }, 'Create Your First Project')]));
+      pm.appendChild(h('div', { className: 'empty-state' }, [h('h2', {}, 'Welcome to G-Log'), h('p', {}, 'Create your first project to start logging boreholes.'), h('button', { className: 'btn btn-primary mt-8', onclick: () => this._showCreateProjectModal() }, 'Create Your First Project')]));
       return;
     }
     const grid = h('div', { className: 'project-grid' });
@@ -410,19 +434,31 @@ export const UI = {
     e.target.value = '';
   },
 
-  _showCreateProjectModal() {
-    this._showModal('New Project', `
+  _showCreateProjectModal(edit = false) {
+    const existing = edit ? Model.currentProject : null;
+    this._showModal(edit ? 'Project details' : 'New Project', `
       <div class="form-group"><label class="form-label">Project Name *</label><input class="form-input" id="mp-name" required></div>
-      <div class="form-row form-row-2 mt-8"><div class="form-group"><label class="form-label">Client</label><input class="form-input" id="mp-client"></div><div class="form-group"><label class="form-label">Job No</label><input class="form-input" id="mp-jobno"></div></div>
-      <div class="form-row form-row-2 mt-8"><div class="form-group"><label class="form-label">Datum</label><input class="form-input" id="mp-datum"></div><div class="form-group"><label class="form-label">EPSG</label><input class="form-input" id="mp-epsg"></div></div>
+      <div class="form-group mt-8"><label class="form-label" for="mp-purpose">Log purpose</label><select class="form-select" id="mp-purpose">${Object.entries(LOG_TEMPLATES).map(([key,t]) => `<option value="${key}">${t.label}</option>`).join('')}</select></div><p class="text-sm">Start with a name and a blank borehole. Add observations to see your log; project details can follow.</p><details><summary>Additional project details (optional)</summary><div class="form-row form-row-2 mt-8"><div class="form-group"><label class="form-label">Client</label><input class="form-input" id="mp-client"></div><div class="form-group"><label class="form-label">Job No</label><input class="form-input" id="mp-jobno"></div></div>
+      <div class="form-row form-row-2 mt-8"><div class="form-group"><label class="form-label">Datum</label><input class="form-input" id="mp-datum"></div><div class="form-group"><label class="form-label">EPSG</label><input class="form-input" id="mp-epsg"></div></div></details>
     `, async () => {
       const name = $('#mp-name')?.value.trim(); if (!name) return alert('Project name is required');
       try {
-        const proj = await Model.createProject({ name, client: $('#mp-client')?.value || '', jobNo: $('#mp-jobno')?.value || '', datum: $('#mp-datum')?.value || '', epsg: $('#mp-epsg')?.value || '' });
+        const values = { name, client: $('#mp-client')?.value || '', jobNo: $('#mp-jobno')?.value || '', datum: $('#mp-datum')?.value || '', epsg: $('#mp-epsg')?.value || '' };
+        if (existing) { await Model.updateProject(existing.id, values); await this.showLoggingView(); return; }
+        const proj = await Model.createProject(values);
         Model.currentProject = proj;
+        const hole = await Model.createHole({ projectId: proj.id, name: 'BH01', purpose: $('#mp-purpose').value, type: $('#mp-purpose').value === 'mining' ? 'core' : $('#mp-purpose').value === 'testpit' ? 'testpit' : 'soil' });
+        await Model.selectHole(hole.id);
         await this.showLoggingView();
       } catch (err) { console.error(err); }
     });
+    if (!existing && Model.currentHole) $('#mp-purpose').value = logPurpose(Model.currentHole);
+    if (existing) {
+      $('#mp-purpose').closest('.form-group').remove();
+      for (const key of ['name', 'client', 'jobno', 'datum', 'epsg']) {
+        $('#mp-' + key).value = existing[key === 'jobno' ? 'jobNo' : key] || '';
+      }
+    }
   },
 
   // ===========================================================================
@@ -444,7 +480,7 @@ export const UI = {
         }
       }
     } else {
-      left.appendChild(h('span', { className: 'toolbar-title' }, 'G-Resolog'));
+      left.appendChild(h('span', { className: 'toolbar-title' }, 'G-Log'));
     }
     tb.appendChild(left);
 
@@ -456,6 +492,7 @@ export const UI = {
     // Right group
     const right = h('div', { className: 'toolbar-group' });
     if (_currentView === 'logging') {
+      if (!Model.currentProject.defaults?.example) right.appendChild(h('button', { className: 'toolbar-btn', onclick: () => this._showCreateProjectModal(true) }, 'Project details'));
       right.appendChild(h('button', { className: 'toolbar-btn btn-sm', onclick: () => this._handleExportPDF(), title: 'Export PDF' }, 'PDF'));
       right.appendChild(h('button', { className: 'toolbar-btn btn-sm', onclick: () => this._handleExportExcel(), title: 'Export Excel' }, 'XLSX'));
       right.appendChild(h('button', { className: 'toolbar-btn btn-sm', onclick: () => this._handleExportCSV(), title: 'Export CSV' }, 'CSV'));
@@ -471,6 +508,18 @@ export const UI = {
   _renderStriplogToolbar() {
     const st = $('#striplog-toolbar'); if (!st) return; clr(st);
 
+    if (Model.currentHole) {
+      StripLog.applyTemplate(Model.currentHole);
+      st.appendChild(h('label', { for:'report-purpose', className:'text-sm' }, 'Report layout:'));
+      st.appendChild(h('select', { id:'report-purpose', className:'form-select', onchange: async e => {
+        await Model.updateHole(Model.currentHole.id, {purpose:e.target.value,reportColumns:null});
+        this.refreshStripLog(); this._renderStriplogToolbar();
+      } }, Object.entries(LOG_TEMPLATES).map(([key,t])=>h('option',{value:key,selected:key===logPurpose(Model.currentHole)},t.label))));
+      if(Model.currentProject.defaults?.example) {
+        st.appendChild(h('label', {for:'example-purpose',className:'text-sm'}, 'Load sample:'));
+        st.appendChild(h('select', {id:'example-purpose',className:'form-select',onchange:e=>this.openExample(e.target.value)}, Object.entries(LOG_TEMPLATES).map(([key,t])=>h('option',{value:key,selected:key===(Model.currentProject.defaults.examplePurpose || 'geotechnical')},t.label))));
+      }
+    }
     // Scale buttons
     const scaleGroup = h('div', { className: 'toolbar-group' });
     [50, 100, 200].forEach(s => {
@@ -486,11 +535,11 @@ export const UI = {
     const cols = [
       ['depthRuler','Depth'],['drillingMethod','Method'],['water','Water'],['samples','Samples'],
       ['spt','SPT'],['lithology','Lithology'],['description','Desc'],['weathering','Weath.'],
-      ['strength','Strength'],['rqd','RQD'],['defects','Defects']
+      ['strength','Strength'],['rqd','RQD'],['defects','Defects'],['recovery','TCR'],['construction','Well construction']
     ];
     cols.forEach(([key, label]) => {
-      const visible = StripLog[`show${key[0].toUpperCase()}${key.slice(1)}`];
-      const btn = h('button', { className: `btn btn-sm ${visible ? 'active' : ''}`, onclick: () => { StripLog.toggleColumn(key); this.refreshStripLog(); this._renderStriplogToolbar(); } }, label);
+      const visible = StripLog._isColVisible(key);
+      const btn = h('button', { className: `btn btn-sm ${visible ? 'active' : ''}`, onclick: async () => { const cols = StripLog._colOrder.filter(c=>StripLog._isColVisible(c)); const next=cols.includes(key)?cols.filter(c=>c!==key):[...cols,key]; await Model.updateHole(Model.currentHole.id,{reportColumns:next}); this.refreshStripLog(); this._renderStriplogToolbar(); } }, label);
       st.appendChild(btn);
     });
   },
@@ -621,6 +670,7 @@ export const UI = {
     } catch (e) { console.error(e); }
     if (key === 'name' || key === 'type') { this.renderHoleTabs(); this.renderToolbar(); }
     this.refreshStripLog();
+    if(key === 'type') this._renderStriplogToolbar();
   },
 
   // ===========================================================================
@@ -760,13 +810,21 @@ export const UI = {
 
     // Pattern picker
     const patGroup = h('div', { className: 'form-group mb-8' });
-    patGroup.appendChild(h('label', { className: 'form-label' }, 'Pattern'));
+    patGroup.appendChild(h('label', { className: 'form-label' }, 'Lithology symbol'));
+    patGroup.appendChild(h('a', {href:'resources/lithology/catalog.html',target:'_blank',rel:'noopener',className:'text-sm'}, 'View symbol library and sources'));
     const patGrid = h('div', { className: 'pattern-grid' });
+    let previousGroup = '';
     PATTERNS.forEach(p => {
-      const sw = h('div', { className: `pattern-swatch${iv.pattern === p ? ' selected' : ''}`,
+      const asset = LITHOLOGY_ASSETS[p];
+      if(asset.group !== previousGroup) {
+        patGrid.appendChild(h('div',{className:'pattern-group-title'},asset.group)); previousGroup=asset.group;
+      }
+      const sw = h('button', { type:'button', className: `pattern-swatch${iv.pattern === p ? ' selected' : ''}`,
+        'aria-pressed': iv.pattern === p ? 'true':'false', title:asset.source+(asset.code ? ' - '+asset.code:''),
         onclick: () => this._updateIntervalField(iv.id, 'pattern', p) });
-      sw.appendChild(h('div', { className: 'pattern-swatch-preview', style: { backgroundColor: PATTERN_COLORS[p]||'#ccc' } }));
-      sw.appendChild(h('span', {}, p.replace(/_/g,' ')));
+      sw.appendChild(h('img', {src:`resources/lithology/${p}.svg?v=20261010-6`,alt:'',className:'pattern-swatch-preview',loading:'lazy'}));
+      sw.appendChild(h('span', {}, asset.label));
+      sw.appendChild(h('small',{className:'pattern-source'},asset.code ? `FGDC ${asset.code}` : 'Field symbol'));
       patGrid.appendChild(sw);
     });
     patGroup.appendChild(patGrid); form.appendChild(patGroup);
@@ -856,13 +914,13 @@ export const UI = {
     // Defect spacing checkboxes
     const defG = h('div', { className: 'form-group' });
     defG.appendChild(h('label', { className: 'form-label' }, 'Defect Spacing (mm)'));
-    const defVal = (iv.defectSpacing||'').split(/,\s*/).filter(Boolean);
+    const defVal = String(iv.defectSpacing||'').split(/,\s*/).filter(Boolean);
     const defDiv = h('div', { className: 'flex-center', style: { gap: '8px' } });
     ['30','100','300','1000','3000'].forEach(ds => {
       const checked = defVal.includes(ds);
       const lbl = h('label', { className: 'flex-center', style: { gap: '2px', fontSize: '12px', cursor: 'pointer' } });
       lbl.appendChild(h('input', { type: 'checkbox', checked, onchange: () => {
-        const cur = (iv.defectSpacing||'').split(/,\s*/).filter(Boolean);
+        const cur = String(iv.defectSpacing||'').split(/,\s*/).filter(Boolean);
         if (cur.includes(ds)) { cur.splice(cur.indexOf(ds), 1); } else { cur.push(ds); }
         this._updateIntervalField(iv.id, 'defectSpacing', cur.join(', ')||null);
       } }));
@@ -1002,7 +1060,7 @@ export const UI = {
     const section = $('#fieldtests-section'); if (!section) return; clr(section);
     if (!Model.currentHole) return;
 
-    const tests = Model.currentFieldTests;
+    const tests = [...Model.currentFieldTests].sort((a,b)=>a.depth-b.depth);
     const panel = h('div', { className: 'panel' });
     const hdr = h('div', { className: 'panel-header', onclick: () => this._togglePanel('fieldtests-body') },
       [h('span', {}, 'Field Tests'), h('span', { className: 'panel-header-count' }, `${tests.length} test(s)`)]);
@@ -1027,7 +1085,7 @@ export const UI = {
       const info = h('div', { className: 'ft-info' });
       info.appendChild(h('strong', {}, `${FT_LABELS[ft.type] || ft.type}`));
       info.appendChild(h('span', { className: 'text-muted' }, ` @ ${ft.depth}m`));
-      const dataStr = typeof ft.data === 'object' ? JSON.stringify(ft.data) : (ft.data || '');
+      const dataStr = ft.type === 'SPT' ? `N = ${ft.data?.n ?? '—'}; blows: ${ft.data?.blow1 ?? '—'} / ${ft.data?.blow2 ?? '—'} / ${ft.data?.blow3 ?? '—'}` : typeof ft.data === 'object' ? `Reading: ${ft.data.reading ?? '—'}` : (ft.data || '');
       info.appendChild(h('span', { className: 'text-sm' }, ` ${dataStr.length > 40 ? dataStr.substring(0,40)+'...' : dataStr}`));
       card.appendChild(info);
       const acts = h('div', { className: 'ft-actions' });
@@ -1093,7 +1151,7 @@ export const UI = {
     const section = $('#samples-section'); if (!section) return; clr(section);
     if (!Model.currentHole) return;
 
-    const samples = Model.currentSamples;
+    const samples = [...Model.currentSamples].sort((a,b)=>a.topDepth-b.topDepth);
     const panel = h('div', { className: 'panel' });
     const hdr = h('div', { className: 'panel-header', onclick: () => this._togglePanel('samples-body') },
       [h('span', {}, 'Samples'), h('span', { className: 'panel-header-count' }, `${samples.length} sample(s)`)]);
@@ -1423,7 +1481,7 @@ export const UI = {
 
   async handleLegacyMigration(legacyData) {
     if (!legacyData) return;
-    const confirmed = confirm('We found data from the previous version of G-Resolog. Would you like to import it as a new project?');
+    const confirmed = confirm('We found data from the previous version of G-Log. Would you like to import it as a new project?');
     if (confirmed) {
       try {
         await Model.importLegacy(legacyData);

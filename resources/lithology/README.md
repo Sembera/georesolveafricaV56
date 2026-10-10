@@ -1,0 +1,7 @@
+# Lithology symbol assets
+
+Primary source: USGS/FGDC Digital Cartographic Standard for Geologic Map Symbolization (2006), Section 37, https://ngmdb.usgs.gov/fgdc_gds/geolsymstd/fgdc-geolsym-sec37.pdf . The original reference PDF is retained here. These US federal government geological-symbol artworks are attributed to USGS/FGDC; no USGS endorsement is implied. Copyright policy: https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits .
+
+The SVGs are extracted directly from the source PDF vector paths, with the chart frames removed. They retain source linework and physical scale and are reproduced on white for monochrome printing. The generated browser module embeds the same vector artwork for reliable PDF export; the picker uses the standalone SVGs. Rebuild with scripts/build_lithology_assets.py and pdfplumber.
+
+Codes: gravel 601, conglomerate 602, breccia 605, sand/sandstone 607, silt/siltstone 616, clay/shale 620, limestone 627, dolostone 642, chert 649, peat 657, coal 658, quartzite 702, slate 703, schist 705, gneiss 708, tuff 711, volcanic breccia 714, basalt 717, granite 718, vein quartz 732. Mudstone uses the clay/shale artwork as a labelled adaptation. Grain patterns describe lithology; they are not a statement of USCS or BS5930 classification compliance. Laterite, fill, topsoil, weathered-rock and core-loss symbols are supplementary GeoResolve field-record symbols, distinctly identified in the library. Weathering should be recorded separately whenever the parent lithology is known.

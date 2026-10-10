@@ -2,8 +2,8 @@
 // Places electrodes along drawn lines, auto-splits long lines into roll-along
 // segments with 25% overlap, computes pseudo-depth & n-levels per array type.
 
-import { lineLength, pointAtChainage, dist, utmZoneLabel, utmToLatlngs, latlngsToUtm } from '../geometry.js';
-import { ertDepth, ertLevels, ERT_ARRAY_LABELS, fieldDays } from '../calculators.js';
+import { lineLength, pointAtChainage, dist, utmZoneLabel, utmToLatlngs, latlngsToUtm } from '../geometry.js?v=20261010-layout5';
+import { ertDepth, ertLevels, ERT_ARRAY_LABELS, fieldDays } from '../calculators.js?v=20261010-layout5';
 
 // params:
 //  electrodeCount (24|32|48|64|72|96)

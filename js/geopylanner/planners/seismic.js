@@ -1,9 +1,10 @@
+import {shotPositions,extendedPoint} from '../spread.js?v=20261010-layout5';
 // planners/seismic.js — seismic refraction & MASW spread planner.
 // Spreads placed along drawn polylines; geophones + shots interpolated by chainage.
 // Supports roll-along overlap for multi-spread lines.
 
-import { lineLength, pointAtChainage, azimuth, dist, utmZoneLabel, utmToLatlngs, latlngsToUtm } from '../geometry.js';
-import { seismicShotOffsets, refractionDepthEstimate, maswDepthEstimate, fieldDays } from '../calculators.js';
+import { lineLength, pointAtChainage, azimuth, dist, utmZoneLabel, utmToLatlngs, latlngsToUtm } from '../geometry.js?v=20261010-layout5';
+import { seismicShotOffsets, refractionDepthEstimate, maswDepthEstimate, fieldDays } from '../calculators.js?v=20261010-layout5';
 
 // params:
 //  mode: 'refraction' | 'masw'
@@ -21,6 +22,8 @@ export function planSeismic(params, state) {
   const mode = params.mode || 'refraction';
   const gPerSpread = Math.max(2, Math.round(Number(params.geophonesPerSpread) || 24));
   const gSpacing = Math.max(0.1, Number(params.geophoneSpacing) || 2);
+  if(!Number.isInteger(Number(params.geophonesPerSpread))||Number(params.geophonesPerSpread)<2||Number(params.geophonesPerSpread)>192||!(Number(params.geophoneSpacing)>0))throw Error('Use 2–192 geophones and positive spacing.');
+  if(Number(params.rollAlongOverlap)>=gPerSpread||Number(params.rollAlongOverlap)<0)throw Error('Overlap must be between zero and one less than the geophone count.');
   const overlap = Math.max(0, Math.round(Number(params.rollAlongOverlap) || 0));
   const spreadLength = (gPerSpread - 1) * gSpacing;
   const step = Math.max(gSpacing, (gPerSpread - overlap) * gSpacing); // roll-along step
@@ -33,15 +36,6 @@ export function planSeismic(params, state) {
     const utm = lineObj.utm || latlngsToUtm(lineObj.latlngs, state.crs);
     const totalLen = lineLength(utm);
     if (totalLen < gSpacing) return;
-
-    // Determine shot offsets (relative to spread start chainage).
-    let shotOffsets;
-    if (mode === 'masw') {
-      const src = Math.max(0, Number(params.sourceOffset) || 5);
-      shotOffsets = [-src]; // source before first geophone
-    } else {
-      shotOffsets = seismicShotOffsets(params.shotSpec, spreadLength);
-    }
 
     // Place spreads along the line.
     let spreadStart = 0;
@@ -70,24 +64,26 @@ export function planSeismic(params, state) {
           color: '#4DA34D'
         });
       }
-      // Shots.
-      shotOffsets.forEach((off, i) => {
+      // Shot positions use the actual receiver length of this spread.
+      const activeLength=Math.min(spreadLength,Math.floor((totalLen-spreadStart+1e-6)/gSpacing)*gSpacing);
+      const shotOffsets=shotPositions(activeLength,params);
+      shotOffsets.forEach(({x:off,type:shotType}, i) => {
         const ch = spreadStart + off;
-        if (ch < -1e-6 || ch > totalLen + 1e-6) return;
-        const clamped = Math.max(0, Math.min(totalLen, ch));
-        const { point } = pointAtChainage(utm, clamped);
+        const point = extendedPoint(utm, ch);
         const [lon, lat] = window.proj4(state.crs, 'EPSG:4326', point);
         points.push({
           line_id: lineObj.name,
           point_id: `${spreadId}_SP${i + 1}`,
           label: `${spreadId}/SP${i + 1}`,
-          chainage: Math.round(clamped * 100) / 100,
+          chainage: Math.round(ch * 100) / 100,
           easting: point[0],
           northing: point[1],
           utm_zone: utmZoneLabel(state.crs),
           latlng: [lat, lon],
           lat, lon,
           kind: 'shot',
+          shotType,
+          extended: ch<0||ch>totalLen,
           spread: spreadId,
           color: '#e74c3c'
         });
@@ -133,6 +129,7 @@ export function planSeismic(params, state) {
     points,
     pointsFolderName: 'Geophones & shots',
     boundary: null,
-    stats
+    stats,
+    parameters: params
   };
 }

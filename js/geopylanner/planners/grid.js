@@ -6,8 +6,8 @@ import {
   boundingBoxUtm, minimumBoundingRectangle, clipSegmentToPolygon,
   projectAtAzimuth, dist, azimuth, pointAtChainage, latlngsToUtm, utmToLatlngs,
   fmt, utmZoneLabel
-} from '../geometry.js';
-import { magneticEstimate, fieldDays } from '../calculators.js';
+} from '../geometry.js?v=20261010-layout5';
+import { magneticEstimate, fieldDays } from '../calculators.js?v=20261010-layout5';
 
 const PRESETS = {
   magnetic: { lineSpacing: 50, stationSpacing: 2, tieMultiplier: 10, defaultAzimuth: 0, hasStations: true, label: 'Magnetic' },
