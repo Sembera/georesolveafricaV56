@@ -1,20 +1,21 @@
-// app.js — G-Geopylanner entry module.
+import {renderIllustration,bindIllustration} from './illustration.js?v=20261010-layout5';
+// app.js — G-PhysicsPlanner entry module.
 // Wires the shared map workspace, per-method planners, exports, stats, print, mobile sheet.
 // Strict ES module. Loaded via <script type="module">.
 
-import { MapWorkspace, registerProjections } from './map.js';
-import { planGrid, getPresets } from './planners/grid.js';
-import { planSeismic } from './planners/seismic.js';
-import { planERT } from './planners/ert.js';
+import { MapWorkspace, registerProjections } from './map.js?v=20261010-layout5';
+import { planGrid, getPresets } from './planners/grid.js?v=20261010-layout5';
+import { planSeismic } from './planners/seismic.js?v=20261010-layout5';
+import { planERT } from './planners/ert.js?v=20261010-layout5';
 import {
   exportKMZ, exportKML, exportGPX, exportCSV, exportGeoJSON, exportDXF, downloadText, ATTRIBUTION
-} from './exports.js';
+} from './exports.js?v=20261010-layout5';
 import {
   maswDepthEstimate, refractionDepthEstimate, ertDepth, ertLevels, ERT_ARRAY_LABELS,
   magneticEstimate, gravityStationCount, gravitySpacingForTarget, gprVelocityFromPicks,
   fieldDays, seismicShotOffsets
-} from './calculators.js';
-import { fmt } from './geometry.js';
+} from './calculators.js?v=20261010-layout5';
+import { fmt } from './geometry.js?v=20261010-layout5';
 
 const $ = (id) => document.getElementById(id);
 const val = (id, fallback = '') => {
@@ -47,6 +48,7 @@ function init() {
   bindPlannerControls();
   bindExports();
   bindPrint();
+  bindIllustration(()=>state.result);
   bindMobile();
   bindGprAnalyzer();
   applyPreset(state.method);
@@ -65,6 +67,7 @@ function bindMethodNav() {
       const firstSub = document.querySelector(`.gp-method-panel[data-method="${method}"] .gp-subtab`);
       if (firstSub) selectSubtab(method, firstSub.dataset.subtab);
       syncDrawModeForMethod(method);
+      updateGenerateEnabled();
     });
   });
 }
@@ -91,6 +94,7 @@ function bindAreaControls() {
   $('gp-cancel-draw')?.addEventListener('click', () => workspace.cancelDraw());
   $('gp-clear-area')?.addEventListener('click', () => { workspace.clearAll(); state.result = null; renderResult(null); });
 
+  $('gp-add-endpoints')?.addEventListener('click',()=>{const ids=['gp-start-lat','gp-start-lon','gp-end-lat','gp-end-lon'];const a=ids.map(id=>$(id).value.trim());const n=a.map(Number);if(a.some(v=>v==='')||n.some(v=>!Number.isFinite(v))||Math.abs(n[0])>80||Math.abs(n[2])>80||Math.abs(n[1])>180||Math.abs(n[3])>180){toast('Enter valid WGS84 coordinates within UTM latitude limits.');return;}if(n[0]===n[2]&&n[1]===n[3]){toast('Start and end must differ.');return;}workspace.addSurveyLine([[n[0],n[1]],[n[2],n[3]]]);});
   $('gp-paste-apply')?.addEventListener('click', () => {
     const text = $('gp-paste-text').value;
     const crs = $('gp-paste-crs').value;
@@ -100,7 +104,7 @@ function bindAreaControls() {
       const n = workspace.applyPastedCoordinates(text, crs, mode);
       toast(`${n} coordinates loaded as ${mode}.`);
     } catch (err) {
-      alert(err.message);
+      toast(err.message);
     }
   });
 
@@ -225,7 +229,10 @@ function generate() {
         mode,
         geophonesPerSpread: val('sei-channels', 24),
         geophoneSpacing: val('sei-spacing', 2),
-        shotSpec: $('sei-shot-spec').value,
+        inlineShots: val('sei-inline',3),
+        endShots: Number(val('sei-ends',2)),
+        offEndShots: val('sei-off-count',1),
+        offsetStep: val('sei-offset-step',10),
         sourceOffset: val('sei-source-offset', 5),
         rollAlongOverlap: val('sei-roll', 0),
         velocity: val('sei-velocity', 1500),
@@ -241,7 +248,7 @@ function generate() {
       }, s);
     }
   } catch (err) {
-    alert(err.message);
+    toast(err.message);
     return;
   }
   if (!result) return;
@@ -250,9 +257,11 @@ function generate() {
   renderStats(result);
   renderTable(result);
   updateGenerateEnabled();
+  if (["seismic","ert"].includes(result.method)) $("gp-illustrations").scrollIntoView({block:"start",behavior:"smooth"});
 }
 
 function renderResult(result) {
+  renderIllustration(result);
   workspace.renderResult(result);
 }
 
@@ -264,7 +273,7 @@ function renderStats(result) {
   const cards = [];
   const push = (label, value) => cards.push(`<div class="gp-stat-card"><div class="gp-stat-label">${label}</div><div class="gp-stat-value">${value}</div></div>`);
   push('Method', s.mode);
-  if (s.lineCount !== undefined) push(s.method === 'ert' ? 'Segments' : (s.method === 'seismic' ? 'Spreads' : 'Lines'), s.lineCount);
+  if (s.lineCount !== undefined) push(result.method === 'ert' ? 'Segments' : (result.method === 'seismic' ? 'Spreads' : 'Lines'), s.lineCount);
   if (s.tieCount !== undefined && s.tieCount > 0) push('Tie lines', s.tieCount);
   if (s.stationCount !== undefined) push('Stations', s.stationCount);
   if (s.electrodeCount !== undefined) push('Electrodes', s.electrodeCount);
@@ -317,14 +326,14 @@ function bindExports() {
   for (const [id, fn] of Object.entries(handlers)) {
     $(id)?.addEventListener('click', () => {
       if (!state.result) { alert('Generate a plan first.'); return; }
-      try { fn(); } catch (err) { alert(err.message); }
+      try { fn(); } catch (err) { toast(err.message); }
     });
   }
 }
 
 function meta(ext) {
   return {
-    name: `G-Geopylanner ${state.method} plan`,
+    name: `G-PhysicsPlanner ${state.method} plan`,
     filename: `geopylanner_${state.method}`,
     utmZone: state.mapState?.crs ? state.mapState.crs : ''
   };
@@ -341,10 +350,11 @@ function bindPrint() {
     const paramRows = params.map((p) => `<tr><th>${p[0]}</th><td>${p[1]}</td></tr>`).join('');
     const statRows = Object.entries(s).map(([k, v]) => `<tr><th>${k}</th><td>${v}</td></tr>`).join('');
     body.innerHTML = `
-      <h2>G-Geopylanner — ${s.mode} survey plan</h2>
+      <h2>G-PhysicsPlanner — ${s.mode} survey plan</h2>
       <p class="gp-print-attrib">${ATTRIBUTION}</p>
       <table class="gp-print-tbl"><caption>Parameters</caption>${paramRows}</table>
       <table class="gp-print-tbl"><caption>Statistics</caption>${statRows}</table>
+      ${$("gp-diagram")?.innerHTML||""}<p>${$("gp-diagram-note")?.textContent||""}</p>
       <p class="gp-print-foot">Generated ${new Date().toLocaleString()}</p>`;
     window.print();
   });

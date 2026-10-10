@@ -1,4 +1,4 @@
-// G-Resolog - IndexedDB Helper (ES Module)
+// G-Log - IndexedDB Helper (ES Module)
 // Promise-based wrapper around IndexedDB with no external dependencies.
 
 let db = null;
@@ -256,6 +256,7 @@ export const DB = {
           id: crypto.randomUUID(),
           projectId: data.projectId || '',
           type: data.type || 'soil',
+          purpose: data.purpose || '',
           name: data.name || '',
           easting: data.easting || null,
           northing: data.northing || null,

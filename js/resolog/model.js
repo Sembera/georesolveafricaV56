@@ -1,4 +1,4 @@
-// G-Resolog - Application State Model (ES Module)
+// G-Log - Application State Model (ES Module)
 // Manages in-memory state, wraps DB CRUD, undo/redo, legacy migration.
 
 import { DB } from './db.js';

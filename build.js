@@ -143,7 +143,7 @@ const PAGES_WITH_HARDCODED_FOOTER = new Set([]);
 // Tool pages that get JSON-LD injection
 const TOOL_PAGES = {
   'g-resolog.html': {
-    name: 'G-Resolog',
+    name: 'G-Log',
     description: 'Professional borehole core logging tool for geotechnical and soil investigation with pattern-based lithology classification, SPT testing, and PDF/Excel export.'
   },
   'g-resconvt.html': {
@@ -151,8 +151,12 @@ const TOOL_PAGES = {
     description: 'Professional coordinate conversion tool for East Africa supporting 45+ CRS systems across 8 countries with batch CSV processing.'
   },
   'g-geopylanner.html': {
-    name: 'G-Geopylanner',
+    name: 'G-PhysicsPlanner',
     description: 'Unified geophysics survey planning tool for MASW, Seismic Refraction, ERT, GPR, magnetic, and gravity survey design with CSV export.'
+  },
+  'g-structural.html': {
+    name: 'G-Structural',
+    description: 'Free structural geology workspace for lower-hemisphere stereonets, rose diagrams, CSV measurements and documented Bieniawski 1989 RMR assessments.'
   },
   'g-flightplanner.html': {
     name: 'G-FlightPlanner',
@@ -192,9 +196,12 @@ const BREADCRUMBS = {
   'projects.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }],
   'contact.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }],
   'quality-hse.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }],
+  'free-tools.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }],
   'g-resolog.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }],
   'g-resconvt.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }],
   'g-geopylanner.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }],
+  'g-structural.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }],
+  'g-lugeon.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }],
   'g-flightplanner.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }],
   'drone-magnetic-survey-uganda.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }, { name: 'Methods', url: 'https://georesolveafrica.com/methods.html' }],
   'ground-magnetic-survey-uganda.html': [{ name: 'Home', url: 'https://georesolveafrica.com/' }, { name: 'Methods', url: 'https://georesolveafrica.com/methods.html' }],
@@ -213,10 +220,13 @@ const BREADCRUMB_CURRENT_LABEL = {
   'projects.html': 'Projects',
   'contact.html': 'Contact',
   'quality-hse.html': 'QHSE',
-  'g-resolog.html': 'G-Resolog',
+  'free-tools.html': 'Free Tools',
+  'g-resolog.html': 'G-Log',
   'g-resconvt.html': 'G-Resconvt',
-  'g-geopylanner.html': 'G-Geopylanner',
+  'g-geopylanner.html': 'G-PhysicsPlanner',
   'g-flightplanner.html': 'G-FlightPlanner',
+  'g-structural.html': 'G-Structural',
+  'g-lugeon.html': 'G-Lugeon',
   'drone-magnetic-survey-uganda.html': 'Drone Magnetic Survey Uganda',
   'ground-magnetic-survey-uganda.html': 'Ground Magnetic Survey Uganda',
   'insar-sar-services-uganda.html': 'SAR & InSAR Services Uganda',
@@ -517,6 +527,9 @@ function processHTML(filePath, headerHTML, footerHTML, headerFrHTML, footerFrHTM
 
   const header = isFr ? headerFrHTML : headerHTML;
   const footer = isFr ? footerFrHTML : footerHTML;
+
+  // Refresh navigation assets after the Free Tools directory release.
+  html = html.replace(/src="((?:\.\.\/)?js\/header-component\.js)(?:\?[^" ]*)?"/g, 'src="$1?v=20261010-layout3"');
 
   // --- Inject header ---
   html = html.replace(
@@ -1353,7 +1366,8 @@ function generateSitemap() {
       fileName === 'g-resolog.html' ||
       fileName === 'g-resconvt.html' ||
       fileName === 'g-geopylanner.html' ||
-      fileName === 'g-flightplanner.html'
+      fileName === 'g-flightplanner.html' ||
+      fileName === 'g-structural.html' || fileName === 'g-lugeon.html'
     ) {
       priority = '0.9';
       changefreq = 'monthly';

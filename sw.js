@@ -1,13 +1,73 @@
-// G-Resolog - Service Worker
+// G-Log - Service Worker
 // Provides offline support by caching the application shell and CDN libraries.
 
 // bump CACHE_NAME on every release
-const CACHE_NAME = 'gresolog-2026-07-07-4';
+const CACHE_NAME = 'gresolog-2026-10-10-8';
 const APP_SHELL = [
     '/g-resolog.html',
     '/js/resolog/db.js',
     '/js/resolog/model.js',
     '/js/resolog/ui.js',
+    '/js/resolog/example.js',
+    '/js/resolog/templates.js',
+    '/js/resolog/lithology-assets.js',
+    '/resources/lithology/clay.svg',
+
+    '/resources/lithology/silt.svg',
+
+    '/resources/lithology/sand.svg',
+
+    '/resources/lithology/gravel.svg',
+
+    '/resources/lithology/peat.svg',
+
+    '/resources/lithology/sandstone.svg',
+
+    '/resources/lithology/siltstone.svg',
+
+    '/resources/lithology/mudstone.svg',
+
+    '/resources/lithology/shale.svg',
+
+    '/resources/lithology/limestone.svg',
+
+    '/resources/lithology/dolostone.svg',
+
+    '/resources/lithology/conglomerate.svg',
+
+    '/resources/lithology/breccia.svg',
+
+    '/resources/lithology/chert.svg',
+
+    '/resources/lithology/coal.svg',
+
+    '/resources/lithology/granite.svg',
+
+    '/resources/lithology/gneiss.svg',
+
+    '/resources/lithology/schist.svg',
+
+    '/resources/lithology/quartzite.svg',
+
+    '/resources/lithology/basalt.svg',
+
+    '/resources/lithology/slate.svg',
+
+    '/resources/lithology/tuff.svg',
+
+    '/resources/lithology/volcanic_breccia.svg',
+
+    '/resources/lithology/quartz.svg',
+
+    '/resources/lithology/topsoil.svg',
+
+    '/resources/lithology/laterite.svg',
+
+    '/resources/lithology/fill.svg',
+
+    '/resources/lithology/weathered_rock.svg',
+
+    '/resources/lithology/core_loss.svg',
     '/js/resolog/description-builder.js',
     '/js/resolog/striplog.js',
     '/js/resolog/exports.js',

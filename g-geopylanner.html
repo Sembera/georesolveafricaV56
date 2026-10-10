@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>G-Geopylanner - Map-Based Geophysical Survey Planner | Georesolve Africa</title>
+    <title>G-PhysicsPlanner - Map-Based Geophysical Survey Planner | Georesolve Africa</title>
     <meta name="description"
         content="Plan magnetic, gravity, GPR, seismic and ERT geophysical surveys on a shared map workspace. Draw a survey area, generate grids and spreads, export field-ready KMZ, GPX, CSV and DXF.">
     <meta name="keywords"
         content="geophysical survey planner, magnetic grid layout, ERT electrode planner, seismic refraction spread, MASW design, GPR survey, KMZ export, Georesolve tools">
 
-    <meta property="og:title" content="G-Geopylanner | Map-Based Geophysical Survey Planner">
+    <meta property="og:title" content="G-PhysicsPlanner | Map-Based Geophysical Survey Planner">
     <meta property="og:description"
         content="Draw a survey area once, plan any geophysical method on it, and export field-ready KML/KMZ/CSV/GPX/DXF. Free, client-side, built for ground geophysics in East Africa.">
     <meta property="og:type" content="website">
@@ -34,6 +34,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 
     <style>
+        #gp-illustrations {scroll-margin-top:110px;}
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
@@ -288,7 +289,7 @@
     <div class="gp-wrap">
 
         <div class="gp-header">
-            <h1>G-Geopylanner <span style="font-size:0.5em; font-weight:400; opacity:0.85;">map-based survey planning</span></h1>
+            <h1>G-PhysicsPlanner <span style="font-size:0.5em; font-weight:400; opacity:0.85;">map-based survey planning</span></h1>
             <p>Draw a survey area or line once, plan any geophysical method on it, and export a field-ready KMZ / GPX / CSV / DXF.</p>
             <div class="subtitle">Magnetic · Gravity · GPR · Seismic refraction / MASW · ERT — all in one shared map workspace.</div>
         </div>
@@ -316,7 +317,7 @@
                     </div>
 
                     <div class="gp-field">
-                        <label for="gp-paste-text">Paste coordinates (one pair per line)</label>
+                        <div class="gp-field"><label for="gp-start-lat">Start latitude</label><input id="gp-start-lat" type="number" step="any" value="0.3476"></div><div class="gp-field"><label for="gp-start-lon">Start longitude</label><input id="gp-start-lon" type="number" step="any" value="32.5825"></div><div class="gp-field"><label for="gp-end-lat">End latitude</label><input id="gp-end-lat" type="number" step="any" value="0.3476"></div><div class="gp-field"><label for="gp-end-lon">End longitude</label><input id="gp-end-lon" type="number" step="any" value="32.5845"></div><button id="gp-add-endpoints" class="gp-btn gp-btn-sm" type="button">Add start / end line</button><p class="gp-hint">WGS84 decimal degrees. For UTM coordinates, use the CRS-aware paste input below.</p><p id="gp-live-length" role="status">Line length: start drawing or enter endpoints.</p><label for="gp-paste-text">Paste coordinates (one pair per line)</label>
                         <textarea id="gp-paste-text" rows="3" placeholder="lat, lon  (e.g. 0.3476, 32.5825)&#10;or easting, northing with a projected CRS below"></textarea>
                     </div>
                     <div class="gp-row">
@@ -508,27 +509,11 @@
                             </div>
                             <div class="gp-row">
                                 <div class="gp-field"><label for="sei-channels" data-label="Geophones per spread">Geophones / spread</label>
-                                    <select id="sei-channels">
-                                        <option value="12">12</option><option value="24" selected>24</option>
-                                        <option value="48">48</option><option value="96">96</option>
-                                    </select>
+                                    <input id="sei-channels" type="number" min="2" max="192" step="1" value="24">
                                 </div>
                                 <div class="gp-field"><label for="sei-spacing" data-label="Geophone spacing (m)">Geophone spacing (m)</label><input type="number" id="sei-spacing" value="2" step="0.5" min="0.5"></div>
                             </div>
-                            <div id="sei-ref-extras">
-                                <div class="gp-field"><label for="sei-shot-spec">Shot layout</label>
-                                    <select id="sei-shot-spec">
-                                        <option value="5shot">5-shot symmetric</option>
-                                        <option value="7shot">7-shot symmetric (far offsets)</option>
-                                        <option value="mid">Single mid-spread</option>
-                                        <option value="custom">2 end shots</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div id="sei-masw-extras" style="display:none;">
-                                <div class="gp-field"><label for="sei-source-offset" data-label="Source offset (m)">Source offset (m)</label><input type="number" id="sei-source-offset" value="5" step="1" min="0"></div>
-                            </div>
-                            <div class="gp-row">
+<div class="gp-row"><div class="gp-field"><label for="sei-inline">Inline shots (interior)</label><input id="sei-inline" type="number" min="0" max="50" step="1" value="3"></div><div class="gp-field"><label for="sei-ends">End shots</label><select id="sei-ends"><option value="0">None</option><option value="1">Start only</option><option value="2" selected>Both ends</option></select></div></div><div class="gp-row"><div class="gp-field"><label for="sei-off-count">Off-end shots per side</label><input id="sei-off-count" type="number" value="1" min="0" max="10" step="1"></div><div class="gp-field"><label for="sei-source-offset">First off-end offset (m)</label><input id="sei-source-offset" type="number" value="10" min="0.1" step="any"></div></div><div class="gp-field"><label for="sei-offset-step">Additional off-end interval (m)</label><input id="sei-offset-step" type="number" value="10" min="0.1" step="any"></div><p class="gp-hint">Inline shots are equally spaced inside the active spread. End shots lie at the first and last geophones. Off-end shots extend along the first/last line segment; verify access in the field. For MASW, set inline and end shots to zero if only forward/reverse off-end records are required.</p>                            <div class="gp-row">
                                 <div class="gp-field"><label for="sei-roll" data-label="Roll-along overlap (geophones)">Roll-along overlap (geophones)</label><input type="number" id="sei-roll" value="0" min="0"></div>
                                 <div class="gp-field"><label for="sei-velocity" data-label="Assumed velocity (m/s)">Assumed velocity (m/s)</label><input type="number" id="sei-velocity" value="1500" min="300"></div>
                             </div>
@@ -663,6 +648,7 @@
         <div id="g-geopylanner-lead-inline"></div>
     </div>
 
+<section id="gp-illustrations" class="gp-wrap" hidden><div style="background:white;padding:22px;border-radius:10px"><h2>Spread layout &amp; propagation</h2><p id="gp-illustration-status" role="status" aria-live="polite" style="color:#21694d;margin:8px 0 14px"></p><div class="gp-row"><div class="gp-field"><label for="gp-spread-select">Spread / segment</label><select id="gp-spread-select"></select></div><div class="gp-field"><label for="gp-shot-select">Shot to illustrate</label><select id="gp-shot-select"></select></div></div><div id="gp-ray-settings" class="gp-row"><div class="gp-field"><label for="gp-ray-v1">Upper layer Vp (m/s)</label><input id="gp-ray-v1" type="number" value="600" min="1"></div><div class="gp-field"><label for="gp-ray-v2">Lower layer Vp (m/s)</label><input id="gp-ray-v2" type="number" value="1800" min="1"></div><div class="gp-field"><label for="gp-ray-h">Layer thickness (m)</label><input id="gp-ray-h" type="number" value="5" min="0.1" step="any"></div></div><p id="gp-diagram-note"></p><div id="gp-diagram"></div><button id="gp-diagram-export" class="gp-btn">Download illustration SVG</button></div></section>
     <!-- Print-only summary (populated by app.js) -->
     <div class="gp-print-only" id="gp-print-body"></div>
 
@@ -687,7 +673,7 @@
     <script src="js/header-component.js" defer></script>
     <script src="footer-component.js" defer></script>
 
-    <script type="module" src="js/geopylanner/app.js"></script>
+    <script type="module" src="js/geopylanner/app.js?v=20261010-layout5"></script>
     <script type="module" src="main.js"></script>
 </body>
 
